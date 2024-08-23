@@ -39,7 +39,7 @@ begin
 end
 
 
-# ╔═╡ 4da766a0-97e9-4162-807a-bd027a2cb1d6
+# ╔═╡ cb0eda5b-9dcb-421f-b6b6-ed4b51797df7
 md"# 1.1 Differential Equations and Mathematical Models"
 
 # ╔═╡ 20bd193d-c0f7-47e6-8b46-33e07338ad91
@@ -50,8 +50,26 @@ __The study of differential equations has three principal goals:__
 3. To interpret the solution that is found.
 """
 
-# ╔═╡ 6e18341c-870e-4776-8f70-00056cf9d309
-md"## Differential Equations and Mathematical Models"
+# ╔═╡ 555e1ddd-fcd2-4ff8-af06-f4caafc8dcff
+md"## Mathematical Models"
+
+# ╔═╡ d5117856-b9ca-4ed1-976e-9e20d613bfc1
+md"## Examples and Terminology"
+
+# ╔═╡ 55221819-6a40-4f85-93b0-76c5d05ed35e
+cm"""
+ - The __order__ of a differential equation is the __order of the highest derivative that appears in it__. For example
+```math
+y^{(4)}+x^2 y^{(3)}+x^5 y=\sin x \quad \text{is a fourth-order equation.}
+```
+- The most general form of an ``\boldsymbol{n}^t h``-order differential equation with independent variable ``x`` and unknown function or dependent variable ``y=y(x)`` is
+$(texeq"F\left(x, y, y^{\prime}, y^{\prime \prime}, \ldots, y^{(n)}\right)=0\label{GDE}")
+where ``F`` is a specific real-valued function of ``n+2`` variables.
+- We say that the continuous function ``u=u(x)`` is a __solution__ of the differential equation in $(eqref("GDE")) on the interval ``I`` provided that the derivatives ``u^{\prime}, u^{\prime \prime}, \ldots, u^{(n)}`` exist on ``I`` and
+$(texeq"F\left(x, u, u^{\prime}, u^{\prime \prime}, \ldots, u^{(n)}\right)=0")
+for all ``x`` in ``I``. For the sake of brevity, we may say that ``u=u(x)`` satisfies the differential equation in $(eqref("GDE")) on ``I``.
+
+"""
 
 # ╔═╡ a9d46b08-d25a-49df-9f93-427e521055e0
 md"# 1.2 Integrals as General and Particular Solutions"
@@ -199,14 +217,37 @@ begin
     @htl("")
 end
 
+# ╔═╡ 8408e369-40eb-4f9b-a7d7-26cde3e34a74
+begin
+    text_book = post_img("https://www.pearson.com/store/medias/size-W650-desktop-A1030-00-23-46-A103000234623-A103000234623-Lrg.jpg?context=bWFzdGVyfGltYWdlc3w3NTU4NTd8aW1hZ2UvanBlZ3xzeXMtbWFzdGVyL2ltYWdlcy9oNjcvaDQyLzEzMDMzMzI2NTc1NjQ2L3NpemVfVzY1MF9kZXNrdG9wXy9BMTAzMC8wMC8yMy80Ni9BMTAzMDAwMjM0NjIzL0ExMDMwMDAyMzQ2MjNfTHJnLmpwZ3w2NWIzMWM3NzA5ZmMxOGUxYzA4MjcyMDQ3OTYzODZjNmRhYjY4NTEyMWE4ZmM2ODYyYTlkZTNkYTI5ZjgxY2M4", 200)
+    md""" # Syllabus
+    ## Syallbus
+    See here [Term 241 - MATH208 - Syllabus](https://www.dropbox.com/scl/fi/5u3riz5gzbfuj9c5h8bn2/T241MATH208Syllabus.pdf?rlkey=pcjja6yvflfzazbxx1wkkyazo&raw=1)
+    ## Textbook
+    __Textbook: Edwards, C. H., Penney, D. E., and Calvis, D. T., Differential Equations and Linear Algebra, Fourth edition, Pearson, 2021__
+    $text_book
+
+    ## Office Hours
+    I strongly encourage all students to make use of my office hours. These dedicated times are a valuable opportunity for you to ask questions, seek clarification on lecture material, discuss challenging problems, and get personalized feedback on your work. Engaging with me during office hours can greatly enhance your understanding of the course content and improve your performance. Whether you're struggling with a specific concept or simply want to delve deeper into the subject, I am here to support your learning journey. Don't hesitate to drop by; __your success is my priority__.
+
+    | Day       | Time        |
+    |-----------|-------------|
+    | Tuesday    | 11:00-11:50AM |
+    | Thursday | 11:00-11:50AM |
+    Also you can ask for an online meeting through __TEAMS__.
+    """
+end
+
 # ╔═╡ e6c9f44f-19dd-4922-bc05-8614f5441e80
 cm"""
-$(ex(3))
-Rate of cooling Newton's law of cooling may be stated in this way: The time rate of change (the rate of change with respect to time ``t`` ) of the temperature ``T(t)`` of a body is proportional to the difference between ``T`` and the temperature ``A`` of the surrounding medium (Fig. 1.1.1). That is,
+$(ex("Example 3","Rate of cooling"))
+ Newton's law of cooling may be stated in this way: __The time rate of change (the rate of change with respect to time ``t`` ) of the temperature ``T(t)`` of a body is proportional to the difference between ``T`` and the temperature ``A`` of the surrounding medium (Fig. 1.1.1)__. That is,
 ```math
 \frac{d T}{d t}=-k(T-A)
 ```
-where ``k`` is a positive constant. Observe that if ``T > A``, then ``d T / d t < 0``, so the temperature is a decreasing function of ``t`` and the body is cooling. But if ``T < A``, then ``d T / d t >0``, so that ``T`` is increasing.
+where 
+- ``k`` is a positive constant. 
+- Observe that if ``T > A``, then ``d T / d t < 0``, so the temperature is a decreasing function of ``t`` and the body is cooling. But if ``T < A``, then ``d T / d t >0``, so that ``T`` is increasing.
 
 Thus the physical law is translated into a differential equation. If we are given the values of ``k`` and ``A``, we should be able to find an explicit formula for ``T(t)``, and then-with the aid of this formula-we can predict the future temperature of the body.
 """
@@ -218,17 +259,20 @@ $(post_img("https://www.dropbox.com/scl/fi/l1ku5zzq9cartv6qck9e3/fig_1_1_1.png?r
 
 # ╔═╡ 0853d79c-5ae0-4690-9f09-9068505ba213
 cm"""
-$(ex(5)) Population growth The time rate of change of a population ``P(t)`` with constant birth and death rates is, in many simple cases, proportional to the size of the population. That is,
-```math
-\frac{d P}{d t}=k P
-```
+$(ex("Example 5","Population growth")) 
+__The time rate of change of a population ``P(t)`` with constant birth and death rates is, in many simple cases, proportional to the size of the population__. That is,
+$(texeq"\frac{d P}{d t}=k P \label{pop_growth}")
 where ``k`` is the constant of proportionality.
+
+This equation has the solution
+
+$(texeq"P(t)=Ce^{kt}\label{pop_growth_sol}")
 """
 
 # ╔═╡ 2b5ca5c2-4232-48df-95ab-4a5765436995
 cm"""
-$(ex(6))
-Population growth Suppose that ``P(t)=C e^{k t}`` is the population of a colony of bacteria at time ``t``, that the population at time ``t=0`` (hours, h) was 1000 , and that the population doubled after 1 h . This additional information about ``P(t)`` yields the following equations:
+$(ex("Example 6","Population growth"))
+Suppose that ``P(t)=C e^{k t}`` is the population of a colony of bacteria at time ``t``, that the population at time ``t=0`` (hours, h) was 1000 , and that the population doubled after 1 h . This additional information about ``P(t)`` yields the following equations:
 ```math
 \begin{aligned}
 & 1000=P(0)=C e^0=C \\
@@ -236,12 +280,12 @@ Population growth Suppose that ``P(t)=C e^{k t}`` is the population of a colony 
 \end{aligned}
 ```
 
-It follows that ``C=1000`` and that ``e^k=2``, so ``k=\ln 2 \approx 0.693147``. With this value of ``k`` the differential equation in (6) is
+It follows that ``C=1000`` and that ``e^k=2``, so ``k=\ln 2 \approx 0.693147``. With this value of ``k`` the differential equation in $(eqref("pop_growth")) is
 ```math
 \frac{d P}{d t}=(\ln 2) P \approx(0.693147) P
 ```
 
-Substitution of ``k=\ln 2`` and ``C=1000`` in Eq. (7) yields the particular solution
+Substitution of ``k=\ln 2`` and ``C=1000`` in Eq. $(eqref("pop_growth_sol")) yields the particular solution
 ```math
 P(t)=1000 e^{(\ln 2) t}=1000\left(e^{\ln 2}\right)^t=1000 \cdot 2^t \quad\left(\text { because } e^{\ln 2}=2\right)
 ```
@@ -257,6 +301,16 @@ $(bbl("Remarks",""))
 
 $(post_img("https://www.dropbox.com/scl/fi/9jkvevpmi4apwd5k73mgv/fig_1_1_4.png?rlkey=m2gu7plj5o7bjbudeqze2bzxq&dl=1",500))
 $(ebl())
+"""
+
+# ╔═╡ a7abd027-69c5-43a9-a99e-164a9199a334
+cm"""
+$(ex(8))
+Verify that the function ``y(x)=2 x^{1 / 2}-x^{1 / 2} \ln x`` satisfies the differential equation
+```math
+4 x^2 y^{\prime \prime}+y=0
+```
+for all ``x>0``.
 """
 
 # ╔═╡ fbd68049-57ac-42fc-9c4c-5bd9f019dabb
@@ -292,19 +346,29 @@ Solve the initial value problem
 ```
 """
 
-# ╔═╡ 963808c0-5ae5-11ef-1c70-5f46edb52327
+# ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
+initialize_eqref()
 
-
+# ╔═╡ 107407c8-5da0-4833-9965-75a82d84a0fb
 @htl("""
 <style>
 @import url("https://mmogib.github.io/math102/custom.css");
 
+ul {
+  list-style: none;
+}
+
+ul li:before {
+  content: '💡 ';
+}
+
+.p40 {
+	padding-left: 40px;
+}
+</style>
 
 </style>
 """)
-
-
-
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -1934,14 +1998,18 @@ version = "1.4.1+1"
 # ╔═╡ Cell order:
 # ╟─71bc54d5-d0ed-42d3-9bc1-48aa86e91d1d
 # ╟─e414122f-b93a-4510-b8ae-026c303e0df9
-# ╟─4da766a0-97e9-4162-807a-bd027a2cb1d6
+# ╟─8408e369-40eb-4f9b-a7d7-26cde3e34a74
+# ╟─cb0eda5b-9dcb-421f-b6b6-ed4b51797df7
 # ╟─20bd193d-c0f7-47e6-8b46-33e07338ad91
-# ╟─6e18341c-870e-4776-8f70-00056cf9d309
 # ╟─e6c9f44f-19dd-4922-bc05-8614f5441e80
 # ╟─a1cc7232-8dff-4fb4-908a-01c105e62797
 # ╟─0853d79c-5ae0-4690-9f09-9068505ba213
 # ╟─2b5ca5c2-4232-48df-95ab-4a5765436995
+# ╟─555e1ddd-fcd2-4ff8-af06-f4caafc8dcff
 # ╟─3dab7c5b-363a-4b55-b8b0-342723d99ba5
+# ╟─d5117856-b9ca-4ed1-976e-9e20d613bfc1
+# ╟─55221819-6a40-4f85-93b0-76c5d05ed35e
+# ╟─a7abd027-69c5-43a9-a99e-164a9199a334
 # ╟─a9d46b08-d25a-49df-9f93-427e521055e0
 # ╟─fbd68049-57ac-42fc-9c4c-5bd9f019dabb
 # ╟─41344730-e8c5-4e2b-a98c-9995846c7244
@@ -1952,6 +2020,7 @@ version = "1.4.1+1"
 # ╠═c7cc5a14-f964-4cf9-82f0-f23904bbdace
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
-# ╟─963808c0-5ae5-11ef-1c70-5f46edb52327
+# ╟─da9230a6-088d-4735-b206-9514c12dd223
+# ╟─107407c8-5da0-4833-9965-75a82d84a0fb
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
