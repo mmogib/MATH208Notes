@@ -39,6 +39,10 @@ begin
 end
 
 
+# ╔═╡ cd269caf-ef81-43d7-a1a8-6668932b6363
+# exportqrcode("https://www.mathmatize.com/")
+LocalImage("./qrcode.png")
+
 # ╔═╡ cb0eda5b-9dcb-421f-b6b6-ed4b51797df7
 md"# 1.1 Differential Equations and Mathematical Models"
 
@@ -91,6 +95,37 @@ cm"""
 - __The Velocity__ ``v(t)=f'(t)``, or ``v =\displaystyle\frac{dx}{dt}``.
 - __The Accelaration__ ``a(t)=v'(t)=x''(t)``. or ``\displaystyle a = \frac{dv}{dt}=\frac{d^2x}{dt^2}``.
 """
+
+# ╔═╡ b97a6f03-dbeb-40b9-be58-f9a9a50cac5a
+md"## A Swimmer’s Problem"
+
+# ╔═╡ a1d00dd2-59b0-427b-b2c0-25ec94e039a9
+let
+	dydx(x) = 3(1-4x^2)
+	x = -0.5:0.01:0.5
+	# y = x .+ dydx.(x)
+	# 3x-4x.^3)
+	y = zeros(length(x));
+	p = plot(xlimits=(-0.55,0.55),ylimits=(-10,221), 
+		frame_style=:origin, legend=:topleft,
+		xticks=-0.5:0.2:0.5
+	)
+	vline!(p,[-0.5,0],c=:black,label=nothing)
+	vline!(p,[0.5,0],c=:black,label=nothing)
+	annotate!(p,[(0.52,10.5,text(L"x=\frac{1}{2}",10))])
+	annotate!(p,[(-0.52,10.5,text(L"x=-\frac{1}{2}",10))])
+	anim = @animate for i in 2:length(x)
+		y[i] = y[i-1] + dydx(x[i])
+		plot(p,[(x[1:i],y[1:i]),([x[i]],[y[i]])], 
+			seriestype=[:line  :scatter],
+			label=["y:: swimmer trajectory" "swimmer"],
+			markershapes = [:none :star]
+		)
+		
+	end
+	gif(anim,"imgs/swimmer.gif",fps=10)
+	# dydx(-1/2)
+end
 
 # ╔═╡ 8d103106-40ac-49fa-86ae-1af3ecb8a3ec
 let
@@ -344,6 +379,17 @@ Solve the initial value problem
 ```math
 \frac{d y}{d x}=2 x+3, \quad y(1)=2
 ```
+"""
+
+# ╔═╡ ab0da87e-9b87-48eb-a235-44fdfd2f81f2
+cm"""
+$(post_img("https://www.dropbox.com/scl/fi/l6nrl55ye583z7vu2v55k/fig_1_2_5.png?rlkey=vpoky2h6hycj51kfemjjv0itg&dl=1",500))
+"""
+
+# ╔═╡ 6168170e-2fcb-4728-b8d8-ddc44992d3f9
+cm"""
+$(ex("Example 4","River crossing"))
+Suppose that the river is ``1`` mile wide and that its midstream velocity is ``v_0=9 \mathrm{mi} / \mathrm{h}`` and the swimmer's velocity is ``v_S=3 \mathrm{mi} / \mathrm{h}``.
 """
 
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
@@ -1999,6 +2045,7 @@ version = "1.4.1+1"
 # ╟─71bc54d5-d0ed-42d3-9bc1-48aa86e91d1d
 # ╟─e414122f-b93a-4510-b8ae-026c303e0df9
 # ╟─8408e369-40eb-4f9b-a7d7-26cde3e34a74
+# ╟─cd269caf-ef81-43d7-a1a8-6668932b6363
 # ╟─cb0eda5b-9dcb-421f-b6b6-ed4b51797df7
 # ╟─20bd193d-c0f7-47e6-8b46-33e07338ad91
 # ╟─e6c9f44f-19dd-4922-bc05-8614f5441e80
@@ -2016,6 +2063,10 @@ version = "1.4.1+1"
 # ╟─22715277-7264-44aa-a2be-0cf6bba6b24f
 # ╟─07d56dc4-4a09-43eb-8ad6-8cb796b53c80
 # ╟─2d42c9ba-bc48-4836-aa56-bca41304a300
+# ╟─b97a6f03-dbeb-40b9-be58-f9a9a50cac5a
+# ╟─ab0da87e-9b87-48eb-a235-44fdfd2f81f2
+# ╟─6168170e-2fcb-4728-b8d8-ddc44992d3f9
+# ╟─a1d00dd2-59b0-427b-b2c0-25ec94e039a9
 # ╠═8d103106-40ac-49fa-86ae-1af3ecb8a3ec
 # ╠═c7cc5a14-f964-4cf9-82f0-f23904bbdace
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
