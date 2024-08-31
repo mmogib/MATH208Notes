@@ -9,6 +9,7 @@ begin
     using CommonMark
     using PlutoUI, PlutoExtras
     using Plots, PlotThemes, LaTeXStrings
+	# PythonPlot
     using Latexify
     using HypertextLiteral
     using Colors
@@ -124,29 +125,202 @@ let
 		
 	end
 	gif(anim,"imgs/swimmer.gif",fps=10)
-	# dydx(-1/2)
+	
+end
+
+# ╔═╡ 261637c6-4da1-4b4a-9f01-3e2324c41b60
+# let
+# 	xs = -2:0.3:2
+# 	ys = -2:0.2:2
+
+
+# 	df(x, y) = normalize([1, 1/x]) ./ 10
+
+# 	xxs = repeat(xs',length(xs),length(ys))
+# 	yys = reshape(repeat(ys,length(xs)),length(xs),length(ys))
+
+# quiver(xxs, yys, quiver=df, c=:black,framestyle=:origin)
+# end
+md"Vector Feilds"
+
+# ╔═╡ 953e31c8-3e26-47cf-a675-2067802ba941
+md"# 1.4 Separable Equations and Applications"
+
+# ╔═╡ 75287b3b-3f90-4a0a-88d0-92130f84c0db
+cm"""
+The first-order differential equation ``\displaystyle \frac{dy}{dx}=f(x,y)`` is called __separable__ provided that ``f(x, y)`` can be written as the product of a function of ``x`` and a function of ``y`` :
+```math
+\frac{d y}{d x}=f(x, y)=g(x) k(y)=\frac{g(x)}{h(y)}
+```
+where ``h(y)=1 / k(y)``. 
+
+In this case the variables ``x`` and ``y`` can be __separated__(isolated) on opposite sides of an equation-by writing informally the equation
+```math
+h(y) d y=g(x) d x
+```
+"""
+
+# ╔═╡ 1790195b-439e-4472-96e8-6f87d8ff0601
+md"## Implicit, General, and Singular Solution"
+
+# ╔═╡ 085418be-7e83-4a6a-b3a8-fbd4d2ac2451
+cm"""
+- The equation ``K(x,y)=0`` is called an __implicit solution__ of a differential
+equation if it is satisfied (on some interval) by some solution ``y=y(x)`` of the differential equation.
+- A particular solution ``y=y(x)`` of ``K(x,y)`` may or may not satisfy a given initial condition.
+- Not every possible algebraic solution ``y=y(x)`` of an implicit solution ``K(x,y)`` satisfies the same differential equation.
+- Similarly, solutions of a given differential equation can be either gained or lost
+when it is multiplied or divided by an algebraic factor.
+- A solution of a differential equation that contains an “arbitrary constant” (like
+the constant C) is commonly called __the general solution__ of the differential equation; any particular choice of a specific value for ``C`` yields a single particular solution of the equation.
+- __A particular solution__ is one that is obtained by selecting a value for ``C``.
+- A solution that cannot be obtained by selecting a value for ``C`` is called a __singular solution__.
+
+
+"""
+
+# ╔═╡ 7bacb885-372a-4ee9-ba9c-de505d332dfb
+md"## Natural Growth and Decay"   
+
+# ╔═╡ 241b2797-3050-400b-a532-303a6feeb39e
+cm"""
+The differential equation
+$(texeq"
+\frac{d x}{d t}=k x \quad(k \text { a constant }) \label{}
+")
+serves as a mathematical model for a wide range of natural phenomena-any
+"""
+
+# ╔═╡ a5a9fda5-c077-4505-8fcf-2e23f9b3ad1f
+md"###  POPULATION GROWTH"
+
+# ╔═╡ 809d228a-65a3-4af5-b605-e030c41c4548
+cm"""
+```math
+\frac{dP}{dt} = k P
+```
+where ``P(t)`` is the number of individuals in a
+ population (of humans, or insects, or bacteria) having constant birth and death rates.
+"""
+
+# ╔═╡ 6b4ce7dc-39f3-4c4e-973f-b501916f0717
+md"### COMPOUND INTEREST"
+
+# ╔═╡ 0756191d-272f-4e62-8fed-1f731820325c
+cm"""
+```math
+\frac{d A}{d t}=\lim _{\Delta t \rightarrow 0} \frac{\Delta A}{\Delta t}=r A
+```
+where  
+- ``A(t)`` is the number of dollars in a savings account
+ at time t (in years), and
+- ``r`` is the interest compounded continuously at
+ an annually.
+"""
+
+# ╔═╡ f832a1e4-17ff-43d8-97a4-c7e29bbe542f
+md"### RADIOACTIVE DECAY"
+
+# ╔═╡ a2cc59fc-01d3-45c6-80e7-3c8485632036
+cm"""
+```math
+\frac{d N}{d t}=-k N
+```
+where 
+- ``N(t)`` the number of atoms  of  certain radio active isotope at time ``t``.
+
+The decay constant of a radioactive isotope is often specified in terms of another empirical constant, the __half-life__ of the isotope, because this parameter is more convenient. 
+
+- The half-life ``\tau`` of a radioactive isotope is the time required for half of it to decay. 
+- To find the relationship between ``k`` and ``\tau``, we set ``t=\tau`` and ``N=\frac{1}{2} N_0`` in the equation ``N(t)=N_0 e^{-k t}``, so that ``\frac{1}{2} N_0=N_0 e^{-k \tau}``. When we solve for ``\tau``, we find that
+```math
+\tau=\frac{\ln 2}{k}
+```
+
+- For example, the half-life of ``{ }^{14} \mathrm{C}`` is ``\tau \approx(\ln 2) /(0.0001216)``, approximately 5700
+"""
+
+# ╔═╡ 72cef7b7-f466-4872-bba0-6f46ac36de15
+let
+	k = 0.0001216
+	t = -log(0.63)/k
+end
+
+# ╔═╡ 1cfb4072-1e58-4b7a-bcdc-672cd0183f75
+md"###  DRUG ELIMINATION"
+
+# ╔═╡ 07b46453-655c-4fc0-8590-3104ce5f6c99
+cm"""
+```math
+\frac{d A}{d t}=-\lambda A
+```
+where 
+- ``A(t)`` is the amount of a certain drug in the bloodstream, measured by the excess over the natural level of the drug, will decline at a rate proportional to the current excess amount. 
+- ``\lambda`` is called the elimination constant of the drug.
+"""
+
+# ╔═╡ 27f89662-ef45-4469-bbc7-7a6b1949881c
+let
+	P₀=6
+	Pprime0 = 0.000212 * (365.25)
+	k = Pprime0/P₀
+
+	P_2051 = P₀*exp(k*51)
+
+	P10=floor(log(10)/k)
+	1999+Int(P10)
+end
+
+# ╔═╡ 124fc4b5-157b-46b1-8a77-06b119ee0a4d
+md"##  Cooling and Heatin"
+
+# ╔═╡ c8d24a6a-b851-420f-9c4f-e42eeb934fc3
+cm"""
+__Newton's law of cooling__: the time rate of change of the temperature ``T(t)`` of a body immersed in a medium of constant temperature ``A`` is proportional to the difference ``A-T``. That is,
+```math
+\frac{d T}{d t}=k(A-T)
+```
+where ``k`` is a positive constant. This is an instance of the linear first-order differential equation with constant coefficients:
+```math
+\frac{d x}{d t}=a x+b
+```
+
+It includes the exponential equation as a special case ``(b=0)`` and is also easy to solve by separation of variables.
+"""
+
+# ╔═╡ c96bcf16-8467-4f8f-a55a-6769f73143da
+let
+	A = 375
+	C = 375-50
+	k = -log((A-125)/325)/75
+	T = 150
+	t = -log((A-T)/C)/k
+	105/60
+	(0.75*60)
 end
 
 # ╔═╡ 8d103106-40ac-49fa-86ae-1af3ecb8a3ec
 let
-	@syms x::Real, y()
-	∂ = Differential(x)
-	DE1 = ∂(∂(y(x))) - 3∂(y(x)) + 2y(x)-3exp(-x)+10cos(3x)
-	Z1 = dsolve(DE1,y(x); ics=Dict(y(0)=>1, ∂(y)(0)=>2))
-	DE2 = ∂(∂(∂(y(x)))) +∂(∂(y(x)))-3*exp(x)-4x^2
-	Z2 = dsolve(DE2,y(x))
-	DE3 = 2x*y(x)*∂(y(x)) ~ 4x^2+3y(x)^2
-	dsolve(DE3,y(x))
-	# Z
+	# @syms x::Real, y()
+	# ∂ = Differential(x)
+	# DE1 = ∂(∂(y(x))) - 3∂(y(x)) + 2y(x)-3exp(-x)+10cos(3x)
+	# Z1 = dsolve(DE1,y(x); ics=Dict(y(0)=>1, ∂(y)(0)=>2))
+	# DE2 = ∂(∂(∂(y(x)))) +∂(∂(y(x)))-3*exp(x)-4x^2
+	# Z2 = dsolve(DE2,y(x))
+	# DE3 = 2x*y(x)*∂(y(x)) ~ 4x^2+3y(x)^2
+	# dsolve(DE3,y(x))
+	# # Z
+	md"Example ..."
 end
 
 # ╔═╡ c7cc5a14-f964-4cf9-82f0-f23904bbdace
 let
-	@syms x(),y(), t::Real
-	∂ = Differential(t)
-	Z =[x(t);y(t)]
-	S1 = ∂.(Z) .~ [4 1;6 -1]*Z
-	dsolve(S1)
+	# @syms x(),y(), t::Real
+	# ∂ = Differential(t)
+	# Z =[x(t);y(t)]
+	# S1 = ∂.(Z) .~ [4 1;6 -1]*Z
+	# dsolve(S1)
+	cm"Example ...."
 end
 
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
@@ -267,8 +441,8 @@ begin
 
     | Day       | Time        |
     |-----------|-------------|
-    | Tuesday    | 11:00-11:50AM |
-    | Thursday | 11:00-11:50AM |
+    | Sunday    | 11:00-11:50AM |
+    | Monday | 12:00-12:50PM |
     Also you can ask for an online meeting through __TEAMS__.
     """
 end
@@ -392,6 +566,53 @@ $(ex("Example 4","River crossing"))
 Suppose that the river is ``1`` mile wide and that its midstream velocity is ``v_0=9 \mathrm{mi} / \mathrm{h}`` and the swimmer's velocity is ``v_S=3 \mathrm{mi} / \mathrm{h}``.
 """
 
+# ╔═╡ 15531160-b5d7-4e55-848c-9b239d4f116c
+cm"""
+$(ex(1)) Solve the differential equation
+```math
+\frac{d y}{d x}=\frac{4-2 x}{3 y^2-5}
+```
+"""
+
+# ╔═╡ 6d3c4d0e-a950-43bd-a2d7-46aec4417ab3
+cm"""
+$(ex(2)) Find all solutions of the differential equation
+```math
+\frac{d y}{d x}=6 x(y-1)^{2 / 3}
+```
+
+"""
+
+# ╔═╡ a1af7fe8-cb18-4b36-a015-38df3d346b33
+cm"""
+$(ex("Example 3", "World population")) According to data listed at www. census.gov, the world's total population reached ``6`` billion persons in mid-``1999``, and was then increasing at the rate of about ``212`` thousand persons each day. Assuming that natural population growth at this rate continues, we want to answer these questions: 
+
+<ol type="a">
+
+<li> 
+
+What is the annual growth rate ``k`` ? 
+</li>
+
+<li> What will be the world population at the middle of the 21 st century? </li>
+<li> How long will it take the world population to increase tenfold-thereby reaching the 60 billion that some demographers believe to be the maximum for which the planet can provide adequate food supplies? </li>
+
+</ol>
+"""
+
+# ╔═╡ ceb445e8-64ca-4d6f-86c2-98c96ad42fb2
+cm"""
+$(ex("Example 4","Radiometric dating"))
+A specimen of charcoal found at Stonehenge turns out to contain ``63 \%`` as much ``{ }^{14} \mathrm{C}`` as a sample of present-day charcoal of equal mass. What is the age of the 
+sample?
+"""
+
+# ╔═╡ 177d7ac6-2a24-4282-84a3-e42a1c03251f
+cm"""
+$(ex(5,s="Cooling"))
+A ``4``-lb roast, initially at ``50^{\circ} \mathrm{F}``, is placed in a ``375^{\circ} \mathrm{F}`` oven at 5:00 P.M. After 75 minutes it is found that the temperature ``T(t)`` of the roast is ``125^{\circ} \mathrm{F}``. When will the roast be ``150^{\circ} \mathrm{F}`` (medium rare) ``?``
+"""
+
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
 initialize_eqref()
 
@@ -441,14 +662,14 @@ Colors = "~0.12.11"
 CommonMark = "~0.8.12"
 HypertextLiteral = "~0.9.5"
 LaTeXStrings = "~1.3.1"
-Latexify = "~0.16.4"
+Latexify = "~0.16.5"
 PlotThemes = "~3.2.0"
 Plots = "~1.40.5"
 PlutoExtras = "~0.7.12"
 PlutoUI = "~0.7.59"
 PrettyTables = "~2.3.2"
 QRCoders = "~1.4.5"
-SymPy = "~1.1.12"
+SymPy = "~2.2.0"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
@@ -457,7 +678,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.4"
 manifest_format = "2.0"
-project_hash = "6877737bf84303eb5f407025d2966a2db43172d6"
+project_hash = "f4703e0dff485bac3fb1464187004fe2ccfdbd03"
 
 [[deps.AbstractFFTs]]
 deps = ["LinearAlgebra"]
@@ -548,9 +769,9 @@ uuid = "5ae59095-9a9b-59fe-a467-6f913c188581"
 version = "0.12.11"
 
 [[deps.CommonEq]]
-git-tree-sha1 = "d1beba82ceee6dc0fce8cb6b80bf600bbde66381"
+git-tree-sha1 = "6b0f0354b8eb954cdba708fb262ef00ee7274468"
 uuid = "3709ef60-1bee-4518-9f2f-acd86f176c50"
-version = "0.2.0"
+version = "0.2.1"
 
 [[deps.CommonMark]]
 deps = ["Crayons", "JSON", "PrecompileTools", "URIs"]
@@ -565,9 +786,9 @@ version = "0.2.4"
 
 [[deps.Compat]]
 deps = ["TOML", "UUIDs"]
-git-tree-sha1 = "b1c55339b7c6c350ee89f2c1604299660525b248"
+git-tree-sha1 = "8ae8d32e09f0dcf42a36b90d4e17f5dd2e4c4215"
 uuid = "34da2185-b29b-5c13-b0c7-acf172513d20"
-version = "4.15.0"
+version = "4.16.0"
 weakdeps = ["Dates", "LinearAlgebra"]
 
     [deps.Compat.extensions]
@@ -994,16 +1215,18 @@ version = "1.3.1"
 
 [[deps.Latexify]]
 deps = ["Format", "InteractiveUtils", "LaTeXStrings", "MacroTools", "Markdown", "OrderedCollections", "Requires"]
-git-tree-sha1 = "5b0d630f3020b82c0775a51d05895852f8506f50"
+git-tree-sha1 = "ce5f5621cac23a86011836badfedf664a612cee4"
 uuid = "23fbe1c1-3f47-55db-b15f-69d7ec21a316"
-version = "0.16.4"
+version = "0.16.5"
 
     [deps.Latexify.extensions]
     DataFramesExt = "DataFrames"
+    SparseArraysExt = "SparseArrays"
     SymEngineExt = "SymEngine"
 
     [deps.Latexify.weakdeps]
     DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+    SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
     SymEngine = "123dc426-2d89-5057-bbad-38513e3affd8"
 
 [[deps.LazyModules]]
@@ -1625,16 +1848,22 @@ uuid = "bea87d4a-7f5b-5778-9afe-8cc45184846c"
 version = "7.2.1+1"
 
 [[deps.SymPy]]
-deps = ["CommonEq", "CommonSolve", "Latexify", "LinearAlgebra", "Markdown", "PyCall", "RecipesBase", "SpecialFunctions"]
-git-tree-sha1 = "ed1605d9415cccb50e614b8fe0035753877b5303"
+deps = ["CommonEq", "CommonSolve", "LinearAlgebra", "PyCall", "SpecialFunctions", "SymPyCore"]
+git-tree-sha1 = "d35b297be048dfac05bcff29e55d6106808e3c5a"
 uuid = "24249f21-da20-56a4-8eb1-6a02cf4ae2e6"
-version = "1.1.12"
+version = "2.2.0"
 
-    [deps.SymPy.extensions]
-    SymPySymbolicUtilsExt = "SymbolicUtils"
+[[deps.SymPyCore]]
+deps = ["CommonEq", "CommonSolve", "Latexify", "LinearAlgebra", "Markdown", "RecipesBase", "SpecialFunctions"]
+git-tree-sha1 = "bef92ec4c31804bdc9c44cb00eaf0348eac383fb"
+uuid = "458b697b-88f0-4a86-b56b-78b75cfb3531"
+version = "0.2.5"
 
-    [deps.SymPy.weakdeps]
-    SymbolicUtils = "d1185830-fcd6-423d-90d6-eec64667417b"
+    [deps.SymPyCore.extensions]
+    SymPyCoreTermInterfaceExt = "TermInterface"
+
+    [deps.SymPyCore.weakdeps]
+    TermInterface = "8ea1fca8-c5ef-4a55-8b96-4e9afe9c9a3c"
 
 [[deps.TOML]]
 deps = ["Dates"]
@@ -2066,9 +2295,34 @@ version = "1.4.1+1"
 # ╟─b97a6f03-dbeb-40b9-be58-f9a9a50cac5a
 # ╟─ab0da87e-9b87-48eb-a235-44fdfd2f81f2
 # ╟─6168170e-2fcb-4728-b8d8-ddc44992d3f9
-# ╟─a1d00dd2-59b0-427b-b2c0-25ec94e039a9
-# ╠═8d103106-40ac-49fa-86ae-1af3ecb8a3ec
-# ╠═c7cc5a14-f964-4cf9-82f0-f23904bbdace
+# ╠═a1d00dd2-59b0-427b-b2c0-25ec94e039a9
+# ╟─261637c6-4da1-4b4a-9f01-3e2324c41b60
+# ╟─953e31c8-3e26-47cf-a675-2067802ba941
+# ╟─75287b3b-3f90-4a0a-88d0-92130f84c0db
+# ╟─15531160-b5d7-4e55-848c-9b239d4f116c
+# ╟─1790195b-439e-4472-96e8-6f87d8ff0601
+# ╟─085418be-7e83-4a6a-b3a8-fbd4d2ac2451
+# ╟─6d3c4d0e-a950-43bd-a2d7-46aec4417ab3
+# ╟─7bacb885-372a-4ee9-ba9c-de505d332dfb
+# ╟─241b2797-3050-400b-a532-303a6feeb39e
+# ╟─a5a9fda5-c077-4505-8fcf-2e23f9b3ad1f
+# ╟─809d228a-65a3-4af5-b605-e030c41c4548
+# ╟─a1af7fe8-cb18-4b36-a015-38df3d346b33
+# ╟─6b4ce7dc-39f3-4c4e-973f-b501916f0717
+# ╟─0756191d-272f-4e62-8fed-1f731820325c
+# ╟─f832a1e4-17ff-43d8-97a4-c7e29bbe542f
+# ╟─a2cc59fc-01d3-45c6-80e7-3c8485632036
+# ╟─ceb445e8-64ca-4d6f-86c2-98c96ad42fb2
+# ╟─72cef7b7-f466-4872-bba0-6f46ac36de15
+# ╟─1cfb4072-1e58-4b7a-bcdc-672cd0183f75
+# ╟─07b46453-655c-4fc0-8590-3104ce5f6c99
+# ╠═27f89662-ef45-4469-bbc7-7a6b1949881c
+# ╟─124fc4b5-157b-46b1-8a77-06b119ee0a4d
+# ╟─c8d24a6a-b851-420f-9c4f-e42eeb934fc3
+# ╟─177d7ac6-2a24-4282-84a3-e42a1c03251f
+# ╠═c96bcf16-8467-4f8f-a55a-6769f73143da
+# ╟─8d103106-40ac-49fa-86ae-1af3ecb8a3ec
+# ╟─c7cc5a14-f964-4cf9-82f0-f23904bbdace
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
