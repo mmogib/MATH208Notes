@@ -9,7 +9,6 @@ begin
     using CommonMark
     using PlutoUI, PlutoExtras
     using Plots, PlotThemes, LaTeXStrings
-	# PythonPlot
     using Latexify
     using HypertextLiteral
     using Colors
@@ -126,6 +125,19 @@ let
 	end
 	gif(anim,"imgs/swimmer.gif",fps=10)
 	
+end
+
+# ╔═╡ 8781e87a-146a-41b0-8981-243fec51bfa3
+function vector_field(xs,ys,df)
+	# xs = -2:0.3:2
+	# ys = -2:0.2:2
+	# df(x, y) = normalize([1, 1/x]) ./ 10
+
+	xxs = repeat(xs',length(xs),length(ys))
+	yys = reshape(repeat(ys,length(xs)),length(xs),length(ys))
+
+	quiver(xxs, yys, quiver=df, c=:black,framestyle=:origin)
+
 end
 
 # ╔═╡ 261637c6-4da1-4b4a-9f01-3e2324c41b60
@@ -272,7 +284,7 @@ let
 end
 
 # ╔═╡ 124fc4b5-157b-46b1-8a77-06b119ee0a4d
-md"##  Cooling and Heatin"
+md"##  Cooling and Heating"
 
 # ╔═╡ c8d24a6a-b851-420f-9c4f-e42eeb934fc3
 cm"""
@@ -292,12 +304,90 @@ It includes the exponential equation as a special case ``(b=0)`` and is also eas
 let
 	A = 375
 	C = 375-50
+	# (A-125)
 	k = -log((A-125)/325)/75
 	T = 150
 	t = -log((A-T)/C)/k
-	105/60
-	(0.75*60)
+	# 105/60
+	# (0.75*60)
 end
+
+# ╔═╡ e9d05d41-2d51-4f11-ad43-95571b99b466
+md"# 1.5 Linear First-Order Equations"
+
+# ╔═╡ e1c8a21a-8f19-4632-992f-014d4690baa6
+cm"""
+A __linear first-order equation__ is a differential equation of the form
+```math
+\frac{d y}{d x}+P(x) y=Q(x) \text {. }
+```
+"""
+
+# ╔═╡ 16d641fc-590f-4ab2-9288-c0f03849caec
+cm"""
+multiplying by the __integrating factor__
+```math
+\rho(x) = e^{\int P(x)dx}
+```
+
+Solves the problem.
+
+##### METHOD: SOLUTION OF LINEAR FIRST-ORDER EQUATIONS
+1. Begin by calculating the integrating factor ``\rho(x)=e^{\int P(x) d x}``.
+2. Then multiply both sides of the differential equation by ``\rho(x)``.
+3. Next, recognize the left-hand side of the resulting equation as the derivative of a product:
+```math
+D_x[\rho(x) y(x)]=\rho(x) Q(x)
+```
+4. Finally, integrate this equation,
+```math
+\rho(x) y(x)=\int \rho(x) Q(x) d x+C
+```
+then solve for ``y`` to obtain the general solution of the original differential equation.
+
+"""
+
+# ╔═╡ ae81e505-f95a-4355-bf74-b308445d2830
+let
+	xs = -1.5:0.6:6
+	ys = -4.5:0.6:2.5
+	df(x,y) = normalize([1,y+(11/8)*exp(-x/3)])
+	p1 = vector_field(xs,ys,df)
+	p1 = plot(p1,x->(1/32)*(exp(x)-33*exp(-x/3)),c=:blue,
+		xlims=(min(xs...),max(xs...)),
+		ylims=(min(ys...),max(ys...)),
+		label=:none
+	)
+	plot(p1,[0],[-1], seriestype=:scatter,label=:none)
+end
+
+# ╔═╡ 5aa66e9f-5741-4306-aa36-8a28627bca0f
+md"# 1.6 Substitution Methods and Exact Equations"
+
+# ╔═╡ 419f6c6f-1aff-4b72-be83-3dc3ef01bc76
+md"##  Homogeneous Equations"
+
+# ╔═╡ cacc6877-5310-4f5a-a0c2-344cccd0ec8b
+md"## Bernoulli Equations"
+
+# ╔═╡ 564258db-41ca-41fd-90c8-13c8fd39fe93
+cm"""
+A first-order differential equation of the form
+```math
+\frac{d y}{d x}+P(x) y=Q(x) y^n
+```
+is called a __Bernoulli equation__. If either ``n=0`` or ``n=1``, then this equation is linear. Otherwise, we make the substitution
+```math
+v=y^{1-n}
+```
+transforming it the linear equation
+```math
+\frac{d v}{d x}+(1-n) P(x) v=(1-n) Q(x)
+```
+"""
+
+# ╔═╡ 4ccc21f1-f253-4e7d-87e4-4c8f5e1db785
+md"##  Exact Differential Equations"
 
 # ╔═╡ 8d103106-40ac-49fa-86ae-1af3ecb8a3ec
 let
@@ -363,6 +453,7 @@ begin
     end
     eth() = endTheorem()
     ex(n::Int; s::String="") = ex("Example $n", s)
+    ex(t::Int, s::String) = example("Example $t", s)
     ex(t, s) = example(t, s)
     function beginBlock(title, subtitle)
         """<div style="box-sizing: border-box;">
@@ -611,6 +702,202 @@ sample?
 cm"""
 $(ex(5,s="Cooling"))
 A ``4``-lb roast, initially at ``50^{\circ} \mathrm{F}``, is placed in a ``375^{\circ} \mathrm{F}`` oven at 5:00 P.M. After 75 minutes it is found that the temperature ``T(t)`` of the roast is ``125^{\circ} \mathrm{F}``. When will the roast be ``150^{\circ} \mathrm{F}`` (medium rare) ``?``
+"""
+
+# ╔═╡ cd7eb646-c23c-4ab8-9dc4-04c0db21d4bb
+cm"""
+$(ex(1)) 
+Solve the initial value problem
+```math
+\frac{d y}{d x}-y=\frac{11}{8} e^{-x / 3}, \quad y(0)=-1
+```
+"""
+
+# ╔═╡ 2e8d8477-a937-4cd4-b300-2cae6b9b2853
+cm"""
+$(ex(2)) Find a general solution of
+```math
+\left(x^2+1\right) \frac{d y}{d x}+3 x y=6 x
+```
+"""
+
+# ╔═╡ e0c6b9b1-ab42-4e6f-a41e-440e68d68041
+cm"""
+$(bth("1 The Linear First-Order Equation"))
+If the functions ``P(x)`` and ``Q(x)`` are continuous on the open interval ``I`` containing the point ``x_0``, then the initial value problem
+```math
+\frac{d y}{d x}+P(x) y=Q(x), \quad y\left(x_0\right)=y_0
+```
+has a unique solution ``y(x)`` on ``I``, given by the formula in 
+```math
+y(x)=e^{-\int P(x) d x}\left[\int\left(Q(x) e^{\int P(x) d x}\right) d x+C\right]
+```
+with an appropriate value of ``C``.
+"""
+
+# ╔═╡ 1d54e85b-f3e6-41f1-a818-ab483c918fee
+cm"""
+$(ex(3)) Solve the initial value problem
+```math
+x^2 \frac{d y}{d x}+x y=\sin x, \quad y(1)=y_0
+```
+"""
+
+# ╔═╡ 4fbe0c02-a31f-4f37-b014-84e4bb914fff
+cm"""
+$(example("Example",""))
+Solve
+```math 
+\left(x+y e^y\right) \frac{d y}{d x}=1
+```
+"""
+
+# ╔═╡ c868de03-803a-49a9-b1f5-657f46ab8498
+cm"""
+$(ex(1)) Solve the differential equation
+```math
+\frac{d y}{d x}=(x+y+3)^2
+```
+"""
+
+# ╔═╡ 90a2fcd1-1d38-4c12-8f7e-cb9f83f890f3
+cm"""
+$(define("homogeneous DE")) A __homogeneous__ first-order differential equation is one that can be written in the form
+```math
+\frac{d y}{d x}=F\left(\frac{y}{x}\right)
+```
+
+If we make the substitutions
+```math
+v=\frac{y}{x}, \quad y=v x, \quad \frac{d y}{d x}=v+x \frac{d v}{d x}
+```
+"""
+
+# ╔═╡ aca4f2f0-5c16-4e51-b83c-b76149f836a9
+cm"""
+$(ex(2))
+Solve the differential equation
+```math
+2 x y \frac{d y}{d x}=4 x^2+3 y^2
+```
+"""
+
+# ╔═╡ d743b750-2a29-4fb3-a729-07bec9637121
+cm"""
+$(ex(3)) Solve the initial value problem
+```math
+x \frac{d y}{d x}=y+\sqrt{x^2-y^2}, \quad y\left(x_0\right)=0
+```
+where ``x_0>0``.
+"""
+
+# ╔═╡ 7a405477-d020-4b31-b0be-036fd3f22322
+cm"""
+$(ex(5)) Solve the differential equation
+```math
+x \frac{d y}{d x}+6 y=3 x y^{4 / 3}
+```
+"""
+
+# ╔═╡ 0e5e9fe4-0157-4497-b675-53071f4e6782
+cm"""
+$(ex(6))
+Solve
+```math
+2 x e^{2 y} \frac{d y}{d x}=3 x^4+e^{2 y}
+```
+
+"""
+
+# ╔═╡ a32e62d2-e65f-492a-a3f4-db8dec72db67
+cm"""
+- A general solution ``y(x)`` of a __first-order differential equation__ is often defined implicitly by an equation of the form
+```math
+F(x, y(x))=C\quad \text{where } C \text{ is a constant.}
+```
+- The original differentail equation is
+```math
+\frac{\partial F}{\partial x}+\frac{\partial F}{\partial y} \frac{d y}{d x}=0
+```
+$(add_space(10)) that is,
+```math
+M(x, y)+N(x, y) \frac{d y}{d x}=0
+```
+$(add_space(10))where ``M(x, y)=F_x(x, y)`` and ``N(x, y)=F_y(x, y)``
+- We write 
+```math
+M(x, y) d x+N(x, y) d y=0
+```
+- This last form is called the __differential form__.
+- If there exists a function F(x,y) such that 
+```math
+\frac{\partial F}{\partial x}=M \quad \text{and} \quad \frac{\partial F}{\partial y}=N
+```
+$(add_space(10))then the equation
+```math
+F(x, y)=C
+```
+implicitly defines a general solution. In this case, the equation
+```math
+M(x, y)+N(x, y) \frac{d y}{d x}=0
+```
+is called an __exact differential equation__ 
+```math
+(\text{the differential} dF=F_x d x+F_y d y \text{ of }  F(x, y) \text{ is exactly } M d x+N d y)
+```
+
+"""
+
+# ╔═╡ 8792fe08-498e-4d18-aad2-de9bc3a7ade4
+cm"""
+$(bbl("Question 1"))
+How can we determine whether the differential
+ equation in 
+```math
+M(x, y) d x+N(x, y) d y=0
+```
+is exact?
+$(ebl())
+
+$(bbl("Question 2"))
+ If it is exact, how can we find the function ``F`` such
+ that 
+```math
+ F_x = M, \quad F_y = N?
+```
+$(ebl())
+"""
+
+# ╔═╡ c006d3aa-8cf1-4382-806a-4e9714f934f6
+cm"""
+$(bth("1 Criterion for Exactness"))
+Suppose that the functions ``M(x, y)`` and ``N(x, y)`` are continuous and have continuous first-order partial derivatives in the open rectangle ``R`` : ``a < x < b, c < y < d``. Then the differential equation
+```math
+M(x, y) d x+N(x, y) d y=0
+```
+is exact in ``R`` if and only if
+```math
+\frac{\partial M}{\partial y}=\frac{\partial N}{\partial x}
+```
+at each point of ``R``. That is, there exists a function ``F(x, y)`` defined on ``R`` with ``\partial F / \partial x=M`` and ``\partial F / \partial y=N`` if and only if last equation holds on ``R``.
+"""
+
+# ╔═╡ 626fe783-d05a-49ca-8e3c-2ac76be27e34
+cm"""
+$(ex(8)) 
+Show that the differential equation 
+```math
+\quad y^3 d x+3 x y^2 d y=0
+```
+is exact.
+"""
+
+# ╔═╡ 933c6345-fffc-4159-8b67-e1443b988f9f
+cm"""
+$(ex(9)) Solve the differential equation
+```math
+\left(6 x y-y^3\right) d x+\left(4 y+3 x^2-3 x y^2\right) d y=0
+```
 """
 
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
@@ -2296,7 +2583,8 @@ version = "1.4.1+1"
 # ╟─ab0da87e-9b87-48eb-a235-44fdfd2f81f2
 # ╟─6168170e-2fcb-4728-b8d8-ddc44992d3f9
 # ╠═a1d00dd2-59b0-427b-b2c0-25ec94e039a9
-# ╟─261637c6-4da1-4b4a-9f01-3e2324c41b60
+# ╟─8781e87a-146a-41b0-8981-243fec51bfa3
+# ╠═261637c6-4da1-4b4a-9f01-3e2324c41b60
 # ╟─953e31c8-3e26-47cf-a675-2067802ba941
 # ╟─75287b3b-3f90-4a0a-88d0-92130f84c0db
 # ╟─15531160-b5d7-4e55-848c-9b239d4f116c
@@ -2321,7 +2609,32 @@ version = "1.4.1+1"
 # ╟─c8d24a6a-b851-420f-9c4f-e42eeb934fc3
 # ╟─177d7ac6-2a24-4282-84a3-e42a1c03251f
 # ╠═c96bcf16-8467-4f8f-a55a-6769f73143da
-# ╟─8d103106-40ac-49fa-86ae-1af3ecb8a3ec
+# ╟─e9d05d41-2d51-4f11-ad43-95571b99b466
+# ╟─e1c8a21a-8f19-4632-992f-014d4690baa6
+# ╟─16d641fc-590f-4ab2-9288-c0f03849caec
+# ╟─cd7eb646-c23c-4ab8-9dc4-04c0db21d4bb
+# ╠═ae81e505-f95a-4355-bf74-b308445d2830
+# ╟─2e8d8477-a937-4cd4-b300-2cae6b9b2853
+# ╟─e0c6b9b1-ab42-4e6f-a41e-440e68d68041
+# ╟─1d54e85b-f3e6-41f1-a818-ab483c918fee
+# ╟─4fbe0c02-a31f-4f37-b014-84e4bb914fff
+# ╟─5aa66e9f-5741-4306-aa36-8a28627bca0f
+# ╟─c868de03-803a-49a9-b1f5-657f46ab8498
+# ╟─419f6c6f-1aff-4b72-be83-3dc3ef01bc76
+# ╟─90a2fcd1-1d38-4c12-8f7e-cb9f83f890f3
+# ╟─aca4f2f0-5c16-4e51-b83c-b76149f836a9
+# ╟─d743b750-2a29-4fb3-a729-07bec9637121
+# ╟─cacc6877-5310-4f5a-a0c2-344cccd0ec8b
+# ╟─564258db-41ca-41fd-90c8-13c8fd39fe93
+# ╟─7a405477-d020-4b31-b0be-036fd3f22322
+# ╟─0e5e9fe4-0157-4497-b675-53071f4e6782
+# ╟─4ccc21f1-f253-4e7d-87e4-4c8f5e1db785
+# ╟─a32e62d2-e65f-492a-a3f4-db8dec72db67
+# ╟─8792fe08-498e-4d18-aad2-de9bc3a7ade4
+# ╟─c006d3aa-8cf1-4382-806a-4e9714f934f6
+# ╟─626fe783-d05a-49ca-8e3c-2ac76be27e34
+# ╠═933c6345-fffc-4159-8b67-e1443b988f9f
+# ╠═8d103106-40ac-49fa-86ae-1af3ecb8a3ec
 # ╟─c7cc5a14-f964-4cf9-82f0-f23904bbdace
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e

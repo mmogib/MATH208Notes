@@ -1,0 +1,8 @@
+dir.txt
+[0m[01;34mdocs[0m/
+[01;34mimgs[0m/
+Manifest.toml
+MATH208_NOTES.jl
+Project.toml
+qrcode.png
+README.md
