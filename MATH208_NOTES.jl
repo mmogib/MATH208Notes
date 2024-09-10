@@ -128,7 +128,7 @@ let
 end
 
 # ╔═╡ 8781e87a-146a-41b0-8981-243fec51bfa3
-function vector_field(xs,ys,df)
+function vector_field(xs,ys,df; c=:black, args...)
 	# xs = -2:0.3:2
 	# ys = -2:0.2:2
 	# df(x, y) = normalize([1, 1/x]) ./ 10
@@ -136,7 +136,7 @@ function vector_field(xs,ys,df)
 	xxs = repeat(xs',length(xs),length(ys))
 	yys = reshape(repeat(ys,length(xs)),length(xs),length(ys))
 
-	quiver(xxs, yys, quiver=df, c=:black,framestyle=:origin)
+	quiver(xxs, yys, quiver=df; framestyle=:origin, c=c, args...)
 
 end
 
@@ -389,18 +389,35 @@ transforming it the linear equation
 # ╔═╡ 4ccc21f1-f253-4e7d-87e4-4c8f5e1db785
 md"##  Exact Differential Equations"
 
+# ╔═╡ 9ed8b8ed-1ac5-4e8b-8a74-17dff32f1ad5
+let
+	x = -2:0.1:2
+	y = -2:0.1:2
+	df(x,y) = 0.1*normalize([1,(y^3-6*x*y)/(4y+3x^2-3x*y^2)])
+	plt = vector_field(x,y,df; lw=0.01)
+	contour!(x,y,(x,y)->3x^2*y-x*y^3+2y^2, c=:red)
+end
+
+# ╔═╡ 80e20e84-51d2-4e6e-8eb3-b7a8dac22a8b
+md"## Reducible Second-Order Equations"
+
+# ╔═╡ 65b3d353-815c-4e5a-a887-24a82bdf005d
+cm"""
+
+A second-order differential equation involves the second derivative of the unknown function ``y(x)``, and thus has the general form
+```math
+F\left(x, y, y^{\prime}, y^{\prime \prime}\right)=0
+```
+
+If either the dependent variable ``y`` or the independent variable ``x`` is missing from a second-order equation, then it is easily reduced by a simple substitution to a firstorder equation that may be solvable by the methods of this chapter.
+"""
+
 # ╔═╡ 8d103106-40ac-49fa-86ae-1af3ecb8a3ec
 let
 	# @syms x::Real, y()
 	# ∂ = Differential(x)
-	# DE1 = ∂(∂(y(x))) - 3∂(y(x)) + 2y(x)-3exp(-x)+10cos(3x)
-	# Z1 = dsolve(DE1,y(x); ics=Dict(y(0)=>1, ∂(y)(0)=>2))
-	# DE2 = ∂(∂(∂(y(x)))) +∂(∂(y(x)))-3*exp(x)-4x^2
-	# Z2 = dsolve(DE2,y(x))
-	# DE3 = 2x*y(x)*∂(y(x)) ~ 4x^2+3y(x)^2
-	# dsolve(DE3,y(x))
-	# # Z
-	md"Example ..."
+	# Eq =2*x*exp(2*y(x))*∂(y(x)) ~ 3x^4+exp(2*y(x))
+	# dsolve(Eq)
 end
 
 # ╔═╡ c7cc5a14-f964-4cf9-82f0-f23904bbdace
@@ -412,6 +429,21 @@ let
 	# dsolve(S1)
 	cm"Example ...."
 end
+
+# ╔═╡ 2678d172-8896-4681-b9af-45e3485f2312
+md"# Chapter 3: Linear Systems and Matrices"
+
+# ╔═╡ 27dbde5f-5e4d-4c67-bc67-ae0b9c40a774
+md"## Gaussian Elimination"
+
+# ╔═╡ a3567a11-b2c2-4545-b4a2-278b4b7e4b0e
+cm"""
+__We can use three elementary row operations only:__
+
+1. Multiply one equation by a nonzero constant. (``\lambda R_i \to R_i``)
+2. Interchange two equations. (``\lambda R_i \leftrightarrow R_j``)
+3. Add a constant multiple of (the terms of) one equation to (corresponding terms of) another equation. (``\lambda R_i +R_j\to R_j``)
+"""
 
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
@@ -490,6 +522,7 @@ begin
     function endTheorem()
         endBlock()
     end
+	ex() = example("Example","")
     function example(lable, desc)
         """<div style="display:flex;">
        <div style="
@@ -762,7 +795,7 @@ $(ex(1)) Solve the differential equation
 
 # ╔═╡ 90a2fcd1-1d38-4c12-8f7e-cb9f83f890f3
 cm"""
-$(define("homogeneous DE")) A __homogeneous__ first-order differential equation is one that can be written in the form
+$(define("Homogeneous DE")) A __homogeneous__ first-order differential equation is one that can be written in the form
 ```math
 \frac{d y}{d x}=F\left(\frac{y}{x}\right)
 ```
@@ -892,11 +925,97 @@ Show that the differential equation
 is exact.
 """
 
+# ╔═╡ ad29db84-3c84-4a6e-aeb0-5a51210ef05d
+cm"""
+$(bbl("Remarks",""))
+- What happens if we divide by ``y^2`` both sides?
+"""
+
 # ╔═╡ 933c6345-fffc-4159-8b67-e1443b988f9f
 cm"""
 $(ex(9)) Solve the differential equation
 ```math
 \left(6 x y-y^3\right) d x+\left(4 y+3 x^2-3 x y^2\right) d y=0
+```
+"""
+
+# ╔═╡ a4256712-b454-4733-bcf5-c5764705b028
+cm"""
+$(ex(10))
+Solve the equation ``x y^{\prime \prime}+2 y^{\prime}=6 x``.
+"""
+
+# ╔═╡ 87802187-2aeb-4e67-a2d7-1975cf588a17
+cm"""
+$(ex(11)) 
+Solve the equation ``y y^{\prime \prime}=\left(y^{\prime}\right)^2``.
+"""
+
+# ╔═╡ 608e2182-ce7c-4626-bcda-bf4bd6f2f1c6
+cm"""
+## Using Julia
+$example("EXample","")
+Solve the differential equation
+```math
+2 x e^{2 y} \frac{d y}{d x}=3 x^4+e^{2 y}
+```
+using Julia
+"""
+
+# ╔═╡ 643d7441-1dbf-4b98-b76f-617babece0c0
+cm"""
+$(example("Example","")) Solve the linear system
+```math
+\begin{aligned}
+x+2 y+z & =4 \\
+3 x+8 y+7 z & =20 \\
+2 x+7 y+9 z & =23
+\end{aligned}
+```
+"""
+
+# ╔═╡ 2aa7e38b-c48d-470c-943e-a6a73d053a70
+cm"""
+$(define("Echelon Matrix"))
+The matrix ``\mathbf{E}`` is called an echelon matrix provided it has the following two properties:
+1. Every row of ``\mathbf{E}`` that consists entirely of zeros (if any) lies beneath every row that contains a nonzero element.
+2. In each row of ``\mathbf{E}`` that contains a nonzero element, the first nonzero element lies strictly to the right of the first (from left) nonzero element (called __leading entry__) in the preceding row (if there is a preceding row).
+$(ebl())
+
+__FOR EXAMPLE__
+```math
+\mathbf{E}=\left[\begin{array}{rrrrr}2 & -1 & 0 & 4 & 7 \\ 0 & 1 & 2 & 0 & -5 \\ 0 & 0 & 0 & 3 & 0 \\ 0 & 0 & 0 & 0 & 0\end{array}\right]
+```
+"""
+
+# ╔═╡ 13748f1f-4092-4592-9a4f-8f17c38a875a
+cm"""
+$(define("Reduced Echelon Matrix"))
+A reduced echelon matrix ``\mathbf{E}`` is an echelon matrix that has-in addition to Properties 1 and 2 -the following properties:
+
+3. Each leading entry of ``\mathbf{E}`` is 1 .
+4. Each leading entry of ``\mathbf{E}`` is the only nonzero element in its column.
+"""
+
+# ╔═╡ 2d3b73f6-8429-4551-96ac-b2db865189ed
+cm"""
+$(bbl("ALGORITHM Gauss-Jordan Elimination",""))
+1. First transform ``\mathbf{A}`` into echelon form by Gaussian elimination.
+2. Then divide each element of each nonzero row by its leading entry (to satisfy Property 3).
+3. Finally, use each leading 1 to "clear out" any remaining nonzero elements in its column (to satisfy Property 4).
+$(ebl())
+> Every matrix is row equivalent to one and only one reduced echelon matrix.
+"""
+
+# ╔═╡ ab51c417-0482-4c68-ba07-38fd46e535cd
+cm"""
+$(ex())Find the reduced echelon form of the matrix
+```math
+\mathbf{A}=\left[\begin{array}{rrrr}
+1 & 2 & 1 & 4 \\
+3 & 8 & 7 & 20 \\
+2 & 7 & 9 & 23
+\end{array}\right]
 ```
 """
 
@@ -2583,7 +2702,7 @@ version = "1.4.1+1"
 # ╟─ab0da87e-9b87-48eb-a235-44fdfd2f81f2
 # ╟─6168170e-2fcb-4728-b8d8-ddc44992d3f9
 # ╠═a1d00dd2-59b0-427b-b2c0-25ec94e039a9
-# ╟─8781e87a-146a-41b0-8981-243fec51bfa3
+# ╠═8781e87a-146a-41b0-8981-243fec51bfa3
 # ╠═261637c6-4da1-4b4a-9f01-3e2324c41b60
 # ╟─953e31c8-3e26-47cf-a675-2067802ba941
 # ╟─75287b3b-3f90-4a0a-88d0-92130f84c0db
@@ -2633,9 +2752,24 @@ version = "1.4.1+1"
 # ╟─8792fe08-498e-4d18-aad2-de9bc3a7ade4
 # ╟─c006d3aa-8cf1-4382-806a-4e9714f934f6
 # ╟─626fe783-d05a-49ca-8e3c-2ac76be27e34
-# ╠═933c6345-fffc-4159-8b67-e1443b988f9f
+# ╟─ad29db84-3c84-4a6e-aeb0-5a51210ef05d
+# ╟─933c6345-fffc-4159-8b67-e1443b988f9f
+# ╠═9ed8b8ed-1ac5-4e8b-8a74-17dff32f1ad5
+# ╟─80e20e84-51d2-4e6e-8eb3-b7a8dac22a8b
+# ╟─65b3d353-815c-4e5a-a887-24a82bdf005d
+# ╟─a4256712-b454-4733-bcf5-c5764705b028
+# ╟─87802187-2aeb-4e67-a2d7-1975cf588a17
+# ╠═608e2182-ce7c-4626-bcda-bf4bd6f2f1c6
 # ╠═8d103106-40ac-49fa-86ae-1af3ecb8a3ec
 # ╟─c7cc5a14-f964-4cf9-82f0-f23904bbdace
+# ╟─2678d172-8896-4681-b9af-45e3485f2312
+# ╟─27dbde5f-5e4d-4c67-bc67-ae0b9c40a774
+# ╟─a3567a11-b2c2-4545-b4a2-278b4b7e4b0e
+# ╟─643d7441-1dbf-4b98-b76f-617babece0c0
+# ╟─2aa7e38b-c48d-470c-943e-a6a73d053a70
+# ╟─13748f1f-4092-4592-9a4f-8f17c38a875a
+# ╟─2d3b73f6-8429-4551-96ac-b2db865189ed
+# ╠═ab51c417-0482-4c68-ba07-38fd46e535cd
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
