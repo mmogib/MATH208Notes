@@ -74,4 +74,4 @@ jobs:
               run: mv ./docs/index.html ./docs/index2.html
 
             - name: Rename Notebooks.html 
-              run: mv ./docs/MATH557_NOTES.html ./docs/index.html
+              run: mv ./docs/MATH208_NOTES.html ./docs/index.html
