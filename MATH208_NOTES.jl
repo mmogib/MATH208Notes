@@ -414,10 +414,10 @@ If either the dependent variable ``y`` or the independent variable ``x`` is miss
 
 # ╔═╡ 8d103106-40ac-49fa-86ae-1af3ecb8a3ec
 let
-	# @syms x::Real, y()
-	# ∂ = Differential(x)
-	# Eq =2*x*exp(2*y(x))*∂(y(x)) ~ 3x^4+exp(2*y(x))
-	# dsolve(Eq)
+	@syms x::Real, y()
+	D = Differential(x)
+	Eq =2*x*exp(2*y(x))*D(y(x)) ~ 3x^4+exp(2*y(x))
+	dsolve(Eq)
 end
 
 # ╔═╡ c7cc5a14-f964-4cf9-82f0-f23904bbdace
@@ -954,7 +954,7 @@ Solve the equation ``y y^{\prime \prime}=\left(y^{\prime}\right)^2``.
 # ╔═╡ 608e2182-ce7c-4626-bcda-bf4bd6f2f1c6
 cm"""
 ## Using Julia
-$example("EXample","")
+$(example("EXample",""))
 Solve the differential equation
 ```math
 2 x e^{2 y} \frac{d y}{d x}=3 x^4+e^{2 y}
@@ -2759,7 +2759,7 @@ version = "1.4.1+1"
 # ╟─65b3d353-815c-4e5a-a887-24a82bdf005d
 # ╟─a4256712-b454-4733-bcf5-c5764705b028
 # ╟─87802187-2aeb-4e67-a2d7-1975cf588a17
-# ╠═608e2182-ce7c-4626-bcda-bf4bd6f2f1c6
+# ╟─608e2182-ce7c-4626-bcda-bf4bd6f2f1c6
 # ╠═8d103106-40ac-49fa-86ae-1af3ecb8a3ec
 # ╟─c7cc5a14-f964-4cf9-82f0-f23904bbdace
 # ╟─2678d172-8896-4681-b9af-45e3485f2312
