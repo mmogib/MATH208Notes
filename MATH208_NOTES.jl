@@ -445,6 +445,23 @@ __We can use three elementary row operations only:__
 3. Add a constant multiple of (the terms of) one equation to (corresponding terms of) another equation. (``\lambda R_i +R_j\to R_j``)
 """
 
+# ╔═╡ a2a039ee-2097-4569-9d85-e96597ff47da
+let
+	A = [4 3 2;5 6 3;3 5 2]
+	# Au = Rational.(hcat([4 3 2;5 6 3;3 5 2],I(3)))
+	# Au[1,:]=-Au[3,:]+Au[1,:]
+	# Au[2,:]=-5Au[1,:]+Au[2,:]
+	# Au[3,:]=-3Au[1,:]+Au[3,:]
+	# Au[2,:]=(1//16)Au[2,:]
+	# Au[3,:]=-11Au[2,:]+Au[3,:]
+	# Au[1,:]=2Au[2,:]+Au[1,:]
+	# Au[3,:]=-16Au[3,:]
+	# Au[1,:]=-(3//8)Au[3,:]+Au[1,:]
+	# Au[2,:]=-(3//16)Au[3,:]+Au[2,:]
+	# B=Au[:,4:end]
+	# B*A
+end
+
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
 	function add_space(n=1)
@@ -1017,6 +1034,66 @@ $(ex())Find the reduced echelon form of the matrix
 2 & 7 & 9 & 23
 \end{array}\right]
 ```
+"""
+
+# ╔═╡ 3e062725-d0ac-4d5e-9baa-49b1b10de464
+cm"""
+$(ex())
+Use Gauss-Jordan elimination to solve the linear system
+```math
+\begin{aligned}
+x_1+x_2+x_3+x_4 & =12 \\
+x_1+2 x_2+5 x_4 & =17 \\
+3 x_1+2 x_2+4 x_3-x_4 & =31
+\end{aligned}
+```
+"""
+
+# ╔═╡ 34820013-08f9-4077-9403-206671bea915
+cm"""
+$(bth("The Three Possibilities")) 
+A linear system of equations has either
+- a unique solution, or
+- no solution, or
+- infinitely many solutions.
+"""
+
+# ╔═╡ 6f434bf9-93f6-4052-aed0-7ebe0c06b736
+cm"""
+$(bth(""))
+Every homogeneous linear system with more variables than equations has infinitely many solutions.
+"""
+
+# ╔═╡ bf7f3424-92fd-4ece-8aeb-db8da6762056
+cm"""
+$(define("Invertible Matrix"))
+The square matrix ``\mathbf{A}`` is called invertible if there exists a matrix ``\mathbf{B}`` such that
+```math
+\mathbf{A B}=\mathbf{B A}=\mathbf{I} .
+```
+"""
+
+# ╔═╡ eb2a3144-7dca-42d0-9fce-01c78728eac7
+cm"""
+$(ex())Find the inverse of the ``3 \times 3`` matrix
+```math
+\mathbf{A}=\left[\begin{array}{lll}
+4 & 3 & 2 \\
+5 & 6 & 3 \\
+3 & 5 & 2
+\end{array}\right]
+```
+"""
+
+# ╔═╡ 6189764d-9da8-460b-b873-a040c413e721
+cm"""
+$(bth("Properties of Nonsingular Matrices"))
+The following properties of an ``n \times n`` matrix ``\mathbf{A}`` are equivalent.
+1. ``\mathbf{A}`` is invertible.
+2. ``\mathbf{A}`` is row equivalent to the ``n \times n`` identity matrix ``\mathbf{I}``.
+3. ``\mathbf{A x}=\mathbf{0}`` has only the trivial solution.
+4. For every ``n``-vector ``\mathbf{b}``, the system ``\mathbf{A x}=\mathbf{b}`` has a unique solution.
+5. For every ``n``-vector ``\mathbf{b}``, the system ``\mathbf{A x}=\mathbf{b}`` is consistent.
 """
 
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
@@ -2769,7 +2846,14 @@ version = "1.4.1+1"
 # ╟─2aa7e38b-c48d-470c-943e-a6a73d053a70
 # ╟─13748f1f-4092-4592-9a4f-8f17c38a875a
 # ╟─2d3b73f6-8429-4551-96ac-b2db865189ed
-# ╠═ab51c417-0482-4c68-ba07-38fd46e535cd
+# ╟─ab51c417-0482-4c68-ba07-38fd46e535cd
+# ╟─3e062725-d0ac-4d5e-9baa-49b1b10de464
+# ╟─34820013-08f9-4077-9403-206671bea915
+# ╟─6f434bf9-93f6-4052-aed0-7ebe0c06b736
+# ╟─bf7f3424-92fd-4ece-8aeb-db8da6762056
+# ╟─eb2a3144-7dca-42d0-9fce-01c78728eac7
+# ╠═a2a039ee-2097-4569-9d85-e96597ff47da
+# ╠═6189764d-9da8-460b-b873-a040c413e721
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
