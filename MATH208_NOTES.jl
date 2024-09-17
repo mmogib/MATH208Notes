@@ -441,13 +441,42 @@ cm"""
 __We can use three elementary row operations only:__
 
 1. Multiply one equation by a nonzero constant. (``\lambda R_i \to R_i``)
-2. Interchange two equations. (``\lambda R_i \leftrightarrow R_j``)
+2. Interchange two equations. (`` R_i \leftrightarrow R_j``)
 3. Add a constant multiple of (the terms of) one equation to (corresponding terms of) another equation. (``\lambda R_i +R_j\to R_j``)
 """
+
+# ╔═╡ aa04cd10-62d5-49a9-8b60-7e5d928ec1ee
+let
+	@syms a::Real, b::Real, c::Real
+	A = [2 -1 3;1 2 1;7 4 9]
+	B =[a;b;c]
+	Au=hcat(A,B)
+	Au[1,:],Au[2,:]=Au[2,:],Au[1,:]
+	Au[2,:]=-2Au[1,:]+Au[2,:]
+	Au[3,:]=-7Au[1,:]+Au[3,:]
+	Au[3,:]=-2Au[2,:]+Au[3,:]
+
+	Au
+end
+
+# ╔═╡ 387953af-89c5-47ee-a1b1-af9b05baf949
+md"## Inverse of a Matrix"
+
+# ╔═╡ 747384a8-c06a-49b7-92f1-0cdd44043fb2
+let
+	A = [
+		1  1  5 
+		1  4  13 
+		3  2  12
+	]
+	B=inv(A)
+
+end
 
 # ╔═╡ a2a039ee-2097-4569-9d85-e96597ff47da
 let
 	A = [4 3 2;5 6 3;3 5 2]
+	inv(A)
 	# Au = Rational.(hcat([4 3 2;5 6 3;3 5 2],I(3)))
 	# Au[1,:]=-Au[3,:]+Au[1,:]
 	# Au[2,:]=-5Au[1,:]+Au[2,:]
@@ -460,6 +489,28 @@ let
 	# Au[2,:]=-(3//16)Au[3,:]+Au[2,:]
 	# B=Au[:,4:end]
 	# B*A
+end
+
+# ╔═╡ 25e77707-5852-48f8-9849-46e3f6841bb6
+md"## Determinants"
+
+# ╔═╡ f5bf2679-c765-4b80-bd27-021a82683611
+md"### Cramer's Rule"
+
+# ╔═╡ aff3151b-4b66-4d55-8e27-744a53f5a91e
+ md"## Row and Column Properties"
+
+# ╔═╡ e1199b37-1692-4d97-ba86-0b5239c316d1
+md"## Inverses and the Adjoint Matrix"
+
+# ╔═╡ ece946d9-b094-4e01-8dda-47740ec418b3
+let
+	A = [
+		1  4  5 
+		4  2  5
+		-3  3  -1
+	]
+	inv(Rational.(A))
 end
 
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
@@ -1064,6 +1115,28 @@ $(bth(""))
 Every homogeneous linear system with more variables than equations has infinitely many solutions.
 """
 
+# ╔═╡ 22bb573e-8fa7-4f6c-b5f6-b96dee4c8507
+cm"""
+$(ex()) Determine the constants ``A`` and ``B`` so as to find a solution of the differential equation that satisfies the given initial conditions involving ``y(0)`` and ``y^{\prime}(0)``.
+```math
+\begin{aligned} & y^{\prime \prime}-25 y=0, y(x)=A e^{5 x}+B e^{-5 x} \\ & y(0)=10, y^{\prime}(0)=20\end{aligned}
+```
+"""
+
+# ╔═╡ 6e605916-523b-466b-ad96-c206af3bf27c
+cm"""
+$(ex())
+Under what condition on the constants ``a, b``, and ``c`` does the system
+```math
+\begin{array}{r}
+2 x-y+3 z=a \\
+x+2 y+z=b \\
+7 x+4 y+9 z=c
+\end{array}
+```
+have a unique solution? No solution? Infinitely many solutions?
+"""
+
 # ╔═╡ bf7f3424-92fd-4ece-8aeb-db8da6762056
 cm"""
 $(define("Invertible Matrix"))
@@ -1073,15 +1146,27 @@ The square matrix ``\mathbf{A}`` is called invertible if there exists a matrix `
 ```
 """
 
+# ╔═╡ c35aca68-0b50-430f-b1e1-bc2ab187fa40
+cm"""
+$(ex())
+Find ``\mathbf{A}^{-1}``. Then use ``\mathbf{A}^{-1}`` (as in Example 5) to solve the system ``\mathbf{A x}=\mathbf{b}``
+```math
+\mathbf{A}=\left[\begin{array}{ll}3 & 2 \\ 5 & 4\end{array}\right], \mathbf{b}=\left[\begin{array}{l}5 \\ 6\end{array}\right]
+```
+"""
+
 # ╔═╡ eb2a3144-7dca-42d0-9fce-01c78728eac7
+# ```math
+# \mathbf{A}=\left[\begin{array}{lll}
+# 4 & 3 & 2 \\
+# 5 & 6 & 3 \\
+# 3 & 5 & 2
+# \end{array}\right]
+# ```
 cm"""
 $(ex())Find the inverse of the ``3 \times 3`` matrix
 ```math
-\mathbf{A}=\left[\begin{array}{lll}
-4 & 3 & 2 \\
-5 & 6 & 3 \\
-3 & 5 & 2
-\end{array}\right]
+\mathbf{A}=\left[\begin{array}{rrr}1 & 1 & 5 \\ 1 & 4 & 13 \\ 3 & 2 & 12\end{array}\right]
 ```
 """
 
@@ -1094,6 +1179,147 @@ The following properties of an ``n \times n`` matrix ``\mathbf{A}`` are equivale
 3. ``\mathbf{A x}=\mathbf{0}`` has only the trivial solution.
 4. For every ``n``-vector ``\mathbf{b}``, the system ``\mathbf{A x}=\mathbf{b}`` has a unique solution.
 5. For every ``n``-vector ``\mathbf{b}``, the system ``\mathbf{A x}=\mathbf{b}`` is consistent.
+"""
+
+# ╔═╡ 9d011957-4432-484f-99dc-da94395aeef1
+cm"""
+$(ex())
+Find a matrix ``\mathbf{X}`` such that ``\mathbf{A X}=\mathbf{B}``.
+```math
+\mathbf{A}=\left[\begin{array}{ll}7 & 6 \\ 8 & 7\end{array}\right], \mathbf{B}=\left[\begin{array}{rrr}2 & 0 & 4 \\ 0 & 5 & -3\end{array}\right]
+```
+"""
+
+# ╔═╡ fb9cd8c0-ace5-4123-a8a0-58ab32f849f1
+cm"""
+$(ex())
+Apply Cramer's rule to solve the system
+```math
+\begin{aligned}
+& 7 x+8 y=5 \\
+& 6 x+9 y=4
+\end{aligned}
+```
+"""
+
+# ╔═╡ c63574f6-2f03-4f3d-b9eb-08ca321a0aad
+cm"""
+$(define("Minors and Cofactors"))
+Let ``\mathbf{A}=\left[a_{i j}\right]`` be an ``n \times n`` matrix. The ``i j`` th minor of ``\mathbf{A}`` (also called the minor of ``a_{i j}`` ) is the determinant ``M_{i j}`` of the ``(n-1) \times(n-1)`` submatrix that remains after deleting the ``i`` th row and the ``j`` th column of ``\mathbf{A}``. The ``i j`` th cofactor ``A_{i j}`` of ``\mathbf{A}`` (or the cofactor of ``a_{i j}`` ) is defined to be
+```math
+A_{i j}=(-1)^{i+j} M_{i j}
+```
+$(ebl())
+For the sign of the cofactors
+```math
+\left[\begin{array}{lll}+ & - & + \\ - & + & - \\ + & - & +\end{array}\right] \quad\text{and} \quad\left[\begin{array}{cccc}+ & - & + & - \\ - & + & - & + \\ + & - & + & - \\ - & + & - & +\end{array}\right]
+```
+So
+```math
+\begin{array}{llll}A_{11}=+M_{11}, & A_{12}=-M_{12}, & A_{13}=+M_{13}, & A_{14}=-M_{14} \\ A_{21}=-M_{21}, & A_{22}=+M_{22}, & A_{23}=-M_{23}, & A_{24}=+M_{24}\end{array}
+```
+"""
+
+# ╔═╡ 737365c0-472d-4f0d-87c5-5d70a2fe027f
+cm"""
+$(define("Determinants"))
+The determinant ``\operatorname{det} \mathbf{A}=\left|a_{i j}\right|`` of an ``n \times n`` matrix ``\mathbf{A}=\left[a_{i j}\right]`` is defined as
+```math
+\operatorname{det} \mathbf{A}=a_{11} A_{11}+a_{12} A_{12}+\cdots+a_{1 n} A_{1 n}
+```
+
+Thus we multiply each element of the first row of ``\mathbf{A}`` by its cofactor and then add these ``n`` products to get ``\operatorname{det} \mathbf{A}``.
+"""
+
+# ╔═╡ b583732f-ed42-4a4f-9dec-6369b5e85c41
+cm"""
+$(ex()) Evaluate the determinant of
+```math
+\mathbf{A}=\left[\begin{array}{rrrr}
+2 & 0 & 0 & -3 \\
+0 & -1 & 0 & 0 \\
+7 & 4 & 3 & 5 \\
+-6 & 2 & 2 & 4
+\end{array}\right]
+```
+"""
+
+# ╔═╡ 8dae3e8d-96e3-4fe0-8b9f-5074dff0f9e4
+cm"""
+$(bth("Cofactor Expansions of Determinants"))
+The determinant of an ``n \times n`` matrix ``\mathbf{A}=\left[a_{i j}\right]`` can be obtained by expansion along any row or column. The cofactor expansion along the ``i`` th row is
+```math
+\operatorname{det} \mathbf{A}=a_{i 1} A_{i 1}+a_{i 2} A_{i 2}+\cdots+a_{i n} A_{i n} .
+```
+
+The cofactor expansion along the ``j`` th column is
+```math
+\operatorname{det} \mathbf{A}=a_{1 j} A_{1 j}+a_{2 j} A_{2 j}+\cdots+a_{n j} A_{n j}
+```
+"""
+
+# ╔═╡ 1ba6a9f9-f0b3-4033-a20a-117b19d7c74b
+cm"""
+1. __Property 1__: If the ``n \times n`` matrix ``\mathbf{B}`` is obtained from ``\mathbf{A}`` by multiplying a single row (or a column) of ``\mathbf{A}`` by the constant ``k``, then ``\operatorname{det} \mathbf{B}=k \operatorname{det} \mathbf{A}``.
+2. __Property 2__: If the ``n \times n`` matrix ``\mathbf{B}`` is obtained from ``\mathbf{A}`` by interchanging two rows (or two columns), then ``\operatorname{det} \mathbf{B}=-\operatorname{det} \mathbf{A}``.
+3. __Property 3__: If two rows (or two columns) of the ``n \times n`` matrix ``\mathbf{A}`` are identical, then ``\operatorname{det} \mathbf{A}=0``.
+4. __Property 4__: ``\quad`` Suppose that the ``n \times n`` matrices ``\mathbf{A}_1, \mathbf{A}_2``, and ``\mathbf{B}`` are identical except for their ``i`` th rows-that is, the other ``n-1`` rows of the three matrices are identicaland that the ``i`` th row of ``\mathbf{B}`` is the sum of the ``i`` th rows of ``\mathbf{A}_1`` and ``\mathbf{A}_2``. Then
+```math
+\operatorname{det} \mathbf{B}=\operatorname{det} \mathbf{A}_1+\operatorname{det} \mathbf{A}_2
+```
+$(add_space(10))This result also holds if columns are involved instead of rows.
+
+5. __Property 5__: If the ``n \times n`` matrix ``\mathbf{B}`` is obtained by adding a constant multiple of one row (or column) of ``\mathbf{A}`` to another row (or column) of ``\mathbf{A}``, then ``\operatorname{det} \mathbf{B}=\operatorname{det} \mathbf{A}``.
+
+6. __Property 6__: The determinant of a triangular matrix is equal to the product of its diagonal elements.
+7. __Property 7__: If ``\mathbf{A}`` is a square matrix, then ``\operatorname{det}\left(\mathbf{A}^T\right)=\operatorname{det} \mathbf{A}``.
+
+$(add_space(10))Note that:
+
+$(add_space(20))``\text{(i)} \quad\left(\mathbf{A}^T\right)^T=\mathbf{A}``;
+
+$(add_space(20))``\text{(ii)} \quad(\mathbf{A}+\mathbf{B})^T=\mathbf{A}^T+\mathbf{B}^T``;
+
+$(add_space(20))``\text{(iii)} \quad(c \mathbf{A})^T=c \mathbf{A}^T``;
+
+$(add_space(20))``\text{(iv)} \quad(\mathbf{A B})^T=\mathbf{B}^T \mathbf{A}^T``.
+
+"""
+
+# ╔═╡ ea830a4d-f11a-474e-9b42-dde6295e8d24
+cm"""
+$(ex()) Evaluate the determinant of
+```math
+\mathbf{A}=\left|\begin{array}{llll}1 & 2 & 3 & 4 \\ 0 & 5 & 6 & 7 \\ 0 & 0 & 8 & 9 \\ 2 & 4 & 6 & 9\end{array}\right|
+```
+"""
+
+# ╔═╡ b0efeb12-e0fd-4a1e-80b9-24c230368c53
+cm"""
+$(bth("Determinants and Invertibility"))
+The ``n \times n`` matrix ``\mathbf{A}`` is invertible if and only if ``\operatorname{det} \mathbf{A} \neq 0``.
+"""
+
+# ╔═╡ 42e01a69-848d-4d34-a5de-8c54ca3f3b83
+cm"""
+$(bth("The Inverse Matrix"))
+The inverse of the invertible matrix ``\mathbf{A}`` is given by the formula
+```math
+\mathbf{A}^{-1}=\frac{\left[A_{i j}\right]^T}{|\mathbf{A}|}
+```
+where, as usual, ``A_{i j}`` denotes the ``i j`` th cofactor of ``\mathbf{A}``; that is, ``A_{i j}`` is the product of ``(-1)^{i+j}`` and the ``i j`` th minor determinant of ``\mathbf{A}``.
+"""
+
+# ╔═╡ e948494b-8a14-47b8-bfec-4390376e1bcd
+cm"""
+$(ex()) Apply the formula above to find the inverse of the matrix
+```math
+\mathbf{A}=\left[\begin{array}{rrr}
+1 & 4 & 5 \\
+4 & 2 & 5 \\
+-3 & 3 & -1
+\end{array}\right]
+```
 """
 
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
@@ -2850,10 +3076,32 @@ version = "1.4.1+1"
 # ╟─3e062725-d0ac-4d5e-9baa-49b1b10de464
 # ╟─34820013-08f9-4077-9403-206671bea915
 # ╟─6f434bf9-93f6-4052-aed0-7ebe0c06b736
+# ╟─22bb573e-8fa7-4f6c-b5f6-b96dee4c8507
+# ╟─6e605916-523b-466b-ad96-c206af3bf27c
+# ╠═aa04cd10-62d5-49a9-8b60-7e5d928ec1ee
+# ╟─387953af-89c5-47ee-a1b1-af9b05baf949
 # ╟─bf7f3424-92fd-4ece-8aeb-db8da6762056
+# ╟─c35aca68-0b50-430f-b1e1-bc2ab187fa40
 # ╟─eb2a3144-7dca-42d0-9fce-01c78728eac7
+# ╟─747384a8-c06a-49b7-92f1-0cdd44043fb2
 # ╠═a2a039ee-2097-4569-9d85-e96597ff47da
-# ╠═6189764d-9da8-460b-b873-a040c413e721
+# ╟─6189764d-9da8-460b-b873-a040c413e721
+# ╟─9d011957-4432-484f-99dc-da94395aeef1
+# ╟─25e77707-5852-48f8-9849-46e3f6841bb6
+# ╟─f5bf2679-c765-4b80-bd27-021a82683611
+# ╟─fb9cd8c0-ace5-4123-a8a0-58ab32f849f1
+# ╟─c63574f6-2f03-4f3d-b9eb-08ca321a0aad
+# ╟─737365c0-472d-4f0d-87c5-5d70a2fe027f
+# ╟─b583732f-ed42-4a4f-9dec-6369b5e85c41
+# ╟─8dae3e8d-96e3-4fe0-8b9f-5074dff0f9e4
+# ╟─aff3151b-4b66-4d55-8e27-744a53f5a91e
+# ╟─1ba6a9f9-f0b3-4033-a20a-117b19d7c74b
+# ╟─ea830a4d-f11a-474e-9b42-dde6295e8d24
+# ╟─b0efeb12-e0fd-4a1e-80b9-24c230368c53
+# ╟─e1199b37-1692-4d97-ba86-0b5239c316d1
+# ╟─42e01a69-848d-4d34-a5de-8c54ca3f3b83
+# ╟─e948494b-8a14-47b8-bfec-4390376e1bcd
+# ╟─ece946d9-b094-4e01-8dda-47740ec418b3
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
