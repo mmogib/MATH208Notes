@@ -451,10 +451,10 @@ let
 	A = [2 -1 3;1 2 1;7 4 9]
 	B =[a;b;c]
 	Au=hcat(A,B)
-	Au[1,:],Au[2,:]=Au[2,:],Au[1,:]
-	Au[2,:]=-2Au[1,:]+Au[2,:]
-	Au[3,:]=-7Au[1,:]+Au[3,:]
-	Au[3,:]=-2Au[2,:]+Au[3,:]
+	# Au[1,:],Au[2,:]=Au[2,:],Au[1,:]
+	# Au[2,:]=-2Au[1,:]+Au[2,:]
+	# Au[3,:]=-7Au[1,:]+Au[3,:]
+	# Au[3,:]=-2Au[2,:]+Au[3,:]
 
 	Au
 end
@@ -476,7 +476,7 @@ end
 # ╔═╡ a2a039ee-2097-4569-9d85-e96597ff47da
 let
 	A = [4 3 2;5 6 3;3 5 2]
-	inv(A)
+	# inv(A)
 	# Au = Rational.(hcat([4 3 2;5 6 3;3 5 2],I(3)))
 	# Au[1,:]=-Au[3,:]+Au[1,:]
 	# Au[2,:]=-5Au[1,:]+Au[2,:]
@@ -500,6 +500,30 @@ md"### Cramer's Rule"
 # ╔═╡ aff3151b-4b66-4d55-8e27-744a53f5a91e
  md"## Row and Column Properties"
 
+# ╔═╡ babc3fb7-0eaa-4af6-b7d1-cd0b0fd4c78b
+let
+	A1 =[1 2 3
+		 0 4 4
+		0 6 7
+	]
+	A2 =[1 2 3
+		 4 0 0
+		0 6 7
+	]
+	B = [1 2 3;4 4 4;0 6 7]
+	det(B),det(A1),det(A2)
+end
+
+# ╔═╡ ea5ca7e4-2f30-45f2-8715-7e502a274a53
+let
+	A =[
+		1  2  3  4 
+		0  5  6  7 
+		0  0  8  9 
+		2  4  6  9
+	]
+end
+
 # ╔═╡ e1199b37-1692-4d97-ba86-0b5239c316d1
 md"## Inverses and the Adjoint Matrix"
 
@@ -510,8 +534,38 @@ let
 		4  2  5
 		-3  3  -1
 	]
-	inv(Rational.(A))
+	# inv(Rational.(A))
 end
+
+# ╔═╡ 30795897-1e43-41ed-ba85-c3b89ecdef1f
+md"# 4.1 The Vector Space ``\mathbb{R}^3``"
+
+# ╔═╡ c233fecb-8525-493f-a088-011d5386ec1d
+md"## The Vector Space ``\mathbb{R}^2``"
+
+# ╔═╡ d5618ff1-3420-4c92-bcfa-238b4da78f17
+cm"""
+ ``\mathbb{R}^2`` is simply the set of all 3-dimensional vectors that have third
+ component ``0``.
+```math
+\mathbb{R}^2 = \left\{(x,y,0)\in \mathbb{R}^3\;\;|\;\; x,y\in \mathbb{R}\right\}
+```
+
+__Two vectors ``\mathbf{u}`` and ``\mathbf{v}`` are collinear__-they lie on the same line through the origin and hence point either in the same direction  or in opposite directions-if and only if one is a scalar multiple of the other; that is, either
+```math
+\mathbf{u}=c \mathbf{v} \quad \text { or } \quad \mathbf{v}=c \mathbf{u}
+```
+for some scalar ``c``. If one of the relations holds for some scalar ``c``, then we say that the two vectors are __linearly dependent__. 
+"""
+
+# ╔═╡ 6a3e0f87-707c-4122-a5fd-dcef8fce8a7d
+md"##  Linear Independence in ``\mathbb{R}^3``"
+
+# ╔═╡ b7430962-79fb-427c-a23e-8cbb09ae8e46
+md"##  Basis Vectors in ``\mathbb{R}^3``"
+
+# ╔═╡ e0261d6d-2bc3-4eab-8eb2-ef799f0cece7
+md"##  Subspaces of ``\mathbb{R}^3``"
 
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
@@ -1320,6 +1374,226 @@ $(ex()) Apply the formula above to find the inverse of the matrix
 -3 & 3 & -1
 \end{array}\right]
 ```
+"""
+
+# ╔═╡ 52d0d0d2-3079-4285-92de-c59961848921
+cm"""
+$(define("")) 
+__Vector__ : A vector ``\mathbf{v}`` in 3 -space ``\mathbb{R}^3`` is simply an ordered triple ``(a, b, c)`` of real numbers. We write ``\mathbf{v}=(a, b, c)`` and call the numbers ``a, b``, and ``c`` the components (or coordinates) of the vector ``v``. We may also write 
+```math
+\mathbf{v} =\begin{bmatrix} a\\b\\c \end{bmatrix}.
+```
+
+__Addition of Vectors__: The sum ``\mathbf{u}+\mathbf{v}`` of the two vectors ``\mathbf{u}=\left(u_1, u_2, u_3\right)`` and ``\mathbf{v}=\left(v_1, v_2, v_3\right)`` is the vector
+```math
+\mathbf{u}+\mathbf{v}=\left(u_1+v_1, u_2+v_2, u_3+v_3\right)
+```
+that is obtained upon addition of respective components of ``\mathbf{u}`` and ``\mathbf{v}``.
+
+__The geometric interpretation of vector addition__
+
+$(post_img("https://www.dropbox.com/scl/fi/kvrnymjm7panzimoqe4ov/fig_4_1_2_and_3.png?rlkey=s6lpzojg7la8rybddv0t04gkf&raw=1",800))
+
+__Multiplication of a Vector by a Scalar__: If ``\mathbf{v}=\left(v_1, v_2, v_3\right)`` is a vector and ``c`` is a real number, then the scalar multiple ``c \mathbf{v}`` is the vector
+```math
+c \mathbf{v}=\left(c v_1, c v_2, c v_3\right)
+```
+that is obtained upon multiplying each component of ``\mathbf{v}`` by ``c``.
+
+__The length of a vector__: The length ``|\mathbf{v}|`` of the vector ``\mathbf{v}=(a, b, c)`` is defined to be the distance of the point ``P(a, b, c)`` from the origin,
+```math
+|\mathbf{v}|=\sqrt{a^2+b^2+c^2}
+```
+"""
+
+# ╔═╡ aaae2aff-fc65-4b7f-9e28-b7577c5fdd51
+cm"""
+$(bth("3")) __``\mathbb{R}^3`` as a Vector Space__
+
+If ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` are vectors in ``\mathbf{R}^3``, and ``r`` and ``s`` are real numbers, then
+1. ``\mathbf{u}+\mathbf{v}=\mathbf{v}+\mathbf{u}`` (commutativity)
+2. ``\mathbf{u}+(\mathbf{v}+\mathbf{w})=(\mathbf{u}+\mathbf{v})+\mathbf{w}`` (associativity)
+3. ``\mathbf{u}+\mathbf{0}=\mathbf{0}+\mathbf{u}=\mathbf{u}`` (zero element)
+4. ``\mathbf{u}+(-\mathbf{u})=(-\mathbf{u})+\mathbf{u}=\mathbf{0}`` (additive inverse)
+5. ``r(\mathbf{u}+\mathbf{v})=r \mathbf{u}+r \mathbf{v}`` (distributivity)
+6. ``(r+s) \mathbf{u}=r \mathbf{u}+s \mathbf{u}``
+7. ``r(s \mathbf{u})=(r s) \mathbf{u}``
+8. ``1(\mathbf{u})=\mathbf{u}`` (multiplicative identity).
+"""
+
+# ╔═╡ ddda1623-3b11-46f7-9fda-fd6686dd4343
+cm"""
+$(bth("2 Two Linearly Dependent Vectors"))
+The two vectors ``\mathbf{u}`` and ``\mathbf{v}`` are __linearly dependent__ if and only if there exist scalars ``a`` and ``b`` not both zero such that
+```math
+a \mathbf{u}+b \mathbf{v}=\mathbf{0} .
+```
+"""
+
+# ╔═╡ c31e6c51-9f45-4581-a7b6-54bdf2e04ada
+cm"""
+$(bbl("Remark","Two Linearly Independent Vectors "))
+The two vectors ``\mathbf{u}`` and ``\mathbf{v}`` are __linearly independent__ if and only if the relation
+```math
+a \mathbf{u}+b \mathbf{v}=\mathbf{0}
+```
+implies that ``a=b=0``.
+"""
+
+# ╔═╡ 856ff140-9c2b-4953-a033-849f1af34286
+cm"""
+$(ex(1))
+Consider the vector 
+```math
+\mathbf{u}=(3,-2), \quad \mathbf{v}=(-6,4), \quad\text{and}\quad \mathbf{w}=(5,-7)
+```
+"""
+
+# ╔═╡ 96a09993-9f1a-4908-9334-494b4e198455
+cm"""
+$(ex(2))
+Express the vector ``\mathbf{w}=(11,4)`` as a linear combination of the vectors  ``\mathbf{u}=(3,-2)`` and ``\mathbf{v}= (-2,7)``
+
+"""
+
+# ╔═╡ dff6e998-431d-4493-bc34-6fa9b5de6f93
+cm"""
+$(define(""))
+__Linearly Dependent Vectors in ``R^3``__
+
+The three vectors ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` in ``\mathbf{R}^3`` are said to be __linearly dependent__ provided that one of them is a linear combination of the other two-that is, either
+```math
+\begin{array}{ll}
+\mathbf{w}=r \mathbf{u}+s \mathbf{v} & \text { or } \\
+\mathbf{u}=r \mathbf{v}+s \mathbf{w} & \text { or } \\
+\mathbf{v}=r \mathbf{u}+s \mathbf{w} &
+\end{array}
+```
+for appropriate scalars ``r`` and ``s``.
+"""
+
+# ╔═╡ f61386e6-e32c-45f6-b1a9-dec901195e96
+cm"""
+$(bth("3 Three Linearly Dependent Vectors"))
+The three vectors ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` in ``\mathbf{R}^3`` are __linearly dependent__ if and only if there exist scalars ``a, b``, and ``c`` not all zero such that
+```math
+a \mathbf{u}+b \mathbf{v}+c \mathbf{w}=\mathbf{0}
+```
+"""
+
+# ╔═╡ 20916835-0034-40b5-ab98-1f24fb78247c
+cm"""
+$(bbl("Remark","Linear Independence"))
+The vectors ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` are __linearly independent__ if and only if the relation
+```math
+a \mathbf{u}+b \mathbf{v}+c \mathbf{w}=\mathbf{0}
+```
+implies that ``a=b=c=0``.
+"""
+
+# ╔═╡ f868d290-9a4e-4a6f-933e-ee642deabeac
+cm"""
+$(bth("4 Three Linearly Independent Vectors"))
+The vectors ``\mathbf{u}=\left(u_1, u_2, u_3\right), \mathbf{v}=\left(v_1, v_2, v_3\right)``, and ``\mathbf{w}=\left(w_1, w_2, w_3\right)`` are linearly independent if and only if
+```math
+\left|\begin{array}{lll}
+u_1 & v_1 & w_1 \\
+u_2 & v_2 & w_2 \\
+u_3 & v_3 & w_3
+\end{array}\right| \neq 0
+```
+"""
+
+# ╔═╡ 20e79ac6-f0f4-40e6-89e0-2eaa44e0ff2b
+cm"""
+$(ex(3))
+Check linear independence for
+
+```math
+\mathbf{u}=(1,2,-3), \quad \mathbf{v}=(3,1,-2), \quad \text{and}\quad  \mathbf{w}=(5,-5,6)
+```
+"""
+
+# ╔═╡ f6653849-9370-4f84-a07a-ad924983fda6
+cm"""
+__The basic unit vectors__
+```math
+\mathbf{i}=(1,0,0), \quad \mathbf{j}=(0,1,0), \quad \text { and } \quad \mathbf{k}=(0,0,1)
+```
+
+The expression
+```math
+\mathbf{v}=a \mathbf{i}+b \mathbf{j}+c \mathbf{k}=(a, b, c)
+```
+shows both that
+- the three vectors ``\mathbf{i}, \mathbf{j}``, and ``\mathbf{k}`` are linearly independent (because ``\mathbf{v}=\mathbf{0}`` immediately implies ``a=b=c=0`` ), and that
+- any vector in ``\mathbf{R}^3`` can be expressed as a linear combination of ``\mathbf{i}, \mathbf{j}``, and ``\mathbf{k}``.
+
+- A __basis__ for ``\mathbf{R}^3`` is a triple ``\mathbf{u}, \mathbf{v}, \mathbf{w}`` of vectors such that every vector ``\mathbf{t}`` in ``\mathbf{R}^3`` can be expressed as a linear combination
+```math
+\mathbf{t}=a \mathbf{u}+b \mathbf{v}+c \mathbf{w}
+```
+$(add_space(10))of them. 
+
+That is, given any vector ``\mathbf{t}`` in ``\mathbf{R}^3``, there exist scalars ``a, b, c`` such that Eq. 
+```math
+\mathbf{t}=a \mathbf{u}+b \mathbf{v}+c \mathbf{w}
+```
+holds
+"""
+
+# ╔═╡ 4faab984-e4a5-4620-9c7e-61abd525a1fa
+cm"""
+$(bth("5"))
+__Basis for ``\mathrm{R}^3``__
+
+If the vectors ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` in ``\mathbf{R}^3`` are linearly independent, then they constitute a basis for ``\mathbf{R}^3``.
+"""
+
+# ╔═╡ cf4fc0c1-c9d8-4597-b1d7-a5d65b59421d
+cm"""
+$(ex(4))
+Express the vector ``\mathbf{t}=(4,20,23)`` as a combination of the linearly independent vectors ``\mathbf{u}=(1,3,2), \mathbf{v}=(2,8,7)``, and ``\mathbf{w}=(1,7,9)``
+"""
+
+# ╔═╡ d76bbff8-1730-41cb-93d4-ddb35f66b19b
+cm"""
+$(bbl("Subspaces",""))
+A nonempty subset ``V`` of ``\mathbf{R}^3`` is a __subspace__ of ``\mathbf{R}^3`` if and only if it satisfies the following two conditions:
+
+1. If ``\mathbf{u}`` and ``\mathbf{v}`` are vectors in ``V``, then ``\mathbf{u}+\mathbf{v}`` is also in ``V``  __(closure under addition)__.
+2. If ``\mathbf{u}`` is a vector in ``V`` and ``c`` is a scalar, then ``c \mathbf{u}`` is in ``V`` __(closure under multiplication by scalars)__.
+"""
+
+# ╔═╡ d711bb6f-f627-4568-97f5-5d7690088663
+cm"""
+$(bbl("Remarks",""))
+
+- The subspaces ``\{\boldsymbol{0}\}`` and ``\mathbf{R}^3`` are sometimes called the __trivial subspaces__ of ``\mathbf{R}^3`` (because the verification that they are subspaces is quite trivial). 
+- All subspaces other than ``\{0\}`` and ``\mathbf{R}^3`` itself are called __proper subspaces__ of ``\mathbf{R}^3``.
+- The proper subspaces of ``\mathbf{R}^3`` are what we customarily call __lines__ and __planes__ through the origin. 
+"""
+
+# ╔═╡ 263e7015-3130-4597-b440-a996e52967b9
+cm"""
+$(ex(5))
+Let ``V`` be the set of all vectors ``(x, y)`` in ``\mathbf{R}^2`` such that ``y=x``. That is
+```math
+V = \left\{(x,y)\in \mathbb{R}^2 \;|\; y=x\right\}
+````
+
+Show that the set ``V`` is a subspace of ``\mathbf{R}^2``.
+"""
+
+# ╔═╡ 64e0c10c-a4e8-4435-86fc-60bff5e476d4
+cm"""
+$(ex(6))
+Let ``V`` be the set of all vectors ``(x, y)`` in ``\mathbf{R}^2`` such that ``x+y=1``. That is
+```math
+V = \left\{(x,y)\in \mathbb{R}^2 \;|\; x+y=1\right\}
+````
+
+Show that the set ``V`` is a NOT subspace of ``\mathbf{R}^2``.
 """
 
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
@@ -3083,7 +3357,7 @@ version = "1.4.1+1"
 # ╟─bf7f3424-92fd-4ece-8aeb-db8da6762056
 # ╟─c35aca68-0b50-430f-b1e1-bc2ab187fa40
 # ╟─eb2a3144-7dca-42d0-9fce-01c78728eac7
-# ╟─747384a8-c06a-49b7-92f1-0cdd44043fb2
+# ╠═747384a8-c06a-49b7-92f1-0cdd44043fb2
 # ╠═a2a039ee-2097-4569-9d85-e96597ff47da
 # ╟─6189764d-9da8-460b-b873-a040c413e721
 # ╟─9d011957-4432-484f-99dc-da94395aeef1
@@ -3096,12 +3370,38 @@ version = "1.4.1+1"
 # ╟─8dae3e8d-96e3-4fe0-8b9f-5074dff0f9e4
 # ╟─aff3151b-4b66-4d55-8e27-744a53f5a91e
 # ╟─1ba6a9f9-f0b3-4033-a20a-117b19d7c74b
+# ╠═babc3fb7-0eaa-4af6-b7d1-cd0b0fd4c78b
 # ╟─ea830a4d-f11a-474e-9b42-dde6295e8d24
+# ╠═ea5ca7e4-2f30-45f2-8715-7e502a274a53
 # ╟─b0efeb12-e0fd-4a1e-80b9-24c230368c53
 # ╟─e1199b37-1692-4d97-ba86-0b5239c316d1
 # ╟─42e01a69-848d-4d34-a5de-8c54ca3f3b83
 # ╟─e948494b-8a14-47b8-bfec-4390376e1bcd
-# ╟─ece946d9-b094-4e01-8dda-47740ec418b3
+# ╠═ece946d9-b094-4e01-8dda-47740ec418b3
+# ╟─30795897-1e43-41ed-ba85-c3b89ecdef1f
+# ╟─52d0d0d2-3079-4285-92de-c59961848921
+# ╟─aaae2aff-fc65-4b7f-9e28-b7577c5fdd51
+# ╟─c233fecb-8525-493f-a088-011d5386ec1d
+# ╟─d5618ff1-3420-4c92-bcfa-238b4da78f17
+# ╟─ddda1623-3b11-46f7-9fda-fd6686dd4343
+# ╟─c31e6c51-9f45-4581-a7b6-54bdf2e04ada
+# ╟─856ff140-9c2b-4953-a033-849f1af34286
+# ╟─96a09993-9f1a-4908-9334-494b4e198455
+# ╟─6a3e0f87-707c-4122-a5fd-dcef8fce8a7d
+# ╟─dff6e998-431d-4493-bc34-6fa9b5de6f93
+# ╟─f61386e6-e32c-45f6-b1a9-dec901195e96
+# ╟─20916835-0034-40b5-ab98-1f24fb78247c
+# ╟─f868d290-9a4e-4a6f-933e-ee642deabeac
+# ╟─20e79ac6-f0f4-40e6-89e0-2eaa44e0ff2b
+# ╟─b7430962-79fb-427c-a23e-8cbb09ae8e46
+# ╟─f6653849-9370-4f84-a07a-ad924983fda6
+# ╟─4faab984-e4a5-4620-9c7e-61abd525a1fa
+# ╟─cf4fc0c1-c9d8-4597-b1d7-a5d65b59421d
+# ╟─e0261d6d-2bc3-4eab-8eb2-ef799f0cece7
+# ╟─d76bbff8-1730-41cb-93d4-ddb35f66b19b
+# ╟─d711bb6f-f627-4568-97f5-5d7690088663
+# ╟─263e7015-3130-4597-b440-a996e52967b9
+# ╟─64e0c10c-a4e8-4435-86fc-60bff5e476d4
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
