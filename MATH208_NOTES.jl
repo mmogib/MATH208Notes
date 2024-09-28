@@ -567,6 +567,40 @@ md"##  Basis Vectors in ``\mathbb{R}^3``"
 # ╔═╡ e0261d6d-2bc3-4eab-8eb2-ef799f0cece7
 md"##  Subspaces of ``\mathbb{R}^3``"
 
+# ╔═╡ 2af29504-36c2-4f20-a325-c32acf62d9bc
+md"# 4.2 The Vector Space ``\mathbb{R}^n``"
+
+# ╔═╡ 170f2255-078f-4c9e-86e9-0eb93b2ff87e
+md"## Vector Spaces"
+
+# ╔═╡ 6827e93a-43b1-4ee7-a650-573a3ce61676
+md"## Subspaces"
+
+# ╔═╡ 2f5bc349-791e-4ece-8933-f2baef3c59a1
+md"# 4.3 Linear Combinations and Independence of Vectors"
+
+# ╔═╡ ca3afed1-ded8-4792-8253-58a2b5bc0502
+md"##  Linear Independence"
+
+# ╔═╡ 4fc61c32-377d-475f-9587-fb884aaafcb6
+let
+	A=[1 2 3;2 3 8;2 4 8;1 1 5]
+	
+end
+
+# ╔═╡ 73ea96b9-be3c-4e26-8f54-914bd53d409b
+let
+	v1=[2;0;-3]
+	v2=[4,-5,-6]
+	v3=[-2,1,3]
+	A=[v1 v2 v3]
+	A[3,:]=(3//2)A[1,:]+A[3,:]
+	A
+end
+
+# ╔═╡ faf0e3cf-3973-4272-bda3-a3410c8e17d2
+md"# 4.4 Bases and Dimension for Vector Spaces"
+
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
 	function add_space(n=1)
@@ -591,6 +625,12 @@ begin
     end
     function define(t="")
         beginBlock("Definition", t)
+    end
+	function remark(t="")
+        beginBlock("Remark", t)
+    end
+	function remarks(t="")
+        beginBlock("Remarks", t)
     end
     function bbl(t)
         beginBlock(t, "")
@@ -1594,6 +1634,281 @@ V = \left\{(x,y)\in \mathbb{R}^2 \;|\; x+y=1\right\}
 ````
 
 Show that the set ``V`` is a NOT subspace of ``\mathbf{R}^2``.
+"""
+
+# ╔═╡ d9a91130-0cf8-414e-b8a8-dd352090f7a6
+cm"""
+$(define(""))
+__``n``-Space ``R^n``__
+
+The ``\boldsymbol{n}``-dimensional space ``\mathbf{R}^{\boldsymbol{n}}`` is the set of all ``n``-tuples ``\left(x_1, x_2, x_3, \ldots, x_n\right)`` of real numbers.
+"""
+
+# ╔═╡ f1464582-faf2-4902-96a6-bb1cf17c1102
+cm"""
+$(define("Vector Space"))
+Let ``V`` be a set of elements called vectors, in which the operations of addition of vectors and multiplication of vectors by scalars are defined. That is, given vectors ``\mathbf{u}`` and ``\mathbf{v}`` in ``V`` and a scalar ``c``, the vectors ``\mathbf{u}+\mathbf{v}`` and ``c \mathbf{u}`` are also in ``V`` (so that ``V`` is closed under vector addition and multiplication by scalars). Then, with these operations, ``V`` is called a vector space provided that—given any vectors ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` in ``V`` and any scalars ``a`` and ``b``-the following properties hold true:
+1. ``\mathbf{u}+\mathbf{v}=\mathbf{v}+\mathbf{u}``
+(commutativity)
+2. ``\mathbf{u}+(\mathbf{v}+\mathbf{w})=(\mathbf{u}+\mathbf{v})+\mathbf{w}``
+(associativity)
+3. ``\mathbf{u}+\mathbf{0}=\mathbf{0}+\mathbf{u}=\mathbf{u}``
+(zero element)
+4. ``\mathbf{u}+(-\mathbf{u})=(-\mathbf{u})+\mathbf{u}=\mathbf{0}``
+(additive inverse)
+5. ``a(\mathbf{u}+\mathbf{v})=a \mathbf{u}+a \mathbf{v}``
+(distributivity)
+6. ``(a+b) \mathbf{u}=a \mathbf{u}+b \mathbf{u}``
+7. ``a(b \mathbf{u})=(a b) \mathbf{u}``
+8. ``(1) \mathbf{u}=\mathbf{u}``
+"""
+
+# ╔═╡ f3d58858-f9ab-42bb-a822-14d03916984e
+cm"""
+$(ex(1)) 
+Let ``\mathscr{F}`` be the set of all real-valued functions defined on the real number line ``\mathbb{R}`` is a vector space with function addition and scalar multiplication.
+"""
+
+# ╔═╡ 4b2763bd-cf78-4913-8d5d-ac10d08b1031
+cm"""
+$(define("Subspace"))
+Let ``W`` be a nonempty subset of the vector space ``V``. Then ``W`` is a subspace of ``V`` provided that ``W`` itself is a vector space with the operations of addition and multiplication by scalars as defined in ``V``.
+"""
+
+# ╔═╡ abefd094-b57a-46c7-a314-eb836e58c6a0
+cm"""
+$(bth("1 Conditions for a Subspace"))
+The nonempty subset ``W`` of the vector space ``V`` is a subspace of ``V`` if and only if it satisfies the following two conditions:
+- (i) If ``\mathbf{u}`` and ``\mathbf{v}`` are vectors in ``W``, then ``\mathbf{u}+\mathbf{v}`` is also in ``W``.
+- (ii) If ``\mathbf{u}`` is in ``W`` and ``c`` is a scalar, then the vector ``c \mathbf{u}`` is also in ``W``.
+"""
+
+# ╔═╡ f8cd8873-f4fb-4300-8aa2-4aee9990cf5e
+cm"""
+$(ex(2))
+Let ``W`` be the subset of ``\mathbf{R}^n`` consisting of all those vectors ``\left(x_1, x_2, \ldots, x_n\right)`` whose coordinates satisfy the single homogeneous linear equation
+```math
+a_1 x_1+a_2 x_2+\cdots+a_n x_n=0
+```
+where the given coefficients ``a_1, a_2, \ldots, a_n`` are not all zero. Show that ``W`` is a subspace of ``\mathbb{R}^n``.
+"""
+
+# ╔═╡ e17f0845-12a9-4da8-b81d-bf3e61d95260
+cm"""
+$(ex(4))
+Let ``W`` be the set of all those vectors ``\left(x_1, x_2, x_3, x_4\right)`` in ``\mathbb{R}^4`` such that ``x_1 x_4=0``. 
+
+Is ``W`` a subspace of ``\mathbb{R}^4``?
+"""
+
+# ╔═╡ b13e61f1-3d38-4f87-838f-5c448ce1193a
+cm"""
+$(bth("2 Solution Subspaces"))
+If ``\mathbf{A}`` is a (constant) ``m \times n`` matrix, then the solution set of the homogeneous linear system
+```math
+\mathbf{A x}=\mathbf{0}
+```
+is a subspace of ``\mathbf{R}^n``. This subspace is called __solution space__ of the system.
+"""
+
+# ╔═╡ add8e82e-02cb-4262-b8e4-ac7a8c317257
+cm"""
+$(ex(5))
+In Example 4 of Section 3.4 we considered the homogeneous system
+```math
+\begin{aligned}
+x_1+3 x_2-15 x_3+7 x_4 & =0 \\
+x_1+4 x_2-19 x_3+10 x_4 & =0 \\
+2 x_1+5 x_2-26 x_3+11 x_4 & =0
+\end{aligned}
+```
+The reduced echelon form of the coefficient matrix of this system is
+```math
+\left[\begin{array}{rrrr}
+1 & 0 & -3 & -2 \\
+0 & 1 & -4 & 3 \\
+0 & 0 & 0 & 0
+\end{array}\right]
+```
+
+What is the solution space of the system?
+"""
+
+# ╔═╡ 56aee5a8-caf4-4cba-9e1e-7e319c21047b
+cm"""
+$(define("Linear Combination"))
+The vector ``\mathbf{w}`` is called a __linear combination__ of the vectors ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` provided that there exist scalars ``c_1, c_2, \ldots, c_k`` such that
+```math
+\mathbf{w}=c_1 \mathbf{v}_1+c_2 \mathbf{v}_2+\cdots+c_k \mathbf{v}_k
+```
+"""
+
+# ╔═╡ f110354f-ab42-481d-9057-fd467fa9a664
+cm"""
+$(define("Spanning Set"))
+Suppose that ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` are vectors in a vector space ``V``. Then we say that the vectors ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` __span__ the vector space ``V`` provided that every vector in ``V`` is a linear combination of these ``k`` vectors. 
+
+We may also say that the set ``S=\left\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k\right\}`` of vectors is a __spanning set__ for ``V``.
+"""
+
+# ╔═╡ 4e16d3d9-668d-4565-95f2-f8c20e73839c
+cm"""
+$(bth("1 The Span of a Set of Vectors"))
+Let ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` be vectors in the vector space ``V``. Then the set ``W`` of all linear combinations of ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` is a subspace of ``V``.
+$(ebl())
+
+- We sometimes write
+```math
+W=\operatorname{span}(S)=\operatorname{span}\left\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k\right\}
+```
+
+- ``\mathbb{R}^3=\operatorname{span}\{\mathbf{i}, \mathbf{j}, \mathbf{k}\}``. 
+"""
+
+# ╔═╡ 4a6e9768-71f4-4a2b-9746-d27c64d31314
+cm"""
+$(define("Linear Independence"))
+The vectors ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` in a vector space ``V`` are said to be __linearly independent__ provided that the equation
+```math
+c_1 \mathbf{v}_1+c_2 \mathbf{v}_2+\cdots+c_k \mathbf{v}_k=\mathbf{0}
+```
+has only the trivial solution ``c_1=c_2=\cdots=c_k=0``. That is, the only linear combination of ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` that represents the zero vector ``\mathbf{0}`` is the trivial combination 
+```math
+0 \mathbf{v}_1+0 \mathbf{v}_2+\cdots+0 \mathbf{v}_k.
+```
+"""
+
+# ╔═╡ d14cb002-bfcd-49d4-8318-62ca9a2e6521
+cm"""
+$(ex(4)) 
+__The standard unit vectors__
+
+```math
+\begin{aligned}
+\mathbf{e}_1 & =(1,0,0, \ldots, 0) \\
+\mathbf{e}_2 & =(0,1,0, \ldots, 0) \\
+& \vdots \\
+\mathbf{e}_n & =(0,0,0, \ldots, 1)
+\end{aligned}
+```
+in ``\mathbb{R}^n`` are __linearly independent__. 
+"""
+
+# ╔═╡ 9221b160-0335-42e3-830f-35be3df0a1ed
+cm"""
+$(bbl("Remark","Linear Dependent"))
+A set of vectors is called __linearly dependent__ provided it is not linearly independent. Hence the vectors ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` are linearly dependent if and only if there exist scalars ``c_1, c_2, \ldots, c_k`` not all zero such that
+```math
+c_1 \mathbf{v}_1+c_2 \mathbf{v}_2+\cdots+c_k \mathbf{v}_k=\mathbf{0}
+```
+
+In short, a (finite) set of vectors is linearly dependent provided that some nontrivial linear combination of them equals the zero vector.
+"""
+
+# ╔═╡ 23159722-3535-468c-8501-987e3786dcdb
+cm"""
+$(ex(5))
+Determine whether the vectors ``\mathbf{v}_1=(1,2,2,1), \mathbf{v}_2=(2,3,4,1)``, and ``\mathbf{v}_3=(3,8,7,5)`` in ``\mathbb{R}^4`` are linearly independent.
+"""
+
+# ╔═╡ 26755d8b-8b1f-43df-8117-a38840b9349b
+cm"""
+$(remarks())
+- Observe that linear independence of the vectors ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` actually is a property of the set ``S=\left\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k\right\}`` whose elements are these vectors. Occasionally the phraseology "the set ``S=\left\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k\right\}`` is linearly independent" is more convenient. 
+
+- Any subset of a linearly independent set ``S=`` ``\left\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k\right\}`` is a linearly independent set of vectors.
+
+- the coefficients in a linear combination of the linearly independent vectors ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` are unique. If both
+"""
+
+# ╔═╡ 57369806-889e-42cf-9da3-7325ff1176f5
+cm"""
+$(ex(6))
+Let ``\mathbf{v}_1=(2,1,3), \mathbf{v}_2=(5,-2,4), \mathbf{v}_3=(3,8,-6)``, and ``\mathbf{v}_4=(2,7,-4)``. Show that these vectors are linealy depedent.
+
+Then the equation ``c_1 \mathbf{v}_1+c_2 \mathbf{v}_2+c_3 \mathbf{v}_3+c_4 \mathbf{v}_4=\mathbf{0}`` is equivalent to the linear system
+```math
+\begin{aligned}
+2 c_1+5 c_2+3 c_3+2 c_4 & =0 \\
+c_1-2 c_2+8 c_3+7 c_4 & =0 \\
+3 c_1+4 c_2-6 c_3-4 c_4 & =0
+\end{aligned}
+```
+of three equations in four unknowns. 
+"""
+
+# ╔═╡ 87f79eab-0b30-4bc8-8a47-fe027d91e476
+cm"""
+$(remark())
+Any set of more than ``n`` vectors in ``\mathbb{R}^n`` is linearly dependent.
+"""
+
+# ╔═╡ 7a6a7ba0-cd23-4d36-b6d7-6af7514d9bb6
+cm"""
+$(bth("2"))
+__Independence of ``\boldsymbol{n}`` Vectors in ``\mathbb{R}^n``__
+
+The ``n`` vectors ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n`` in ``\mathbf{R}^n`` are linearly independent if and only if the ``n \times n`` matrix
+```math
+\mathbf{A}=\left[\begin{array}{llll}
+\mathbf{v}_1 & \mathbf{v}_2 & \cdots & \mathbf{v}_n
+\end{array}\right]
+```
+having them as its column vectors has nonzero determinant.
+"""
+
+# ╔═╡ 46874b7b-0d64-4a7f-bbbc-4744aef58e55
+cm"""
+$(bth("3"))
+__Independence of Fewer Than ``\boldsymbol{n}`` Vectors in ``\mathbb{R}^n``__
+
+Consider ``k`` vectors ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` in ``\mathbf{R}^n``, with ``k<n``. Let
+```math
+\mathbf{A}=\left[\begin{array}{llll}
+\mathbf{v}_1 & \mathbf{v}_2 & \cdots & \mathbf{v}_k
+\end{array}\right]
+```
+be the ``n \times k`` matrix having them as its column vectors. Then the vectors ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` are linearly independent if and only if some ``k \times k`` submatrix of A has nonzero determinant.
+"""
+
+# ╔═╡ 6cd1ff75-1846-45d4-a24e-dc5a8d4b5176
+cm"""
+$(ex())
+If theyare linearly independent, showthis; otherwise find a
+ non trivial linear combination of them that is equal to the zero
+ vector.
+```math
+\mathbf{v}_1=(2,0,-3), \mathbf{v}_2=(4,-5,-6), \mathbf{v}_3=(-2,1,3)
+```
+"""
+
+# ╔═╡ e0a788cb-4029-4673-8220-4edf08026ca9
+cm"""
+$(ex())
+ The vectors ``\{v_1,v_2\}`` are known to be linearly
+ independent. Apply the definition of linear independence to
+ show that the vectors fuig are also linearly independent.
+```math
+\mathbf{u}_1=\mathbf{v}_1+\mathbf{v}_2, \mathbf{u}_2=2 \mathbf{v}_1+3 \mathbf{v}_2
+```
+
+"""
+
+# ╔═╡ de7140da-31e6-45a6-ba94-83f98cfd9dbf
+cm"""
+$(define("Basis"))
+A finite set ``S`` of vectors in a vector space ``V`` is called a basis for ``V`` provided that
+- (a) the vectors in ``S`` are linearly independent, and
+- (b) the vectors in ``S`` span ``V``.
+"""
+
+# ╔═╡ 14f1a87d-56e1-4606-bfed-8b0fa558ab93
+cm"""
+$(ex(1))
+The standard basis for ``\mathbb{R}^n`` consists of the unit vectors
+```math
+\mathbf{e}_1=(1,0,0, \ldots, 0), \mathbf{e}_2=(0,1,0, \ldots, 0), \ldots, \mathbf{e}_n=(0,0,0, \ldots, 1)
+```
 """
 
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
@@ -3402,6 +3717,39 @@ version = "1.4.1+1"
 # ╟─d711bb6f-f627-4568-97f5-5d7690088663
 # ╟─263e7015-3130-4597-b440-a996e52967b9
 # ╟─64e0c10c-a4e8-4435-86fc-60bff5e476d4
+# ╟─2af29504-36c2-4f20-a325-c32acf62d9bc
+# ╟─d9a91130-0cf8-414e-b8a8-dd352090f7a6
+# ╟─170f2255-078f-4c9e-86e9-0eb93b2ff87e
+# ╟─f1464582-faf2-4902-96a6-bb1cf17c1102
+# ╟─f3d58858-f9ab-42bb-a822-14d03916984e
+# ╟─6827e93a-43b1-4ee7-a650-573a3ce61676
+# ╟─4b2763bd-cf78-4913-8d5d-ac10d08b1031
+# ╟─abefd094-b57a-46c7-a314-eb836e58c6a0
+# ╟─f8cd8873-f4fb-4300-8aa2-4aee9990cf5e
+# ╟─e17f0845-12a9-4da8-b81d-bf3e61d95260
+# ╟─b13e61f1-3d38-4f87-838f-5c448ce1193a
+# ╟─add8e82e-02cb-4262-b8e4-ac7a8c317257
+# ╟─2f5bc349-791e-4ece-8933-f2baef3c59a1
+# ╟─56aee5a8-caf4-4cba-9e1e-7e319c21047b
+# ╟─f110354f-ab42-481d-9057-fd467fa9a664
+# ╟─4e16d3d9-668d-4565-95f2-f8c20e73839c
+# ╟─ca3afed1-ded8-4792-8253-58a2b5bc0502
+# ╟─4a6e9768-71f4-4a2b-9746-d27c64d31314
+# ╟─d14cb002-bfcd-49d4-8318-62ca9a2e6521
+# ╟─9221b160-0335-42e3-830f-35be3df0a1ed
+# ╟─23159722-3535-468c-8501-987e3786dcdb
+# ╠═4fc61c32-377d-475f-9587-fb884aaafcb6
+# ╟─26755d8b-8b1f-43df-8117-a38840b9349b
+# ╟─57369806-889e-42cf-9da3-7325ff1176f5
+# ╟─87f79eab-0b30-4bc8-8a47-fe027d91e476
+# ╟─7a6a7ba0-cd23-4d36-b6d7-6af7514d9bb6
+# ╟─46874b7b-0d64-4a7f-bbbc-4744aef58e55
+# ╟─6cd1ff75-1846-45d4-a24e-dc5a8d4b5176
+# ╠═73ea96b9-be3c-4e26-8f54-914bd53d409b
+# ╟─e0a788cb-4029-4673-8220-4edf08026ca9
+# ╟─faf0e3cf-3973-4272-bda3-a3410c8e17d2
+# ╟─de7140da-31e6-45a6-ba94-83f98cfd9dbf
+# ╟─14f1a87d-56e1-4606-bfed-8b0fa558ab93
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
