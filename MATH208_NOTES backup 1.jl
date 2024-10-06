@@ -17,7 +17,7 @@ begin
 	using SymPy
     using QRCoders
     using PrettyTables
-	# using LinearSolve
+	using LinearSolve
     # using NonlinearSolve
     # using ForwardDiff
     # using Integrals
@@ -588,7 +588,7 @@ let
 	A=[1 2 3;2 3 8;2 4 8;1 1 5]
 	b= zeros(3)
 	# A\b
-	# solve()
+	solve()
 end
 
 # ╔═╡ 73ea96b9-be3c-4e26-8f54-914bd53d409b
@@ -599,49 +599,10 @@ let
 	A=[v1 v2 v3]
 	A[3,:]=(3//2)A[1,:]+A[3,:]
 	A
-	# det(A)
 end
 
 # ╔═╡ faf0e3cf-3973-4272-bda3-a3410c8e17d2
 md"# 4.4 Bases and Dimension for Vector Spaces"
-
-# ╔═╡ dca3f82b-7cac-4849-88a2-d47805957566
-md"##  Bases for Solution Spaces"
-
-# ╔═╡ 03e906c2-29b0-487b-9223-6c7313c1d740
-let
-	A = [
-		3 6 -1 -5 5 
-		2 4 -1 -3 2 
-		3//1 6 -2 -4 1
-
-	]
-	A[1,:]=A[1,:]-A[2,:]
-	A[2,:]=-(A[2,1]/A[1,1])*A[1,:]+A[2,:]
-	A[3,:]=-(A[3,1]/A[1,1])*A[1,:]+A[3,:]
-	A[3,:]=-(A[3,3]/A[2,3])*A[2,:]+A[3,:]
-	
-	A
-end
-
-# ╔═╡ ee16937c-617a-4f4a-a15e-c3853f0e8ca8
-md"# 4.5 Row and Column Spaces"
-
-# ╔═╡ d999ba91-2a73-4d8e-a99a-fd5187f24e6b
-let
-	A = [
-		3 6 -1 -5 5 
-		2 4 -1 -3 2 
-		3 6 -2 -4 1
-
-	]
-	A[1,:]=A[1,:]-A[2,:]
-	A[2,:]=-(A[2,1]/A[1,1])*A[1,:]+A[2,:]
-	A[3,:]=-(A[3,1]/A[1,1])*A[1,:]+A[3,:]
-	A[3,:]=-(A[3,3]/A[2,3])*A[2,:]+A[3,:]
-	
-	A
-end
 
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
@@ -1953,130 +1914,6 @@ The standard basis for ``\mathbb{R}^n`` consists of the unit vectors
 ```
 """
 
-# ╔═╡ 215b534d-7de6-4e6e-a20c-7ca936bf3af9
-cm"""
-$(bbl("Remark",""))
-
-Any set of ``n`` linearly independent vectors in ``\mathbb{R}^n`` is a __basis__ for ``\mathbb{R}^n``.
-
-
-$(ebl())
-"""
-
-# ╔═╡ 53b4b372-cc7f-48d7-930e-8bf007820dae
-cm"""
-$(ex(3))
-Let ``\mathbf{v}_1=(1,-1,-2,-3), \mathbf{v}_2=(1,-1,2,3), \mathbf{v}_3=(1,-1,-3,-2)``, and ``\mathbf{v}_4=(0,3,-1,2)``. Is the set ``\{v_1,v_2,v_3,v_4\}`` a basis for ``\mathbb{R}^4``?
-"""
-
-# ╔═╡ 91007be4-b072-44bc-a484-5ace7c30a174
-cm"""
-$(bth("1 Bases as Maximal Linearly Independent Sets"))
-Let ``S=\left\{\mathbf{v}_{\mathbf{1}}, \mathbf{v}_2, \ldots, \mathbf{v}_n\right\}`` be a basis for the vector space ``V``. Then any set of more than ``n`` vectors in ``V`` is linearly dependent.
-"""
-
-# ╔═╡ 83e6ef8d-5c04-4805-a9fe-5ef096b1c5a6
-cm"""
-$(bth("The Dimension of a Vector Space"))
-Any two bases for a vector space consist of the same number of vectors.
-"""
-
-# ╔═╡ 390905b4-84be-430a-be26-da43007d8de2
-cm"""
-$(define("Dimension of a Vector Space"))
-A nonzero vector space ``V`` is called __finite dimensional__ provided that there exists a basis for ``V`` consisting of a __finite number of vectors__ from ``V``. In this case the number ``n`` of vectors in each basis for ``V`` is called the __dimension of ``V``, denoted by ``n=\operatorname{dim} V``__. 
-"""
-
-# ╔═╡ 36b5cd1f-7872-491c-95c9-e0503b7d5ca6
-cm"""
-$(bbl("Remarks"))
-- Note that the zero vector space ``\{\boldsymbol{0}\}`` has no basis because it contains no linearly independent set of vectors. (Sometimes it is convenient to adopt the convention that the null set is a basis for ``\{\boldsymbol{0}\}``.) Here we define ``\operatorname{dim}\{\boldsymbol{0}\}=0``. 
-- A nonzero vector space that has no finite basis is called __infinite dimensional__. 
-"""
-
-# ╔═╡ a35044ca-ff7d-411c-ad19-b1067dc96b0d
-cm"""
-$(ex(4))
-Let ``\mathcal{P}`` be the set of all polynomials of the form 
-```math
-p(x)=a_0+a_1 x+a_2 x^2+\cdots+a_n x^n
-```
-where the largest exponent ``n \geq 0`` that appears is the degree of the polynomial ``p(x)``, and the coefficients ``a_0, a_1, a_2, \ldots, a_n`` are real numbers. 
-
-``\mathcal{P}`` is an infinite-dimensional space.
-"""
-
-# ╔═╡ 77fbd41a-f3ac-477e-b4e0-01cb0049362f
-cm"""
-$(bth("3 Independent Sets, Spanning Sets, and Bases"))
-Let ``V`` be an ``n``-dimensional vector space and let ``S`` be a subset of ``V``. Then
-- (a) If ``S`` is linearly independent and consists of ``n`` vectors, then ``S`` is a basis for ``V``;
-- (b) If ``S`` spans ``V`` and consists of ``n`` vectors, then ``S`` is a basis for ``V``;
-- (c) If ``S`` is linearly independent, then ``S`` is contained in a basis for ``V``;
-- (d) If ``S`` spans ``V``, then ``S`` contains a basis for ``V``.
-"""
-
-# ╔═╡ 50e51cd6-6337-47ee-b405-3b0ec86a9ad3
-cm"""
-$(bbl("ALGORITHM A Basis for the Solution Space"))
-To find a basis for the solution space ``W`` of the homogeneous linear system ``\mathbf{A x}=`` ``\mathbf{0}``, carry out the following steps.
-1. Reduce the coefficient matrix ``\mathbf{A}`` to echelon form.
-2. Identify the ``r`` leading variables and the ``k=n-r`` free variables. If ``k=0``, then ``W=\{0\}``.
-3. Set the free variables equal to parameters ``t_1, t_2, \ldots, t_k``, and then solve by back substitution for the leading variables in terms of these parameters.
-4. Let ``\mathbf{v}_j`` be the solution vector obtained by setting ``t_j`` equal to 1 and the other parameters equal to zero. Then ``\left\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k\right\}`` is a basis for ``W``.
-"""
-
-# ╔═╡ 0a7fda1b-7041-481d-8935-e25e91040e3a
-cm"""
-$(ex(5))
-Find a basis for the solution space of the homogeneous linear system
-```math
-\begin{aligned}
-& 3 x_1+6 x_2-x_3-5 x_4+5 x_5=0 \\
-& 2 x_1+4 x_2-x_3-3 x_4+2 x_5=0 \\
-& 3 x_1+6 x_2-2 x_3-4 x_4+x_5=0
-\end{aligned}
-```
-"""
-
-# ╔═╡ cd3dcd43-5aa6-4f0d-9e26-2a7e5d5db706
-cm"""
-$(define("Row Sapce of a Matrix"))
-Let ``A\in \mathbb{R}^{m\times n}`` be an ``m\times n`` matrix. The __row space__ of ``A`` (denoted by ``\textrm{Row}(A)``) is the subspace of ``\mathbb{R}^n`` spanned by the ``m`` rows of ``A``. 
-The dimension of ``\textrm{Row}(A)`` is called the __row rank__ of ``A``.
-$(ebl())
-
-$(define("Column Sapce of a Matrix"))
-Let ``A\in \mathbb{R}^{m\times n}`` be an ``m\times n`` matrix. The __column space__ of ``A`` (denoted by ``\textrm{Col}(A)``) is the subspace of ``\mathbb{R}^m`` spanned by the ``n`` columns of ``A``. 
-The dimension of ``\textrm{Col}(A)`` is called the __column rank__ of ``A``.
-$(ebl())
-
-"""
-
-# ╔═╡ 131a8093-a933-4ffe-b5b9-396cbe6b03e2
-cm"""
-$(bth("Rank of a Matrix"))
-Let ``A\in \mathbb{R}^{m\times n}`` be an ``m\times n`` matrix. The __column rank__ of ``A`` is equal to the __row rank__ of ``A``. So we define the __rank of ``A``__ as
-```math
-\textrm{rank}(A) = \textrm{dim}(\textrm{Col}(A)) =\textrm{dim}(\textrm{Row}(A))
-```
-"""
-
-# ╔═╡ 87933565-4591-492c-a819-6136c1b1b547
-cm"""
-$(ex())
-Find ``\textrm{rank}(A)`` of 
-```math
-A = \begin{bmatrix}
-		3& 6 &-1& -5& 5 \\
-		2& 4& -1& -3& 2 \\
-		3& 6& -2& -4& 1\\
-
-	\end{bmatrix}
-```
-	
-"""
-
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
 initialize_eqref()
 
@@ -2128,7 +1965,7 @@ HypertextLiteral = "~0.9.5"
 LaTeXStrings = "~1.3.1"
 Latexify = "~0.16.5"
 PlotThemes = "~3.2.0"
-Plots = "~1.40.8"
+Plots = "~1.40.5"
 PlutoExtras = "~0.7.12"
 PlutoUI = "~0.7.59"
 PrettyTables = "~2.3.2"
@@ -2142,7 +1979,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.5"
 manifest_format = "2.0"
-project_hash = "f817cd5ac65c8931c7f01777c1ac255aeeccba40"
+project_hash = "f4703e0dff485bac3fb1464187004fe2ccfdbd03"
 
 [[deps.AbstractFFTs]]
 deps = ["LinearAlgebra"]
@@ -2276,14 +2113,14 @@ uuid = "8f4d0f93-b110-5947-807f-2305c1781a2d"
 version = "1.10.2"
 
 [[deps.ConstructionBase]]
-git-tree-sha1 = "76219f1ed5771adbb096743bff43fb5fdd4c1157"
+deps = ["LinearAlgebra"]
+git-tree-sha1 = "d8a9c0b6ac2d9081bf76324b39c78ca3ce4f0c98"
 uuid = "187b0558-2788-49d3-abe0-74a17ed4e7c9"
-version = "1.5.8"
-weakdeps = ["IntervalSets", "LinearAlgebra", "StaticArrays"]
+version = "1.5.6"
+weakdeps = ["IntervalSets", "StaticArrays"]
 
     [deps.ConstructionBase.extensions]
     ConstructionBaseIntervalSetsExt = "IntervalSets"
-    ConstructionBaseLinearAlgebraExt = "LinearAlgebra"
     ConstructionBaseStaticArraysExt = "StaticArrays"
 
 [[deps.Contour]]
@@ -2369,9 +2206,9 @@ uuid = "2e619515-83b5-522b-bb60-26c02a35a201"
 version = "2.6.2+0"
 
 [[deps.Extents]]
-git-tree-sha1 = "81023caa0021a41712685887db1fc03db26f41f5"
+git-tree-sha1 = "94997910aca72897524d2237c41eb852153b0f65"
 uuid = "411431e0-e8b7-467b-b5e0-f676ba4f2910"
-version = "0.1.4"
+version = "0.1.3"
 
 [[deps.FFMPEG]]
 deps = ["FFMPEG_jll"]
@@ -2437,9 +2274,9 @@ version = "1.0.14+0"
 
 [[deps.GLFW_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libglvnd_jll", "Xorg_libXcursor_jll", "Xorg_libXi_jll", "Xorg_libXinerama_jll", "Xorg_libXrandr_jll", "libdecor_jll", "xkbcommon_jll"]
-git-tree-sha1 = "532f9126ad901533af1d4f5c198867227a7bb077"
+git-tree-sha1 = "3f74912a156096bd8fdbef211eff66ab446e7297"
 uuid = "0656b61e-2033-5cc2-a64a-77c0f6c09b89"
-version = "3.4.0+1"
+version = "3.4.0+0"
 
 [[deps.GR]]
 deps = ["Artifacts", "Base64", "DelimitedFiles", "Downloads", "GR_jll", "HTTP", "JSON", "Libdl", "LinearAlgebra", "Preferences", "Printf", "Qt6Wayland_jll", "Random", "Serialization", "Sockets", "TOML", "Tar", "Test", "p7zip_jll"]
@@ -2453,16 +2290,11 @@ git-tree-sha1 = "a8863b69c2a0859f2c2c87ebdc4c6712e88bdf0d"
 uuid = "d2c73de3-f751-5644-a686-071e5b155ba9"
 version = "0.73.7+0"
 
-[[deps.GeoFormatTypes]]
-git-tree-sha1 = "59107c179a586f0fe667024c5eb7033e81333271"
-uuid = "68eda718-8dee-11e9-39e7-89f7f65f511f"
-version = "0.4.2"
-
 [[deps.GeoInterface]]
-deps = ["Extents", "GeoFormatTypes"]
-git-tree-sha1 = "5921fc0704e40c024571eca551800c699f86ceb4"
+deps = ["Extents"]
+git-tree-sha1 = "801aef8228f7f04972e596b09d4dba481807c913"
 uuid = "cf35fbd7-0cd7-5166-be24-54bfbe79505f"
-version = "1.3.6"
+version = "1.3.4"
 
 [[deps.GeometryBasics]]
 deps = ["EarCut_jll", "Extents", "GeoInterface", "IterTools", "LinearAlgebra", "StaticArrays", "StructArrays", "Tables"]
@@ -2512,10 +2344,10 @@ uuid = "cd3eb016-35fb-5094-929b-558a96fad6f3"
 version = "1.10.8"
 
 [[deps.HarfBuzz_jll]]
-deps = ["Artifacts", "Cairo_jll", "Fontconfig_jll", "FreeType2_jll", "Glib_jll", "Graphite2_jll", "JLLWrappers", "Libdl", "Libffi_jll"]
-git-tree-sha1 = "401e4f3f30f43af2c8478fc008da50096ea5240f"
+deps = ["Artifacts", "Cairo_jll", "Fontconfig_jll", "FreeType2_jll", "Glib_jll", "Graphite2_jll", "JLLWrappers", "Libdl", "Libffi_jll", "Pkg"]
+git-tree-sha1 = "129acf094d168394e80ee1dc4bc06ec835e510a3"
 uuid = "2e76f6c2-a576-52d4-95c1-20adfe4de566"
-version = "8.3.1+0"
+version = "2.8.1+1"
 
 [[deps.Hyperscript]]
 deps = ["Test"]
@@ -2625,15 +2457,15 @@ version = "1.0.0"
 
 [[deps.JLFzf]]
 deps = ["Pipe", "REPL", "Random", "fzf_jll"]
-git-tree-sha1 = "39d64b09147620f5ffbf6b2d3255be3c901bec63"
+git-tree-sha1 = "a53ebe394b71470c7f97c2e7e170d51df21b17af"
 uuid = "1019f520-868f-41f5-a6de-eb00f4b6a39c"
-version = "0.1.8"
+version = "0.1.7"
 
 [[deps.JLLWrappers]]
 deps = ["Artifacts", "Preferences"]
-git-tree-sha1 = "f389674c99bfcde17dc57454011aa44d5a260a40"
+git-tree-sha1 = "7e5d6779a1e09a36db2a7b6cff50942a0a7d0fca"
 uuid = "692b3bcd-3c85-4b1f-b108-f13ce0eb3210"
-version = "1.6.0"
+version = "1.5.0"
 
 [[deps.JSON]]
 deps = ["Dates", "Mmap", "Parsers", "Unicode"]
@@ -2667,9 +2499,9 @@ version = "3.0.0+1"
 
 [[deps.LLVMOpenMP_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "78211fb6cbc872f77cad3fc0b6cf647d923f4929"
+git-tree-sha1 = "d986ce2d884d49126836ea94ed5bfb0f12679713"
 uuid = "1d63c593-3942-5779-bab2-d838dc0a180e"
-version = "18.1.7+0"
+version = "15.0.7+0"
 
 [[deps.LZO_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
@@ -2943,9 +2775,9 @@ version = "1.4.3"
 
 [[deps.OpenSSL_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "7493f61f55a6cce7325f197443aa80d32554ba10"
+git-tree-sha1 = "a028ee3cb5641cccc4c24e90c36b0a4f7707bdf5"
 uuid = "458c3c95-2e84-50aa-8efc-19380b2a3a95"
-version = "3.0.15+1"
+version = "3.0.14+0"
 
 [[deps.OpenSpecFun_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "Libdl", "Pkg"]
@@ -2954,10 +2786,10 @@ uuid = "efe28fd5-8261-553b-a9e1-b2916fc3738e"
 version = "0.5.5+0"
 
 [[deps.Opus_jll]]
-deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "6703a85cb3781bd5909d48730a67205f3f31a575"
+deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
+git-tree-sha1 = "51a08fb14ec28da2ec7a927c4337e4332c2a4720"
 uuid = "91d4177d-7536-5919-b921-800302f37372"
-version = "1.3.3+0"
+version = "1.3.2+0"
 
 [[deps.OrderedCollections]]
 git-tree-sha1 = "dfdf5519f235516220579f949664f1bf44e741c5"
@@ -2983,9 +2815,9 @@ version = "0.5.12"
 
 [[deps.Pango_jll]]
 deps = ["Artifacts", "Cairo_jll", "Fontconfig_jll", "FreeType2_jll", "FriBidi_jll", "Glib_jll", "HarfBuzz_jll", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "e127b609fb9ecba6f201ba7ab753d5a605d53801"
+git-tree-sha1 = "cb5a2ab6763464ae0f19c86c56c63d4a2b0f5bda"
 uuid = "36c8627f-9965-5494-a995-c6b170f724f3"
-version = "1.54.1+0"
+version = "1.52.2+0"
 
 [[deps.Parsers]]
 deps = ["Dates", "PrecompileTools", "UUIDs"]
@@ -3029,9 +2861,9 @@ version = "1.4.1"
 
 [[deps.Plots]]
 deps = ["Base64", "Contour", "Dates", "Downloads", "FFMPEG", "FixedPointNumbers", "GR", "JLFzf", "JSON", "LaTeXStrings", "Latexify", "LinearAlgebra", "Measures", "NaNMath", "Pkg", "PlotThemes", "PlotUtils", "PrecompileTools", "Printf", "REPL", "Random", "RecipesBase", "RecipesPipeline", "Reexport", "RelocatableFolders", "Requires", "Scratch", "Showoff", "SparseArrays", "Statistics", "StatsBase", "TOML", "UUIDs", "UnicodeFun", "UnitfulLatexify", "Unzip"]
-git-tree-sha1 = "45470145863035bb124ca51b320ed35d071cc6c2"
+git-tree-sha1 = "082f0c4b70c202c37784ce4bfbc33c9f437685bf"
 uuid = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
-version = "1.40.8"
+version = "1.40.5"
 
     [deps.Plots.extensions]
     FileIOExt = "FileIO"
@@ -3183,9 +3015,9 @@ version = "0.7.0"
 
 [[deps.SIMD]]
 deps = ["PrecompileTools"]
-git-tree-sha1 = "98ca7c29edd6fc79cd74c61accb7010a4e7aee33"
+git-tree-sha1 = "2803cab51702db743f3fda07dd1745aadfbf43bd"
 uuid = "fdea26ae-647d-5447-a871-4b548cad5224"
-version = "3.6.0"
+version = "3.5.0"
 
 [[deps.Scratch]]
 deps = ["Dates"]
@@ -3203,9 +3035,9 @@ uuid = "992d4aef-0814-514b-bc4d-f2e9a6c4116f"
 version = "1.0.3"
 
 [[deps.SimpleBufferStream]]
-git-tree-sha1 = "f305871d2f381d21527c770d4788c06c097c9bc1"
+git-tree-sha1 = "874e8867b33a00e784c8a7e4b60afe9e037b74e1"
 uuid = "777ac1f9-54b0-4bf8-805c-2214025038e7"
-version = "1.2.0"
+version = "1.1.0"
 
 [[deps.SimpleTraits]]
 deps = ["InteractiveUtils", "MacroTools"]
@@ -3456,9 +3288,9 @@ version = "1.31.0+0"
 
 [[deps.XML2_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libiconv_jll", "Zlib_jll"]
-git-tree-sha1 = "1165b0443d0eca63ac1e32b8c0eb69ed2f4f8127"
+git-tree-sha1 = "d9717ce3518dc68a99e6b96300813760d887a01d"
 uuid = "02c8fc9c-b97f-50b9-bbe4-9be30ff0a78a"
-version = "2.13.3+0"
+version = "2.13.1+0"
 
 [[deps.XSLT_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libgcrypt_jll", "Libgpg_error_jll", "Libiconv_jll", "XML2_jll", "Zlib_jll"]
@@ -3635,9 +3467,9 @@ version = "3.2.9+0"
 
 [[deps.fzf_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "936081b536ae4aa65415d869287d43ef3cb576b2"
+git-tree-sha1 = "a68c9655fbe6dfcab3d972808f1aafec151ce3f8"
 uuid = "214eeab7-80f7-51ab-84ad-2988db7cef09"
-version = "0.53.0+0"
+version = "0.43.0+0"
 
 [[deps.gperf_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -3652,10 +3484,10 @@ uuid = "a4ae2306-e953-59d6-aa16-d00cac43593b"
 version = "3.9.0+0"
 
 [[deps.libass_jll]]
-deps = ["Artifacts", "Bzip2_jll", "FreeType2_jll", "FriBidi_jll", "HarfBuzz_jll", "JLLWrappers", "Libdl", "Zlib_jll"]
-git-tree-sha1 = "e17c115d55c5fbb7e52ebedb427a0dca79d4484e"
+deps = ["Artifacts", "Bzip2_jll", "FreeType2_jll", "FriBidi_jll", "HarfBuzz_jll", "JLLWrappers", "Libdl", "Pkg", "Zlib_jll"]
+git-tree-sha1 = "5982a94fcba20f02f42ace44b9894ee2b140fe47"
 uuid = "0ac62f75-1d6f-5e53-bd7c-93b484bb37c0"
-version = "0.15.2+0"
+version = "0.15.1+0"
 
 [[deps.libblastrampoline_jll]]
 deps = ["Artifacts", "Libdl"]
@@ -3675,10 +3507,10 @@ uuid = "2db6ffa8-e38f-5e21-84af-90c45d0032cc"
 version = "1.11.0+0"
 
 [[deps.libfdk_aac_jll]]
-deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "8a22cf860a7d27e4f3498a0fe0811a7957badb38"
+deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
+git-tree-sha1 = "daacc84a041563f965be61859a36e17c4e4fcd55"
 uuid = "f638f0a6-7fb0-5443-88ba-1cc74229b280"
-version = "2.0.3+0"
+version = "2.0.2+0"
 
 [[deps.libinput_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg", "eudev_jll", "libevdev_jll", "mtdev_jll"]
@@ -3921,23 +3753,6 @@ version = "1.4.1+1"
 # ╟─faf0e3cf-3973-4272-bda3-a3410c8e17d2
 # ╟─de7140da-31e6-45a6-ba94-83f98cfd9dbf
 # ╟─14f1a87d-56e1-4606-bfed-8b0fa558ab93
-# ╟─215b534d-7de6-4e6e-a20c-7ca936bf3af9
-# ╟─53b4b372-cc7f-48d7-930e-8bf007820dae
-# ╟─91007be4-b072-44bc-a484-5ace7c30a174
-# ╟─83e6ef8d-5c04-4805-a9fe-5ef096b1c5a6
-# ╟─390905b4-84be-430a-be26-da43007d8de2
-# ╟─36b5cd1f-7872-491c-95c9-e0503b7d5ca6
-# ╟─a35044ca-ff7d-411c-ad19-b1067dc96b0d
-# ╟─77fbd41a-f3ac-477e-b4e0-01cb0049362f
-# ╟─dca3f82b-7cac-4849-88a2-d47805957566
-# ╟─50e51cd6-6337-47ee-b405-3b0ec86a9ad3
-# ╟─0a7fda1b-7041-481d-8935-e25e91040e3a
-# ╟─03e906c2-29b0-487b-9223-6c7313c1d740
-# ╟─ee16937c-617a-4f4a-a15e-c3853f0e8ca8
-# ╟─cd3dcd43-5aa6-4f0d-9e26-2a7e5d5db706
-# ╟─131a8093-a933-4ffe-b5b9-396cbe6b03e2
-# ╟─87933565-4591-492c-a819-6136c1b1b547
-# ╠═d999ba91-2a73-4d8e-a99a-fd5187f24e6b
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
