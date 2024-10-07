@@ -605,6 +605,17 @@ end
 # ╔═╡ faf0e3cf-3973-4272-bda3-a3410c8e17d2
 md"# 4.4 Bases and Dimension for Vector Spaces"
 
+# ╔═╡ f911e13b-7830-449d-b8d2-ae6ecb388e5c
+let
+	A = [
+		1 1 1 0
+		-1 -1 -1 3
+		-2 2 -3 -1
+		-3 3 -2 2
+	]
+	det(A)
+end
+
 # ╔═╡ dca3f82b-7cac-4849-88a2-d47805957566
 md"##  Bases for Solution Spaces"
 
@@ -642,6 +653,58 @@ let
 	
 	A
 end
+
+# ╔═╡ 28fb5089-e83b-47f5-93be-60f1f0ea1e30
+md"# 5.1 Introduction: Second-Order Linear Equations"
+
+# ╔═╡ 82a55302-3cf3-4c7e-861c-12f5f554f142
+cm"""
+__Homogeneous Second-Order Linear Equations__
+
+Consider the general second-order linear equation
+```math
+A(x) y^{\prime \prime}+B(x) y^{\prime}+C(x) y=F(x)
+```
+where the coefficient functions ``A, B, C``, and ``F`` are continuous on the open interval ``I``. Here we assume in addition that ``A(x) \neq 0`` at each point of ``I``, so we can divide each term in Eq. (7) by ``A(x)`` and write it in the form
+
+$(texeq"y^{\prime \prime}+p(x) y^{\prime}+q(x) y=f(x)")
+
+
+We will discuss first the associated homogeneous equation
+
+"""
+
+# ╔═╡ c9ac1dc2-078e-47ae-b0cf-9f22eb294b39
+texeq"y^{\prime \prime}+p(x) y^{\prime}+q(x) y=0 \label{hso}"
+
+# ╔═╡ 98730a31-e9e9-45fc-ae12-5cf0832b5069
+md"## LinearlyIndependentSolutions"
+
+# ╔═╡ f9a9f5f5-5134-4f2f-8672-c2e665c546ce
+md"## GeneralSolutions"
+
+# ╔═╡ 06cbf42d-9811-40ae-bcd5-1bcc4ff60880
+md"##  Linear Second-Order Equations with Constant Coefficients"
+
+# ╔═╡ c60351f6-a57c-46db-a3ea-3deee1f9180b
+cm"""
+```math
+a y^{\prime \prime}+b y^{\prime}+c y=0
+```
+with constant coefficients ``a, b``, and ``c``.
+Because ``e^{r x}`` is never zero, we may conclude that ``y(x)=e^{r x}`` will satisfy the differential equation precisely when ``r`` is a root of the algebraic equation
+$(texeq"
+a r^2+b r+c=0 .
+")
+
+This quadratic equation is called the __characteristic equation__ of the homogeneous linear differential equation
+$(texeq"
+a y^{\prime \prime}+b y^{\prime}+c y=0 \label{eqhc}
+")
+"""
+
+# ╔═╡ 381710b7-c487-4b65-9a07-88d773cdacf0
+eqref("eqhc")
 
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
@@ -2075,6 +2138,119 @@ A = \begin{bmatrix}
 	\end{bmatrix}
 ```
 	
+"""
+
+# ╔═╡ 55fb1d51-1582-4465-ae90-d21a4322281b
+cm"""
+$(bth("1 Principle of Superposition for Homogeneous Equations"))
+Let ``y_1`` and ``y_2`` be two solutions of the homogeneous linear equation in (7) on the interval ``I``. If ``c_1`` and ``c_2`` are constants, then the linear combination
+```math
+y=c_1 y_1+c_2 y_2
+```
+is also a solution of Eq. (7) on ``I``.
+"""
+
+# ╔═╡ 03dcf152-ab37-478f-8130-b53a8047c7b0
+cm"""
+
+$(bth("2 Existence and Uniqueness for Linear Equations"))
+Suppose that the functions ``p, q``, and ``f`` are continuous on the open interval ``I`` containing the point ``a``. Then, given any two numbers ``b_0`` and ``b_1``, the equation
+```math
+y^{\prime \prime}+p(x) y^{\prime}+q(x) y=f(x)
+```
+has a unique (that is, one and only one) solution on the entire interval ``I`` that satisfies the initial conditions
+```math
+y(a)=b_0, \quad y^{\prime}(a)=b_1
+```
+"""
+
+# ╔═╡ 21aea514-7f39-41b8-9e51-4139e5d1825d
+cm"""
+$(ex(2)) Verify that the functions
+```math
+y_1(x)=e^x \quad \text { and } \quad y_2(x)=x e^x
+```
+are solutions of the differential equation
+```math
+y^{\prime \prime}-2 y^{\prime}+y=0
+```
+"""
+
+# ╔═╡ b35479c0-8873-42d5-9296-8e22323f7e96
+cm"""
+$(define("Linear Independence of Two Functions"))
+Two functions defined on an open interval ``I`` are said to be linearly independent on ``I`` provided that neither is a constant multiple of the other.
+"""
+
+# ╔═╡ d3371b50-9c33-4df0-91b2-1c3bd13b7093
+cm"""
+$(bth("3 Wronskians of Solutions"))
+Suppose that ``y_1`` and ``y_2`` are two solutions of the homogeneous second-order linear equation (Eq. (7))
+```math
+y^{\prime \prime}+p(x) y^{\prime}+q(x) y=0
+```
+on an open interval ``I`` on which ``p`` and ``q`` are continuous.
+- (a) If ``y_1`` and ``y_2`` are linearly dependent, then ``W\left(y_1, y_2\right) \equiv 0`` on ``I``.
+- (b) If ``y_1`` and ``y_2`` are linearly independent, then ``W\left(y_1, y_2\right) \neq 0`` at each point of ``I``.
+
+Where ``W(y_1,y_2)`` is called the __Wronskian__ of ``y_1`` and ``y_2`` and is defined as the determinant
+```math
+W=\left|\begin{array}{cc}
+y_1 & y_2 \\
+y_1^{\prime} & y_2^{\prime}
+\end{array}\right|=y_1 y_2^{\prime}-y_1^{\prime} y_2
+```
+"""
+
+# ╔═╡ 48739d88-721f-471c-afa6-7cbb2e92ce3d
+cm"""
+$(bth("4 General Solutions of Homogeneous Equations"))
+Let ``y_1`` and ``y_2`` be two linearly independent solutions of the homogeneous equation (Eq. (7))
+```math
+y^{\prime \prime}+p(x) y^{\prime}+q(x) y=0
+```
+with ``p`` and ``q`` continuous on the open interval ``I``. If ``Y`` is any solution whatsoever of Eq. (7) on ``I``, then there exist numbers ``c_1`` and ``c_2`` such that
+```math
+Y(x)=c_1 y_1(x)+c_2 y_2(x)
+```
+for all ``x`` in ``I``.
+"""
+
+# ╔═╡ a7f45d96-911d-470e-a370-7037820a927b
+cm"""
+$(bth("5 Distinct Real Roots"))
+If the roots ``r_1`` and ``r_2`` of the characteristic equation in (8) are real and distinct, then
+```math
+y(x)=c_1 e^{r_1 x}+c_2 e^{r_2 x}
+```
+is a general solution of Eq. (9). Thus the solution space of the equation ``a y^{\prime \prime}+`` ``b y^{\prime}+c y=0`` has basis ``\left\{e^{r_1 x}, e^{r_2 x}\right\}``.
+"""
+
+# ╔═╡ dbbdb46b-5cb6-4ee2-831e-251f8b39f9b8
+cm"""
+$(ex(5)) Find the general solution of ``\quad 2 y^{\prime \prime}-7 y^{\prime}+3 y=0``
+"""
+
+# ╔═╡ 0354703b-ee11-4d5c-8707-6b8559ca3fac
+cm"""
+$(bth("6 Repeated Roots"))
+If the characteristic equation in (8) has equal (necessarily real) roots ``r_1=r_2``, then
+```math
+y(x)=\left(c_1+c_2 x\right) e^{r_1 x}
+```
+is a general solution of Eq. (9). In this case the solution space of the equation ``a y^{\prime \prime}+b y^{\prime}+c y=0`` has basis ``\left\{e^{r_1 x}, x e^{r_1 x}\right\}``.
+"""
+
+# ╔═╡ e15959e9-60c8-4084-9adb-012ca2ab1c2e
+cm"""
+$(ex(7))
+To solve the initial value problem
+```math
+\begin{aligned}
+& y^{\prime \prime}+2 y^{\prime}+y=0 \\
+& y(0)=5, \quad y^{\prime}(0)=-3
+\end{aligned}
+```
 """
 
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
@@ -3923,6 +4099,7 @@ version = "1.4.1+1"
 # ╟─14f1a87d-56e1-4606-bfed-8b0fa558ab93
 # ╟─215b534d-7de6-4e6e-a20c-7ca936bf3af9
 # ╟─53b4b372-cc7f-48d7-930e-8bf007820dae
+# ╠═f911e13b-7830-449d-b8d2-ae6ecb388e5c
 # ╟─91007be4-b072-44bc-a484-5ace7c30a174
 # ╟─83e6ef8d-5c04-4805-a9fe-5ef096b1c5a6
 # ╟─390905b4-84be-430a-be26-da43007d8de2
@@ -3938,9 +4115,27 @@ version = "1.4.1+1"
 # ╟─131a8093-a933-4ffe-b5b9-396cbe6b03e2
 # ╟─87933565-4591-492c-a819-6136c1b1b547
 # ╠═d999ba91-2a73-4d8e-a99a-fd5187f24e6b
+# ╟─28fb5089-e83b-47f5-93be-60f1f0ea1e30
+# ╟─82a55302-3cf3-4c7e-861c-12f5f554f142
+# ╟─c9ac1dc2-078e-47ae-b0cf-9f22eb294b39
+# ╟─55fb1d51-1582-4465-ae90-d21a4322281b
+# ╟─03dcf152-ab37-478f-8130-b53a8047c7b0
+# ╟─21aea514-7f39-41b8-9e51-4139e5d1825d
+# ╟─98730a31-e9e9-45fc-ae12-5cf0832b5069
+# ╟─b35479c0-8873-42d5-9296-8e22323f7e96
+# ╟─f9a9f5f5-5134-4f2f-8672-c2e665c546ce
+# ╟─d3371b50-9c33-4df0-91b2-1c3bd13b7093
+# ╟─48739d88-721f-471c-afa6-7cbb2e92ce3d
+# ╟─06cbf42d-9811-40ae-bcd5-1bcc4ff60880
+# ╟─c60351f6-a57c-46db-a3ea-3deee1f9180b
+# ╠═381710b7-c487-4b65-9a07-88d773cdacf0
+# ╟─a7f45d96-911d-470e-a370-7037820a927b
+# ╟─dbbdb46b-5cb6-4ee2-831e-251f8b39f9b8
+# ╟─0354703b-ee11-4d5c-8707-6b8559ca3fac
+# ╟─e15959e9-60c8-4084-9adb-012ca2ab1c2e
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
-# ╟─da9230a6-088d-4735-b206-9514c12dd223
+# ╠═da9230a6-088d-4735-b206-9514c12dd223
 # ╟─107407c8-5da0-4833-9965-75a82d84a0fb
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
