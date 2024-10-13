@@ -55,8 +55,73 @@ __The study of differential equations has three principal goals:__
 3. To interpret the solution that is found.
 """
 
+# ╔═╡ e6c9f44f-19dd-4922-bc05-8614f5441e80
+cm"""
+$(ex("Example 3","Rate of cooling"))
+ Newton's law of cooling may be stated in this way: __The time rate of change (the rate of change with respect to time ``t`` ) of the temperature ``T(t)`` of a body is proportional to the difference between ``T`` and the temperature ``A`` of the surrounding medium (Fig. 1.1.1)__. That is,
+```math
+\frac{d T}{d t}=-k(T-A)
+```
+where 
+- ``k`` is a positive constant. 
+- Observe that if ``T > A``, then ``d T / d t < 0``, so the temperature is a decreasing function of ``t`` and the body is cooling. But if ``T < A``, then ``d T / d t >0``, so that ``T`` is increasing.
+
+Thus the physical law is translated into a differential equation. If we are given the values of ``k`` and ``A``, we should be able to find an explicit formula for ``T(t)``, and then-with the aid of this formula-we can predict the future temperature of the body.
+"""
+
+# ╔═╡ a1cc7232-8dff-4fb4-908a-01c105e62797
+cm"""
+$(post_img("https://www.dropbox.com/scl/fi/l1ku5zzq9cartv6qck9e3/fig_1_1_1.png?rlkey=pleb3h5e9gyrjwq9zop53t3g5&dl=1",500))
+"""
+
+# ╔═╡ 0853d79c-5ae0-4690-9f09-9068505ba213
+cm"""
+$(ex("Example 5","Population growth")) 
+__The time rate of change of a population ``P(t)`` with constant birth and death rates is, in many simple cases, proportional to the size of the population__. That is,
+$(texeq"\frac{d P}{d t}=k P \label{pop_growth}")
+where ``k`` is the constant of proportionality.
+
+This equation has the solution
+
+$(texeq"P(t)=Ce^{kt}\label{pop_growth_sol}")
+"""
+
+# ╔═╡ 2b5ca5c2-4232-48df-95ab-4a5765436995
+cm"""
+$(ex("Example 6","Population growth"))
+Suppose that ``P(t)=C e^{k t}`` is the population of a colony of bacteria at time ``t``, that the population at time ``t=0`` (hours, h) was 1000 , and that the population doubled after 1 h . This additional information about ``P(t)`` yields the following equations:
+```math
+\begin{aligned}
+& 1000=P(0)=C e^0=C \\
+& 2000=P(1)=C e^k
+\end{aligned}
+```
+
+It follows that ``C=1000`` and that ``e^k=2``, so ``k=\ln 2 \approx 0.693147``. With this value of ``k`` the differential equation in $(eqref("pop_growth")) is
+```math
+\frac{d P}{d t}=(\ln 2) P \approx(0.693147) P
+```
+
+Substitution of ``k=\ln 2`` and ``C=1000`` in Eq. $(eqref("pop_growth_sol")) yields the particular solution
+```math
+P(t)=1000 e^{(\ln 2) t}=1000\left(e^{\ln 2}\right)^t=1000 \cdot 2^t \quad\left(\text { because } e^{\ln 2}=2\right)
+```
+that satisfies the given conditions. We can use this particular solution to predict future populations of the bacteria colony. For instance, the predicted number of bacteria in the population after one and a half hours (when ``t=1.5`` ) is
+```math
+P(1.5)=1000 \cdot 2^{3 / 2} \approx 2828
+```
+"""
+
 # ╔═╡ 555e1ddd-fcd2-4ff8-af06-f4caafc8dcff
 md"## Mathematical Models"
+
+# ╔═╡ 3dab7c5b-363a-4b55-b8b0-342723d99ba5
+cm"""
+$(bbl("Remarks",""))
+
+$(post_img("https://www.dropbox.com/scl/fi/9jkvevpmi4apwd5k73mgv/fig_1_1_4.png?rlkey=m2gu7plj5o7bjbudeqze2bzxq&dl=1",500))
+$(ebl())
+"""
 
 # ╔═╡ d5117856-b9ca-4ed1-976e-9e20d613bfc1
 md"## Examples and Terminology"
@@ -76,8 +141,51 @@ for all ``x`` in ``I``. For the sake of brevity, we may say that ``u=u(x)`` sati
 
 """
 
+# ╔═╡ a7abd027-69c5-43a9-a99e-164a9199a334
+cm"""
+$(ex(8))
+Verify that the function ``y(x)=2 x^{1 / 2}-x^{1 / 2} \ln x`` satisfies the differential equation
+```math
+4 x^2 y^{\prime \prime}+y=0
+```
+for all ``x>0``.
+"""
+
 # ╔═╡ a9d46b08-d25a-49df-9f93-427e521055e0
 md"# 1.2 Integrals as General and Particular Solutions"
+
+# ╔═╡ fbd68049-57ac-42fc-9c4c-5bd9f019dabb
+cm"""
+__The first-order equation__
+\[
+d y / d x=f(x, y)
+\]
+- __The general solution__
+```math
+y(x)=\int f(x) d x+C
+```
+- __A particular solution__ : a solution to the *initial-value* problem
+```math
+\frac{d y}{d x}=f(x), \quad y\left(x_0\right)=y_0
+```
+
+$(bbl("Remark",""))
+> We will first find a general solution involving an arbitrary
+constant ``C``. We can then attempt to obtain, by appropriate choice of ``C``, a particular
+solution satisfying a given initial condition ``y(x_0) = y_0``.
+
+$(ebl())
+"""
+
+# ╔═╡ 41344730-e8c5-4e2b-a98c-9995846c7244
+cm"""
+$(ex(1))
+Solve the initial value problem 
+
+```math
+\frac{d y}{d x}=2 x+3, \quad y(1)=2
+```
+"""
 
 # ╔═╡ 22715277-7264-44aa-a2be-0cf6bba6b24f
 cm"""
@@ -99,6 +207,17 @@ cm"""
 
 # ╔═╡ b97a6f03-dbeb-40b9-be58-f9a9a50cac5a
 md"## A Swimmer’s Problem"
+
+# ╔═╡ ab0da87e-9b87-48eb-a235-44fdfd2f81f2
+cm"""
+$(post_img("https://www.dropbox.com/scl/fi/l6nrl55ye583z7vu2v55k/fig_1_2_5.png?rlkey=vpoky2h6hycj51kfemjjv0itg&dl=1",500))
+"""
+
+# ╔═╡ 6168170e-2fcb-4728-b8d8-ddc44992d3f9
+cm"""
+$(ex("Example 4","River crossing"))
+Suppose that the river is ``1`` mile wide and that its midstream velocity is ``v_0=9 \mathrm{mi} / \mathrm{h}`` and the swimmer's velocity is ``v_S=3 \mathrm{mi} / \mathrm{h}``.
+"""
 
 # ╔═╡ a1d00dd2-59b0-427b-b2c0-25ec94e039a9
 let
@@ -173,6 +292,14 @@ h(y) d y=g(x) d x
 ```
 """
 
+# ╔═╡ 15531160-b5d7-4e55-848c-9b239d4f116c
+cm"""
+$(ex(1)) Solve the differential equation
+```math
+\frac{d y}{d x}=\frac{4-2 x}{3 y^2-5}
+```
+"""
+
 # ╔═╡ 1790195b-439e-4472-96e8-6f87d8ff0601
 md"## Implicit, General, and Singular Solution"
 
@@ -189,6 +316,15 @@ the constant C) is commonly called __the general solution__ of the differential
 - __A particular solution__ is one that is obtained by selecting a value for ``C``.
 - A solution that cannot be obtained by selecting a value for ``C`` is called a __singular solution__.
 
+
+"""
+
+# ╔═╡ 6d3c4d0e-a950-43bd-a2d7-46aec4417ab3
+cm"""
+$(ex(2)) Find all solutions of the differential equation
+```math
+\frac{d y}{d x}=6 x(y-1)^{2 / 3}
+```
 
 """
 
@@ -214,6 +350,23 @@ cm"""
 ```
 where ``P(t)`` is the number of individuals in a
  population (of humans, or insects, or bacteria) having constant birth and death rates.
+"""
+
+# ╔═╡ a1af7fe8-cb18-4b36-a015-38df3d346b33
+cm"""
+$(ex("Example 3", "World population")) According to data listed at www. census.gov, the world's total population reached ``6`` billion persons in mid-``1999``, and was then increasing at the rate of about ``212`` thousand persons each day. Assuming that natural population growth at this rate continues, we want to answer these questions: 
+
+<ol type="a">
+
+<li> 
+
+What is the annual growth rate ``k`` ? 
+</li>
+
+<li> What will be the world population at the middle of the 21 st century? </li>
+<li> How long will it take the world population to increase tenfold-thereby reaching the 60 billion that some demographers believe to be the maximum for which the planet can provide adequate food supplies? </li>
+
+</ol>
 """
 
 # ╔═╡ 6b4ce7dc-39f3-4c4e-973f-b501916f0717
@@ -251,6 +404,13 @@ The decay constant of a radioactive isotope is often specified in terms of anoth
 ```
 
 - For example, the half-life of ``{ }^{14} \mathrm{C}`` is ``\tau \approx(\ln 2) /(0.0001216)``, approximately 5700
+"""
+
+# ╔═╡ ceb445e8-64ca-4d6f-86c2-98c96ad42fb2
+cm"""
+$(ex("Example 4","Radiometric dating"))
+A specimen of charcoal found at Stonehenge turns out to contain ``63 \%`` as much ``{ }^{14} \mathrm{C}`` as a sample of present-day charcoal of equal mass. What is the age of the 
+sample?
 """
 
 # ╔═╡ 72cef7b7-f466-4872-bba0-6f46ac36de15
@@ -301,6 +461,12 @@ where ``k`` is a positive constant. This is an instance of the linear first-orde
 It includes the exponential equation as a special case ``(b=0)`` and is also easy to solve by separation of variables.
 """
 
+# ╔═╡ 177d7ac6-2a24-4282-84a3-e42a1c03251f
+cm"""
+$(ex(5,s="Cooling"))
+A ``4``-lb roast, initially at ``50^{\circ} \mathrm{F}``, is placed in a ``375^{\circ} \mathrm{F}`` oven at 5:00 P.M. After 75 minutes it is found that the temperature ``T(t)`` of the roast is ``125^{\circ} \mathrm{F}``. When will the roast be ``150^{\circ} \mathrm{F}`` (medium rare) ``?``
+"""
+
 # ╔═╡ c96bcf16-8467-4f8f-a55a-6769f73143da
 let
 	A = 375
@@ -348,6 +514,15 @@ then solve for ``y`` to obtain the general solution of the original differential
 
 """
 
+# ╔═╡ cd7eb646-c23c-4ab8-9dc4-04c0db21d4bb
+cm"""
+$(ex(1)) 
+Solve the initial value problem
+```math
+\frac{d y}{d x}-y=\frac{11}{8} e^{-x / 3}, \quad y(0)=-1
+```
+"""
+
 # ╔═╡ ae81e505-f95a-4355-bf74-b308445d2830
 let
 	xs = -1.5:0.6:6
@@ -362,11 +537,89 @@ let
 	plot(p1,[0],[-1], seriestype=:scatter,label=:none)
 end
 
+# ╔═╡ 2e8d8477-a937-4cd4-b300-2cae6b9b2853
+cm"""
+$(ex(2)) Find a general solution of
+```math
+\left(x^2+1\right) \frac{d y}{d x}+3 x y=6 x
+```
+"""
+
+# ╔═╡ e0c6b9b1-ab42-4e6f-a41e-440e68d68041
+cm"""
+$(bth("1 The Linear First-Order Equation"))
+If the functions ``P(x)`` and ``Q(x)`` are continuous on the open interval ``I`` containing the point ``x_0``, then the initial value problem
+```math
+\frac{d y}{d x}+P(x) y=Q(x), \quad y\left(x_0\right)=y_0
+```
+has a unique solution ``y(x)`` on ``I``, given by the formula in 
+```math
+y(x)=e^{-\int P(x) d x}\left[\int\left(Q(x) e^{\int P(x) d x}\right) d x+C\right]
+```
+with an appropriate value of ``C``.
+"""
+
+# ╔═╡ 1d54e85b-f3e6-41f1-a818-ab483c918fee
+cm"""
+$(ex(3)) Solve the initial value problem
+```math
+x^2 \frac{d y}{d x}+x y=\sin x, \quad y(1)=y_0
+```
+"""
+
+# ╔═╡ 4fbe0c02-a31f-4f37-b014-84e4bb914fff
+cm"""
+$(example("Example",""))
+Solve
+```math 
+\left(x+y e^y\right) \frac{d y}{d x}=1
+```
+"""
+
 # ╔═╡ 5aa66e9f-5741-4306-aa36-8a28627bca0f
 md"# 1.6 Substitution Methods and Exact Equations"
 
+# ╔═╡ c868de03-803a-49a9-b1f5-657f46ab8498
+cm"""
+$(ex(1)) Solve the differential equation
+```math
+\frac{d y}{d x}=(x+y+3)^2
+```
+"""
+
 # ╔═╡ 419f6c6f-1aff-4b72-be83-3dc3ef01bc76
 md"##  Homogeneous Equations"
+
+# ╔═╡ 90a2fcd1-1d38-4c12-8f7e-cb9f83f890f3
+cm"""
+$(define("Homogeneous DE")) A __homogeneous__ first-order differential equation is one that can be written in the form
+```math
+\frac{d y}{d x}=F\left(\frac{y}{x}\right)
+```
+
+If we make the substitutions
+```math
+v=\frac{y}{x}, \quad y=v x, \quad \frac{d y}{d x}=v+x \frac{d v}{d x}
+```
+"""
+
+# ╔═╡ aca4f2f0-5c16-4e51-b83c-b76149f836a9
+cm"""
+$(ex(2))
+Solve the differential equation
+```math
+2 x y \frac{d y}{d x}=4 x^2+3 y^2
+```
+"""
+
+# ╔═╡ d743b750-2a29-4fb3-a729-07bec9637121
+cm"""
+$(ex(3)) Solve the initial value problem
+```math
+x \frac{d y}{d x}=y+\sqrt{x^2-y^2}, \quad y\left(x_0\right)=0
+```
+where ``x_0>0``.
+"""
 
 # ╔═╡ cacc6877-5310-4f5a-a0c2-344cccd0ec8b
 md"## Bernoulli Equations"
@@ -387,8 +640,123 @@ transforming it the linear equation
 ```
 """
 
+# ╔═╡ 7a405477-d020-4b31-b0be-036fd3f22322
+cm"""
+$(ex(5)) Solve the differential equation
+```math
+x \frac{d y}{d x}+6 y=3 x y^{4 / 3}
+```
+"""
+
+# ╔═╡ 0e5e9fe4-0157-4497-b675-53071f4e6782
+cm"""
+$(ex(6))
+Solve
+```math
+2 x e^{2 y} \frac{d y}{d x}=3 x^4+e^{2 y}
+```
+
+"""
+
 # ╔═╡ 4ccc21f1-f253-4e7d-87e4-4c8f5e1db785
 md"##  Exact Differential Equations"
+
+# ╔═╡ a32e62d2-e65f-492a-a3f4-db8dec72db67
+cm"""
+- A general solution ``y(x)`` of a __first-order differential equation__ is often defined implicitly by an equation of the form
+```math
+F(x, y(x))=C\quad \text{where } C \text{ is a constant.}
+```
+- The original differentail equation is
+```math
+\frac{\partial F}{\partial x}+\frac{\partial F}{\partial y} \frac{d y}{d x}=0
+```
+$(add_space(10)) that is,
+```math
+M(x, y)+N(x, y) \frac{d y}{d x}=0
+```
+$(add_space(10))where ``M(x, y)=F_x(x, y)`` and ``N(x, y)=F_y(x, y)``
+- We write 
+```math
+M(x, y) d x+N(x, y) d y=0
+```
+- This last form is called the __differential form__.
+- If there exists a function F(x,y) such that 
+```math
+\frac{\partial F}{\partial x}=M \quad \text{and} \quad \frac{\partial F}{\partial y}=N
+```
+$(add_space(10))then the equation
+```math
+F(x, y)=C
+```
+implicitly defines a general solution. In this case, the equation
+```math
+M(x, y)+N(x, y) \frac{d y}{d x}=0
+```
+is called an __exact differential equation__ 
+```math
+(\text{the differential} dF=F_x d x+F_y d y \text{ of }  F(x, y) \text{ is exactly } M d x+N d y)
+```
+
+"""
+
+# ╔═╡ 8792fe08-498e-4d18-aad2-de9bc3a7ade4
+cm"""
+$(bbl("Question 1"))
+How can we determine whether the differential
+ equation in 
+```math
+M(x, y) d x+N(x, y) d y=0
+```
+is exact?
+$(ebl())
+
+$(bbl("Question 2"))
+ If it is exact, how can we find the function ``F`` such
+ that 
+```math
+ F_x = M, \quad F_y = N?
+```
+$(ebl())
+"""
+
+# ╔═╡ c006d3aa-8cf1-4382-806a-4e9714f934f6
+cm"""
+$(bth("1 Criterion for Exactness"))
+Suppose that the functions ``M(x, y)`` and ``N(x, y)`` are continuous and have continuous first-order partial derivatives in the open rectangle ``R`` : ``a < x < b, c < y < d``. Then the differential equation
+```math
+M(x, y) d x+N(x, y) d y=0
+```
+is exact in ``R`` if and only if
+```math
+\frac{\partial M}{\partial y}=\frac{\partial N}{\partial x}
+```
+at each point of ``R``. That is, there exists a function ``F(x, y)`` defined on ``R`` with ``\partial F / \partial x=M`` and ``\partial F / \partial y=N`` if and only if last equation holds on ``R``.
+"""
+
+# ╔═╡ 626fe783-d05a-49ca-8e3c-2ac76be27e34
+cm"""
+$(ex(8)) 
+Show that the differential equation 
+```math
+\quad y^3 d x+3 x y^2 d y=0
+```
+is exact.
+"""
+
+# ╔═╡ ad29db84-3c84-4a6e-aeb0-5a51210ef05d
+cm"""
+$(bbl("Remarks",""))
+- What happens if we divide by ``y^2`` both sides?
+"""
+
+# ╔═╡ 933c6345-fffc-4159-8b67-e1443b988f9f
+cm"""
+$(ex(9)) Solve the differential equation
+```math
+\left(6 x y-y^3\right) d x+\left(4 y+3 x^2-3 x y^2\right) d y=0
+```
+"""
 
 # ╔═╡ 9ed8b8ed-1ac5-4e8b-8a74-17dff32f1ad5
 let
@@ -411,6 +779,29 @@ F\left(x, y, y^{\prime}, y^{\prime \prime}\right)=0
 ```
 
 If either the dependent variable ``y`` or the independent variable ``x`` is missing from a second-order equation, then it is easily reduced by a simple substitution to a firstorder equation that may be solvable by the methods of this chapter.
+"""
+
+# ╔═╡ a4256712-b454-4733-bcf5-c5764705b028
+cm"""
+$(ex(10))
+Solve the equation ``x y^{\prime \prime}+2 y^{\prime}=6 x``.
+"""
+
+# ╔═╡ 87802187-2aeb-4e67-a2d7-1975cf588a17
+cm"""
+$(ex(11)) 
+Solve the equation ``y y^{\prime \prime}=\left(y^{\prime}\right)^2``.
+"""
+
+# ╔═╡ 608e2182-ce7c-4626-bcda-bf4bd6f2f1c6
+cm"""
+## Using Julia
+$(example("EXample",""))
+Solve the differential equation
+```math
+2 x e^{2 y} \frac{d y}{d x}=3 x^4+e^{2 y}
+```
+using Julia
 """
 
 # ╔═╡ 8d103106-40ac-49fa-86ae-1af3ecb8a3ec
@@ -446,6 +837,113 @@ __We can use three elementary row operations only:__
 3. Add a constant multiple of (the terms of) one equation to (corresponding terms of) another equation. (``\lambda R_i +R_j\to R_j``)
 """
 
+# ╔═╡ 643d7441-1dbf-4b98-b76f-617babece0c0
+cm"""
+$(example("Example","")) Solve the linear system
+```math
+\begin{aligned}
+x+2 y+z & =4 \\
+3 x+8 y+7 z & =20 \\
+2 x+7 y+9 z & =23
+\end{aligned}
+```
+"""
+
+# ╔═╡ 2aa7e38b-c48d-470c-943e-a6a73d053a70
+cm"""
+$(define("Echelon Matrix"))
+The matrix ``\mathbf{E}`` is called an echelon matrix provided it has the following two properties:
+1. Every row of ``\mathbf{E}`` that consists entirely of zeros (if any) lies beneath every row that contains a nonzero element.
+2. In each row of ``\mathbf{E}`` that contains a nonzero element, the first nonzero element lies strictly to the right of the first (from left) nonzero element (called __leading entry__) in the preceding row (if there is a preceding row).
+$(ebl())
+
+__FOR EXAMPLE__
+```math
+\mathbf{E}=\left[\begin{array}{rrrrr}2 & -1 & 0 & 4 & 7 \\ 0 & 1 & 2 & 0 & -5 \\ 0 & 0 & 0 & 3 & 0 \\ 0 & 0 & 0 & 0 & 0\end{array}\right]
+```
+"""
+
+# ╔═╡ 13748f1f-4092-4592-9a4f-8f17c38a875a
+cm"""
+$(define("Reduced Echelon Matrix"))
+A reduced echelon matrix ``\mathbf{E}`` is an echelon matrix that has-in addition to Properties 1 and 2 -the following properties:
+
+3. Each leading entry of ``\mathbf{E}`` is 1 .
+4. Each leading entry of ``\mathbf{E}`` is the only nonzero element in its column.
+"""
+
+# ╔═╡ 2d3b73f6-8429-4551-96ac-b2db865189ed
+cm"""
+$(bbl("ALGORITHM Gauss-Jordan Elimination",""))
+1. First transform ``\mathbf{A}`` into echelon form by Gaussian elimination.
+2. Then divide each element of each nonzero row by its leading entry (to satisfy Property 3).
+3. Finally, use each leading 1 to "clear out" any remaining nonzero elements in its column (to satisfy Property 4).
+$(ebl())
+> Every matrix is row equivalent to one and only one reduced echelon matrix.
+"""
+
+# ╔═╡ ab51c417-0482-4c68-ba07-38fd46e535cd
+cm"""
+$(ex())Find the reduced echelon form of the matrix
+```math
+\mathbf{A}=\left[\begin{array}{rrrr}
+1 & 2 & 1 & 4 \\
+3 & 8 & 7 & 20 \\
+2 & 7 & 9 & 23
+\end{array}\right]
+```
+"""
+
+# ╔═╡ 3e062725-d0ac-4d5e-9baa-49b1b10de464
+cm"""
+$(ex())
+Use Gauss-Jordan elimination to solve the linear system
+```math
+\begin{aligned}
+x_1+x_2+x_3+x_4 & =12 \\
+x_1+2 x_2+5 x_4 & =17 \\
+3 x_1+2 x_2+4 x_3-x_4 & =31
+\end{aligned}
+```
+"""
+
+# ╔═╡ 34820013-08f9-4077-9403-206671bea915
+cm"""
+$(bth("The Three Possibilities")) 
+A linear system of equations has either
+- a unique solution, or
+- no solution, or
+- infinitely many solutions.
+"""
+
+# ╔═╡ 6f434bf9-93f6-4052-aed0-7ebe0c06b736
+cm"""
+$(bth(""))
+Every homogeneous linear system with more variables than equations has infinitely many solutions.
+"""
+
+# ╔═╡ 22bb573e-8fa7-4f6c-b5f6-b96dee4c8507
+cm"""
+$(ex()) Determine the constants ``A`` and ``B`` so as to find a solution of the differential equation that satisfies the given initial conditions involving ``y(0)`` and ``y^{\prime}(0)``.
+```math
+\begin{aligned} & y^{\prime \prime}-25 y=0, y(x)=A e^{5 x}+B e^{-5 x} \\ & y(0)=10, y^{\prime}(0)=20\end{aligned}
+```
+"""
+
+# ╔═╡ 6e605916-523b-466b-ad96-c206af3bf27c
+cm"""
+$(ex())
+Under what condition on the constants ``a, b``, and ``c`` does the system
+```math
+\begin{array}{r}
+2 x-y+3 z=a \\
+x+2 y+z=b \\
+7 x+4 y+9 z=c
+\end{array}
+```
+have a unique solution? No solution? Infinitely many solutions?
+"""
+
 # ╔═╡ aa04cd10-62d5-49a9-8b60-7e5d928ec1ee
 let
 	@syms a::Real, b::Real, c::Real
@@ -462,6 +960,39 @@ end
 
 # ╔═╡ 387953af-89c5-47ee-a1b1-af9b05baf949
 md"## Inverse of a Matrix"
+
+# ╔═╡ bf7f3424-92fd-4ece-8aeb-db8da6762056
+cm"""
+$(define("Invertible Matrix"))
+The square matrix ``\mathbf{A}`` is called invertible if there exists a matrix ``\mathbf{B}`` such that
+```math
+\mathbf{A B}=\mathbf{B A}=\mathbf{I} .
+```
+"""
+
+# ╔═╡ c35aca68-0b50-430f-b1e1-bc2ab187fa40
+cm"""
+$(ex())
+Find ``\mathbf{A}^{-1}``. Then use ``\mathbf{A}^{-1}`` (as in Example 5) to solve the system ``\mathbf{A x}=\mathbf{b}``
+```math
+\mathbf{A}=\left[\begin{array}{ll}3 & 2 \\ 5 & 4\end{array}\right], \mathbf{b}=\left[\begin{array}{l}5 \\ 6\end{array}\right]
+```
+"""
+
+# ╔═╡ eb2a3144-7dca-42d0-9fce-01c78728eac7
+# ```math
+# \mathbf{A}=\left[\begin{array}{lll}
+# 4 & 3 & 2 \\
+# 5 & 6 & 3 \\
+# 3 & 5 & 2
+# \end{array}\right]
+# ```
+cm"""
+$(ex())Find the inverse of the ``3 \times 3`` matrix
+```math
+\mathbf{A}=\left[\begin{array}{rrr}1 & 1 & 5 \\ 1 & 4 & 13 \\ 3 & 2 & 12\end{array}\right]
+```
+"""
 
 # ╔═╡ 747384a8-c06a-49b7-92f1-0cdd44043fb2
 let
@@ -492,14 +1023,130 @@ let
 	# B*A
 end
 
+# ╔═╡ 6189764d-9da8-460b-b873-a040c413e721
+cm"""
+$(bth("Properties of Nonsingular Matrices"))
+The following properties of an ``n \times n`` matrix ``\mathbf{A}`` are equivalent.
+1. ``\mathbf{A}`` is invertible.
+2. ``\mathbf{A}`` is row equivalent to the ``n \times n`` identity matrix ``\mathbf{I}``.
+3. ``\mathbf{A x}=\mathbf{0}`` has only the trivial solution.
+4. For every ``n``-vector ``\mathbf{b}``, the system ``\mathbf{A x}=\mathbf{b}`` has a unique solution.
+5. For every ``n``-vector ``\mathbf{b}``, the system ``\mathbf{A x}=\mathbf{b}`` is consistent.
+"""
+
+# ╔═╡ 9d011957-4432-484f-99dc-da94395aeef1
+cm"""
+$(ex())
+Find a matrix ``\mathbf{X}`` such that ``\mathbf{A X}=\mathbf{B}``.
+```math
+\mathbf{A}=\left[\begin{array}{ll}7 & 6 \\ 8 & 7\end{array}\right], \mathbf{B}=\left[\begin{array}{rrr}2 & 0 & 4 \\ 0 & 5 & -3\end{array}\right]
+```
+"""
+
 # ╔═╡ 25e77707-5852-48f8-9849-46e3f6841bb6
 md"## Determinants"
 
 # ╔═╡ f5bf2679-c765-4b80-bd27-021a82683611
 md"### Cramer's Rule"
 
+# ╔═╡ fb9cd8c0-ace5-4123-a8a0-58ab32f849f1
+cm"""
+$(ex())
+Apply Cramer's rule to solve the system
+```math
+\begin{aligned}
+& 7 x+8 y=5 \\
+& 6 x+9 y=4
+\end{aligned}
+```
+"""
+
+# ╔═╡ c63574f6-2f03-4f3d-b9eb-08ca321a0aad
+cm"""
+$(define("Minors and Cofactors"))
+Let ``\mathbf{A}=\left[a_{i j}\right]`` be an ``n \times n`` matrix. The ``i j`` th minor of ``\mathbf{A}`` (also called the minor of ``a_{i j}`` ) is the determinant ``M_{i j}`` of the ``(n-1) \times(n-1)`` submatrix that remains after deleting the ``i`` th row and the ``j`` th column of ``\mathbf{A}``. The ``i j`` th cofactor ``A_{i j}`` of ``\mathbf{A}`` (or the cofactor of ``a_{i j}`` ) is defined to be
+```math
+A_{i j}=(-1)^{i+j} M_{i j}
+```
+$(ebl())
+For the sign of the cofactors
+```math
+\left[\begin{array}{lll}+ & - & + \\ - & + & - \\ + & - & +\end{array}\right] \quad\text{and} \quad\left[\begin{array}{cccc}+ & - & + & - \\ - & + & - & + \\ + & - & + & - \\ - & + & - & +\end{array}\right]
+```
+So
+```math
+\begin{array}{llll}A_{11}=+M_{11}, & A_{12}=-M_{12}, & A_{13}=+M_{13}, & A_{14}=-M_{14} \\ A_{21}=-M_{21}, & A_{22}=+M_{22}, & A_{23}=-M_{23}, & A_{24}=+M_{24}\end{array}
+```
+"""
+
+# ╔═╡ 737365c0-472d-4f0d-87c5-5d70a2fe027f
+cm"""
+$(define("Determinants"))
+The determinant ``\operatorname{det} \mathbf{A}=\left|a_{i j}\right|`` of an ``n \times n`` matrix ``\mathbf{A}=\left[a_{i j}\right]`` is defined as
+```math
+\operatorname{det} \mathbf{A}=a_{11} A_{11}+a_{12} A_{12}+\cdots+a_{1 n} A_{1 n}
+```
+
+Thus we multiply each element of the first row of ``\mathbf{A}`` by its cofactor and then add these ``n`` products to get ``\operatorname{det} \mathbf{A}``.
+"""
+
+# ╔═╡ b583732f-ed42-4a4f-9dec-6369b5e85c41
+cm"""
+$(ex()) Evaluate the determinant of
+```math
+\mathbf{A}=\left[\begin{array}{rrrr}
+2 & 0 & 0 & -3 \\
+0 & -1 & 0 & 0 \\
+7 & 4 & 3 & 5 \\
+-6 & 2 & 2 & 4
+\end{array}\right]
+```
+"""
+
+# ╔═╡ 8dae3e8d-96e3-4fe0-8b9f-5074dff0f9e4
+cm"""
+$(bth("Cofactor Expansions of Determinants"))
+The determinant of an ``n \times n`` matrix ``\mathbf{A}=\left[a_{i j}\right]`` can be obtained by expansion along any row or column. The cofactor expansion along the ``i`` th row is
+```math
+\operatorname{det} \mathbf{A}=a_{i 1} A_{i 1}+a_{i 2} A_{i 2}+\cdots+a_{i n} A_{i n} .
+```
+
+The cofactor expansion along the ``j`` th column is
+```math
+\operatorname{det} \mathbf{A}=a_{1 j} A_{1 j}+a_{2 j} A_{2 j}+\cdots+a_{n j} A_{n j}
+```
+"""
+
 # ╔═╡ aff3151b-4b66-4d55-8e27-744a53f5a91e
  md"## Row and Column Properties"
+
+# ╔═╡ 1ba6a9f9-f0b3-4033-a20a-117b19d7c74b
+cm"""
+1. __Property 1__: If the ``n \times n`` matrix ``\mathbf{B}`` is obtained from ``\mathbf{A}`` by multiplying a single row (or a column) of ``\mathbf{A}`` by the constant ``k``, then ``\operatorname{det} \mathbf{B}=k \operatorname{det} \mathbf{A}``.
+2. __Property 2__: If the ``n \times n`` matrix ``\mathbf{B}`` is obtained from ``\mathbf{A}`` by interchanging two rows (or two columns), then ``\operatorname{det} \mathbf{B}=-\operatorname{det} \mathbf{A}``.
+3. __Property 3__: If two rows (or two columns) of the ``n \times n`` matrix ``\mathbf{A}`` are identical, then ``\operatorname{det} \mathbf{A}=0``.
+4. __Property 4__: ``\quad`` Suppose that the ``n \times n`` matrices ``\mathbf{A}_1, \mathbf{A}_2``, and ``\mathbf{B}`` are identical except for their ``i`` th rows-that is, the other ``n-1`` rows of the three matrices are identicaland that the ``i`` th row of ``\mathbf{B}`` is the sum of the ``i`` th rows of ``\mathbf{A}_1`` and ``\mathbf{A}_2``. Then
+```math
+\operatorname{det} \mathbf{B}=\operatorname{det} \mathbf{A}_1+\operatorname{det} \mathbf{A}_2
+```
+$(add_space(10))This result also holds if columns are involved instead of rows.
+
+5. __Property 5__: If the ``n \times n`` matrix ``\mathbf{B}`` is obtained by adding a constant multiple of one row (or column) of ``\mathbf{A}`` to another row (or column) of ``\mathbf{A}``, then ``\operatorname{det} \mathbf{B}=\operatorname{det} \mathbf{A}``.
+
+6. __Property 6__: The determinant of a triangular matrix is equal to the product of its diagonal elements.
+7. __Property 7__: If ``\mathbf{A}`` is a square matrix, then ``\operatorname{det}\left(\mathbf{A}^T\right)=\operatorname{det} \mathbf{A}``.
+
+$(add_space(10))Note that:
+
+$(add_space(20))``\text{(i)} \quad\left(\mathbf{A}^T\right)^T=\mathbf{A}``;
+
+$(add_space(20))``\text{(ii)} \quad(\mathbf{A}+\mathbf{B})^T=\mathbf{A}^T+\mathbf{B}^T``;
+
+$(add_space(20))``\text{(iii)} \quad(c \mathbf{A})^T=c \mathbf{A}^T``;
+
+$(add_space(20))``\text{(iv)} \quad(\mathbf{A B})^T=\mathbf{B}^T \mathbf{A}^T``.
+
+"""
 
 # ╔═╡ babc3fb7-0eaa-4af6-b7d1-cd0b0fd4c78b
 let
@@ -515,6 +1162,14 @@ let
 	det(B),det(A1),det(A2)
 end
 
+# ╔═╡ ea830a4d-f11a-474e-9b42-dde6295e8d24
+cm"""
+$(ex()) Evaluate the determinant of
+```math
+\mathbf{A}=\left|\begin{array}{llll}1 & 2 & 3 & 4 \\ 0 & 5 & 6 & 7 \\ 0 & 0 & 8 & 9 \\ 2 & 4 & 6 & 9\end{array}\right|
+```
+"""
+
 # ╔═╡ ea5ca7e4-2f30-45f2-8715-7e502a274a53
 let
 	A =[
@@ -525,8 +1180,36 @@ let
 	]
 end
 
+# ╔═╡ b0efeb12-e0fd-4a1e-80b9-24c230368c53
+cm"""
+$(bth("Determinants and Invertibility"))
+The ``n \times n`` matrix ``\mathbf{A}`` is invertible if and only if ``\operatorname{det} \mathbf{A} \neq 0``.
+"""
+
 # ╔═╡ e1199b37-1692-4d97-ba86-0b5239c316d1
 md"## Inverses and the Adjoint Matrix"
+
+# ╔═╡ 42e01a69-848d-4d34-a5de-8c54ca3f3b83
+cm"""
+$(bth("The Inverse Matrix"))
+The inverse of the invertible matrix ``\mathbf{A}`` is given by the formula
+```math
+\mathbf{A}^{-1}=\frac{\left[A_{i j}\right]^T}{|\mathbf{A}|}
+```
+where, as usual, ``A_{i j}`` denotes the ``i j`` th cofactor of ``\mathbf{A}``; that is, ``A_{i j}`` is the product of ``(-1)^{i+j}`` and the ``i j`` th minor determinant of ``\mathbf{A}``.
+"""
+
+# ╔═╡ e948494b-8a14-47b8-bfec-4390376e1bcd
+cm"""
+$(ex()) Apply the formula above to find the inverse of the matrix
+```math
+\mathbf{A}=\left[\begin{array}{rrr}
+1 & 4 & 5 \\
+4 & 2 & 5 \\
+-3 & 3 & -1
+\end{array}\right]
+```
+"""
 
 # ╔═╡ ece946d9-b094-4e01-8dda-47740ec418b3
 let
@@ -540,6 +1223,51 @@ end
 
 # ╔═╡ 30795897-1e43-41ed-ba85-c3b89ecdef1f
 md"# 4.1 The Vector Space ``\mathbb{R}^3``"
+
+# ╔═╡ 52d0d0d2-3079-4285-92de-c59961848921
+cm"""
+$(define("")) 
+__Vector__ : A vector ``\mathbf{v}`` in 3 -space ``\mathbb{R}^3`` is simply an ordered triple ``(a, b, c)`` of real numbers. We write ``\mathbf{v}=(a, b, c)`` and call the numbers ``a, b``, and ``c`` the components (or coordinates) of the vector ``v``. We may also write 
+```math
+\mathbf{v} =\begin{bmatrix} a\\b\\c \end{bmatrix}.
+```
+
+__Addition of Vectors__: The sum ``\mathbf{u}+\mathbf{v}`` of the two vectors ``\mathbf{u}=\left(u_1, u_2, u_3\right)`` and ``\mathbf{v}=\left(v_1, v_2, v_3\right)`` is the vector
+```math
+\mathbf{u}+\mathbf{v}=\left(u_1+v_1, u_2+v_2, u_3+v_3\right)
+```
+that is obtained upon addition of respective components of ``\mathbf{u}`` and ``\mathbf{v}``.
+
+__The geometric interpretation of vector addition__
+
+$(post_img("https://www.dropbox.com/scl/fi/kvrnymjm7panzimoqe4ov/fig_4_1_2_and_3.png?rlkey=s6lpzojg7la8rybddv0t04gkf&raw=1",800))
+
+__Multiplication of a Vector by a Scalar__: If ``\mathbf{v}=\left(v_1, v_2, v_3\right)`` is a vector and ``c`` is a real number, then the scalar multiple ``c \mathbf{v}`` is the vector
+```math
+c \mathbf{v}=\left(c v_1, c v_2, c v_3\right)
+```
+that is obtained upon multiplying each component of ``\mathbf{v}`` by ``c``.
+
+__The length of a vector__: The length ``|\mathbf{v}|`` of the vector ``\mathbf{v}=(a, b, c)`` is defined to be the distance of the point ``P(a, b, c)`` from the origin,
+```math
+|\mathbf{v}|=\sqrt{a^2+b^2+c^2}
+```
+"""
+
+# ╔═╡ aaae2aff-fc65-4b7f-9e28-b7577c5fdd51
+cm"""
+$(bth("3")) __``\mathbb{R}^3`` as a Vector Space__
+
+If ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` are vectors in ``\mathbf{R}^3``, and ``r`` and ``s`` are real numbers, then
+1. ``\mathbf{u}+\mathbf{v}=\mathbf{v}+\mathbf{u}`` (commutativity)
+2. ``\mathbf{u}+(\mathbf{v}+\mathbf{w})=(\mathbf{u}+\mathbf{v})+\mathbf{w}`` (associativity)
+3. ``\mathbf{u}+\mathbf{0}=\mathbf{0}+\mathbf{u}=\mathbf{u}`` (zero element)
+4. ``\mathbf{u}+(-\mathbf{u})=(-\mathbf{u})+\mathbf{u}=\mathbf{0}`` (additive inverse)
+5. ``r(\mathbf{u}+\mathbf{v})=r \mathbf{u}+r \mathbf{v}`` (distributivity)
+6. ``(r+s) \mathbf{u}=r \mathbf{u}+s \mathbf{u}``
+7. ``r(s \mathbf{u})=(r s) \mathbf{u}``
+8. ``1(\mathbf{u})=\mathbf{u}`` (multiplicative identity).
+"""
 
 # ╔═╡ c233fecb-8525-493f-a088-011d5386ec1d
 md"## The Vector Space ``\mathbb{R}^2``"
@@ -559,29 +1287,379 @@ __Two vectors ``\mathbf{u}`` and ``\mathbf{v}`` are collinear__-they lie on the 
 for some scalar ``c``. If one of the relations holds for some scalar ``c``, then we say that the two vectors are __linearly dependent__. 
 """
 
+# ╔═╡ ddda1623-3b11-46f7-9fda-fd6686dd4343
+cm"""
+$(bth("2 Two Linearly Dependent Vectors"))
+The two vectors ``\mathbf{u}`` and ``\mathbf{v}`` are __linearly dependent__ if and only if there exist scalars ``a`` and ``b`` not both zero such that
+```math
+a \mathbf{u}+b \mathbf{v}=\mathbf{0} .
+```
+"""
+
+# ╔═╡ c31e6c51-9f45-4581-a7b6-54bdf2e04ada
+cm"""
+$(bbl("Remark","Two Linearly Independent Vectors "))
+The two vectors ``\mathbf{u}`` and ``\mathbf{v}`` are __linearly independent__ if and only if the relation
+```math
+a \mathbf{u}+b \mathbf{v}=\mathbf{0}
+```
+implies that ``a=b=0``.
+"""
+
+# ╔═╡ 856ff140-9c2b-4953-a033-849f1af34286
+cm"""
+$(ex(1))
+Consider the vector 
+```math
+\mathbf{u}=(3,-2), \quad \mathbf{v}=(-6,4), \quad\text{and}\quad \mathbf{w}=(5,-7)
+```
+"""
+
+# ╔═╡ 96a09993-9f1a-4908-9334-494b4e198455
+cm"""
+$(ex(2))
+Express the vector ``\mathbf{w}=(11,4)`` as a linear combination of the vectors  ``\mathbf{u}=(3,-2)`` and ``\mathbf{v}= (-2,7)``
+
+"""
+
 # ╔═╡ 6a3e0f87-707c-4122-a5fd-dcef8fce8a7d
 md"##  Linear Independence in ``\mathbb{R}^3``"
+
+# ╔═╡ dff6e998-431d-4493-bc34-6fa9b5de6f93
+cm"""
+$(define(""))
+__Linearly Dependent Vectors in ``R^3``__
+
+The three vectors ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` in ``\mathbf{R}^3`` are said to be __linearly dependent__ provided that one of them is a linear combination of the other two-that is, either
+```math
+\begin{array}{ll}
+\mathbf{w}=r \mathbf{u}+s \mathbf{v} & \text { or } \\
+\mathbf{u}=r \mathbf{v}+s \mathbf{w} & \text { or } \\
+\mathbf{v}=r \mathbf{u}+s \mathbf{w} &
+\end{array}
+```
+for appropriate scalars ``r`` and ``s``.
+"""
+
+# ╔═╡ f61386e6-e32c-45f6-b1a9-dec901195e96
+cm"""
+$(bth("3 Three Linearly Dependent Vectors"))
+The three vectors ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` in ``\mathbf{R}^3`` are __linearly dependent__ if and only if there exist scalars ``a, b``, and ``c`` not all zero such that
+```math
+a \mathbf{u}+b \mathbf{v}+c \mathbf{w}=\mathbf{0}
+```
+"""
+
+# ╔═╡ 20916835-0034-40b5-ab98-1f24fb78247c
+cm"""
+$(bbl("Remark","Linear Independence"))
+The vectors ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` are __linearly independent__ if and only if the relation
+```math
+a \mathbf{u}+b \mathbf{v}+c \mathbf{w}=\mathbf{0}
+```
+implies that ``a=b=c=0``.
+"""
+
+# ╔═╡ f868d290-9a4e-4a6f-933e-ee642deabeac
+cm"""
+$(bth("4 Three Linearly Independent Vectors"))
+The vectors ``\mathbf{u}=\left(u_1, u_2, u_3\right), \mathbf{v}=\left(v_1, v_2, v_3\right)``, and ``\mathbf{w}=\left(w_1, w_2, w_3\right)`` are linearly independent if and only if
+```math
+\left|\begin{array}{lll}
+u_1 & v_1 & w_1 \\
+u_2 & v_2 & w_2 \\
+u_3 & v_3 & w_3
+\end{array}\right| \neq 0
+```
+"""
+
+# ╔═╡ 20e79ac6-f0f4-40e6-89e0-2eaa44e0ff2b
+cm"""
+$(ex(3))
+Check linear independence for
+
+```math
+\mathbf{u}=(1,2,-3), \quad \mathbf{v}=(3,1,-2), \quad \text{and}\quad  \mathbf{w}=(5,-5,6)
+```
+"""
 
 # ╔═╡ b7430962-79fb-427c-a23e-8cbb09ae8e46
 md"##  Basis Vectors in ``\mathbb{R}^3``"
 
+# ╔═╡ f6653849-9370-4f84-a07a-ad924983fda6
+cm"""
+__The basic unit vectors__
+```math
+\mathbf{i}=(1,0,0), \quad \mathbf{j}=(0,1,0), \quad \text { and } \quad \mathbf{k}=(0,0,1)
+```
+
+The expression
+```math
+\mathbf{v}=a \mathbf{i}+b \mathbf{j}+c \mathbf{k}=(a, b, c)
+```
+shows both that
+- the three vectors ``\mathbf{i}, \mathbf{j}``, and ``\mathbf{k}`` are linearly independent (because ``\mathbf{v}=\mathbf{0}`` immediately implies ``a=b=c=0`` ), and that
+- any vector in ``\mathbf{R}^3`` can be expressed as a linear combination of ``\mathbf{i}, \mathbf{j}``, and ``\mathbf{k}``.
+
+- A __basis__ for ``\mathbf{R}^3`` is a triple ``\mathbf{u}, \mathbf{v}, \mathbf{w}`` of vectors such that every vector ``\mathbf{t}`` in ``\mathbf{R}^3`` can be expressed as a linear combination
+```math
+\mathbf{t}=a \mathbf{u}+b \mathbf{v}+c \mathbf{w}
+```
+$(add_space(10))of them. 
+
+That is, given any vector ``\mathbf{t}`` in ``\mathbf{R}^3``, there exist scalars ``a, b, c`` such that Eq. 
+```math
+\mathbf{t}=a \mathbf{u}+b \mathbf{v}+c \mathbf{w}
+```
+holds
+"""
+
+# ╔═╡ 4faab984-e4a5-4620-9c7e-61abd525a1fa
+cm"""
+$(bth("5"))
+__Basis for ``\mathrm{R}^3``__
+
+If the vectors ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` in ``\mathbf{R}^3`` are linearly independent, then they constitute a basis for ``\mathbf{R}^3``.
+"""
+
+# ╔═╡ cf4fc0c1-c9d8-4597-b1d7-a5d65b59421d
+cm"""
+$(ex(4))
+Express the vector ``\mathbf{t}=(4,20,23)`` as a combination of the linearly independent vectors ``\mathbf{u}=(1,3,2), \mathbf{v}=(2,8,7)``, and ``\mathbf{w}=(1,7,9)``
+"""
+
 # ╔═╡ e0261d6d-2bc3-4eab-8eb2-ef799f0cece7
 md"##  Subspaces of ``\mathbb{R}^3``"
+
+# ╔═╡ d76bbff8-1730-41cb-93d4-ddb35f66b19b
+cm"""
+$(bbl("Subspaces",""))
+A nonempty subset ``V`` of ``\mathbf{R}^3`` is a __subspace__ of ``\mathbf{R}^3`` if and only if it satisfies the following two conditions:
+
+1. If ``\mathbf{u}`` and ``\mathbf{v}`` are vectors in ``V``, then ``\mathbf{u}+\mathbf{v}`` is also in ``V``  __(closure under addition)__.
+2. If ``\mathbf{u}`` is a vector in ``V`` and ``c`` is a scalar, then ``c \mathbf{u}`` is in ``V`` __(closure under multiplication by scalars)__.
+"""
+
+# ╔═╡ d711bb6f-f627-4568-97f5-5d7690088663
+cm"""
+$(bbl("Remarks",""))
+
+- The subspaces ``\{\boldsymbol{0}\}`` and ``\mathbf{R}^3`` are sometimes called the __trivial subspaces__ of ``\mathbf{R}^3`` (because the verification that they are subspaces is quite trivial). 
+- All subspaces other than ``\{0\}`` and ``\mathbf{R}^3`` itself are called __proper subspaces__ of ``\mathbf{R}^3``.
+- The proper subspaces of ``\mathbf{R}^3`` are what we customarily call __lines__ and __planes__ through the origin. 
+"""
+
+# ╔═╡ 263e7015-3130-4597-b440-a996e52967b9
+cm"""
+$(ex(5))
+Let ``V`` be the set of all vectors ``(x, y)`` in ``\mathbf{R}^2`` such that ``y=x``. That is
+```math
+V = \left\{(x,y)\in \mathbb{R}^2 \;|\; y=x\right\}
+````
+
+Show that the set ``V`` is a subspace of ``\mathbf{R}^2``.
+"""
+
+# ╔═╡ 64e0c10c-a4e8-4435-86fc-60bff5e476d4
+cm"""
+$(ex(6))
+Let ``V`` be the set of all vectors ``(x, y)`` in ``\mathbf{R}^2`` such that ``x+y=1``. That is
+```math
+V = \left\{(x,y)\in \mathbb{R}^2 \;|\; x+y=1\right\}
+````
+
+Show that the set ``V`` is a NOT subspace of ``\mathbf{R}^2``.
+"""
 
 # ╔═╡ 2af29504-36c2-4f20-a325-c32acf62d9bc
 md"# 4.2 The Vector Space ``\mathbb{R}^n``"
 
+# ╔═╡ d9a91130-0cf8-414e-b8a8-dd352090f7a6
+cm"""
+$(define(""))
+__``n``-Space ``R^n``__
+
+The ``\boldsymbol{n}``-dimensional space ``\mathbf{R}^{\boldsymbol{n}}`` is the set of all ``n``-tuples ``\left(x_1, x_2, x_3, \ldots, x_n\right)`` of real numbers.
+"""
+
 # ╔═╡ 170f2255-078f-4c9e-86e9-0eb93b2ff87e
 md"## Vector Spaces"
+
+# ╔═╡ f1464582-faf2-4902-96a6-bb1cf17c1102
+cm"""
+$(define("Vector Space"))
+Let ``V`` be a set of elements called vectors, in which the operations of addition of vectors and multiplication of vectors by scalars are defined. That is, given vectors ``\mathbf{u}`` and ``\mathbf{v}`` in ``V`` and a scalar ``c``, the vectors ``\mathbf{u}+\mathbf{v}`` and ``c \mathbf{u}`` are also in ``V`` (so that ``V`` is closed under vector addition and multiplication by scalars). Then, with these operations, ``V`` is called a vector space provided that—given any vectors ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` in ``V`` and any scalars ``a`` and ``b``-the following properties hold true:
+1. ``\mathbf{u}+\mathbf{v}=\mathbf{v}+\mathbf{u}``
+(commutativity)
+2. ``\mathbf{u}+(\mathbf{v}+\mathbf{w})=(\mathbf{u}+\mathbf{v})+\mathbf{w}``
+(associativity)
+3. ``\mathbf{u}+\mathbf{0}=\mathbf{0}+\mathbf{u}=\mathbf{u}``
+(zero element)
+4. ``\mathbf{u}+(-\mathbf{u})=(-\mathbf{u})+\mathbf{u}=\mathbf{0}``
+(additive inverse)
+5. ``a(\mathbf{u}+\mathbf{v})=a \mathbf{u}+a \mathbf{v}``
+(distributivity)
+6. ``(a+b) \mathbf{u}=a \mathbf{u}+b \mathbf{u}``
+7. ``a(b \mathbf{u})=(a b) \mathbf{u}``
+8. ``(1) \mathbf{u}=\mathbf{u}``
+"""
+
+# ╔═╡ f3d58858-f9ab-42bb-a822-14d03916984e
+cm"""
+$(ex(1)) 
+Let ``\mathscr{F}`` be the set of all real-valued functions defined on the real number line ``\mathbb{R}`` is a vector space with function addition and scalar multiplication.
+"""
 
 # ╔═╡ 6827e93a-43b1-4ee7-a650-573a3ce61676
 md"## Subspaces"
 
+# ╔═╡ 4b2763bd-cf78-4913-8d5d-ac10d08b1031
+cm"""
+$(define("Subspace"))
+Let ``W`` be a nonempty subset of the vector space ``V``. Then ``W`` is a subspace of ``V`` provided that ``W`` itself is a vector space with the operations of addition and multiplication by scalars as defined in ``V``.
+"""
+
+# ╔═╡ abefd094-b57a-46c7-a314-eb836e58c6a0
+cm"""
+$(bth("1 Conditions for a Subspace"))
+The nonempty subset ``W`` of the vector space ``V`` is a subspace of ``V`` if and only if it satisfies the following two conditions:
+- (i) If ``\mathbf{u}`` and ``\mathbf{v}`` are vectors in ``W``, then ``\mathbf{u}+\mathbf{v}`` is also in ``W``.
+- (ii) If ``\mathbf{u}`` is in ``W`` and ``c`` is a scalar, then the vector ``c \mathbf{u}`` is also in ``W``.
+"""
+
+# ╔═╡ f8cd8873-f4fb-4300-8aa2-4aee9990cf5e
+cm"""
+$(ex(2))
+Let ``W`` be the subset of ``\mathbf{R}^n`` consisting of all those vectors ``\left(x_1, x_2, \ldots, x_n\right)`` whose coordinates satisfy the single homogeneous linear equation
+```math
+a_1 x_1+a_2 x_2+\cdots+a_n x_n=0
+```
+where the given coefficients ``a_1, a_2, \ldots, a_n`` are not all zero. Show that ``W`` is a subspace of ``\mathbb{R}^n``.
+"""
+
+# ╔═╡ e17f0845-12a9-4da8-b81d-bf3e61d95260
+cm"""
+$(ex(4))
+Let ``W`` be the set of all those vectors ``\left(x_1, x_2, x_3, x_4\right)`` in ``\mathbb{R}^4`` such that ``x_1 x_4=0``. 
+
+Is ``W`` a subspace of ``\mathbb{R}^4``?
+"""
+
+# ╔═╡ b13e61f1-3d38-4f87-838f-5c448ce1193a
+cm"""
+$(bth("2 Solution Subspaces"))
+If ``\mathbf{A}`` is a (constant) ``m \times n`` matrix, then the solution set of the homogeneous linear system
+```math
+\mathbf{A x}=\mathbf{0}
+```
+is a subspace of ``\mathbf{R}^n``. This subspace is called __solution space__ of the system.
+"""
+
+# ╔═╡ add8e82e-02cb-4262-b8e4-ac7a8c317257
+cm"""
+$(ex(5))
+In Example 4 of Section 3.4 we considered the homogeneous system
+```math
+\begin{aligned}
+x_1+3 x_2-15 x_3+7 x_4 & =0 \\
+x_1+4 x_2-19 x_3+10 x_4 & =0 \\
+2 x_1+5 x_2-26 x_3+11 x_4 & =0
+\end{aligned}
+```
+The reduced echelon form of the coefficient matrix of this system is
+```math
+\left[\begin{array}{rrrr}
+1 & 0 & -3 & -2 \\
+0 & 1 & -4 & 3 \\
+0 & 0 & 0 & 0
+\end{array}\right]
+```
+
+What is the solution space of the system?
+"""
+
 # ╔═╡ 2f5bc349-791e-4ece-8933-f2baef3c59a1
 md"# 4.3 Linear Combinations and Independence of Vectors"
 
+# ╔═╡ 56aee5a8-caf4-4cba-9e1e-7e319c21047b
+cm"""
+$(define("Linear Combination"))
+The vector ``\mathbf{w}`` is called a __linear combination__ of the vectors ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` provided that there exist scalars ``c_1, c_2, \ldots, c_k`` such that
+```math
+\mathbf{w}=c_1 \mathbf{v}_1+c_2 \mathbf{v}_2+\cdots+c_k \mathbf{v}_k
+```
+"""
+
+# ╔═╡ f110354f-ab42-481d-9057-fd467fa9a664
+cm"""
+$(define("Spanning Set"))
+Suppose that ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` are vectors in a vector space ``V``. Then we say that the vectors ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` __span__ the vector space ``V`` provided that every vector in ``V`` is a linear combination of these ``k`` vectors. 
+
+We may also say that the set ``S=\left\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k\right\}`` of vectors is a __spanning set__ for ``V``.
+"""
+
+# ╔═╡ 4e16d3d9-668d-4565-95f2-f8c20e73839c
+cm"""
+$(bth("1 The Span of a Set of Vectors"))
+Let ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` be vectors in the vector space ``V``. Then the set ``W`` of all linear combinations of ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` is a subspace of ``V``.
+$(ebl())
+
+- We sometimes write
+```math
+W=\operatorname{span}(S)=\operatorname{span}\left\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k\right\}
+```
+
+- ``\mathbb{R}^3=\operatorname{span}\{\mathbf{i}, \mathbf{j}, \mathbf{k}\}``. 
+"""
+
 # ╔═╡ ca3afed1-ded8-4792-8253-58a2b5bc0502
 md"##  Linear Independence"
+
+# ╔═╡ 4a6e9768-71f4-4a2b-9746-d27c64d31314
+cm"""
+$(define("Linear Independence"))
+The vectors ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` in a vector space ``V`` are said to be __linearly independent__ provided that the equation
+```math
+c_1 \mathbf{v}_1+c_2 \mathbf{v}_2+\cdots+c_k \mathbf{v}_k=\mathbf{0}
+```
+has only the trivial solution ``c_1=c_2=\cdots=c_k=0``. That is, the only linear combination of ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` that represents the zero vector ``\mathbf{0}`` is the trivial combination 
+```math
+0 \mathbf{v}_1+0 \mathbf{v}_2+\cdots+0 \mathbf{v}_k.
+```
+"""
+
+# ╔═╡ d14cb002-bfcd-49d4-8318-62ca9a2e6521
+cm"""
+$(ex(4)) 
+__The standard unit vectors__
+
+```math
+\begin{aligned}
+\mathbf{e}_1 & =(1,0,0, \ldots, 0) \\
+\mathbf{e}_2 & =(0,1,0, \ldots, 0) \\
+& \vdots \\
+\mathbf{e}_n & =(0,0,0, \ldots, 1)
+\end{aligned}
+```
+in ``\mathbb{R}^n`` are __linearly independent__. 
+"""
+
+# ╔═╡ 9221b160-0335-42e3-830f-35be3df0a1ed
+cm"""
+$(bbl("Remark","Linear Dependent"))
+A set of vectors is called __linearly dependent__ provided it is not linearly independent. Hence the vectors ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` are linearly dependent if and only if there exist scalars ``c_1, c_2, \ldots, c_k`` not all zero such that
+```math
+c_1 \mathbf{v}_1+c_2 \mathbf{v}_2+\cdots+c_k \mathbf{v}_k=\mathbf{0}
+```
+
+In short, a (finite) set of vectors is linearly dependent provided that some nontrivial linear combination of them equals the zero vector.
+"""
+
+# ╔═╡ 23159722-3535-468c-8501-987e3786dcdb
+cm"""
+$(ex(5))
+Determine whether the vectors ``\mathbf{v}_1=(1,2,2,1), \mathbf{v}_2=(2,3,4,1)``, and ``\mathbf{v}_3=(3,8,7,5)`` in ``\mathbb{R}^4`` are linearly independent.
+"""
 
 # ╔═╡ 4fc61c32-377d-475f-9587-fb884aaafcb6
 let
@@ -590,6 +1668,77 @@ let
 	# A\b
 	# solve()
 end
+
+# ╔═╡ 26755d8b-8b1f-43df-8117-a38840b9349b
+cm"""
+$(remarks())
+- Observe that linear independence of the vectors ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` actually is a property of the set ``S=\left\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k\right\}`` whose elements are these vectors. Occasionally the phraseology "the set ``S=\left\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k\right\}`` is linearly independent" is more convenient. 
+
+- Any subset of a linearly independent set ``S=`` ``\left\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k\right\}`` is a linearly independent set of vectors.
+
+- the coefficients in a linear combination of the linearly independent vectors ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` are unique. If both
+"""
+
+# ╔═╡ 57369806-889e-42cf-9da3-7325ff1176f5
+cm"""
+$(ex(6))
+Let ``\mathbf{v}_1=(2,1,3), \mathbf{v}_2=(5,-2,4), \mathbf{v}_3=(3,8,-6)``, and ``\mathbf{v}_4=(2,7,-4)``. Show that these vectors are linealy depedent.
+
+Then the equation ``c_1 \mathbf{v}_1+c_2 \mathbf{v}_2+c_3 \mathbf{v}_3+c_4 \mathbf{v}_4=\mathbf{0}`` is equivalent to the linear system
+```math
+\begin{aligned}
+2 c_1+5 c_2+3 c_3+2 c_4 & =0 \\
+c_1-2 c_2+8 c_3+7 c_4 & =0 \\
+3 c_1+4 c_2-6 c_3-4 c_4 & =0
+\end{aligned}
+```
+of three equations in four unknowns. 
+"""
+
+# ╔═╡ 87f79eab-0b30-4bc8-8a47-fe027d91e476
+cm"""
+$(remark())
+Any set of more than ``n`` vectors in ``\mathbb{R}^n`` is linearly dependent.
+"""
+
+# ╔═╡ 7a6a7ba0-cd23-4d36-b6d7-6af7514d9bb6
+cm"""
+$(bth("2"))
+__Independence of ``\boldsymbol{n}`` Vectors in ``\mathbb{R}^n``__
+
+The ``n`` vectors ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n`` in ``\mathbf{R}^n`` are linearly independent if and only if the ``n \times n`` matrix
+```math
+\mathbf{A}=\left[\begin{array}{llll}
+\mathbf{v}_1 & \mathbf{v}_2 & \cdots & \mathbf{v}_n
+\end{array}\right]
+```
+having them as its column vectors has nonzero determinant.
+"""
+
+# ╔═╡ 46874b7b-0d64-4a7f-bbbc-4744aef58e55
+cm"""
+$(bth("3"))
+__Independence of Fewer Than ``\boldsymbol{n}`` Vectors in ``\mathbb{R}^n``__
+
+Consider ``k`` vectors ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` in ``\mathbf{R}^n``, with ``k<n``. Let
+```math
+\mathbf{A}=\left[\begin{array}{llll}
+\mathbf{v}_1 & \mathbf{v}_2 & \cdots & \mathbf{v}_k
+\end{array}\right]
+```
+be the ``n \times k`` matrix having them as its column vectors. Then the vectors ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` are linearly independent if and only if some ``k \times k`` submatrix of A has nonzero determinant.
+"""
+
+# ╔═╡ 6cd1ff75-1846-45d4-a24e-dc5a8d4b5176
+cm"""
+$(ex())
+If theyare linearly independent, showthis; otherwise find a
+ non trivial linear combination of them that is equal to the zero
+ vector.
+```math
+\mathbf{v}_1=(2,0,-3), \mathbf{v}_2=(4,-5,-6), \mathbf{v}_3=(-2,1,3)
+```
+"""
 
 # ╔═╡ 73ea96b9-be3c-4e26-8f54-914bd53d409b
 let
@@ -602,8 +1751,53 @@ let
 	# det(A)
 end
 
+# ╔═╡ e0a788cb-4029-4673-8220-4edf08026ca9
+cm"""
+$(ex())
+ The vectors ``\{v_1,v_2\}`` are known to be linearly
+ independent. Apply the definition of linear independence to
+ show that the vectors fuig are also linearly independent.
+```math
+\mathbf{u}_1=\mathbf{v}_1+\mathbf{v}_2, \mathbf{u}_2=2 \mathbf{v}_1+3 \mathbf{v}_2
+```
+
+"""
+
 # ╔═╡ faf0e3cf-3973-4272-bda3-a3410c8e17d2
 md"# 4.4 Bases and Dimension for Vector Spaces"
+
+# ╔═╡ de7140da-31e6-45a6-ba94-83f98cfd9dbf
+cm"""
+$(define("Basis"))
+A finite set ``S`` of vectors in a vector space ``V`` is called a basis for ``V`` provided that
+- (a) the vectors in ``S`` are linearly independent, and
+- (b) the vectors in ``S`` span ``V``.
+"""
+
+# ╔═╡ 14f1a87d-56e1-4606-bfed-8b0fa558ab93
+cm"""
+$(ex(1))
+The standard basis for ``\mathbb{R}^n`` consists of the unit vectors
+```math
+\mathbf{e}_1=(1,0,0, \ldots, 0), \mathbf{e}_2=(0,1,0, \ldots, 0), \ldots, \mathbf{e}_n=(0,0,0, \ldots, 1)
+```
+"""
+
+# ╔═╡ 215b534d-7de6-4e6e-a20c-7ca936bf3af9
+cm"""
+$(bbl("Remark",""))
+
+Any set of ``n`` linearly independent vectors in ``\mathbb{R}^n`` is a __basis__ for ``\mathbb{R}^n``.
+
+
+$(ebl())
+"""
+
+# ╔═╡ 53b4b372-cc7f-48d7-930e-8bf007820dae
+cm"""
+$(ex(3))
+Let ``\mathbf{v}_1=(1,-1,-2,-3), \mathbf{v}_2=(1,-1,2,3), \mathbf{v}_3=(1,-1,-3,-2)``, and ``\mathbf{v}_4=(0,3,-1,2)``. Is the set ``\{v_1,v_2,v_3,v_4\}`` a basis for ``\mathbb{R}^4``?
+"""
 
 # ╔═╡ f911e13b-7830-449d-b8d2-ae6ecb388e5c
 let
@@ -616,8 +1810,78 @@ let
 	det(A)
 end
 
+# ╔═╡ 91007be4-b072-44bc-a484-5ace7c30a174
+cm"""
+$(bth("1 Bases as Maximal Linearly Independent Sets"))
+Let ``S=\left\{\mathbf{v}_{\mathbf{1}}, \mathbf{v}_2, \ldots, \mathbf{v}_n\right\}`` be a basis for the vector space ``V``. Then any set of more than ``n`` vectors in ``V`` is linearly dependent.
+"""
+
+# ╔═╡ 83e6ef8d-5c04-4805-a9fe-5ef096b1c5a6
+cm"""
+$(bth("The Dimension of a Vector Space"))
+Any two bases for a vector space consist of the same number of vectors.
+"""
+
+# ╔═╡ 390905b4-84be-430a-be26-da43007d8de2
+cm"""
+$(define("Dimension of a Vector Space"))
+A nonzero vector space ``V`` is called __finite dimensional__ provided that there exists a basis for ``V`` consisting of a __finite number of vectors__ from ``V``. In this case the number ``n`` of vectors in each basis for ``V`` is called the __dimension of ``V``, denoted by ``n=\operatorname{dim} V``__. 
+"""
+
+# ╔═╡ 36b5cd1f-7872-491c-95c9-e0503b7d5ca6
+cm"""
+$(bbl("Remarks"))
+- Note that the zero vector space ``\{\boldsymbol{0}\}`` has no basis because it contains no linearly independent set of vectors. (Sometimes it is convenient to adopt the convention that the null set is a basis for ``\{\boldsymbol{0}\}``.) Here we define ``\operatorname{dim}\{\boldsymbol{0}\}=0``. 
+- A nonzero vector space that has no finite basis is called __infinite dimensional__. 
+"""
+
+# ╔═╡ a35044ca-ff7d-411c-ad19-b1067dc96b0d
+cm"""
+$(ex(4))
+Let ``\mathcal{P}`` be the set of all polynomials of the form 
+```math
+p(x)=a_0+a_1 x+a_2 x^2+\cdots+a_n x^n
+```
+where the largest exponent ``n \geq 0`` that appears is the degree of the polynomial ``p(x)``, and the coefficients ``a_0, a_1, a_2, \ldots, a_n`` are real numbers. 
+
+``\mathcal{P}`` is an infinite-dimensional space.
+"""
+
+# ╔═╡ 77fbd41a-f3ac-477e-b4e0-01cb0049362f
+cm"""
+$(bth("3 Independent Sets, Spanning Sets, and Bases"))
+Let ``V`` be an ``n``-dimensional vector space and let ``S`` be a subset of ``V``. Then
+- (a) If ``S`` is linearly independent and consists of ``n`` vectors, then ``S`` is a basis for ``V``;
+- (b) If ``S`` spans ``V`` and consists of ``n`` vectors, then ``S`` is a basis for ``V``;
+- (c) If ``S`` is linearly independent, then ``S`` is contained in a basis for ``V``;
+- (d) If ``S`` spans ``V``, then ``S`` contains a basis for ``V``.
+"""
+
 # ╔═╡ dca3f82b-7cac-4849-88a2-d47805957566
 md"##  Bases for Solution Spaces"
+
+# ╔═╡ 50e51cd6-6337-47ee-b405-3b0ec86a9ad3
+cm"""
+$(bbl("ALGORITHM A Basis for the Solution Space"))
+To find a basis for the solution space ``W`` of the homogeneous linear system ``\mathbf{A x}=`` ``\mathbf{0}``, carry out the following steps.
+1. Reduce the coefficient matrix ``\mathbf{A}`` to echelon form.
+2. Identify the ``r`` leading variables and the ``k=n-r`` free variables. If ``k=0``, then ``W=\{0\}``.
+3. Set the free variables equal to parameters ``t_1, t_2, \ldots, t_k``, and then solve by back substitution for the leading variables in terms of these parameters.
+4. Let ``\mathbf{v}_j`` be the solution vector obtained by setting ``t_j`` equal to 1 and the other parameters equal to zero. Then ``\left\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k\right\}`` is a basis for ``W``.
+"""
+
+# ╔═╡ 0a7fda1b-7041-481d-8935-e25e91040e3a
+cm"""
+$(ex(5))
+Find a basis for the solution space of the homogeneous linear system
+```math
+\begin{aligned}
+& 3 x_1+6 x_2-x_3-5 x_4+5 x_5=0 \\
+& 2 x_1+4 x_2-x_3-3 x_4+2 x_5=0 \\
+& 3 x_1+6 x_2-2 x_3-4 x_4+x_5=0
+\end{aligned}
+```
+"""
 
 # ╔═╡ 03e906c2-29b0-487b-9223-6c7313c1d740
 let
@@ -637,6 +1901,44 @@ end
 
 # ╔═╡ ee16937c-617a-4f4a-a15e-c3853f0e8ca8
 md"# 4.5 Row and Column Spaces"
+
+# ╔═╡ cd3dcd43-5aa6-4f0d-9e26-2a7e5d5db706
+cm"""
+$(define("Row Sapce of a Matrix"))
+Let ``A\in \mathbb{R}^{m\times n}`` be an ``m\times n`` matrix. The __row space__ of ``A`` (denoted by ``\textrm{Row}(A)``) is the subspace of ``\mathbb{R}^n`` spanned by the ``m`` rows of ``A``. 
+The dimension of ``\textrm{Row}(A)`` is called the __row rank__ of ``A``.
+$(ebl())
+
+$(define("Column Sapce of a Matrix"))
+Let ``A\in \mathbb{R}^{m\times n}`` be an ``m\times n`` matrix. The __column space__ of ``A`` (denoted by ``\textrm{Col}(A)``) is the subspace of ``\mathbb{R}^m`` spanned by the ``n`` columns of ``A``. 
+The dimension of ``\textrm{Col}(A)`` is called the __column rank__ of ``A``.
+$(ebl())
+
+"""
+
+# ╔═╡ 131a8093-a933-4ffe-b5b9-396cbe6b03e2
+cm"""
+$(bth("Rank of a Matrix"))
+Let ``A\in \mathbb{R}^{m\times n}`` be an ``m\times n`` matrix. The __column rank__ of ``A`` is equal to the __row rank__ of ``A``. So we define the __rank of ``A``__ as
+```math
+\textrm{rank}(A) = \textrm{dim}(\textrm{Col}(A)) =\textrm{dim}(\textrm{Row}(A))
+```
+"""
+
+# ╔═╡ 87933565-4591-492c-a819-6136c1b1b547
+cm"""
+$(ex())
+Find ``\textrm{rank}(A)`` of 
+```math
+A = \begin{bmatrix}
+		3& 6 &-1& -5& 5 \\
+		2& 4& -1& -3& 2 \\
+		3& 6& -2& -4& 1\\
+
+	\end{bmatrix}
+```
+	
+"""
 
 # ╔═╡ d999ba91-2a73-4d8e-a99a-fd5187f24e6b
 let
@@ -677,11 +1979,87 @@ We will discuss first the associated homogeneous equation
 # ╔═╡ c9ac1dc2-078e-47ae-b0cf-9f22eb294b39
 texeq"y^{\prime \prime}+p(x) y^{\prime}+q(x) y=0 \label{hso}"
 
+# ╔═╡ 55fb1d51-1582-4465-ae90-d21a4322281b
+cm"""
+$(bth("1 Principle of Superposition for Homogeneous Equations"))
+Let ``y_1`` and ``y_2`` be two solutions of the homogeneous linear equation in (7) on the interval ``I``. If ``c_1`` and ``c_2`` are constants, then the linear combination
+```math
+y=c_1 y_1+c_2 y_2
+```
+is also a solution of Eq. (7) on ``I``.
+"""
+
+# ╔═╡ 03dcf152-ab37-478f-8130-b53a8047c7b0
+cm"""
+
+$(bth("2 Existence and Uniqueness for Linear Equations"))
+Suppose that the functions ``p, q``, and ``f`` are continuous on the open interval ``I`` containing the point ``a``. Then, given any two numbers ``b_0`` and ``b_1``, the equation
+```math
+y^{\prime \prime}+p(x) y^{\prime}+q(x) y=f(x)
+```
+has a unique (that is, one and only one) solution on the entire interval ``I`` that satisfies the initial conditions
+```math
+y(a)=b_0, \quad y^{\prime}(a)=b_1
+```
+"""
+
+# ╔═╡ 21aea514-7f39-41b8-9e51-4139e5d1825d
+cm"""
+$(ex(2)) Verify that the functions
+```math
+y_1(x)=e^x \quad \text { and } \quad y_2(x)=x e^x
+```
+are solutions of the differential equation
+```math
+y^{\prime \prime}-2 y^{\prime}+y=0
+```
+"""
+
 # ╔═╡ 98730a31-e9e9-45fc-ae12-5cf0832b5069
 md"## LinearlyIndependentSolutions"
 
+# ╔═╡ b35479c0-8873-42d5-9296-8e22323f7e96
+cm"""
+$(define("Linear Independence of Two Functions"))
+Two functions defined on an open interval ``I`` are said to be linearly independent on ``I`` provided that neither is a constant multiple of the other.
+"""
+
 # ╔═╡ f9a9f5f5-5134-4f2f-8672-c2e665c546ce
 md"## GeneralSolutions"
+
+# ╔═╡ d3371b50-9c33-4df0-91b2-1c3bd13b7093
+cm"""
+$(bth("3 Wronskians of Solutions"))
+Suppose that ``y_1`` and ``y_2`` are two solutions of the homogeneous second-order linear equation (Eq. (7))
+```math
+y^{\prime \prime}+p(x) y^{\prime}+q(x) y=0
+```
+on an open interval ``I`` on which ``p`` and ``q`` are continuous.
+- (a) If ``y_1`` and ``y_2`` are linearly dependent, then ``W\left(y_1, y_2\right) \equiv 0`` on ``I``.
+- (b) If ``y_1`` and ``y_2`` are linearly independent, then ``W\left(y_1, y_2\right) \neq 0`` at each point of ``I``.
+
+Where ``W(y_1,y_2)`` is called the __Wronskian__ of ``y_1`` and ``y_2`` and is defined as the determinant
+```math
+W=\left|\begin{array}{cc}
+y_1 & y_2 \\
+y_1^{\prime} & y_2^{\prime}
+\end{array}\right|=y_1 y_2^{\prime}-y_1^{\prime} y_2
+```
+"""
+
+# ╔═╡ 48739d88-721f-471c-afa6-7cbb2e92ce3d
+cm"""
+$(bth("4 General Solutions of Homogeneous Equations"))
+Let ``y_1`` and ``y_2`` be two linearly independent solutions of the homogeneous equation (Eq. (7))
+```math
+y^{\prime \prime}+p(x) y^{\prime}+q(x) y=0
+```
+with ``p`` and ``q`` continuous on the open interval ``I``. If ``Y`` is any solution whatsoever of Eq. (7) on ``I``, then there exist numbers ``c_1`` and ``c_2`` such that
+```math
+Y(x)=c_1 y_1(x)+c_2 y_2(x)
+```
+for all ``x`` in ``I``.
+"""
 
 # ╔═╡ 06cbf42d-9811-40ae-bcd5-1bcc4ff60880
 md"##  Linear Second-Order Equations with Constant Coefficients"
@@ -706,71 +2084,41 @@ a y^{\prime \prime}+b y^{\prime}+c y=0 \label{eqhc}
 # ╔═╡ 381710b7-c487-4b65-9a07-88d773cdacf0
 eqref("eqhc")
 
-# ╔═╡ 90d2b2d2-c030-4afd-a529-cd940bc82688
-md"# 5.2 General Solutions of Linear Equations"
-
-# ╔═╡ 8695eb73-c264-4f4a-ab66-2ce879ff8c88
+# ╔═╡ a7f45d96-911d-470e-a370-7037820a927b
 cm"""
-Consider the __``n^{\text{th}}``-order linear__ differential equation
+$(bth("5 Distinct Real Roots"))
+If the roots ``r_1`` and ``r_2`` of the characteristic equation in (8) are real and distinct, then
 ```math
-P_0(x) y^{(n)}+P_1(x) y^{(n-1)}+\cdots+P_{n-1}(x) y^{\prime}+P_n(x) y=F(x).
+y(x)=c_1 e^{r_1 x}+c_2 e^{r_2 x}
 ```
-which can be written as
-$(texeq"\quad y^{(n)}+p_1(x) y^{(n-1)}+\cdots+p_{n-1}(x) y^{\prime}+p_n(x) y=f(x)\label{n_order_de}")
-
-The homogeneous linear equation associated with (10) is
-
-$(texeq"y^{(n)}+p_1(x) y^{(n-1)}+\cdots+p_{n-1}(x) y^{\prime}+p_n(x) y=0.")
-
+is a general solution of Eq. (9). Thus the solution space of the equation ``a y^{\prime \prime}+`` ``b y^{\prime}+c y=0`` has basis ``\left\{e^{r_1 x}, e^{r_2 x}\right\}``.
 """
 
-# ╔═╡ dc4b275f-9014-4014-bc59-03353d5de046
-md"## Existence and Uniqueness of Solutions"
-
-# ╔═╡ cc282ef0-67d4-4086-9916-49ee02ee8009
-md"## Linearly Independent Solutions"
-
-# ╔═╡ 0f267953-3b92-4550-af48-3bdc51364a26
-md"## General Solutions"
-
-# ╔═╡ 87c2749f-1390-4ce1-97f1-3a9609cba34e
-md"## Nonhomogeneous Equations"
-
-# ╔═╡ 42a14a32-71aa-4019-8eaf-e42f7f51e7a9
+# ╔═╡ dbbdb46b-5cb6-4ee2-831e-251f8b39f9b8
 cm"""
-We now consider the __nonhomogeneous ``n`` th-order linear__ differential equation
+$(ex(5)) Find the general solution of ``\quad 2 y^{\prime \prime}-7 y^{\prime}+3 y=0``
+"""
 
-$(texeq"y^{(n)}+p_1(x) y^{(n-1)}+\cdots+p_{n-1}(x) y^{\prime}+p_n(x) y=f(x)")
+# ╔═╡ 0354703b-ee11-4d5c-8707-6b8559ca3fac
+cm"""
+$(bth("6 Repeated Roots"))
+If the characteristic equation in (8) has equal (necessarily real) roots ``r_1=r_2``, then
+```math
+y(x)=\left(c_1+c_2 x\right) e^{r_1 x}
+```
+is a general solution of Eq. (9). In this case the solution space of the equation ``a y^{\prime \prime}+b y^{\prime}+c y=0`` has basis ``\left\{e^{r_1 x}, x e^{r_1 x}\right\}``.
+"""
 
-with associated homogeneous equation
-
-$(texeq"y^{(n)}+p_1(x) y^{(n-1)}+\cdots+p_{n-1}(x) y^{\prime}+p_n(x) y=0")
-
-Suppose 
-- ``y_p`` is a particular solution of the nonhomogeneous equation in (13)
-- ``Y`` is any other solution of Eq. (13). 
-- If ``y_c=Y-y_p``, then subsitution of ``y_c`` in the differential equation gives (using the linearity of differentiation)
+# ╔═╡ e15959e9-60c8-4084-9adb-012ca2ab1c2e
+cm"""
+$(ex(7))
+To solve the initial value problem
 ```math
 \begin{aligned}
-& y_c^{(n)}+p_1 y_c^{(n-1)}+\cdots+p_{n-1} y_c^{\prime}+p_n y_c \\
-&= {\left[\left(Y^{(n)}+p_1 Y^{(n-1)}+\cdots+p_{n-1} Y^{\prime}+p_n Y\right]\right.} \\
-&-\left[\left(y_p^{(n)}+p_1 y_p^{(n-1)}+\cdots+p_{n-1} y_p^{\prime}+p_n y_p\right]\right. \\
-&= f(x)-f(x)=0
+& y^{\prime \prime}+2 y^{\prime}+y=0 \\
+& y(0)=5, \quad y^{\prime}(0)=-3
 \end{aligned}
 ```
-
-Thus __``y_c=Y-y_p``__ is a solution of the associated homogeneous equation in (14). Then
-```math
-Y=y_c+y_p
-```
-and it follows from Theorem 4 that
-```math
-y_c=c_1 y_1+c_2 y_2+\cdots+c_n y_n
-```
-where ``y_1, y_2, \ldots, y_n`` are linearly independent solutions of the associated homogeneous equation. 
-
-- We call ``y_c`` a __complementary function__ of the nonhomogeneous equation 
-- a general solution of the nonhomogeneous equation in (13) is the sum of its complementary function ``y_c`` and a single particular solution ``y_p`` of Eq. (13).
 """
 
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
@@ -905,1521 +2253,6 @@ begin
     """
 end
 
-# ╔═╡ e6c9f44f-19dd-4922-bc05-8614f5441e80
-cm"""
-$(ex("Example 3","Rate of cooling"))
- Newton's law of cooling may be stated in this way: __The time rate of change (the rate of change with respect to time ``t`` ) of the temperature ``T(t)`` of a body is proportional to the difference between ``T`` and the temperature ``A`` of the surrounding medium (Fig. 1.1.1)__. That is,
-```math
-\frac{d T}{d t}=-k(T-A)
-```
-where 
-- ``k`` is a positive constant. 
-- Observe that if ``T > A``, then ``d T / d t < 0``, so the temperature is a decreasing function of ``t`` and the body is cooling. But if ``T < A``, then ``d T / d t >0``, so that ``T`` is increasing.
-
-Thus the physical law is translated into a differential equation. If we are given the values of ``k`` and ``A``, we should be able to find an explicit formula for ``T(t)``, and then-with the aid of this formula-we can predict the future temperature of the body.
-"""
-
-# ╔═╡ a1cc7232-8dff-4fb4-908a-01c105e62797
-cm"""
-$(post_img("https://www.dropbox.com/scl/fi/l1ku5zzq9cartv6qck9e3/fig_1_1_1.png?rlkey=pleb3h5e9gyrjwq9zop53t3g5&dl=1",500))
-"""
-
-# ╔═╡ 0853d79c-5ae0-4690-9f09-9068505ba213
-cm"""
-$(ex("Example 5","Population growth")) 
-__The time rate of change of a population ``P(t)`` with constant birth and death rates is, in many simple cases, proportional to the size of the population__. That is,
-$(texeq"\frac{d P}{d t}=k P \label{pop_growth}")
-where ``k`` is the constant of proportionality.
-
-This equation has the solution
-
-$(texeq"P(t)=Ce^{kt}\label{pop_growth_sol}")
-"""
-
-# ╔═╡ 2b5ca5c2-4232-48df-95ab-4a5765436995
-cm"""
-$(ex("Example 6","Population growth"))
-Suppose that ``P(t)=C e^{k t}`` is the population of a colony of bacteria at time ``t``, that the population at time ``t=0`` (hours, h) was 1000 , and that the population doubled after 1 h . This additional information about ``P(t)`` yields the following equations:
-```math
-\begin{aligned}
-& 1000=P(0)=C e^0=C \\
-& 2000=P(1)=C e^k
-\end{aligned}
-```
-
-It follows that ``C=1000`` and that ``e^k=2``, so ``k=\ln 2 \approx 0.693147``. With this value of ``k`` the differential equation in $(eqref("pop_growth")) is
-```math
-\frac{d P}{d t}=(\ln 2) P \approx(0.693147) P
-```
-
-Substitution of ``k=\ln 2`` and ``C=1000`` in Eq. $(eqref("pop_growth_sol")) yields the particular solution
-```math
-P(t)=1000 e^{(\ln 2) t}=1000\left(e^{\ln 2}\right)^t=1000 \cdot 2^t \quad\left(\text { because } e^{\ln 2}=2\right)
-```
-that satisfies the given conditions. We can use this particular solution to predict future populations of the bacteria colony. For instance, the predicted number of bacteria in the population after one and a half hours (when ``t=1.5`` ) is
-```math
-P(1.5)=1000 \cdot 2^{3 / 2} \approx 2828
-```
-"""
-
-# ╔═╡ 3dab7c5b-363a-4b55-b8b0-342723d99ba5
-cm"""
-$(bbl("Remarks",""))
-
-$(post_img("https://www.dropbox.com/scl/fi/9jkvevpmi4apwd5k73mgv/fig_1_1_4.png?rlkey=m2gu7plj5o7bjbudeqze2bzxq&dl=1",500))
-$(ebl())
-"""
-
-# ╔═╡ a7abd027-69c5-43a9-a99e-164a9199a334
-cm"""
-$(ex(8))
-Verify that the function ``y(x)=2 x^{1 / 2}-x^{1 / 2} \ln x`` satisfies the differential equation
-```math
-4 x^2 y^{\prime \prime}+y=0
-```
-for all ``x>0``.
-"""
-
-# ╔═╡ fbd68049-57ac-42fc-9c4c-5bd9f019dabb
-cm"""
-__The first-order equation__
-\[
-d y / d x=f(x, y)
-\]
-- __The general solution__
-```math
-y(x)=\int f(x) d x+C
-```
-- __A particular solution__ : a solution to the *initial-value* problem
-```math
-\frac{d y}{d x}=f(x), \quad y\left(x_0\right)=y_0
-```
-
-$(bbl("Remark",""))
-> We will first find a general solution involving an arbitrary
-constant ``C``. We can then attempt to obtain, by appropriate choice of ``C``, a particular
-solution satisfying a given initial condition ``y(x_0) = y_0``.
-
-$(ebl())
-"""
-
-# ╔═╡ 41344730-e8c5-4e2b-a98c-9995846c7244
-cm"""
-$(ex(1))
-Solve the initial value problem 
-
-```math
-\frac{d y}{d x}=2 x+3, \quad y(1)=2
-```
-"""
-
-# ╔═╡ ab0da87e-9b87-48eb-a235-44fdfd2f81f2
-cm"""
-$(post_img("https://www.dropbox.com/scl/fi/l6nrl55ye583z7vu2v55k/fig_1_2_5.png?rlkey=vpoky2h6hycj51kfemjjv0itg&dl=1",500))
-"""
-
-# ╔═╡ 6168170e-2fcb-4728-b8d8-ddc44992d3f9
-cm"""
-$(ex("Example 4","River crossing"))
-Suppose that the river is ``1`` mile wide and that its midstream velocity is ``v_0=9 \mathrm{mi} / \mathrm{h}`` and the swimmer's velocity is ``v_S=3 \mathrm{mi} / \mathrm{h}``.
-"""
-
-# ╔═╡ 15531160-b5d7-4e55-848c-9b239d4f116c
-cm"""
-$(ex(1)) Solve the differential equation
-```math
-\frac{d y}{d x}=\frac{4-2 x}{3 y^2-5}
-```
-"""
-
-# ╔═╡ 6d3c4d0e-a950-43bd-a2d7-46aec4417ab3
-cm"""
-$(ex(2)) Find all solutions of the differential equation
-```math
-\frac{d y}{d x}=6 x(y-1)^{2 / 3}
-```
-
-"""
-
-# ╔═╡ a1af7fe8-cb18-4b36-a015-38df3d346b33
-cm"""
-$(ex("Example 3", "World population")) According to data listed at www. census.gov, the world's total population reached ``6`` billion persons in mid-``1999``, and was then increasing at the rate of about ``212`` thousand persons each day. Assuming that natural population growth at this rate continues, we want to answer these questions: 
-
-<ol type="a">
-
-<li> 
-
-What is the annual growth rate ``k`` ? 
-</li>
-
-<li> What will be the world population at the middle of the 21 st century? </li>
-<li> How long will it take the world population to increase tenfold-thereby reaching the 60 billion that some demographers believe to be the maximum for which the planet can provide adequate food supplies? </li>
-
-</ol>
-"""
-
-# ╔═╡ ceb445e8-64ca-4d6f-86c2-98c96ad42fb2
-cm"""
-$(ex("Example 4","Radiometric dating"))
-A specimen of charcoal found at Stonehenge turns out to contain ``63 \%`` as much ``{ }^{14} \mathrm{C}`` as a sample of present-day charcoal of equal mass. What is the age of the 
-sample?
-"""
-
-# ╔═╡ 177d7ac6-2a24-4282-84a3-e42a1c03251f
-cm"""
-$(ex(5,s="Cooling"))
-A ``4``-lb roast, initially at ``50^{\circ} \mathrm{F}``, is placed in a ``375^{\circ} \mathrm{F}`` oven at 5:00 P.M. After 75 minutes it is found that the temperature ``T(t)`` of the roast is ``125^{\circ} \mathrm{F}``. When will the roast be ``150^{\circ} \mathrm{F}`` (medium rare) ``?``
-"""
-
-# ╔═╡ cd7eb646-c23c-4ab8-9dc4-04c0db21d4bb
-cm"""
-$(ex(1)) 
-Solve the initial value problem
-```math
-\frac{d y}{d x}-y=\frac{11}{8} e^{-x / 3}, \quad y(0)=-1
-```
-"""
-
-# ╔═╡ 2e8d8477-a937-4cd4-b300-2cae6b9b2853
-cm"""
-$(ex(2)) Find a general solution of
-```math
-\left(x^2+1\right) \frac{d y}{d x}+3 x y=6 x
-```
-"""
-
-# ╔═╡ e0c6b9b1-ab42-4e6f-a41e-440e68d68041
-cm"""
-$(bth("1 The Linear First-Order Equation"))
-If the functions ``P(x)`` and ``Q(x)`` are continuous on the open interval ``I`` containing the point ``x_0``, then the initial value problem
-```math
-\frac{d y}{d x}+P(x) y=Q(x), \quad y\left(x_0\right)=y_0
-```
-has a unique solution ``y(x)`` on ``I``, given by the formula in 
-```math
-y(x)=e^{-\int P(x) d x}\left[\int\left(Q(x) e^{\int P(x) d x}\right) d x+C\right]
-```
-with an appropriate value of ``C``.
-"""
-
-# ╔═╡ 1d54e85b-f3e6-41f1-a818-ab483c918fee
-cm"""
-$(ex(3)) Solve the initial value problem
-```math
-x^2 \frac{d y}{d x}+x y=\sin x, \quad y(1)=y_0
-```
-"""
-
-# ╔═╡ 4fbe0c02-a31f-4f37-b014-84e4bb914fff
-cm"""
-$(example("Example",""))
-Solve
-```math 
-\left(x+y e^y\right) \frac{d y}{d x}=1
-```
-"""
-
-# ╔═╡ c868de03-803a-49a9-b1f5-657f46ab8498
-cm"""
-$(ex(1)) Solve the differential equation
-```math
-\frac{d y}{d x}=(x+y+3)^2
-```
-"""
-
-# ╔═╡ 90a2fcd1-1d38-4c12-8f7e-cb9f83f890f3
-cm"""
-$(define("Homogeneous DE")) A __homogeneous__ first-order differential equation is one that can be written in the form
-```math
-\frac{d y}{d x}=F\left(\frac{y}{x}\right)
-```
-
-If we make the substitutions
-```math
-v=\frac{y}{x}, \quad y=v x, \quad \frac{d y}{d x}=v+x \frac{d v}{d x}
-```
-"""
-
-# ╔═╡ aca4f2f0-5c16-4e51-b83c-b76149f836a9
-cm"""
-$(ex(2))
-Solve the differential equation
-```math
-2 x y \frac{d y}{d x}=4 x^2+3 y^2
-```
-"""
-
-# ╔═╡ d743b750-2a29-4fb3-a729-07bec9637121
-cm"""
-$(ex(3)) Solve the initial value problem
-```math
-x \frac{d y}{d x}=y+\sqrt{x^2-y^2}, \quad y\left(x_0\right)=0
-```
-where ``x_0>0``.
-"""
-
-# ╔═╡ 7a405477-d020-4b31-b0be-036fd3f22322
-cm"""
-$(ex(5)) Solve the differential equation
-```math
-x \frac{d y}{d x}+6 y=3 x y^{4 / 3}
-```
-"""
-
-# ╔═╡ 0e5e9fe4-0157-4497-b675-53071f4e6782
-cm"""
-$(ex(6))
-Solve
-```math
-2 x e^{2 y} \frac{d y}{d x}=3 x^4+e^{2 y}
-```
-
-"""
-
-# ╔═╡ a32e62d2-e65f-492a-a3f4-db8dec72db67
-cm"""
-- A general solution ``y(x)`` of a __first-order differential equation__ is often defined implicitly by an equation of the form
-```math
-F(x, y(x))=C\quad \text{where } C \text{ is a constant.}
-```
-- The original differentail equation is
-```math
-\frac{\partial F}{\partial x}+\frac{\partial F}{\partial y} \frac{d y}{d x}=0
-```
-$(add_space(10)) that is,
-```math
-M(x, y)+N(x, y) \frac{d y}{d x}=0
-```
-$(add_space(10))where ``M(x, y)=F_x(x, y)`` and ``N(x, y)=F_y(x, y)``
-- We write 
-```math
-M(x, y) d x+N(x, y) d y=0
-```
-- This last form is called the __differential form__.
-- If there exists a function F(x,y) such that 
-```math
-\frac{\partial F}{\partial x}=M \quad \text{and} \quad \frac{\partial F}{\partial y}=N
-```
-$(add_space(10))then the equation
-```math
-F(x, y)=C
-```
-implicitly defines a general solution. In this case, the equation
-```math
-M(x, y)+N(x, y) \frac{d y}{d x}=0
-```
-is called an __exact differential equation__ 
-```math
-(\text{the differential} dF=F_x d x+F_y d y \text{ of }  F(x, y) \text{ is exactly } M d x+N d y)
-```
-
-"""
-
-# ╔═╡ 8792fe08-498e-4d18-aad2-de9bc3a7ade4
-cm"""
-$(bbl("Question 1"))
-How can we determine whether the differential
- equation in 
-```math
-M(x, y) d x+N(x, y) d y=0
-```
-is exact?
-$(ebl())
-
-$(bbl("Question 2"))
- If it is exact, how can we find the function ``F`` such
- that 
-```math
- F_x = M, \quad F_y = N?
-```
-$(ebl())
-"""
-
-# ╔═╡ c006d3aa-8cf1-4382-806a-4e9714f934f6
-cm"""
-$(bth("1 Criterion for Exactness"))
-Suppose that the functions ``M(x, y)`` and ``N(x, y)`` are continuous and have continuous first-order partial derivatives in the open rectangle ``R`` : ``a < x < b, c < y < d``. Then the differential equation
-```math
-M(x, y) d x+N(x, y) d y=0
-```
-is exact in ``R`` if and only if
-```math
-\frac{\partial M}{\partial y}=\frac{\partial N}{\partial x}
-```
-at each point of ``R``. That is, there exists a function ``F(x, y)`` defined on ``R`` with ``\partial F / \partial x=M`` and ``\partial F / \partial y=N`` if and only if last equation holds on ``R``.
-"""
-
-# ╔═╡ 626fe783-d05a-49ca-8e3c-2ac76be27e34
-cm"""
-$(ex(8)) 
-Show that the differential equation 
-```math
-\quad y^3 d x+3 x y^2 d y=0
-```
-is exact.
-"""
-
-# ╔═╡ ad29db84-3c84-4a6e-aeb0-5a51210ef05d
-cm"""
-$(bbl("Remarks",""))
-- What happens if we divide by ``y^2`` both sides?
-"""
-
-# ╔═╡ 933c6345-fffc-4159-8b67-e1443b988f9f
-cm"""
-$(ex(9)) Solve the differential equation
-```math
-\left(6 x y-y^3\right) d x+\left(4 y+3 x^2-3 x y^2\right) d y=0
-```
-"""
-
-# ╔═╡ a4256712-b454-4733-bcf5-c5764705b028
-cm"""
-$(ex(10))
-Solve the equation ``x y^{\prime \prime}+2 y^{\prime}=6 x``.
-"""
-
-# ╔═╡ 87802187-2aeb-4e67-a2d7-1975cf588a17
-cm"""
-$(ex(11)) 
-Solve the equation ``y y^{\prime \prime}=\left(y^{\prime}\right)^2``.
-"""
-
-# ╔═╡ 608e2182-ce7c-4626-bcda-bf4bd6f2f1c6
-cm"""
-## Using Julia
-$(example("EXample",""))
-Solve the differential equation
-```math
-2 x e^{2 y} \frac{d y}{d x}=3 x^4+e^{2 y}
-```
-using Julia
-"""
-
-# ╔═╡ 643d7441-1dbf-4b98-b76f-617babece0c0
-cm"""
-$(example("Example","")) Solve the linear system
-```math
-\begin{aligned}
-x+2 y+z & =4 \\
-3 x+8 y+7 z & =20 \\
-2 x+7 y+9 z & =23
-\end{aligned}
-```
-"""
-
-# ╔═╡ 2aa7e38b-c48d-470c-943e-a6a73d053a70
-cm"""
-$(define("Echelon Matrix"))
-The matrix ``\mathbf{E}`` is called an echelon matrix provided it has the following two properties:
-1. Every row of ``\mathbf{E}`` that consists entirely of zeros (if any) lies beneath every row that contains a nonzero element.
-2. In each row of ``\mathbf{E}`` that contains a nonzero element, the first nonzero element lies strictly to the right of the first (from left) nonzero element (called __leading entry__) in the preceding row (if there is a preceding row).
-$(ebl())
-
-__FOR EXAMPLE__
-```math
-\mathbf{E}=\left[\begin{array}{rrrrr}2 & -1 & 0 & 4 & 7 \\ 0 & 1 & 2 & 0 & -5 \\ 0 & 0 & 0 & 3 & 0 \\ 0 & 0 & 0 & 0 & 0\end{array}\right]
-```
-"""
-
-# ╔═╡ 13748f1f-4092-4592-9a4f-8f17c38a875a
-cm"""
-$(define("Reduced Echelon Matrix"))
-A reduced echelon matrix ``\mathbf{E}`` is an echelon matrix that has-in addition to Properties 1 and 2 -the following properties:
-
-3. Each leading entry of ``\mathbf{E}`` is 1 .
-4. Each leading entry of ``\mathbf{E}`` is the only nonzero element in its column.
-"""
-
-# ╔═╡ 2d3b73f6-8429-4551-96ac-b2db865189ed
-cm"""
-$(bbl("ALGORITHM Gauss-Jordan Elimination",""))
-1. First transform ``\mathbf{A}`` into echelon form by Gaussian elimination.
-2. Then divide each element of each nonzero row by its leading entry (to satisfy Property 3).
-3. Finally, use each leading 1 to "clear out" any remaining nonzero elements in its column (to satisfy Property 4).
-$(ebl())
-> Every matrix is row equivalent to one and only one reduced echelon matrix.
-"""
-
-# ╔═╡ ab51c417-0482-4c68-ba07-38fd46e535cd
-cm"""
-$(ex())Find the reduced echelon form of the matrix
-```math
-\mathbf{A}=\left[\begin{array}{rrrr}
-1 & 2 & 1 & 4 \\
-3 & 8 & 7 & 20 \\
-2 & 7 & 9 & 23
-\end{array}\right]
-```
-"""
-
-# ╔═╡ 3e062725-d0ac-4d5e-9baa-49b1b10de464
-cm"""
-$(ex())
-Use Gauss-Jordan elimination to solve the linear system
-```math
-\begin{aligned}
-x_1+x_2+x_3+x_4 & =12 \\
-x_1+2 x_2+5 x_4 & =17 \\
-3 x_1+2 x_2+4 x_3-x_4 & =31
-\end{aligned}
-```
-"""
-
-# ╔═╡ 34820013-08f9-4077-9403-206671bea915
-cm"""
-$(bth("The Three Possibilities")) 
-A linear system of equations has either
-- a unique solution, or
-- no solution, or
-- infinitely many solutions.
-"""
-
-# ╔═╡ 6f434bf9-93f6-4052-aed0-7ebe0c06b736
-cm"""
-$(bth(""))
-Every homogeneous linear system with more variables than equations has infinitely many solutions.
-"""
-
-# ╔═╡ 22bb573e-8fa7-4f6c-b5f6-b96dee4c8507
-cm"""
-$(ex()) Determine the constants ``A`` and ``B`` so as to find a solution of the differential equation that satisfies the given initial conditions involving ``y(0)`` and ``y^{\prime}(0)``.
-```math
-\begin{aligned} & y^{\prime \prime}-25 y=0, y(x)=A e^{5 x}+B e^{-5 x} \\ & y(0)=10, y^{\prime}(0)=20\end{aligned}
-```
-"""
-
-# ╔═╡ 6e605916-523b-466b-ad96-c206af3bf27c
-cm"""
-$(ex())
-Under what condition on the constants ``a, b``, and ``c`` does the system
-```math
-\begin{array}{r}
-2 x-y+3 z=a \\
-x+2 y+z=b \\
-7 x+4 y+9 z=c
-\end{array}
-```
-have a unique solution? No solution? Infinitely many solutions?
-"""
-
-# ╔═╡ bf7f3424-92fd-4ece-8aeb-db8da6762056
-cm"""
-$(define("Invertible Matrix"))
-The square matrix ``\mathbf{A}`` is called invertible if there exists a matrix ``\mathbf{B}`` such that
-```math
-\mathbf{A B}=\mathbf{B A}=\mathbf{I} .
-```
-"""
-
-# ╔═╡ c35aca68-0b50-430f-b1e1-bc2ab187fa40
-cm"""
-$(ex())
-Find ``\mathbf{A}^{-1}``. Then use ``\mathbf{A}^{-1}`` (as in Example 5) to solve the system ``\mathbf{A x}=\mathbf{b}``
-```math
-\mathbf{A}=\left[\begin{array}{ll}3 & 2 \\ 5 & 4\end{array}\right], \mathbf{b}=\left[\begin{array}{l}5 \\ 6\end{array}\right]
-```
-"""
-
-# ╔═╡ eb2a3144-7dca-42d0-9fce-01c78728eac7
-# ```math
-# \mathbf{A}=\left[\begin{array}{lll}
-# 4 & 3 & 2 \\
-# 5 & 6 & 3 \\
-# 3 & 5 & 2
-# \end{array}\right]
-# ```
-cm"""
-$(ex())Find the inverse of the ``3 \times 3`` matrix
-```math
-\mathbf{A}=\left[\begin{array}{rrr}1 & 1 & 5 \\ 1 & 4 & 13 \\ 3 & 2 & 12\end{array}\right]
-```
-"""
-
-# ╔═╡ 6189764d-9da8-460b-b873-a040c413e721
-cm"""
-$(bth("Properties of Nonsingular Matrices"))
-The following properties of an ``n \times n`` matrix ``\mathbf{A}`` are equivalent.
-1. ``\mathbf{A}`` is invertible.
-2. ``\mathbf{A}`` is row equivalent to the ``n \times n`` identity matrix ``\mathbf{I}``.
-3. ``\mathbf{A x}=\mathbf{0}`` has only the trivial solution.
-4. For every ``n``-vector ``\mathbf{b}``, the system ``\mathbf{A x}=\mathbf{b}`` has a unique solution.
-5. For every ``n``-vector ``\mathbf{b}``, the system ``\mathbf{A x}=\mathbf{b}`` is consistent.
-"""
-
-# ╔═╡ 9d011957-4432-484f-99dc-da94395aeef1
-cm"""
-$(ex())
-Find a matrix ``\mathbf{X}`` such that ``\mathbf{A X}=\mathbf{B}``.
-```math
-\mathbf{A}=\left[\begin{array}{ll}7 & 6 \\ 8 & 7\end{array}\right], \mathbf{B}=\left[\begin{array}{rrr}2 & 0 & 4 \\ 0 & 5 & -3\end{array}\right]
-```
-"""
-
-# ╔═╡ fb9cd8c0-ace5-4123-a8a0-58ab32f849f1
-cm"""
-$(ex())
-Apply Cramer's rule to solve the system
-```math
-\begin{aligned}
-& 7 x+8 y=5 \\
-& 6 x+9 y=4
-\end{aligned}
-```
-"""
-
-# ╔═╡ c63574f6-2f03-4f3d-b9eb-08ca321a0aad
-cm"""
-$(define("Minors and Cofactors"))
-Let ``\mathbf{A}=\left[a_{i j}\right]`` be an ``n \times n`` matrix. The ``i j`` th minor of ``\mathbf{A}`` (also called the minor of ``a_{i j}`` ) is the determinant ``M_{i j}`` of the ``(n-1) \times(n-1)`` submatrix that remains after deleting the ``i`` th row and the ``j`` th column of ``\mathbf{A}``. The ``i j`` th cofactor ``A_{i j}`` of ``\mathbf{A}`` (or the cofactor of ``a_{i j}`` ) is defined to be
-```math
-A_{i j}=(-1)^{i+j} M_{i j}
-```
-$(ebl())
-For the sign of the cofactors
-```math
-\left[\begin{array}{lll}+ & - & + \\ - & + & - \\ + & - & +\end{array}\right] \quad\text{and} \quad\left[\begin{array}{cccc}+ & - & + & - \\ - & + & - & + \\ + & - & + & - \\ - & + & - & +\end{array}\right]
-```
-So
-```math
-\begin{array}{llll}A_{11}=+M_{11}, & A_{12}=-M_{12}, & A_{13}=+M_{13}, & A_{14}=-M_{14} \\ A_{21}=-M_{21}, & A_{22}=+M_{22}, & A_{23}=-M_{23}, & A_{24}=+M_{24}\end{array}
-```
-"""
-
-# ╔═╡ 737365c0-472d-4f0d-87c5-5d70a2fe027f
-cm"""
-$(define("Determinants"))
-The determinant ``\operatorname{det} \mathbf{A}=\left|a_{i j}\right|`` of an ``n \times n`` matrix ``\mathbf{A}=\left[a_{i j}\right]`` is defined as
-```math
-\operatorname{det} \mathbf{A}=a_{11} A_{11}+a_{12} A_{12}+\cdots+a_{1 n} A_{1 n}
-```
-
-Thus we multiply each element of the first row of ``\mathbf{A}`` by its cofactor and then add these ``n`` products to get ``\operatorname{det} \mathbf{A}``.
-"""
-
-# ╔═╡ b583732f-ed42-4a4f-9dec-6369b5e85c41
-cm"""
-$(ex()) Evaluate the determinant of
-```math
-\mathbf{A}=\left[\begin{array}{rrrr}
-2 & 0 & 0 & -3 \\
-0 & -1 & 0 & 0 \\
-7 & 4 & 3 & 5 \\
--6 & 2 & 2 & 4
-\end{array}\right]
-```
-"""
-
-# ╔═╡ 8dae3e8d-96e3-4fe0-8b9f-5074dff0f9e4
-cm"""
-$(bth("Cofactor Expansions of Determinants"))
-The determinant of an ``n \times n`` matrix ``\mathbf{A}=\left[a_{i j}\right]`` can be obtained by expansion along any row or column. The cofactor expansion along the ``i`` th row is
-```math
-\operatorname{det} \mathbf{A}=a_{i 1} A_{i 1}+a_{i 2} A_{i 2}+\cdots+a_{i n} A_{i n} .
-```
-
-The cofactor expansion along the ``j`` th column is
-```math
-\operatorname{det} \mathbf{A}=a_{1 j} A_{1 j}+a_{2 j} A_{2 j}+\cdots+a_{n j} A_{n j}
-```
-"""
-
-# ╔═╡ 1ba6a9f9-f0b3-4033-a20a-117b19d7c74b
-cm"""
-1. __Property 1__: If the ``n \times n`` matrix ``\mathbf{B}`` is obtained from ``\mathbf{A}`` by multiplying a single row (or a column) of ``\mathbf{A}`` by the constant ``k``, then ``\operatorname{det} \mathbf{B}=k \operatorname{det} \mathbf{A}``.
-2. __Property 2__: If the ``n \times n`` matrix ``\mathbf{B}`` is obtained from ``\mathbf{A}`` by interchanging two rows (or two columns), then ``\operatorname{det} \mathbf{B}=-\operatorname{det} \mathbf{A}``.
-3. __Property 3__: If two rows (or two columns) of the ``n \times n`` matrix ``\mathbf{A}`` are identical, then ``\operatorname{det} \mathbf{A}=0``.
-4. __Property 4__: ``\quad`` Suppose that the ``n \times n`` matrices ``\mathbf{A}_1, \mathbf{A}_2``, and ``\mathbf{B}`` are identical except for their ``i`` th rows-that is, the other ``n-1`` rows of the three matrices are identicaland that the ``i`` th row of ``\mathbf{B}`` is the sum of the ``i`` th rows of ``\mathbf{A}_1`` and ``\mathbf{A}_2``. Then
-```math
-\operatorname{det} \mathbf{B}=\operatorname{det} \mathbf{A}_1+\operatorname{det} \mathbf{A}_2
-```
-$(add_space(10))This result also holds if columns are involved instead of rows.
-
-5. __Property 5__: If the ``n \times n`` matrix ``\mathbf{B}`` is obtained by adding a constant multiple of one row (or column) of ``\mathbf{A}`` to another row (or column) of ``\mathbf{A}``, then ``\operatorname{det} \mathbf{B}=\operatorname{det} \mathbf{A}``.
-
-6. __Property 6__: The determinant of a triangular matrix is equal to the product of its diagonal elements.
-7. __Property 7__: If ``\mathbf{A}`` is a square matrix, then ``\operatorname{det}\left(\mathbf{A}^T\right)=\operatorname{det} \mathbf{A}``.
-
-$(add_space(10))Note that:
-
-$(add_space(20))``\text{(i)} \quad\left(\mathbf{A}^T\right)^T=\mathbf{A}``;
-
-$(add_space(20))``\text{(ii)} \quad(\mathbf{A}+\mathbf{B})^T=\mathbf{A}^T+\mathbf{B}^T``;
-
-$(add_space(20))``\text{(iii)} \quad(c \mathbf{A})^T=c \mathbf{A}^T``;
-
-$(add_space(20))``\text{(iv)} \quad(\mathbf{A B})^T=\mathbf{B}^T \mathbf{A}^T``.
-
-"""
-
-# ╔═╡ ea830a4d-f11a-474e-9b42-dde6295e8d24
-cm"""
-$(ex()) Evaluate the determinant of
-```math
-\mathbf{A}=\left|\begin{array}{llll}1 & 2 & 3 & 4 \\ 0 & 5 & 6 & 7 \\ 0 & 0 & 8 & 9 \\ 2 & 4 & 6 & 9\end{array}\right|
-```
-"""
-
-# ╔═╡ b0efeb12-e0fd-4a1e-80b9-24c230368c53
-cm"""
-$(bth("Determinants and Invertibility"))
-The ``n \times n`` matrix ``\mathbf{A}`` is invertible if and only if ``\operatorname{det} \mathbf{A} \neq 0``.
-"""
-
-# ╔═╡ 42e01a69-848d-4d34-a5de-8c54ca3f3b83
-cm"""
-$(bth("The Inverse Matrix"))
-The inverse of the invertible matrix ``\mathbf{A}`` is given by the formula
-```math
-\mathbf{A}^{-1}=\frac{\left[A_{i j}\right]^T}{|\mathbf{A}|}
-```
-where, as usual, ``A_{i j}`` denotes the ``i j`` th cofactor of ``\mathbf{A}``; that is, ``A_{i j}`` is the product of ``(-1)^{i+j}`` and the ``i j`` th minor determinant of ``\mathbf{A}``.
-"""
-
-# ╔═╡ e948494b-8a14-47b8-bfec-4390376e1bcd
-cm"""
-$(ex()) Apply the formula above to find the inverse of the matrix
-```math
-\mathbf{A}=\left[\begin{array}{rrr}
-1 & 4 & 5 \\
-4 & 2 & 5 \\
--3 & 3 & -1
-\end{array}\right]
-```
-"""
-
-# ╔═╡ 52d0d0d2-3079-4285-92de-c59961848921
-cm"""
-$(define("")) 
-__Vector__ : A vector ``\mathbf{v}`` in 3 -space ``\mathbb{R}^3`` is simply an ordered triple ``(a, b, c)`` of real numbers. We write ``\mathbf{v}=(a, b, c)`` and call the numbers ``a, b``, and ``c`` the components (or coordinates) of the vector ``v``. We may also write 
-```math
-\mathbf{v} =\begin{bmatrix} a\\b\\c \end{bmatrix}.
-```
-
-__Addition of Vectors__: The sum ``\mathbf{u}+\mathbf{v}`` of the two vectors ``\mathbf{u}=\left(u_1, u_2, u_3\right)`` and ``\mathbf{v}=\left(v_1, v_2, v_3\right)`` is the vector
-```math
-\mathbf{u}+\mathbf{v}=\left(u_1+v_1, u_2+v_2, u_3+v_3\right)
-```
-that is obtained upon addition of respective components of ``\mathbf{u}`` and ``\mathbf{v}``.
-
-__The geometric interpretation of vector addition__
-
-$(post_img("https://www.dropbox.com/scl/fi/kvrnymjm7panzimoqe4ov/fig_4_1_2_and_3.png?rlkey=s6lpzojg7la8rybddv0t04gkf&raw=1",800))
-
-__Multiplication of a Vector by a Scalar__: If ``\mathbf{v}=\left(v_1, v_2, v_3\right)`` is a vector and ``c`` is a real number, then the scalar multiple ``c \mathbf{v}`` is the vector
-```math
-c \mathbf{v}=\left(c v_1, c v_2, c v_3\right)
-```
-that is obtained upon multiplying each component of ``\mathbf{v}`` by ``c``.
-
-__The length of a vector__: The length ``|\mathbf{v}|`` of the vector ``\mathbf{v}=(a, b, c)`` is defined to be the distance of the point ``P(a, b, c)`` from the origin,
-```math
-|\mathbf{v}|=\sqrt{a^2+b^2+c^2}
-```
-"""
-
-# ╔═╡ aaae2aff-fc65-4b7f-9e28-b7577c5fdd51
-cm"""
-$(bth("3")) __``\mathbb{R}^3`` as a Vector Space__
-
-If ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` are vectors in ``\mathbf{R}^3``, and ``r`` and ``s`` are real numbers, then
-1. ``\mathbf{u}+\mathbf{v}=\mathbf{v}+\mathbf{u}`` (commutativity)
-2. ``\mathbf{u}+(\mathbf{v}+\mathbf{w})=(\mathbf{u}+\mathbf{v})+\mathbf{w}`` (associativity)
-3. ``\mathbf{u}+\mathbf{0}=\mathbf{0}+\mathbf{u}=\mathbf{u}`` (zero element)
-4. ``\mathbf{u}+(-\mathbf{u})=(-\mathbf{u})+\mathbf{u}=\mathbf{0}`` (additive inverse)
-5. ``r(\mathbf{u}+\mathbf{v})=r \mathbf{u}+r \mathbf{v}`` (distributivity)
-6. ``(r+s) \mathbf{u}=r \mathbf{u}+s \mathbf{u}``
-7. ``r(s \mathbf{u})=(r s) \mathbf{u}``
-8. ``1(\mathbf{u})=\mathbf{u}`` (multiplicative identity).
-"""
-
-# ╔═╡ ddda1623-3b11-46f7-9fda-fd6686dd4343
-cm"""
-$(bth("2 Two Linearly Dependent Vectors"))
-The two vectors ``\mathbf{u}`` and ``\mathbf{v}`` are __linearly dependent__ if and only if there exist scalars ``a`` and ``b`` not both zero such that
-```math
-a \mathbf{u}+b \mathbf{v}=\mathbf{0} .
-```
-"""
-
-# ╔═╡ c31e6c51-9f45-4581-a7b6-54bdf2e04ada
-cm"""
-$(bbl("Remark","Two Linearly Independent Vectors "))
-The two vectors ``\mathbf{u}`` and ``\mathbf{v}`` are __linearly independent__ if and only if the relation
-```math
-a \mathbf{u}+b \mathbf{v}=\mathbf{0}
-```
-implies that ``a=b=0``.
-"""
-
-# ╔═╡ 856ff140-9c2b-4953-a033-849f1af34286
-cm"""
-$(ex(1))
-Consider the vector 
-```math
-\mathbf{u}=(3,-2), \quad \mathbf{v}=(-6,4), \quad\text{and}\quad \mathbf{w}=(5,-7)
-```
-"""
-
-# ╔═╡ 96a09993-9f1a-4908-9334-494b4e198455
-cm"""
-$(ex(2))
-Express the vector ``\mathbf{w}=(11,4)`` as a linear combination of the vectors  ``\mathbf{u}=(3,-2)`` and ``\mathbf{v}= (-2,7)``
-
-"""
-
-# ╔═╡ dff6e998-431d-4493-bc34-6fa9b5de6f93
-cm"""
-$(define(""))
-__Linearly Dependent Vectors in ``R^3``__
-
-The three vectors ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` in ``\mathbf{R}^3`` are said to be __linearly dependent__ provided that one of them is a linear combination of the other two-that is, either
-```math
-\begin{array}{ll}
-\mathbf{w}=r \mathbf{u}+s \mathbf{v} & \text { or } \\
-\mathbf{u}=r \mathbf{v}+s \mathbf{w} & \text { or } \\
-\mathbf{v}=r \mathbf{u}+s \mathbf{w} &
-\end{array}
-```
-for appropriate scalars ``r`` and ``s``.
-"""
-
-# ╔═╡ f61386e6-e32c-45f6-b1a9-dec901195e96
-cm"""
-$(bth("3 Three Linearly Dependent Vectors"))
-The three vectors ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` in ``\mathbf{R}^3`` are __linearly dependent__ if and only if there exist scalars ``a, b``, and ``c`` not all zero such that
-```math
-a \mathbf{u}+b \mathbf{v}+c \mathbf{w}=\mathbf{0}
-```
-"""
-
-# ╔═╡ 20916835-0034-40b5-ab98-1f24fb78247c
-cm"""
-$(bbl("Remark","Linear Independence"))
-The vectors ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` are __linearly independent__ if and only if the relation
-```math
-a \mathbf{u}+b \mathbf{v}+c \mathbf{w}=\mathbf{0}
-```
-implies that ``a=b=c=0``.
-"""
-
-# ╔═╡ f868d290-9a4e-4a6f-933e-ee642deabeac
-cm"""
-$(bth("4 Three Linearly Independent Vectors"))
-The vectors ``\mathbf{u}=\left(u_1, u_2, u_3\right), \mathbf{v}=\left(v_1, v_2, v_3\right)``, and ``\mathbf{w}=\left(w_1, w_2, w_3\right)`` are linearly independent if and only if
-```math
-\left|\begin{array}{lll}
-u_1 & v_1 & w_1 \\
-u_2 & v_2 & w_2 \\
-u_3 & v_3 & w_3
-\end{array}\right| \neq 0
-```
-"""
-
-# ╔═╡ 20e79ac6-f0f4-40e6-89e0-2eaa44e0ff2b
-cm"""
-$(ex(3))
-Check linear independence for
-
-```math
-\mathbf{u}=(1,2,-3), \quad \mathbf{v}=(3,1,-2), \quad \text{and}\quad  \mathbf{w}=(5,-5,6)
-```
-"""
-
-# ╔═╡ f6653849-9370-4f84-a07a-ad924983fda6
-cm"""
-__The basic unit vectors__
-```math
-\mathbf{i}=(1,0,0), \quad \mathbf{j}=(0,1,0), \quad \text { and } \quad \mathbf{k}=(0,0,1)
-```
-
-The expression
-```math
-\mathbf{v}=a \mathbf{i}+b \mathbf{j}+c \mathbf{k}=(a, b, c)
-```
-shows both that
-- the three vectors ``\mathbf{i}, \mathbf{j}``, and ``\mathbf{k}`` are linearly independent (because ``\mathbf{v}=\mathbf{0}`` immediately implies ``a=b=c=0`` ), and that
-- any vector in ``\mathbf{R}^3`` can be expressed as a linear combination of ``\mathbf{i}, \mathbf{j}``, and ``\mathbf{k}``.
-
-- A __basis__ for ``\mathbf{R}^3`` is a triple ``\mathbf{u}, \mathbf{v}, \mathbf{w}`` of vectors such that every vector ``\mathbf{t}`` in ``\mathbf{R}^3`` can be expressed as a linear combination
-```math
-\mathbf{t}=a \mathbf{u}+b \mathbf{v}+c \mathbf{w}
-```
-$(add_space(10))of them. 
-
-That is, given any vector ``\mathbf{t}`` in ``\mathbf{R}^3``, there exist scalars ``a, b, c`` such that Eq. 
-```math
-\mathbf{t}=a \mathbf{u}+b \mathbf{v}+c \mathbf{w}
-```
-holds
-"""
-
-# ╔═╡ 4faab984-e4a5-4620-9c7e-61abd525a1fa
-cm"""
-$(bth("5"))
-__Basis for ``\mathrm{R}^3``__
-
-If the vectors ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` in ``\mathbf{R}^3`` are linearly independent, then they constitute a basis for ``\mathbf{R}^3``.
-"""
-
-# ╔═╡ cf4fc0c1-c9d8-4597-b1d7-a5d65b59421d
-cm"""
-$(ex(4))
-Express the vector ``\mathbf{t}=(4,20,23)`` as a combination of the linearly independent vectors ``\mathbf{u}=(1,3,2), \mathbf{v}=(2,8,7)``, and ``\mathbf{w}=(1,7,9)``
-"""
-
-# ╔═╡ d76bbff8-1730-41cb-93d4-ddb35f66b19b
-cm"""
-$(bbl("Subspaces",""))
-A nonempty subset ``V`` of ``\mathbf{R}^3`` is a __subspace__ of ``\mathbf{R}^3`` if and only if it satisfies the following two conditions:
-
-1. If ``\mathbf{u}`` and ``\mathbf{v}`` are vectors in ``V``, then ``\mathbf{u}+\mathbf{v}`` is also in ``V``  __(closure under addition)__.
-2. If ``\mathbf{u}`` is a vector in ``V`` and ``c`` is a scalar, then ``c \mathbf{u}`` is in ``V`` __(closure under multiplication by scalars)__.
-"""
-
-# ╔═╡ d711bb6f-f627-4568-97f5-5d7690088663
-cm"""
-$(bbl("Remarks",""))
-
-- The subspaces ``\{\boldsymbol{0}\}`` and ``\mathbf{R}^3`` are sometimes called the __trivial subspaces__ of ``\mathbf{R}^3`` (because the verification that they are subspaces is quite trivial). 
-- All subspaces other than ``\{0\}`` and ``\mathbf{R}^3`` itself are called __proper subspaces__ of ``\mathbf{R}^3``.
-- The proper subspaces of ``\mathbf{R}^3`` are what we customarily call __lines__ and __planes__ through the origin. 
-"""
-
-# ╔═╡ 263e7015-3130-4597-b440-a996e52967b9
-cm"""
-$(ex(5))
-Let ``V`` be the set of all vectors ``(x, y)`` in ``\mathbf{R}^2`` such that ``y=x``. That is
-```math
-V = \left\{(x,y)\in \mathbb{R}^2 \;|\; y=x\right\}
-````
-
-Show that the set ``V`` is a subspace of ``\mathbf{R}^2``.
-"""
-
-# ╔═╡ 64e0c10c-a4e8-4435-86fc-60bff5e476d4
-cm"""
-$(ex(6))
-Let ``V`` be the set of all vectors ``(x, y)`` in ``\mathbf{R}^2`` such that ``x+y=1``. That is
-```math
-V = \left\{(x,y)\in \mathbb{R}^2 \;|\; x+y=1\right\}
-````
-
-Show that the set ``V`` is a NOT subspace of ``\mathbf{R}^2``.
-"""
-
-# ╔═╡ d9a91130-0cf8-414e-b8a8-dd352090f7a6
-cm"""
-$(define(""))
-__``n``-Space ``R^n``__
-
-The ``\boldsymbol{n}``-dimensional space ``\mathbf{R}^{\boldsymbol{n}}`` is the set of all ``n``-tuples ``\left(x_1, x_2, x_3, \ldots, x_n\right)`` of real numbers.
-"""
-
-# ╔═╡ f1464582-faf2-4902-96a6-bb1cf17c1102
-cm"""
-$(define("Vector Space"))
-Let ``V`` be a set of elements called vectors, in which the operations of addition of vectors and multiplication of vectors by scalars are defined. That is, given vectors ``\mathbf{u}`` and ``\mathbf{v}`` in ``V`` and a scalar ``c``, the vectors ``\mathbf{u}+\mathbf{v}`` and ``c \mathbf{u}`` are also in ``V`` (so that ``V`` is closed under vector addition and multiplication by scalars). Then, with these operations, ``V`` is called a vector space provided that—given any vectors ``\mathbf{u}, \mathbf{v}``, and ``\mathbf{w}`` in ``V`` and any scalars ``a`` and ``b``-the following properties hold true:
-1. ``\mathbf{u}+\mathbf{v}=\mathbf{v}+\mathbf{u}``
-(commutativity)
-2. ``\mathbf{u}+(\mathbf{v}+\mathbf{w})=(\mathbf{u}+\mathbf{v})+\mathbf{w}``
-(associativity)
-3. ``\mathbf{u}+\mathbf{0}=\mathbf{0}+\mathbf{u}=\mathbf{u}``
-(zero element)
-4. ``\mathbf{u}+(-\mathbf{u})=(-\mathbf{u})+\mathbf{u}=\mathbf{0}``
-(additive inverse)
-5. ``a(\mathbf{u}+\mathbf{v})=a \mathbf{u}+a \mathbf{v}``
-(distributivity)
-6. ``(a+b) \mathbf{u}=a \mathbf{u}+b \mathbf{u}``
-7. ``a(b \mathbf{u})=(a b) \mathbf{u}``
-8. ``(1) \mathbf{u}=\mathbf{u}``
-"""
-
-# ╔═╡ f3d58858-f9ab-42bb-a822-14d03916984e
-cm"""
-$(ex(1)) 
-Let ``\mathscr{F}`` be the set of all real-valued functions defined on the real number line ``\mathbb{R}`` is a vector space with function addition and scalar multiplication.
-"""
-
-# ╔═╡ 4b2763bd-cf78-4913-8d5d-ac10d08b1031
-cm"""
-$(define("Subspace"))
-Let ``W`` be a nonempty subset of the vector space ``V``. Then ``W`` is a subspace of ``V`` provided that ``W`` itself is a vector space with the operations of addition and multiplication by scalars as defined in ``V``.
-"""
-
-# ╔═╡ abefd094-b57a-46c7-a314-eb836e58c6a0
-cm"""
-$(bth("1 Conditions for a Subspace"))
-The nonempty subset ``W`` of the vector space ``V`` is a subspace of ``V`` if and only if it satisfies the following two conditions:
-- (i) If ``\mathbf{u}`` and ``\mathbf{v}`` are vectors in ``W``, then ``\mathbf{u}+\mathbf{v}`` is also in ``W``.
-- (ii) If ``\mathbf{u}`` is in ``W`` and ``c`` is a scalar, then the vector ``c \mathbf{u}`` is also in ``W``.
-"""
-
-# ╔═╡ f8cd8873-f4fb-4300-8aa2-4aee9990cf5e
-cm"""
-$(ex(2))
-Let ``W`` be the subset of ``\mathbf{R}^n`` consisting of all those vectors ``\left(x_1, x_2, \ldots, x_n\right)`` whose coordinates satisfy the single homogeneous linear equation
-```math
-a_1 x_1+a_2 x_2+\cdots+a_n x_n=0
-```
-where the given coefficients ``a_1, a_2, \ldots, a_n`` are not all zero. Show that ``W`` is a subspace of ``\mathbb{R}^n``.
-"""
-
-# ╔═╡ e17f0845-12a9-4da8-b81d-bf3e61d95260
-cm"""
-$(ex(4))
-Let ``W`` be the set of all those vectors ``\left(x_1, x_2, x_3, x_4\right)`` in ``\mathbb{R}^4`` such that ``x_1 x_4=0``. 
-
-Is ``W`` a subspace of ``\mathbb{R}^4``?
-"""
-
-# ╔═╡ b13e61f1-3d38-4f87-838f-5c448ce1193a
-cm"""
-$(bth("2 Solution Subspaces"))
-If ``\mathbf{A}`` is a (constant) ``m \times n`` matrix, then the solution set of the homogeneous linear system
-```math
-\mathbf{A x}=\mathbf{0}
-```
-is a subspace of ``\mathbf{R}^n``. This subspace is called __solution space__ of the system.
-"""
-
-# ╔═╡ add8e82e-02cb-4262-b8e4-ac7a8c317257
-cm"""
-$(ex(5))
-In Example 4 of Section 3.4 we considered the homogeneous system
-```math
-\begin{aligned}
-x_1+3 x_2-15 x_3+7 x_4 & =0 \\
-x_1+4 x_2-19 x_3+10 x_4 & =0 \\
-2 x_1+5 x_2-26 x_3+11 x_4 & =0
-\end{aligned}
-```
-The reduced echelon form of the coefficient matrix of this system is
-```math
-\left[\begin{array}{rrrr}
-1 & 0 & -3 & -2 \\
-0 & 1 & -4 & 3 \\
-0 & 0 & 0 & 0
-\end{array}\right]
-```
-
-What is the solution space of the system?
-"""
-
-# ╔═╡ 56aee5a8-caf4-4cba-9e1e-7e319c21047b
-cm"""
-$(define("Linear Combination"))
-The vector ``\mathbf{w}`` is called a __linear combination__ of the vectors ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` provided that there exist scalars ``c_1, c_2, \ldots, c_k`` such that
-```math
-\mathbf{w}=c_1 \mathbf{v}_1+c_2 \mathbf{v}_2+\cdots+c_k \mathbf{v}_k
-```
-"""
-
-# ╔═╡ f110354f-ab42-481d-9057-fd467fa9a664
-cm"""
-$(define("Spanning Set"))
-Suppose that ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` are vectors in a vector space ``V``. Then we say that the vectors ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` __span__ the vector space ``V`` provided that every vector in ``V`` is a linear combination of these ``k`` vectors. 
-
-We may also say that the set ``S=\left\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k\right\}`` of vectors is a __spanning set__ for ``V``.
-"""
-
-# ╔═╡ 4e16d3d9-668d-4565-95f2-f8c20e73839c
-cm"""
-$(bth("1 The Span of a Set of Vectors"))
-Let ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` be vectors in the vector space ``V``. Then the set ``W`` of all linear combinations of ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` is a subspace of ``V``.
-$(ebl())
-
-- We sometimes write
-```math
-W=\operatorname{span}(S)=\operatorname{span}\left\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k\right\}
-```
-
-- ``\mathbb{R}^3=\operatorname{span}\{\mathbf{i}, \mathbf{j}, \mathbf{k}\}``. 
-"""
-
-# ╔═╡ 4a6e9768-71f4-4a2b-9746-d27c64d31314
-cm"""
-$(define("Linear Independence"))
-The vectors ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` in a vector space ``V`` are said to be __linearly independent__ provided that the equation
-```math
-c_1 \mathbf{v}_1+c_2 \mathbf{v}_2+\cdots+c_k \mathbf{v}_k=\mathbf{0}
-```
-has only the trivial solution ``c_1=c_2=\cdots=c_k=0``. That is, the only linear combination of ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` that represents the zero vector ``\mathbf{0}`` is the trivial combination 
-```math
-0 \mathbf{v}_1+0 \mathbf{v}_2+\cdots+0 \mathbf{v}_k.
-```
-"""
-
-# ╔═╡ d14cb002-bfcd-49d4-8318-62ca9a2e6521
-cm"""
-$(ex(4)) 
-__The standard unit vectors__
-
-```math
-\begin{aligned}
-\mathbf{e}_1 & =(1,0,0, \ldots, 0) \\
-\mathbf{e}_2 & =(0,1,0, \ldots, 0) \\
-& \vdots \\
-\mathbf{e}_n & =(0,0,0, \ldots, 1)
-\end{aligned}
-```
-in ``\mathbb{R}^n`` are __linearly independent__. 
-"""
-
-# ╔═╡ 9221b160-0335-42e3-830f-35be3df0a1ed
-cm"""
-$(bbl("Remark","Linear Dependent"))
-A set of vectors is called __linearly dependent__ provided it is not linearly independent. Hence the vectors ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` are linearly dependent if and only if there exist scalars ``c_1, c_2, \ldots, c_k`` not all zero such that
-```math
-c_1 \mathbf{v}_1+c_2 \mathbf{v}_2+\cdots+c_k \mathbf{v}_k=\mathbf{0}
-```
-
-In short, a (finite) set of vectors is linearly dependent provided that some nontrivial linear combination of them equals the zero vector.
-"""
-
-# ╔═╡ 23159722-3535-468c-8501-987e3786dcdb
-cm"""
-$(ex(5))
-Determine whether the vectors ``\mathbf{v}_1=(1,2,2,1), \mathbf{v}_2=(2,3,4,1)``, and ``\mathbf{v}_3=(3,8,7,5)`` in ``\mathbb{R}^4`` are linearly independent.
-"""
-
-# ╔═╡ 26755d8b-8b1f-43df-8117-a38840b9349b
-cm"""
-$(remarks())
-- Observe that linear independence of the vectors ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` actually is a property of the set ``S=\left\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k\right\}`` whose elements are these vectors. Occasionally the phraseology "the set ``S=\left\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k\right\}`` is linearly independent" is more convenient. 
-
-- Any subset of a linearly independent set ``S=`` ``\left\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k\right\}`` is a linearly independent set of vectors.
-
-- the coefficients in a linear combination of the linearly independent vectors ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` are unique. If both
-"""
-
-# ╔═╡ 57369806-889e-42cf-9da3-7325ff1176f5
-cm"""
-$(ex(6))
-Let ``\mathbf{v}_1=(2,1,3), \mathbf{v}_2=(5,-2,4), \mathbf{v}_3=(3,8,-6)``, and ``\mathbf{v}_4=(2,7,-4)``. Show that these vectors are linealy depedent.
-
-Then the equation ``c_1 \mathbf{v}_1+c_2 \mathbf{v}_2+c_3 \mathbf{v}_3+c_4 \mathbf{v}_4=\mathbf{0}`` is equivalent to the linear system
-```math
-\begin{aligned}
-2 c_1+5 c_2+3 c_3+2 c_4 & =0 \\
-c_1-2 c_2+8 c_3+7 c_4 & =0 \\
-3 c_1+4 c_2-6 c_3-4 c_4 & =0
-\end{aligned}
-```
-of three equations in four unknowns. 
-"""
-
-# ╔═╡ 87f79eab-0b30-4bc8-8a47-fe027d91e476
-cm"""
-$(remark())
-Any set of more than ``n`` vectors in ``\mathbb{R}^n`` is linearly dependent.
-"""
-
-# ╔═╡ 7a6a7ba0-cd23-4d36-b6d7-6af7514d9bb6
-cm"""
-$(bth("2"))
-__Independence of ``\boldsymbol{n}`` Vectors in ``\mathbb{R}^n``__
-
-The ``n`` vectors ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n`` in ``\mathbf{R}^n`` are linearly independent if and only if the ``n \times n`` matrix
-```math
-\mathbf{A}=\left[\begin{array}{llll}
-\mathbf{v}_1 & \mathbf{v}_2 & \cdots & \mathbf{v}_n
-\end{array}\right]
-```
-having them as its column vectors has nonzero determinant.
-"""
-
-# ╔═╡ 46874b7b-0d64-4a7f-bbbc-4744aef58e55
-cm"""
-$(bth("3"))
-__Independence of Fewer Than ``\boldsymbol{n}`` Vectors in ``\mathbb{R}^n``__
-
-Consider ``k`` vectors ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` in ``\mathbf{R}^n``, with ``k<n``. Let
-```math
-\mathbf{A}=\left[\begin{array}{llll}
-\mathbf{v}_1 & \mathbf{v}_2 & \cdots & \mathbf{v}_k
-\end{array}\right]
-```
-be the ``n \times k`` matrix having them as its column vectors. Then the vectors ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` are linearly independent if and only if some ``k \times k`` submatrix of A has nonzero determinant.
-"""
-
-# ╔═╡ 6cd1ff75-1846-45d4-a24e-dc5a8d4b5176
-cm"""
-$(ex())
-If theyare linearly independent, showthis; otherwise find a
- non trivial linear combination of them that is equal to the zero
- vector.
-```math
-\mathbf{v}_1=(2,0,-3), \mathbf{v}_2=(4,-5,-6), \mathbf{v}_3=(-2,1,3)
-```
-"""
-
-# ╔═╡ e0a788cb-4029-4673-8220-4edf08026ca9
-cm"""
-$(ex())
- The vectors ``\{v_1,v_2\}`` are known to be linearly
- independent. Apply the definition of linear independence to
- show that the vectors fuig are also linearly independent.
-```math
-\mathbf{u}_1=\mathbf{v}_1+\mathbf{v}_2, \mathbf{u}_2=2 \mathbf{v}_1+3 \mathbf{v}_2
-```
-
-"""
-
-# ╔═╡ de7140da-31e6-45a6-ba94-83f98cfd9dbf
-cm"""
-$(define("Basis"))
-A finite set ``S`` of vectors in a vector space ``V`` is called a basis for ``V`` provided that
-- (a) the vectors in ``S`` are linearly independent, and
-- (b) the vectors in ``S`` span ``V``.
-"""
-
-# ╔═╡ 14f1a87d-56e1-4606-bfed-8b0fa558ab93
-cm"""
-$(ex(1))
-The standard basis for ``\mathbb{R}^n`` consists of the unit vectors
-```math
-\mathbf{e}_1=(1,0,0, \ldots, 0), \mathbf{e}_2=(0,1,0, \ldots, 0), \ldots, \mathbf{e}_n=(0,0,0, \ldots, 1)
-```
-"""
-
-# ╔═╡ 215b534d-7de6-4e6e-a20c-7ca936bf3af9
-cm"""
-$(bbl("Remark",""))
-
-Any set of ``n`` linearly independent vectors in ``\mathbb{R}^n`` is a __basis__ for ``\mathbb{R}^n``.
-
-
-$(ebl())
-"""
-
-# ╔═╡ 53b4b372-cc7f-48d7-930e-8bf007820dae
-cm"""
-$(ex(3))
-Let ``\mathbf{v}_1=(1,-1,-2,-3), \mathbf{v}_2=(1,-1,2,3), \mathbf{v}_3=(1,-1,-3,-2)``, and ``\mathbf{v}_4=(0,3,-1,2)``. Is the set ``\{v_1,v_2,v_3,v_4\}`` a basis for ``\mathbb{R}^4``?
-"""
-
-# ╔═╡ 91007be4-b072-44bc-a484-5ace7c30a174
-cm"""
-$(bth("1 Bases as Maximal Linearly Independent Sets"))
-Let ``S=\left\{\mathbf{v}_{\mathbf{1}}, \mathbf{v}_2, \ldots, \mathbf{v}_n\right\}`` be a basis for the vector space ``V``. Then any set of more than ``n`` vectors in ``V`` is linearly dependent.
-"""
-
-# ╔═╡ 83e6ef8d-5c04-4805-a9fe-5ef096b1c5a6
-cm"""
-$(bth("The Dimension of a Vector Space"))
-Any two bases for a vector space consist of the same number of vectors.
-"""
-
-# ╔═╡ 390905b4-84be-430a-be26-da43007d8de2
-cm"""
-$(define("Dimension of a Vector Space"))
-A nonzero vector space ``V`` is called __finite dimensional__ provided that there exists a basis for ``V`` consisting of a __finite number of vectors__ from ``V``. In this case the number ``n`` of vectors in each basis for ``V`` is called the __dimension of ``V``, denoted by ``n=\operatorname{dim} V``__. 
-"""
-
-# ╔═╡ 36b5cd1f-7872-491c-95c9-e0503b7d5ca6
-cm"""
-$(bbl("Remarks"))
-- Note that the zero vector space ``\{\boldsymbol{0}\}`` has no basis because it contains no linearly independent set of vectors. (Sometimes it is convenient to adopt the convention that the null set is a basis for ``\{\boldsymbol{0}\}``.) Here we define ``\operatorname{dim}\{\boldsymbol{0}\}=0``. 
-- A nonzero vector space that has no finite basis is called __infinite dimensional__. 
-"""
-
-# ╔═╡ a35044ca-ff7d-411c-ad19-b1067dc96b0d
-cm"""
-$(ex(4))
-Let ``\mathcal{P}`` be the set of all polynomials of the form 
-```math
-p(x)=a_0+a_1 x+a_2 x^2+\cdots+a_n x^n
-```
-where the largest exponent ``n \geq 0`` that appears is the degree of the polynomial ``p(x)``, and the coefficients ``a_0, a_1, a_2, \ldots, a_n`` are real numbers. 
-
-``\mathcal{P}`` is an infinite-dimensional space.
-"""
-
-# ╔═╡ 77fbd41a-f3ac-477e-b4e0-01cb0049362f
-cm"""
-$(bth("3 Independent Sets, Spanning Sets, and Bases"))
-Let ``V`` be an ``n``-dimensional vector space and let ``S`` be a subset of ``V``. Then
-- (a) If ``S`` is linearly independent and consists of ``n`` vectors, then ``S`` is a basis for ``V``;
-- (b) If ``S`` spans ``V`` and consists of ``n`` vectors, then ``S`` is a basis for ``V``;
-- (c) If ``S`` is linearly independent, then ``S`` is contained in a basis for ``V``;
-- (d) If ``S`` spans ``V``, then ``S`` contains a basis for ``V``.
-"""
-
-# ╔═╡ 50e51cd6-6337-47ee-b405-3b0ec86a9ad3
-cm"""
-$(bbl("ALGORITHM A Basis for the Solution Space"))
-To find a basis for the solution space ``W`` of the homogeneous linear system ``\mathbf{A x}=`` ``\mathbf{0}``, carry out the following steps.
-1. Reduce the coefficient matrix ``\mathbf{A}`` to echelon form.
-2. Identify the ``r`` leading variables and the ``k=n-r`` free variables. If ``k=0``, then ``W=\{0\}``.
-3. Set the free variables equal to parameters ``t_1, t_2, \ldots, t_k``, and then solve by back substitution for the leading variables in terms of these parameters.
-4. Let ``\mathbf{v}_j`` be the solution vector obtained by setting ``t_j`` equal to 1 and the other parameters equal to zero. Then ``\left\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k\right\}`` is a basis for ``W``.
-"""
-
-# ╔═╡ 0a7fda1b-7041-481d-8935-e25e91040e3a
-cm"""
-$(ex(5))
-Find a basis for the solution space of the homogeneous linear system
-```math
-\begin{aligned}
-& 3 x_1+6 x_2-x_3-5 x_4+5 x_5=0 \\
-& 2 x_1+4 x_2-x_3-3 x_4+2 x_5=0 \\
-& 3 x_1+6 x_2-2 x_3-4 x_4+x_5=0
-\end{aligned}
-```
-"""
-
-# ╔═╡ cd3dcd43-5aa6-4f0d-9e26-2a7e5d5db706
-cm"""
-$(define("Row Sapce of a Matrix"))
-Let ``A\in \mathbb{R}^{m\times n}`` be an ``m\times n`` matrix. The __row space__ of ``A`` (denoted by ``\textrm{Row}(A)``) is the subspace of ``\mathbb{R}^n`` spanned by the ``m`` rows of ``A``. 
-The dimension of ``\textrm{Row}(A)`` is called the __row rank__ of ``A``.
-$(ebl())
-
-$(define("Column Sapce of a Matrix"))
-Let ``A\in \mathbb{R}^{m\times n}`` be an ``m\times n`` matrix. The __column space__ of ``A`` (denoted by ``\textrm{Col}(A)``) is the subspace of ``\mathbb{R}^m`` spanned by the ``n`` columns of ``A``. 
-The dimension of ``\textrm{Col}(A)`` is called the __column rank__ of ``A``.
-$(ebl())
-
-"""
-
-# ╔═╡ 131a8093-a933-4ffe-b5b9-396cbe6b03e2
-cm"""
-$(bth("Rank of a Matrix"))
-Let ``A\in \mathbb{R}^{m\times n}`` be an ``m\times n`` matrix. The __column rank__ of ``A`` is equal to the __row rank__ of ``A``. So we define the __rank of ``A``__ as
-```math
-\textrm{rank}(A) = \textrm{dim}(\textrm{Col}(A)) =\textrm{dim}(\textrm{Row}(A))
-```
-"""
-
-# ╔═╡ 87933565-4591-492c-a819-6136c1b1b547
-cm"""
-$(ex())
-Find ``\textrm{rank}(A)`` of 
-```math
-A = \begin{bmatrix}
-		3& 6 &-1& -5& 5 \\
-		2& 4& -1& -3& 2 \\
-		3& 6& -2& -4& 1\\
-
-	\end{bmatrix}
-```
-	
-"""
-
-# ╔═╡ 55fb1d51-1582-4465-ae90-d21a4322281b
-cm"""
-$(bth("1 Principle of Superposition for Homogeneous Equations"))
-Let ``y_1`` and ``y_2`` be two solutions of the homogeneous linear equation in (7) on the interval ``I``. If ``c_1`` and ``c_2`` are constants, then the linear combination
-```math
-y=c_1 y_1+c_2 y_2
-```
-is also a solution of Eq. (7) on ``I``.
-"""
-
-# ╔═╡ 03dcf152-ab37-478f-8130-b53a8047c7b0
-cm"""
-
-$(bth("2 Existence and Uniqueness for Linear Equations"))
-Suppose that the functions ``p, q``, and ``f`` are continuous on the open interval ``I`` containing the point ``a``. Then, given any two numbers ``b_0`` and ``b_1``, the equation
-```math
-y^{\prime \prime}+p(x) y^{\prime}+q(x) y=f(x)
-```
-has a unique (that is, one and only one) solution on the entire interval ``I`` that satisfies the initial conditions
-```math
-y(a)=b_0, \quad y^{\prime}(a)=b_1
-```
-"""
-
-# ╔═╡ 21aea514-7f39-41b8-9e51-4139e5d1825d
-cm"""
-$(ex(2)) Verify that the functions
-```math
-y_1(x)=e^x \quad \text { and } \quad y_2(x)=x e^x
-```
-are solutions of the differential equation
-```math
-y^{\prime \prime}-2 y^{\prime}+y=0
-```
-"""
-
-# ╔═╡ b35479c0-8873-42d5-9296-8e22323f7e96
-cm"""
-$(define("Linear Independence of Two Functions"))
-Two functions defined on an open interval ``I`` are said to be linearly independent on ``I`` provided that neither is a constant multiple of the other.
-"""
-
-# ╔═╡ d3371b50-9c33-4df0-91b2-1c3bd13b7093
-cm"""
-$(bth("3 Wronskians of Solutions"))
-Suppose that ``y_1`` and ``y_2`` are two solutions of the homogeneous second-order linear equation (Eq. (7))
-```math
-y^{\prime \prime}+p(x) y^{\prime}+q(x) y=0
-```
-on an open interval ``I`` on which ``p`` and ``q`` are continuous.
-- (a) If ``y_1`` and ``y_2`` are linearly dependent, then ``W\left(y_1, y_2\right) \equiv 0`` on ``I``.
-- (b) If ``y_1`` and ``y_2`` are linearly independent, then ``W\left(y_1, y_2\right) \neq 0`` at each point of ``I``.
-
-Where ``W(y_1,y_2)`` is called the __Wronskian__ of ``y_1`` and ``y_2`` and is defined as the determinant
-```math
-W=\left|\begin{array}{cc}
-y_1 & y_2 \\
-y_1^{\prime} & y_2^{\prime}
-\end{array}\right|=y_1 y_2^{\prime}-y_1^{\prime} y_2
-```
-"""
-
-# ╔═╡ 48739d88-721f-471c-afa6-7cbb2e92ce3d
-cm"""
-$(bth("4 General Solutions of Homogeneous Equations"))
-Let ``y_1`` and ``y_2`` be two linearly independent solutions of the homogeneous equation (Eq. (7))
-```math
-y^{\prime \prime}+p(x) y^{\prime}+q(x) y=0
-```
-with ``p`` and ``q`` continuous on the open interval ``I``. If ``Y`` is any solution whatsoever of Eq. (7) on ``I``, then there exist numbers ``c_1`` and ``c_2`` such that
-```math
-Y(x)=c_1 y_1(x)+c_2 y_2(x)
-```
-for all ``x`` in ``I``.
-"""
-
-# ╔═╡ a7f45d96-911d-470e-a370-7037820a927b
-cm"""
-$(bth("5 Distinct Real Roots"))
-If the roots ``r_1`` and ``r_2`` of the characteristic equation in (8) are real and distinct, then
-```math
-y(x)=c_1 e^{r_1 x}+c_2 e^{r_2 x}
-```
-is a general solution of Eq. (9). Thus the solution space of the equation ``a y^{\prime \prime}+`` ``b y^{\prime}+c y=0`` has basis ``\left\{e^{r_1 x}, e^{r_2 x}\right\}``.
-"""
-
-# ╔═╡ dbbdb46b-5cb6-4ee2-831e-251f8b39f9b8
-cm"""
-$(ex(5)) Find the general solution of ``\quad 2 y^{\prime \prime}-7 y^{\prime}+3 y=0``
-"""
-
-# ╔═╡ 0354703b-ee11-4d5c-8707-6b8559ca3fac
-cm"""
-$(bth("6 Repeated Roots"))
-If the characteristic equation in (8) has equal (necessarily real) roots ``r_1=r_2``, then
-```math
-y(x)=\left(c_1+c_2 x\right) e^{r_1 x}
-```
-is a general solution of Eq. (9). In this case the solution space of the equation ``a y^{\prime \prime}+b y^{\prime}+c y=0`` has basis ``\left\{e^{r_1 x}, x e^{r_1 x}\right\}``.
-"""
-
-# ╔═╡ e15959e9-60c8-4084-9adb-012ca2ab1c2e
-cm"""
-$(ex(7))
-To solve the initial value problem
-```math
-\begin{aligned}
-& y^{\prime \prime}+2 y^{\prime}+y=0 \\
-& y(0)=5, \quad y^{\prime}(0)=-3
-\end{aligned}
-```
-"""
-
-# ╔═╡ adea2ccd-4182-4317-b949-cd76dc7cddcf
-cm"""
-$(bth(" 1 Principle of Superposition for Homogeneous Equations"))
-Let ``y_1, y_2, \ldots, y_n`` be ``n`` solutions of the homogeneous linear equation in (11) on the interval ``I``. If ``c_1, c_2, \ldots, c_n`` are constants, then the linear combination
-```math
-y=c_1 y_1+c_2 y_2+\cdots+c_n y_n
-```
-is also a solution of Eq. (11) on ``I``.
-"""
-
-# ╔═╡ 1cd59ab0-6e97-469b-9723-466105b77ef7
-cm"""
-$(bth(" 2 Existence and Uniqueness for Linear Equations"))
-Suppose that the functions ``p_1, p_2, \ldots, p_n``, and ``f`` are continuous on the open interval ``I`` containing the point ``a``. Then, given ``n`` numbers ``b_0, b_1, \ldots, b_{n-1}``, the ``n`` th-order linear equation (Eq. (10))
-```math
-y^{(n)}+p_1(x) y^{(n-1)}+\cdots+p_{n-1}(x) y^{\prime}+p_n(x) y=f(x)
-```
-has a unique (that is, one and only one) solution on the entire interval ``I`` that satisfies the ``n`` initial conditions
-```math
-y(a)=b_0, \quad y^{\prime}(a)=b_1, \quad \ldots, \quad y^{(n-1)}(a)=b_{n-1} .
-```
-"""
-
-# ╔═╡ 3288d394-9746-450d-aab1-8dc3689b6c4f
-cm"""
-$(define("Linear Dependence of Functions"))
-The ``n`` functions ``f_1, f_2, \ldots, f_n`` are said to be linearly dependent on the interval ``I`` provided that there exist constants ``c_1, c_2, \ldots, c_n`` not all zero such that
-```math
-c_1 f_1+c_2 f_2+\cdots+c_n f_n=0
-```
-on ``I``; that is,
-```math
-c_1 f_1(x)+c_2 f_2(x)+\cdots+c_n f_n(x)=0
-```
-for all ``x`` in ``I``.
-"""
-
-# ╔═╡ 576d55ef-48c6-4785-b431-3b36324650fd
-cm"""
-$(bbl("Reamrks"))
-To show that the functions ``f_1, f_2, \ldots, f_n`` are __linearly independent__ on the interval ``I``, it suffices to show that their Wronskian is nonzero at just one point of ``I``. i.e.
-```math
-W=\left|\begin{array}{cccc}f_1 & f_2 & \cdots & f_n \\ f_1^{\prime} & f_2^{\prime} & \cdots & f_n^{\prime} \\ \vdots & \vdots & & \vdots \\ f_1^{(n-1)} & f_2^{(n-1)} & \cdots & f_n^{(n-1)}\end{array}\right| \not = 0
-```
-"""
-
-# ╔═╡ ae990960-82a6-41f6-93e5-62a399b22288
-cm"""
-$(bth("3 Wronskians of Solutions"))
-Suppose that ``y_1, y_2, \ldots, y_n`` are ``n`` solutions of the homogeneous ``n`` th-order linear equation
-```math
-y^{(n)}+p_1(x) y^{(n-1)}+\cdots+p_{n-1}(x) y^{\prime}+p_n(x) y=0
-```
-on an open interval ``I``, where each ``p_i`` is continuous. Let
-```math
-W=W\left(y_1, y_2, \ldots, y_n\right)
-```
-- (a) If ``y_1, y_2, \ldots, y_n`` are linearly dependent, then ``W \equiv 0`` on ``I``.
-- (b) If ``y_1, y_2, \ldots, y_n`` are linearly independent, then ``W \neq 0`` at each point of ``I``.
-
-Thus there are just two possibilities: Either ``W=0`` everywhere on ``I``, or ``W \neq 0`` everywhere on ``I``.
-"""
-
-# ╔═╡ f3a35115-28e5-4d79-a3d5-a7e4370ad976
-cm"""
-$(ex())
-Show that the functions ``y_1(x)=e^{-3 x}, y_2(x)=\cos 2 x``, and ``y_3(x)=\sin 2 x``  are linearly independent.
-"""
-
-# ╔═╡ 6e905945-6a6a-4bc0-8693-0206e1d920c0
-cm"""
-$(bth("4 General Solutions of Homogeneous Equations"))
-Let ``y_1, y_2, \ldots, y_n`` be ``n`` linearly independent solutions of the homogeneous equation
-
-$(texeq"y^{(n)}+p_1(x) y^{(n-1)}+\cdots+p_{n-1}(x) y^{\prime}+p_n(x) y=0")
-
-on an open interval ``I`` where the ``p_i`` are continuous. If ``Y`` is any solution whatsoever of Eq. (12), then there exist numbers ``c_1, c_2, \ldots, c_n`` such that
-```math
-Y(x)=c_1 y_1(x)+c_2 y_2(x)+\cdots+c_n y_n(x)
-```
-for all ``x`` in ``I``.
-"""
-
-# ╔═╡ 2c586df8-7dc5-4692-ab09-ec0d42e22904
-cm"""
-$(bth(" 5 Solutions of Nonhomogeneous Equations"))
-Let ``y_p`` be a particular solution of the nonhomogeneous equation in (13) on an open interval ``I`` where the functions ``p_i`` and ``f`` are continuous. Let ``y_1, y_2, \ldots, y_n`` be linearly independent solutions of the associated homogeneous equation in (14). If ``Y`` is any solution whatsoever of Eq. (13) on ``I``, then there exist numbers ``c_1, c_2, \ldots``, ``c_n`` such that
-```math
-Y(x)=c_1 y_1(x)+c_2 y_2(x)+\cdots+c_n y_n(x)+y_p(x)
-```
-for all ``x`` in ``I``.
-"""
-
-# ╔═╡ 91ccaa9f-65c3-4527-8ff2-48e02381a8d6
-cm"""
-$(ex())
-Solve ``y^{\prime \prime}-4 y=12 x``.
-
-"""
-
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
 initialize_eqref()
 
@@ -2466,15 +2299,15 @@ SymPy = "24249f21-da20-56a4-8eb1-6a02cf4ae2e6"
 
 [compat]
 Colors = "~0.12.11"
-CommonMark = "~0.8.15"
+CommonMark = "~0.8.12"
 HypertextLiteral = "~0.9.5"
 LaTeXStrings = "~1.3.1"
 Latexify = "~0.16.5"
 PlotThemes = "~3.2.0"
 Plots = "~1.40.8"
-PlutoExtras = "~0.7.13"
-PlutoUI = "~0.7.60"
-PrettyTables = "~2.4.0"
+PlutoExtras = "~0.7.12"
+PlutoUI = "~0.7.59"
+PrettyTables = "~2.3.2"
 QRCoders = "~1.4.5"
 SymPy = "~2.2.0"
 """
@@ -2483,9 +2316,9 @@ SymPy = "~2.2.0"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.11.0"
+julia_version = "1.10.5"
 manifest_format = "2.0"
-project_hash = "7da05748dac78c02b49902a8bf42c86d7c455cde"
+project_hash = "f817cd5ac65c8931c7f01777c1ac255aeeccba40"
 
 [[deps.AbstractFFTs]]
 deps = ["LinearAlgebra"]
@@ -2509,11 +2342,10 @@ version = "1.3.2"
 
 [[deps.ArgTools]]
 uuid = "0dad84c5-d112-42e6-8d28-ef12dabb789f"
-version = "1.1.2"
+version = "1.1.1"
 
 [[deps.Artifacts]]
 uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
-version = "1.11.0"
 
 [[deps.AxisArrays]]
 deps = ["Dates", "IntervalSets", "IterTools", "RangeArrays"]
@@ -2523,7 +2355,6 @@ version = "0.4.7"
 
 [[deps.Base64]]
 uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
-version = "1.11.0"
 
 [[deps.BitFlags]]
 git-tree-sha1 = "0691e34b3bb8be9307330f88d1a3c3f25466c24d"
@@ -2543,9 +2374,9 @@ version = "0.5.0"
 
 [[deps.Cairo_jll]]
 deps = ["Artifacts", "Bzip2_jll", "CompilerSupportLibraries_jll", "Fontconfig_jll", "FreeType2_jll", "Glib_jll", "JLLWrappers", "LZO_jll", "Libdl", "Pixman_jll", "Xorg_libXext_jll", "Xorg_libXrender_jll", "Zlib_jll", "libpng_jll"]
-git-tree-sha1 = "009060c9a6168704143100f36ab08f06c2af4642"
+git-tree-sha1 = "a2f1c8c668c8e3cb4cca4e57a8efdb09067bb3fd"
 uuid = "83423d85-b0ee-5818-9007-b63ccbeb887a"
-version = "1.18.2+1"
+version = "1.18.0+2"
 
 [[deps.CodecZlib]]
 deps = ["TranscodingStreams", "Zlib_jll"]
@@ -2583,10 +2414,10 @@ uuid = "3709ef60-1bee-4518-9f2f-acd86f176c50"
 version = "0.2.1"
 
 [[deps.CommonMark]]
-deps = ["Crayons", "PrecompileTools"]
-git-tree-sha1 = "3faae67b8899797592335832fccf4b3c80bb04fa"
+deps = ["Crayons", "JSON", "PrecompileTools", "URIs"]
+git-tree-sha1 = "532c4185d3c9037c0237546d817858b23cf9e071"
 uuid = "a80b9123-70ca-4bc0-993e-6e3bcb318db6"
-version = "0.8.15"
+version = "0.8.12"
 
 [[deps.CommonSolve]]
 git-tree-sha1 = "0eee5eb66b1cf62cd6ad1b460238e60e4b09400c"
@@ -2661,7 +2492,6 @@ version = "1.0.0"
 [[deps.Dates]]
 deps = ["Printf"]
 uuid = "ade2ca70-3891-5945-98fb-dc099432e06a"
-version = "1.11.0"
 
 [[deps.Dbus_jll]]
 deps = ["Artifacts", "Expat_jll", "JLLWrappers", "Libdl"]
@@ -2678,7 +2508,6 @@ version = "1.9.1"
 [[deps.Distributed]]
 deps = ["Random", "Serialization", "Sockets"]
 uuid = "8ba89e20-285c-5b6f-9357-94700520ee1b"
-version = "1.11.0"
 
 [[deps.DocStringExtensions]]
 deps = ["LibGit2"]
@@ -2722,9 +2551,9 @@ version = "0.1.4"
 
 [[deps.FFMPEG]]
 deps = ["FFMPEG_jll"]
-git-tree-sha1 = "53ebe7511fa11d33bec688a9178fac4e49eeee00"
+git-tree-sha1 = "b57e3acbe22f8484b4b5ff66a7499717fe1a9cc8"
 uuid = "c87230d0-a227-11e9-1b43-d7ebe4e7570a"
-version = "0.4.2"
+version = "0.4.1"
 
 [[deps.FFMPEG_jll]]
 deps = ["Artifacts", "Bzip2_jll", "FreeType2_jll", "FriBidi_jll", "JLLWrappers", "LAME_jll", "Libdl", "Ogg_jll", "OpenSSL_jll", "Opus_jll", "PCRE2_jll", "Zlib_jll", "libaom_jll", "libass_jll", "libfdk_aac_jll", "libvorbis_jll", "x264_jll", "x265_jll"]
@@ -2734,13 +2563,12 @@ version = "4.4.4+1"
 
 [[deps.FileIO]]
 deps = ["Pkg", "Requires", "UUIDs"]
-git-tree-sha1 = "62ca0547a14c57e98154423419d8a342dca75ca9"
+git-tree-sha1 = "82d8afa92ecf4b52d78d869f038ebfb881267322"
 uuid = "5789e2e9-d7fb-5bc7-8068-2c6fae9b9549"
-version = "1.16.4"
+version = "1.16.3"
 
 [[deps.FileWatching]]
 uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
-version = "1.11.0"
 
 [[deps.FixedPointNumbers]]
 deps = ["Statistics"]
@@ -2808,9 +2636,9 @@ version = "0.4.2"
 
 [[deps.GeoInterface]]
 deps = ["Extents", "GeoFormatTypes"]
-git-tree-sha1 = "2f6fce56cdb8373637a6614e14a5768a88450de2"
+git-tree-sha1 = "5921fc0704e40c024571eca551800c699f86ceb4"
 uuid = "cf35fbd7-0cd7-5166-be24-54bfbe79505f"
-version = "1.3.7"
+version = "1.3.6"
 
 [[deps.GeometryBasics]]
 deps = ["EarCut_jll", "Extents", "GeoInterface", "IterTools", "LinearAlgebra", "StaticArrays", "StructArrays", "Tables"]
@@ -2832,9 +2660,9 @@ version = "9.55.0+4"
 
 [[deps.Glib_jll]]
 deps = ["Artifacts", "Gettext_jll", "JLLWrappers", "Libdl", "Libffi_jll", "Libiconv_jll", "Libmount_jll", "PCRE2_jll", "Zlib_jll"]
-git-tree-sha1 = "674ff0db93fffcd11a3573986e550d66cd4fd71f"
+git-tree-sha1 = "7c82e6a6cd34e9d935e9aa4051b66c6ff3af59ba"
 uuid = "7746bdde-850d-59dc-9ae8-88ece973131d"
-version = "2.80.5+0"
+version = "2.80.2+0"
 
 [[deps.Graphics]]
 deps = ["Colors", "LinearAlgebra", "NaNMath"]
@@ -2944,7 +2772,6 @@ version = "0.1.5"
 [[deps.InteractiveUtils]]
 deps = ["Markdown"]
 uuid = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
-version = "1.11.0"
 
 [[deps.IntervalSets]]
 git-tree-sha1 = "dba9ddf07f77f60450fe5d2e2beb9854d9a49bd0"
@@ -2980,9 +2807,9 @@ version = "0.1.8"
 
 [[deps.JLLWrappers]]
 deps = ["Artifacts", "Preferences"]
-git-tree-sha1 = "be3dc50a92e5a386872a493a10050136d4703f9b"
+git-tree-sha1 = "f389674c99bfcde17dc57454011aa44d5a260a40"
 uuid = "692b3bcd-3c85-4b1f-b108-f13ce0eb3210"
-version = "1.6.1"
+version = "1.6.0"
 
 [[deps.JSON]]
 deps = ["Dates", "Mmap", "Parsers", "Unicode"]
@@ -2998,9 +2825,9 @@ version = "0.1.5"
 
 [[deps.JpegTurbo_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "25ee0be4d43d0269027024d75a24c24d6c6e590c"
+git-tree-sha1 = "c84a835e1a09b289ffcd2271bf2a337bbdda6637"
 uuid = "aacddb02-875f-59d6-b918-886e6ef4fbf8"
-version = "3.0.4+0"
+version = "3.0.3+0"
 
 [[deps.LAME_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
@@ -3022,9 +2849,9 @@ version = "18.1.7+0"
 
 [[deps.LZO_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "854a9c268c43b77b0a27f22d7fab8d33cdb3a731"
+git-tree-sha1 = "70c5da094887fd2cae843b8db33920bac4b6f07d"
 uuid = "dd4b983a-f0e5-5f8d-a1b7-129d4a5fb1ac"
-version = "2.10.2+1"
+version = "2.10.2+0"
 
 [[deps.LaTeXStrings]]
 git-tree-sha1 = "50901ebc375ed41dbf8058da26f9de442febbbec"
@@ -3060,17 +2887,16 @@ version = "0.6.4"
 [[deps.LibCURL_jll]]
 deps = ["Artifacts", "LibSSH2_jll", "Libdl", "MbedTLS_jll", "Zlib_jll", "nghttp2_jll"]
 uuid = "deac9b47-8bc7-5906-a0fe-35ac56dc84c0"
-version = "8.6.0+0"
+version = "8.4.0+0"
 
 [[deps.LibGit2]]
 deps = ["Base64", "LibGit2_jll", "NetworkOptions", "Printf", "SHA"]
 uuid = "76f85450-5226-5b5a-8eaa-529ad045b433"
-version = "1.11.0"
 
 [[deps.LibGit2_jll]]
 deps = ["Artifacts", "LibSSH2_jll", "Libdl", "MbedTLS_jll"]
 uuid = "e37daf67-58a4-590a-8e99-b0245dd2ffc5"
-version = "1.7.2+0"
+version = "1.6.4+0"
 
 [[deps.LibSSH2_jll]]
 deps = ["Artifacts", "Libdl", "MbedTLS_jll"]
@@ -3079,7 +2905,6 @@ version = "1.11.0+1"
 
 [[deps.Libdl]]
 uuid = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
-version = "1.11.0"
 
 [[deps.Libffi_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -3132,7 +2957,6 @@ version = "2.40.1+0"
 [[deps.LinearAlgebra]]
 deps = ["Libdl", "OpenBLAS_jll", "libblastrampoline_jll"]
 uuid = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
-version = "1.11.0"
 
 [[deps.LittleCMS_jll]]
 deps = ["Artifacts", "JLLWrappers", "JpegTurbo_jll", "Libdl", "Libtiff_jll"]
@@ -3158,7 +2982,6 @@ version = "0.3.28"
 
 [[deps.Logging]]
 uuid = "56ddb016-857b-54e1-b83d-db4d58db5568"
-version = "1.11.0"
 
 [[deps.LoggingExtras]]
 deps = ["Dates", "Logging"]
@@ -3184,14 +3007,13 @@ version = "0.4.2"
 
 [[deps.MarchingCubes]]
 deps = ["PrecompileTools", "StaticArrays"]
-git-tree-sha1 = "301345b808264ae42e60d10a519e55c5d992969b"
+git-tree-sha1 = "27d162f37cc29de047b527dab11a826dd3a650ad"
 uuid = "299715c1-40a9-479a-aaf9-4a633d36f717"
-version = "0.1.10"
+version = "0.1.9"
 
 [[deps.Markdown]]
 deps = ["Base64"]
 uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
-version = "1.11.0"
 
 [[deps.MbedTLS]]
 deps = ["Dates", "MbedTLS_jll", "MozillaCACerts_jll", "NetworkOptions", "Random", "Sockets"]
@@ -3202,7 +3024,7 @@ version = "1.1.9"
 [[deps.MbedTLS_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "c8ffd9c3-330d-5841-b78e-0817d7145fa1"
-version = "2.28.6+0"
+version = "2.28.2+1"
 
 [[deps.Measures]]
 git-tree-sha1 = "c13304c81eec1ed3af7fc20e75fb6b26092a1102"
@@ -3217,7 +3039,6 @@ version = "1.2.0"
 
 [[deps.Mmap]]
 uuid = "a63ad114-7e13-5084-954f-fe012c677804"
-version = "1.11.0"
 
 [[deps.MosaicViews]]
 deps = ["MappedArrays", "OffsetArrays", "PaddedViews", "StackViews"]
@@ -3227,7 +3048,7 @@ version = "0.3.4"
 
 [[deps.MozillaCACerts_jll]]
 uuid = "14a3606d-f60d-562e-9121-12d972cd8159"
-version = "2023.12.12"
+version = "2023.1.10"
 
 [[deps.NaNMath]]
 deps = ["OpenLibm_jll"]
@@ -3265,7 +3086,7 @@ version = "1.3.5+1"
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.27+1"
+version = "0.3.23+4"
 
 [[deps.OpenEXR]]
 deps = ["Colors", "FileIO", "OpenEXR_jll"]
@@ -3360,13 +3181,9 @@ uuid = "30392449-352a-5448-841d-b1acce4e97dc"
 version = "0.43.4+0"
 
 [[deps.Pkg]]
-deps = ["Artifacts", "Dates", "Downloads", "FileWatching", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "Random", "SHA", "TOML", "Tar", "UUIDs", "p7zip_jll"]
+deps = ["Artifacts", "Dates", "Downloads", "FileWatching", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "Serialization", "TOML", "Tar", "UUIDs", "p7zip_jll"]
 uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
-version = "1.11.0"
-weakdeps = ["REPL"]
-
-    [deps.Pkg.extensions]
-    REPLExt = "REPL"
+version = "1.10.0"
 
 [[deps.PkgVersion]]
 deps = ["Pkg"]
@@ -3406,17 +3223,23 @@ version = "1.40.8"
     ImageInTerminal = "d8c32880-2388-543b-8c61-d9f865259254"
     Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
 
+[[deps.PlutoDevMacros]]
+deps = ["AbstractPlutoDingetjes", "DocStringExtensions", "HypertextLiteral", "InteractiveUtils", "MacroTools", "Markdown", "Pkg", "Random", "TOML"]
+git-tree-sha1 = "c3839362a712e6d9c2845d179edafe74371cb77b"
+uuid = "a0499f29-c39b-4c5c-807c-88074221b949"
+version = "0.7.4"
+
 [[deps.PlutoExtras]]
-deps = ["AbstractPlutoDingetjes", "DocStringExtensions", "HypertextLiteral", "InteractiveUtils", "Markdown", "PlutoUI", "REPL", "Random"]
-git-tree-sha1 = "681f89bdd5c1da76b31a524af798efb5eb332ee9"
+deps = ["AbstractPlutoDingetjes", "HypertextLiteral", "InteractiveUtils", "Markdown", "PlutoDevMacros", "PlutoUI", "REPL"]
+git-tree-sha1 = "93d8c75734da9192d0639406fe6fb446be0fba4f"
 uuid = "ed5d0301-4775-4676-b788-cf71e66ff8ed"
-version = "0.7.13"
+version = "0.7.12"
 
 [[deps.PlutoUI]]
 deps = ["AbstractPlutoDingetjes", "Base64", "ColorTypes", "Dates", "FixedPointNumbers", "Hyperscript", "HypertextLiteral", "IOCapture", "InteractiveUtils", "JSON", "Logging", "MIMEs", "Markdown", "Random", "Reexport", "URIs", "UUIDs"]
-git-tree-sha1 = "eba4810d5e6a01f612b948c9fa94f905b49087b0"
+git-tree-sha1 = "ab55ee1510ad2af0ff674dbcced5e94921f867a9"
 uuid = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
-version = "0.7.60"
+version = "0.7.59"
 
 [[deps.PrecompileTools]]
 deps = ["Preferences"]
@@ -3432,14 +3255,13 @@ version = "1.4.3"
 
 [[deps.PrettyTables]]
 deps = ["Crayons", "LaTeXStrings", "Markdown", "PrecompileTools", "Printf", "Reexport", "StringManipulation", "Tables"]
-git-tree-sha1 = "1101cd475833706e4d0e7b122218257178f48f34"
+git-tree-sha1 = "66b20dd35966a748321d3b2537c4584cf40387c7"
 uuid = "08abe8d2-0d0c-5749-adfa-8a2ac140af0d"
-version = "2.4.0"
+version = "2.3.2"
 
 [[deps.Printf]]
 deps = ["Unicode"]
 uuid = "de0858da-6303-5e67-8744-51eddeeeb8d7"
-version = "1.11.0"
 
 [[deps.ProgressMeter]]
 deps = ["Distributed", "Printf"]
@@ -3490,14 +3312,12 @@ uuid = "e99dba38-086e-5de3-a5b1-6e4c66e897c3"
 version = "6.7.1+1"
 
 [[deps.REPL]]
-deps = ["InteractiveUtils", "Markdown", "Sockets", "StyledStrings", "Unicode"]
+deps = ["InteractiveUtils", "Markdown", "Sockets", "Unicode"]
 uuid = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
-version = "1.11.0"
 
 [[deps.Random]]
 deps = ["SHA"]
 uuid = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
-version = "1.11.0"
 
 [[deps.RangeArrays]]
 git-tree-sha1 = "b9039e93773ddcfc828f12aadf7115b4b4d225f5"
@@ -3551,7 +3371,6 @@ version = "1.2.1"
 
 [[deps.Serialization]]
 uuid = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
-version = "1.11.0"
 
 [[deps.Showoff]]
 deps = ["Dates", "Grisu"]
@@ -3578,7 +3397,6 @@ version = "0.1.3"
 
 [[deps.Sockets]]
 uuid = "6462fe0b-24de-5631-8697-dd941f90decc"
-version = "1.11.0"
 
 [[deps.SortingAlgorithms]]
 deps = ["DataStructures"]
@@ -3589,7 +3407,7 @@ version = "1.2.1"
 [[deps.SparseArrays]]
 deps = ["Libdl", "LinearAlgebra", "Random", "Serialization", "SuiteSparse_jll"]
 uuid = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
-version = "1.11.0"
+version = "1.10.0"
 
 [[deps.SpecialFunctions]]
 deps = ["IrrationalConstants", "LogExpFunctions", "OpenLibm_jll", "OpenSpecFun_jll"]
@@ -3629,14 +3447,9 @@ uuid = "1e83bf80-4336-4d27-bf5d-d5a4f845583c"
 version = "1.4.3"
 
 [[deps.Statistics]]
-deps = ["LinearAlgebra"]
-git-tree-sha1 = "ae3bb1eb3bba077cd276bc5cfc337cc65c3075c0"
+deps = ["LinearAlgebra", "SparseArrays"]
 uuid = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
-version = "1.11.1"
-weakdeps = ["SparseArrays"]
-
-    [deps.Statistics.extensions]
-    SparseArraysExt = ["SparseArrays"]
+version = "1.10.0"
 
 [[deps.StatsAPI]]
 deps = ["LinearAlgebra"]
@@ -3652,9 +3465,9 @@ version = "0.33.21"
 
 [[deps.StringManipulation]]
 deps = ["PrecompileTools"]
-git-tree-sha1 = "a6b1675a536c5ad1a60e5a5153e1fee12eb146e3"
+git-tree-sha1 = "a04cabe79c5f01f4d723cc6704070ada0b9d46d5"
 uuid = "892a3eda-7b42-436c-8928-eab12a02cf0e"
-version = "0.4.0"
+version = "0.3.4"
 
 [[deps.StructArrays]]
 deps = ["ConstructionBase", "DataAPI", "Tables"]
@@ -3674,14 +3487,10 @@ version = "0.6.18"
     SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
     StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
 
-[[deps.StyledStrings]]
-uuid = "f489334b-da3d-4c2e-b8f0-e476e12c162b"
-version = "1.11.0"
-
 [[deps.SuiteSparse_jll]]
 deps = ["Artifacts", "Libdl", "libblastrampoline_jll"]
 uuid = "bea87d4a-7f5b-5778-9afe-8cc45184846c"
-version = "7.7.0+0"
+version = "7.2.1+1"
 
 [[deps.SymPy]]
 deps = ["CommonEq", "CommonSolve", "LinearAlgebra", "PyCall", "SpecialFunctions", "SymPyCore"]
@@ -3732,18 +3541,17 @@ version = "0.1.1"
 [[deps.Test]]
 deps = ["InteractiveUtils", "Logging", "Random", "Serialization"]
 uuid = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
-version = "1.11.0"
 
 [[deps.TiffImages]]
 deps = ["ColorTypes", "DataStructures", "DocStringExtensions", "FileIO", "FixedPointNumbers", "IndirectArrays", "Inflate", "Mmap", "OffsetArrays", "PkgVersion", "ProgressMeter", "SIMD", "UUIDs"]
-git-tree-sha1 = "38f139cc4abf345dd4f22286ec000728d5e8e097"
+git-tree-sha1 = "bc7fd5c91041f44636b2c134041f7e5263ce58ae"
 uuid = "731e570b-9d59-4bfa-96dc-6df516fadf69"
-version = "0.10.2"
+version = "0.10.0"
 
 [[deps.TranscodingStreams]]
-git-tree-sha1 = "0c45878dcfdcfa8480052b6ab162cdd138781742"
+git-tree-sha1 = "e84b3a11b9bece70d14cce63406bbc79ed3464d2"
 uuid = "3bb67fe8-82b1-5028-8e26-92a6c54297fa"
-version = "0.11.3"
+version = "0.11.2"
 
 [[deps.Tricks]]
 git-tree-sha1 = "7822b97e99a1672bfb1b49b668a6d46d58d8cbcb"
@@ -3758,11 +3566,9 @@ version = "1.5.1"
 [[deps.UUIDs]]
 deps = ["Random", "SHA"]
 uuid = "cf7118a7-6976-5b1a-9a39-7adc72f591a4"
-version = "1.11.0"
 
 [[deps.Unicode]]
 uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
-version = "1.11.0"
 
 [[deps.UnicodeFun]]
 deps = ["REPL"]
@@ -3993,9 +3799,9 @@ version = "1.2.13+1"
 
 [[deps.Zstd_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "555d1076590a6cc2fdee2ef1469451f872d8b41b"
+git-tree-sha1 = "e678132f07ddb5bfa46857f0d7620fb9be675d3b"
 uuid = "3161d3a3-bdf6-5164-811a-617609db77b4"
-version = "1.5.6+1"
+version = "1.5.6+0"
 
 [[deps.eudev_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg", "gperf_jll"]
@@ -4058,15 +3864,15 @@ version = "1.18.0+0"
 
 [[deps.libpng_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Zlib_jll"]
-git-tree-sha1 = "b70c870239dc3d7bc094eb2d6be9b73d27bef280"
+git-tree-sha1 = "d7015d2e18a5fd9a4f47de711837e980519781a4"
 uuid = "b53b4c65-9356-5827-b1ea-8c7a1a84506f"
-version = "1.6.44+0"
+version = "1.6.43+1"
 
 [[deps.libsixel_jll]]
 deps = ["Artifacts", "JLLWrappers", "JpegTurbo_jll", "Libdl", "Pkg", "libpng_jll"]
-git-tree-sha1 = "7dfa0fd9c783d3d0cc43ea1af53d69ba45c447df"
+git-tree-sha1 = "d4f63314c8aa1e48cd22aa0c17ed76cd1ae48c3c"
 uuid = "075b6546-f08a-558a-be8f-8157d0f608a5"
-version = "1.10.3+1"
+version = "1.10.3+0"
 
 [[deps.libvorbis_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Ogg_jll", "Pkg"]
@@ -4083,7 +3889,7 @@ version = "1.1.6+0"
 [[deps.nghttp2_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "8e850ede-7688-5339-a07c-302acd2aaf8d"
-version = "1.59.0+0"
+version = "1.52.0+1"
 
 [[deps.p7zip_jll]]
 deps = ["Artifacts", "Libdl"]
@@ -4327,22 +4133,6 @@ version = "1.4.1+1"
 # ╟─dbbdb46b-5cb6-4ee2-831e-251f8b39f9b8
 # ╟─0354703b-ee11-4d5c-8707-6b8559ca3fac
 # ╟─e15959e9-60c8-4084-9adb-012ca2ab1c2e
-# ╟─90d2b2d2-c030-4afd-a529-cd940bc82688
-# ╟─8695eb73-c264-4f4a-ab66-2ce879ff8c88
-# ╟─adea2ccd-4182-4317-b949-cd76dc7cddcf
-# ╟─dc4b275f-9014-4014-bc59-03353d5de046
-# ╟─1cd59ab0-6e97-469b-9723-466105b77ef7
-# ╟─cc282ef0-67d4-4086-9916-49ee02ee8009
-# ╟─3288d394-9746-450d-aab1-8dc3689b6c4f
-# ╟─576d55ef-48c6-4785-b431-3b36324650fd
-# ╟─ae990960-82a6-41f6-93e5-62a399b22288
-# ╟─f3a35115-28e5-4d79-a3d5-a7e4370ad976
-# ╟─0f267953-3b92-4550-af48-3bdc51364a26
-# ╟─6e905945-6a6a-4bc0-8693-0206e1d920c0
-# ╟─87c2749f-1390-4ce1-97f1-3a9609cba34e
-# ╟─42a14a32-71aa-4019-8eaf-e42f7f51e7a9
-# ╟─2c586df8-7dc5-4692-ab09-ec0d42e22904
-# ╟─91ccaa9f-65c3-4527-8ff2-48e02381a8d6
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╠═da9230a6-088d-4735-b206-9514c12dd223
