@@ -773,6 +773,105 @@ where ``y_1, y_2, \ldots, y_n`` are linearly independent solutions of the associ
 - a general solution of the nonhomogeneous equation in (13) is the sum of its complementary function ``y_c`` and a single particular solution ``y_p`` of Eq. (13).
 """
 
+# ╔═╡ bcaf9ef2-6371-4de1-8254-b4ae57f77363
+md"# 5.3 Homogeneous Equations with Constant Coefficients"
+
+# ╔═╡ fb34e1b6-1cd2-4f0f-a8c2-988dd3d709d0
+cm"""
+We consider the equation of the form
+
+$(texeq"
+a_n y^{(n)}+a_{n-1} y^{(n-1)}+\cdots+a_2 y^{\prime \prime}+a_1 y^{\prime}+a_0 =0
+\label{heqc}
+")
+where the coefficients ``a_0, a_1, a_2, \ldots, a_n`` are real constants with ``a_n \neq 0``.
+
+and its corresponding __characteristic equation__ (__auxiliary equation__)
+$(texeq"
+a_n r^n+a_{n-1} r^{n-1}+\cdots+a_2 r^2+a_1 r+a_0=0
+\label{heqc_c}
+")
+"""
+
+# ╔═╡ fcd85a36-c264-43a4-8eb6-8bd025582ac2
+cm"## Distinct Real Roots"
+
+# ╔═╡ 92ebabd1-d3df-47e9-9322-5c415cf1dc7b
+md"##  Polynomial Differential Operators"
+
+# ╔═╡ f9d43fec-1397-4206-9136-adbedd8d7fd8
+cm"""
+We write Equation (15) as 
+```math
+Ly=0
+```
+where 
+```math 
+L=a_n \frac{d^n}{d x^n}+a_{n-1} \frac{d^{n-1}}{d x^{n-1}}+\cdots+a_2 \frac{d^2}{d x^2}+a_1 \frac{d}{d x}+a_0
+```
+called the __differential operator__ operating on ``y``.
+
+We also use the notation ``D=\frac{d}{dx}``.
+
+So for example
+```math
+Dy = y^{\prime} , \quad D^2 = y^{\prime\prime}, \cdots
+```
+Therefore,
+
+```math 
+L=a_n D+a_{n-1} D^{n-1}+\cdots+a_2 D^2+a_1 D+a_0
+```
+called __polynomial differential operator__ in ``D``.
+"""
+
+# ╔═╡ 3e22f633-ef1c-45b4-aa83-3e28c61a9365
+md"## Repeated Real Roots"
+
+# ╔═╡ a03566a1-b19b-4bfe-84e6-7850c401e299
+md"## Complex-Valued Functions and Euler’s Formula"
+
+# ╔═╡ eb6f270c-9e5b-41fa-bfd0-8244d8d811f1
+cm"""
+Recall __Euler Formula__
+```math
+e^{i\theta} = cos(\theta) + i\sin(\theta)
+```
+A __complex-valued function ``F``__ of the real variable ``x`` associates with each real number ``x`` (in its domain of definition) the complex number
+```math
+F(x)=f(x)+i g(x)
+```
+
+The real-valued functions ``f`` and ``g`` are called the __real__ and __imaginary__ parts, respectively, of ``F``. 
+
+If they are differentiable, we define the derivative ``F^{\prime}`` of ``F`` by
+```math
+F^{\prime}(x)=f^{\prime}(x)+i g^{\prime}(x)
+```
+
+Thus we simply differentiate the real and imaginary parts of ``F`` separately.
+"""
+
+# ╔═╡ 96210d10-9d4f-4aea-9b76-a8e066f34e71
+md"##  Complex Roots"
+
+# ╔═╡ 44f2e591-8d5f-41a6-b0b2-66b3a7d83cf2
+md"## Repeated Complex Roots
+
+Same as repeated real Roots.
+"
+
+# ╔═╡ 08dec10f-1df7-4249-88a2-fc52be252e7e
+cm"""
+That is if ``a\pm ib`` has multiplicity ``k`` then
+```math
+\begin{gathered}
+\left(A_1+A_2 x+\cdots+A_k x^{k-1}\right) e^{(a+b i) x}+\left(B_1+B_2 x+\cdots+B_k x^{k-1}\right) e^{(a-b i) x} \\
+=\sum_{p=0}^{k-1} x^p e^{a x}\left(c_p \cos b x+d_p \sin b x\right)
+\end{gathered}
+```
+"""
+
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
 	function add_space(n=1)
@@ -2420,6 +2519,88 @@ Solve ``y^{\prime \prime}-4 y=12 x``.
 
 """
 
+# ╔═╡ f7081366-8968-4b03-96ad-cb13a7da4cb2
+cm"""
+$(bth(" 1 Distinct Real Roots"))
+If the roots ``r_1, r_2, \ldots, r_n`` of the characteristic equation in (3) are real and distinct, then
+```math
+y(x)=c_1 e^{r_1 x}+c_2 e^{r_2 x}+\cdots+c_n e^{r_n x}
+```
+is a general solution of Eq. (1). Thus the ``n`` linearly independent functions ``\left\{e^{r_1 x}\right.``, ``\left.e^{r_2 x}, \ldots, e^{r_n x}\right\}`` constitute a basis for the ``n``-dimensional solution space of Eq. (15).
+"""
+
+# ╔═╡ 18389ff8-adf5-4d98-98ed-a7589c09c908
+cm"""
+$(ex(1)) Solve the initial value problem
+```math
+\begin{aligned}
+& y^{(3)}+3 y^{\prime \prime}-10 y^{\prime}=0 \\
+& y(0)=7, \quad y^{\prime}(0)=0, \quad y^{\prime \prime}(0)=70
+\end{aligned}
+```
+"""
+
+# ╔═╡ e9a04d99-5857-4bd5-bd7f-1681af50cd2e
+cm"""
+$(bth("2 Repeated Roots"))
+If the characteristic equation in (16) has a repeated root ``r`` of multiplicity ``k``, then the part of a general solution of the differential equation in (15) corresponding to ``r`` is of the form
+```math
+\left(c_1+c_2 x+c_3 x^2+\cdots+c_k x^{k-1}\right) e^{r x}
+```
+"""
+
+# ╔═╡ a3e7d794-182d-41df-a914-1b425a4998ff
+cm"""
+$(ex(2))
+Find a general solution of the fifth-order differential equation
+```math
+9 y^{(5)}-6 y^{(4)}+y^{(3)}=0 \text {. }
+```
+"""
+
+# ╔═╡ 369dcfa6-ebfd-4a9a-85fc-0a6ecfc059a6
+cm"""
+$(bth("3 Complex Roots"))
+If the characteristic equation in (16) has an unrepeated pair of complex conjugate roots ``a \pm b i`` (with ``b \neq 0`` ), then the corresponding part of a general solution of Eq. (15) has the form
+```math
+e^{a x}\left(c_1 \cos b x+c_2 \sin b x\right)
+```
+
+Thus the linearly independent solutions ``e^{a x} \cos b x`` and ``e^{a x} \sin b x`` (corresponding to the complex conjugate characteristic roots ``a \pm b i`` ) generate a 2-dimensional subspace of the solution space of the differential equation.
+"""
+
+# ╔═╡ e343be8d-2697-4b5e-9787-659f9ddc53bb
+cm"""
+$(ex()) Find the particular solution of
+```math
+y^{\prime \prime}-4 y^{\prime}+5 y=0
+```
+for which ``y(0)=1`` and ``y^{\prime}(0)=5``.
+"""
+
+# ╔═╡ 4d647c9b-50da-4998-b2f2-cebce39ff874
+cm"""
+$(ex())
+Find a general solution of ``y^{(4)}+4 y=0``.
+"""
+
+# ╔═╡ abf14a2e-e06e-47cc-a000-f78eae4ec377
+cm"""
+$(ex())Find a general solution of ``\left(D^2+6 D+13\right)^2 y=0``.
+"""
+
+# ╔═╡ b0e322b7-1ec6-4f22-b5ed-204cd0d25f2c
+cm"""
+$(ex())
+The roots of the characteristic equation of a certain differential equation are 
+
+```math
+3,-5,0,0,0,0, \quad -5,2 \pm 3 i, \quad \text{and}\quad 2 \pm 3 i.
+```
+
+Write a general solution of this homogeneous differential equation.
+"""
+
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
 initialize_eqref()
 
@@ -2734,9 +2915,9 @@ version = "4.4.4+1"
 
 [[deps.FileIO]]
 deps = ["Pkg", "Requires", "UUIDs"]
-git-tree-sha1 = "62ca0547a14c57e98154423419d8a342dca75ca9"
+git-tree-sha1 = "82d8afa92ecf4b52d78d869f038ebfb881267322"
 uuid = "5789e2e9-d7fb-5bc7-8068-2c6fae9b9549"
-version = "1.16.4"
+version = "1.16.3"
 
 [[deps.FileWatching]]
 uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
@@ -2980,9 +3161,9 @@ version = "0.1.8"
 
 [[deps.JLLWrappers]]
 deps = ["Artifacts", "Preferences"]
-git-tree-sha1 = "be3dc50a92e5a386872a493a10050136d4703f9b"
+git-tree-sha1 = "f389674c99bfcde17dc57454011aa44d5a260a40"
 uuid = "692b3bcd-3c85-4b1f-b108-f13ce0eb3210"
-version = "1.6.1"
+version = "1.6.0"
 
 [[deps.JSON]]
 deps = ["Dates", "Mmap", "Parsers", "Unicode"]
@@ -3184,9 +3365,9 @@ version = "0.4.2"
 
 [[deps.MarchingCubes]]
 deps = ["PrecompileTools", "StaticArrays"]
-git-tree-sha1 = "301345b808264ae42e60d10a519e55c5d992969b"
+git-tree-sha1 = "27d162f37cc29de047b527dab11a826dd3a650ad"
 uuid = "299715c1-40a9-479a-aaf9-4a633d36f717"
-version = "0.1.10"
+version = "0.1.9"
 
 [[deps.Markdown]]
 deps = ["Base64"]
@@ -3736,9 +3917,9 @@ version = "1.11.0"
 
 [[deps.TiffImages]]
 deps = ["ColorTypes", "DataStructures", "DocStringExtensions", "FileIO", "FixedPointNumbers", "IndirectArrays", "Inflate", "Mmap", "OffsetArrays", "PkgVersion", "ProgressMeter", "SIMD", "UUIDs"]
-git-tree-sha1 = "38f139cc4abf345dd4f22286ec000728d5e8e097"
+git-tree-sha1 = "657f0a3fdc8ff4a1802b984872468ae1649aebb3"
 uuid = "731e570b-9d59-4bfa-96dc-6df516fadf69"
-version = "0.10.2"
+version = "0.10.1"
 
 [[deps.TranscodingStreams]]
 git-tree-sha1 = "0c45878dcfdcfa8480052b6ab162cdd138781742"
@@ -4343,9 +4524,29 @@ version = "1.4.1+1"
 # ╟─42a14a32-71aa-4019-8eaf-e42f7f51e7a9
 # ╟─2c586df8-7dc5-4692-ab09-ec0d42e22904
 # ╟─91ccaa9f-65c3-4527-8ff2-48e02381a8d6
+# ╟─bcaf9ef2-6371-4de1-8254-b4ae57f77363
+# ╟─fb34e1b6-1cd2-4f0f-a8c2-988dd3d709d0
+# ╟─fcd85a36-c264-43a4-8eb6-8bd025582ac2
+# ╟─f7081366-8968-4b03-96ad-cb13a7da4cb2
+# ╟─18389ff8-adf5-4d98-98ed-a7589c09c908
+# ╟─92ebabd1-d3df-47e9-9322-5c415cf1dc7b
+# ╟─f9d43fec-1397-4206-9136-adbedd8d7fd8
+# ╟─3e22f633-ef1c-45b4-aa83-3e28c61a9365
+# ╟─e9a04d99-5857-4bd5-bd7f-1681af50cd2e
+# ╟─a3e7d794-182d-41df-a914-1b425a4998ff
+# ╟─a03566a1-b19b-4bfe-84e6-7850c401e299
+# ╟─eb6f270c-9e5b-41fa-bfd0-8244d8d811f1
+# ╟─96210d10-9d4f-4aea-9b76-a8e066f34e71
+# ╟─369dcfa6-ebfd-4a9a-85fc-0a6ecfc059a6
+# ╟─e343be8d-2697-4b5e-9787-659f9ddc53bb
+# ╟─4d647c9b-50da-4998-b2f2-cebce39ff874
+# ╟─44f2e591-8d5f-41a6-b0b2-66b3a7d83cf2
+# ╟─08dec10f-1df7-4249-88a2-fc52be252e7e
+# ╟─abf14a2e-e06e-47cc-a000-f78eae4ec377
+# ╟─b0e322b7-1ec6-4f22-b5ed-204cd0d25f2c
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
-# ╠═da9230a6-088d-4735-b206-9514c12dd223
+# ╟─da9230a6-088d-4735-b206-9514c12dd223
 # ╟─107407c8-5da0-4833-9965-75a82d84a0fb
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
