@@ -872,6 +872,65 @@ That is if ``a\pm ib`` has multiplicity ``k`` then
 ```
 """
 
+# ╔═╡ 9a964597-f45a-4e1e-a4a5-c6d0007b3e13
+md"# 5.5 Nonhomogeneous Equations and Undetermined Coefficients"
+
+# ╔═╡ c0461d53-1446-468f-9ae5-babc4b2bab32
+cm"""
+The __general nonhomogeneous ``n`` th-order linear equation with constant coefficients__ has the form
+
+$(texeq"a_n y^{(n)}+a_{n-1} y^{(n-1)}+\cdots+a_1 y^{\prime}+a_0 y=f(x)")
+
+A __general solution__ of this equation has the form
+
+$(texeq"y=y_c+y_p")
+
+where the __complementary function__ ``y_c(x)`` is a general solution of the __associated homogeneous equation__
+
+$(texeq"a_n y^{(n)}+a_{n-1} y^{(n-1)}+\cdots+a_1 y^{\prime}+a_0 y=0")
+"""
+
+# ╔═╡ 0ee542fb-a1d2-46c8-9604-681485015268
+md"## The method of undetermined coefficients "
+
+# ╔═╡ 270a3760-25c6-4cb3-96c2-95a2b98506f9
+md"## The Case of Duplication"
+
+# ╔═╡ ae2c1de9-d67a-4c4f-a87d-90250e436fc8
+cm"""
+
+Now our problem is to find a particular solution of the equation 
+```math
+L y=f(x),
+``` 
+where ``f(x)`` is a __linear combination of products of the elementary functions listed in (above). 
+
+Thus ``f(x)`` can be written as a sum of terms each of the form
+
+$(texeq"P_m(x) e^{r x} \cos k x \quad \text { or } \quad P_m(x) e^{r x} \sin k x")
+
+where ``P_m(x)`` is a polynomial in ``x`` of degree ``m``. 
+
+"""
+
+# ╔═╡ c0f7a0ed-0a89-4e5d-933d-f261c952a48c
+cm"""
+| ``\boldsymbol{f}(\boldsymbol{x})`` | ``\boldsymbol{y}_{\boldsymbol{p}}`` |
+| :---: | :---: |
+| ``P_m(x)=b_0+b_1 x+b_2 x^2+\cdots+b_m x^m`` | ``x^s\left(A_0+A_1 x+A_2 x^2+\cdots+A_m x^m\right)`` |
+| ``a \cos k x+b \sin k x`` | ``x^s(A \cos k x+B \sin k x)`` |
+| ``e^{r x}(a \cos k x+b \sin k x)`` | ``x^s e^{r x}(A \cos k x+B \sin k x)`` |
+| ``P_m(x) e^{r x}`` | ``x^s\left(A_0+A_1 x+A_2 x^2+\cdots+A_m x^m\right) e^{r x}`` |
+| ``P_m(x)(a \cos k x+b \sin k x)`` | ``x^s\left[\left(A_0+A_1 x+\cdots+A_m x^m\right) \cos k x\right.`` |
+|  | ``\left.+\left(B_0+B_1 x+\cdots+B_m x^m\right) \sin k x\right]`` |
+"""
+
+# ╔═╡ b8db6d0c-7200-4c76-9fed-3a774ce8dae9
+md"## Variation of Parameters"
+
+# ╔═╡ 0fec7bee-9c5a-4288-b8e0-568cbe0b0466
+
+
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
 	function add_space(n=1)
@@ -2599,6 +2658,124 @@ The roots of the characteristic equation of a certain differential equation are
 ```
 
 Write a general solution of this homogeneous differential equation.
+"""
+
+# ╔═╡ 0afe6221-5946-498b-9c1a-6b34d731f403
+cm"""
+$(ex(1))
+Find a particular solution of ``y^{\prime \prime}+3 y^{\prime}+4 y=3 x+2``.
+"""
+
+# ╔═╡ ef47af20-62c9-4d29-bb94-c076e3d0c87e
+cm"""
+$(ex(2))
+Find a particular solution of ``y^{\prime \prime}-4 y=2 e^{3 x}``.
+"""
+
+# ╔═╡ a3e3bcd6-63f1-4e1f-9f33-45d6567ac47b
+cm"""
+$(ex(3))
+Find a particular solution of ``3 y^{\prime \prime}+y^{\prime}-2 y=2 \cos x``.
+"""
+
+# ╔═╡ 8fc8c2f1-efd8-43e0-b0a3-3f107c78add9
+cm"""
+$(ex(4)) 
+Find a particular solution of ``y^{\prime \prime}-4 y=2 e^{2 x}``.
+"""
+
+# ╔═╡ 15ed1ab6-c1e4-4be8-bc71-7e2b37c678b4
+cm"""
+$(bbl("Remark","The General Approach"))
+The method of undetermined coefficients applies whenever the function ``f(x)`` in Eq. (17) is a linear combination of (finite) products of functions of the following three types:
+1. A polynomial in ``x``;
+2. An exponential function ``e^{r x}``;
+3. ``\cos k x`` or ``\sin k x``.
+
+Any such function, for example,
+```math
+f(x)=\left(3-4 x^2\right) e^{5 x}-4 x^3 \cos 10 x
+```
+"""
+
+# ╔═╡ a53c0017-5bd9-4730-b272-6f5b64978c30
+cm"""
+$(bbl("RULE 1","Method of Undetermined Coefficients"))
+
+Suppose that 
+
+__no term appearing either in ``f(x)`` or in any of its derivatives satisfies the associated homogeneous equation ``L y=0``__.
+
+Then take as a trial solution for ``y_p`` a linear combination of all linearly independent such terms and their derivatives. Then determine the coefficients by substitution of this trial solution into the nonhomogeneous equation ``L y=f(x)``.
+"""
+
+# ╔═╡ 3f7b2e7d-ea10-487c-a19c-a5769848cbd3
+cm"""
+$(ex(5))
+Find a particular solution of ``y^{\prime \prime}+4 y=3 x^3``.
+"""
+
+# ╔═╡ b925ecfd-7745-4843-9245-a1191e1505b6
+cm"""
+$(ex(6))
+Solve the initial value problem
+```math
+\begin{aligned}
+& y^{\prime \prime}-3 y^{\prime}+2 y=3 e^{-x}-10 \cos 3 x \\
+& y(0)=1, \quad y^{\prime}(0)=2
+\end{aligned}
+```
+"""
+
+# ╔═╡ 5889801d-3c1a-45e3-89f0-f6d1e52fbd2b
+cm"""
+$(ex(7))
+Find the general form of a particular solution of
+```math
+y^{(3)}+9 y^{\prime}=x \sin x+x^2 e^{2 x}
+```
+"""
+
+# ╔═╡ 81dd2f88-0e8c-4b67-beb7-f234984c22f3
+cm"""
+$(bbl("RULE 2","Method of Undetermined Coefficients"))
+
+If the function ``f(x)`` is of either form in (20), take as the trial solution
+```math
+\begin{aligned}
+y_p(x)= & x^s\left[\left(A_0+A_1 x+A_2 x^2+\cdots+A_m x^m\right) e^{r x} \cos k x\right. \\
+& \left.+\left(B_0+B_1 x+B_2 x^2+\cdots+B_m x^m\right) e^{r x} \sin k x\right]
+\end{aligned}
+```
+where ``s`` is the smallest nonnegative integer such that no term in ``y_p`` duplicates a term in the complementary function ``y_c``. Then determine the coefficients in Eq. (15) by substituting ``y_p`` into the nonhomogeneous equation.
+
+"""
+
+# ╔═╡ 5e05ad97-9f9a-45d7-b211-3056ddee07f3
+cm"""
+$(ex(8))
+Find a particular solution of
+```math
+y^{(3)}+y^{\prime \prime}=3 e^x+4 x^2 \text {. }
+```
+"""
+
+# ╔═╡ 5405ebd1-dbd9-42d1-a542-1d8c9f4b9aaa
+cm"""
+$(ex(9))
+Determine the appropriate form for a particular solution of
+```math
+y^{\prime \prime}+6 y^{\prime}+13 y=e^{-3 x} \cos 2 x
+```
+"""
+
+# ╔═╡ fa4b457e-6833-49b2-a4ee-db18905061d7
+cm"""
+$(ex(10))
+Determine the appropriate form for a particular solution of the fifth-order equation
+```math
+(D-2)^3\left(D^2+9\right) y=x^2 e^{2 x}+x \sin 3 x
+```
 """
 
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
@@ -4544,6 +4721,27 @@ version = "1.4.1+1"
 # ╟─08dec10f-1df7-4249-88a2-fc52be252e7e
 # ╟─abf14a2e-e06e-47cc-a000-f78eae4ec377
 # ╟─b0e322b7-1ec6-4f22-b5ed-204cd0d25f2c
+# ╟─9a964597-f45a-4e1e-a4a5-c6d0007b3e13
+# ╟─c0461d53-1446-468f-9ae5-babc4b2bab32
+# ╟─0ee542fb-a1d2-46c8-9604-681485015268
+# ╟─0afe6221-5946-498b-9c1a-6b34d731f403
+# ╟─ef47af20-62c9-4d29-bb94-c076e3d0c87e
+# ╟─a3e3bcd6-63f1-4e1f-9f33-45d6567ac47b
+# ╟─8fc8c2f1-efd8-43e0-b0a3-3f107c78add9
+# ╟─15ed1ab6-c1e4-4be8-bc71-7e2b37c678b4
+# ╟─a53c0017-5bd9-4730-b272-6f5b64978c30
+# ╟─3f7b2e7d-ea10-487c-a19c-a5769848cbd3
+# ╟─b925ecfd-7745-4843-9245-a1191e1505b6
+# ╟─5889801d-3c1a-45e3-89f0-f6d1e52fbd2b
+# ╟─270a3760-25c6-4cb3-96c2-95a2b98506f9
+# ╟─ae2c1de9-d67a-4c4f-a87d-90250e436fc8
+# ╟─81dd2f88-0e8c-4b67-beb7-f234984c22f3
+# ╟─c0f7a0ed-0a89-4e5d-933d-f261c952a48c
+# ╟─5e05ad97-9f9a-45d7-b211-3056ddee07f3
+# ╟─5405ebd1-dbd9-42d1-a542-1d8c9f4b9aaa
+# ╟─fa4b457e-6833-49b2-a4ee-db18905061d7
+# ╟─b8db6d0c-7200-4c76-9fed-3a774ce8dae9
+# ╠═0fec7bee-9c5a-4288-b8e0-568cbe0b0466
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
