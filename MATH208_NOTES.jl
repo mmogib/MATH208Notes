@@ -14,15 +14,15 @@ begin
     using Colors
     using LinearAlgebra, Random, Printf, SparseArrays
     # using Symbolics
-	using SymPy
+    # using SymPy
     using QRCoders
     using PrettyTables
-	# using LinearSolve
+    # using LinearSolve
     # using NonlinearSolve
     # using ForwardDiff
     # using Integrals
-	# using OrdinaryDiffEq
-	
+    # using OrdinaryDiffEq
+
 end
 
 # ╔═╡ 71bc54d5-d0ed-42d3-9bc1-48aa86e91d1d
@@ -102,42 +102,42 @@ md"## A Swimmer’s Problem"
 
 # ╔═╡ a1d00dd2-59b0-427b-b2c0-25ec94e039a9
 let
-	dydx(x) = 3(1-4x^2)
-	x = -0.5:0.01:0.5
-	# y = x .+ dydx.(x)
-	# 3x-4x.^3)
-	y = zeros(length(x));
-	p = plot(xlimits=(-0.55,0.55),ylimits=(-10,221), 
-		frame_style=:origin, legend=:topleft,
-		xticks=-0.5:0.2:0.5
-	)
-	vline!(p,[-0.5,0],c=:black,label=nothing)
-	vline!(p,[0.5,0],c=:black,label=nothing)
-	annotate!(p,[(0.52,10.5,text(L"x=\frac{1}{2}",10))])
-	annotate!(p,[(-0.52,10.5,text(L"x=-\frac{1}{2}",10))])
-	anim = @animate for i in 2:length(x)
-		y[i] = y[i-1] + dydx(x[i])
-		plot(p,[(x[1:i],y[1:i]),([x[i]],[y[i]])], 
-			seriestype=[:line  :scatter],
-			label=["y:: swimmer trajectory" "swimmer"],
-			markershapes = [:none :star]
-		)
-		
-	end
-	gif(anim,"imgs/swimmer.gif",fps=10)
-	
+    dydx(x) = 3(1 - 4x^2)
+    x = -0.5:0.01:0.5
+    # y = x .+ dydx.(x)
+    # 3x-4x.^3)
+    y = zeros(length(x))
+    p = plot(xlimits=(-0.55, 0.55), ylimits=(-10, 221),
+        frame_style=:origin, legend=:topleft,
+        xticks=-0.5:0.2:0.5
+    )
+    vline!(p, [-0.5, 0], c=:black, label=nothing)
+    vline!(p, [0.5, 0], c=:black, label=nothing)
+    annotate!(p, [(0.52, 10.5, text(L"x=\frac{1}{2}", 10))])
+    annotate!(p, [(-0.52, 10.5, text(L"x=-\frac{1}{2}", 10))])
+    anim = @animate for i in 2:length(x)
+        y[i] = y[i-1] + dydx(x[i])
+        plot(p, [(x[1:i], y[1:i]), ([x[i]], [y[i]])],
+            seriestype=[:line :scatter],
+            label=["y:: swimmer trajectory" "swimmer"],
+            markershapes=[:none :star]
+        )
+
+    end
+    gif(anim, "imgs/swimmer.gif", fps=10)
+
 end
 
 # ╔═╡ 8781e87a-146a-41b0-8981-243fec51bfa3
-function vector_field(xs,ys,df; c=:black, args...)
-	# xs = -2:0.3:2
-	# ys = -2:0.2:2
-	# df(x, y) = normalize([1, 1/x]) ./ 10
+function vector_field(xs, ys, df; c=:black, args...)
+    # xs = -2:0.3:2
+    # ys = -2:0.2:2
+    # df(x, y) = normalize([1, 1/x]) ./ 10
 
-	xxs = repeat(xs',length(xs),length(ys))
-	yys = reshape(repeat(ys,length(xs)),length(xs),length(ys))
+    xxs = repeat(xs', length(xs), length(ys))
+    yys = reshape(repeat(ys, length(xs)), length(xs), length(ys))
 
-	quiver(xxs, yys, quiver=df; framestyle=:origin, c=c, args...)
+    quiver(xxs, yys, quiver=df; framestyle=:origin, c=c, args...)
 
 end
 
@@ -193,7 +193,7 @@ the constant C) is commonly called __the general solution__ of the differential
 """
 
 # ╔═╡ 7bacb885-372a-4ee9-ba9c-de505d332dfb
-md"## Natural Growth and Decay"   
+md"## Natural Growth and Decay"
 
 # ╔═╡ 241b2797-3050-400b-a532-303a6feeb39e
 cm"""
@@ -255,8 +255,8 @@ The decay constant of a radioactive isotope is often specified in terms of anoth
 
 # ╔═╡ 72cef7b7-f466-4872-bba0-6f46ac36de15
 let
-	k = 0.0001216
-	t = -log(0.63)/k
+    k = 0.0001216
+    t = -log(0.63) / k
 end
 
 # ╔═╡ 1cfb4072-1e58-4b7a-bcdc-672cd0183f75
@@ -274,14 +274,14 @@ where
 
 # ╔═╡ 27f89662-ef45-4469-bbc7-7a6b1949881c
 let
-	P₀=6
-	Pprime0 = 0.000212 * (365.25)
-	k = Pprime0/P₀
+    P₀ = 6
+    Pprime0 = 0.000212 * (365.25)
+    k = Pprime0 / P₀
 
-	P_2051 = P₀*exp(k*51)
+    P_2051 = P₀ * exp(k * 51)
 
-	P10=floor(log(10)/k)
-	1999+Int(P10)
+    P10 = floor(log(10) / k)
+    1999 + Int(P10)
 end
 
 # ╔═╡ 124fc4b5-157b-46b1-8a77-06b119ee0a4d
@@ -303,14 +303,14 @@ It includes the exponential equation as a special case ``(b=0)`` and is also eas
 
 # ╔═╡ c96bcf16-8467-4f8f-a55a-6769f73143da
 let
-	A = 375
-	C = 375-50
-	# (A-125)
-	k = -log((A-125)/325)/75
-	T = 150
-	t = -log((A-T)/C)/k
-	# 105/60
-	# (0.75*60)
+    A = 375
+    C = 375 - 50
+    # (A-125)
+    k = -log((A - 125) / 325) / 75
+    T = 150
+    t = -log((A - T) / C) / k
+    # 105/60
+    # (0.75*60)
 end
 
 # ╔═╡ e9d05d41-2d51-4f11-ad43-95571b99b466
@@ -350,16 +350,16 @@ then solve for ``y`` to obtain the general solution of the original differential
 
 # ╔═╡ ae81e505-f95a-4355-bf74-b308445d2830
 let
-	xs = -1.5:0.6:6
-	ys = -4.5:0.6:2.5
-	df(x,y) = normalize([1,y+(11/8)*exp(-x/3)])
-	p1 = vector_field(xs,ys,df)
-	p1 = plot(p1,x->(1/32)*(exp(x)-33*exp(-x/3)),c=:blue,
-		xlims=(min(xs...),max(xs...)),
-		ylims=(min(ys...),max(ys...)),
-		label=:none
-	)
-	plot(p1,[0],[-1], seriestype=:scatter,label=:none)
+    xs = -1.5:0.6:6
+    ys = -4.5:0.6:2.5
+    df(x, y) = normalize([1, y + (11 / 8) * exp(-x / 3)])
+    p1 = vector_field(xs, ys, df)
+    p1 = plot(p1, x -> (1 / 32) * (exp(x) - 33 * exp(-x / 3)), c=:blue,
+        xlims=(min(xs...), max(xs...)),
+        ylims=(min(ys...), max(ys...)),
+        label=:none
+    )
+    plot(p1, [0], [-1], seriestype=:scatter, label=:none)
 end
 
 # ╔═╡ 5aa66e9f-5741-4306-aa36-8a28627bca0f
@@ -392,11 +392,11 @@ md"##  Exact Differential Equations"
 
 # ╔═╡ 9ed8b8ed-1ac5-4e8b-8a74-17dff32f1ad5
 let
-	x = -2:0.1:2
-	y = -2:0.1:2
-	df(x,y) = 0.1*normalize([1,(y^3-6*x*y)/(4y+3x^2-3x*y^2)])
-	plt = vector_field(x,y,df; lw=0.01)
-	contour!(x,y,(x,y)->3x^2*y-x*y^3+2y^2, c=:red)
+    x = -2:0.1:2
+    y = -2:0.1:2
+    df(x, y) = 0.1 * normalize([1, (y^3 - 6 * x * y) / (4y + 3x^2 - 3x * y^2)])
+    plt = vector_field(x, y, df; lw=0.01)
+    contour!(x, y, (x, y) -> 3x^2 * y - x * y^3 + 2y^2, c=:red)
 end
 
 # ╔═╡ 80e20e84-51d2-4e6e-8eb3-b7a8dac22a8b
@@ -415,20 +415,20 @@ If either the dependent variable ``y`` or the independent variable ``x`` is miss
 
 # ╔═╡ 8d103106-40ac-49fa-86ae-1af3ecb8a3ec
 let
-	@syms x::Real, y()
-	D = Differential(x)
-	Eq =2*x*exp(2*y(x))*D(y(x)) ~ 3x^4+exp(2*y(x))
-	dsolve(Eq)
+    # 	@syms x::Real, y()
+    # 	D = Differential(x)
+    # 	Eq =2*x*exp(2*y(x))*D(y(x)) ~ 3x^4+exp(2*y(x))
+    # 	dsolve(Eq)
 end
 
 # ╔═╡ c7cc5a14-f964-4cf9-82f0-f23904bbdace
 let
-	# @syms x(),y(), t::Real
-	# ∂ = Differential(t)
-	# Z =[x(t);y(t)]
-	# S1 = ∂.(Z) .~ [4 1;6 -1]*Z
-	# dsolve(S1)
-	cm"Example ...."
+    # @syms x(),y(), t::Real
+    # ∂ = Differential(t)
+    # Z =[x(t);y(t)]
+    # S1 = ∂.(Z) .~ [4 1;6 -1]*Z
+    # dsolve(S1)
+    cm"Example ...."
 end
 
 # ╔═╡ 2678d172-8896-4681-b9af-45e3485f2312
@@ -448,16 +448,16 @@ __We can use three elementary row operations only:__
 
 # ╔═╡ aa04cd10-62d5-49a9-8b60-7e5d928ec1ee
 let
-	@syms a::Real, b::Real, c::Real
-	A = [2 -1 3;1 2 1;7 4 9]
-	B =[a;b;c]
-	Au=hcat(A,B)
-	# Au[1,:],Au[2,:]=Au[2,:],Au[1,:]
-	# Au[2,:]=-2Au[1,:]+Au[2,:]
-	# Au[3,:]=-7Au[1,:]+Au[3,:]
-	# Au[3,:]=-2Au[2,:]+Au[3,:]
+    # @syms a::Real, b::Real, c::Real
+    # A = [2 -1 3;1 2 1;7 4 9]
+    # B =[a;b;c]
+    # Au=hcat(A,B)
+    # Au[1,:],Au[2,:]=Au[2,:],Au[1,:]
+    # Au[2,:]=-2Au[1,:]+Au[2,:]
+    # Au[3,:]=-7Au[1,:]+Au[3,:]
+    # Au[3,:]=-2Au[2,:]+Au[3,:]
 
-	Au
+    Au
 end
 
 # ╔═╡ 387953af-89c5-47ee-a1b1-af9b05baf949
@@ -465,31 +465,31 @@ md"## Inverse of a Matrix"
 
 # ╔═╡ 747384a8-c06a-49b7-92f1-0cdd44043fb2
 let
-	A = [
-		1  1  5 
-		1  4  13 
-		3  2  12
-	]
-	B=inv(A)
+    A = [
+        1 1 5
+        1 4 13
+        3 2 12
+    ]
+    B = inv(A)
 
 end
 
 # ╔═╡ a2a039ee-2097-4569-9d85-e96597ff47da
 let
-	A = [4 3 2;5 6 3;3 5 2]
-	# inv(A)
-	# Au = Rational.(hcat([4 3 2;5 6 3;3 5 2],I(3)))
-	# Au[1,:]=-Au[3,:]+Au[1,:]
-	# Au[2,:]=-5Au[1,:]+Au[2,:]
-	# Au[3,:]=-3Au[1,:]+Au[3,:]
-	# Au[2,:]=(1//16)Au[2,:]
-	# Au[3,:]=-11Au[2,:]+Au[3,:]
-	# Au[1,:]=2Au[2,:]+Au[1,:]
-	# Au[3,:]=-16Au[3,:]
-	# Au[1,:]=-(3//8)Au[3,:]+Au[1,:]
-	# Au[2,:]=-(3//16)Au[3,:]+Au[2,:]
-	# B=Au[:,4:end]
-	# B*A
+    A = [4 3 2; 5 6 3; 3 5 2]
+    # inv(A)
+    # Au = Rational.(hcat([4 3 2;5 6 3;3 5 2],I(3)))
+    # Au[1,:]=-Au[3,:]+Au[1,:]
+    # Au[2,:]=-5Au[1,:]+Au[2,:]
+    # Au[3,:]=-3Au[1,:]+Au[3,:]
+    # Au[2,:]=(1//16)Au[2,:]
+    # Au[3,:]=-11Au[2,:]+Au[3,:]
+    # Au[1,:]=2Au[2,:]+Au[1,:]
+    # Au[3,:]=-16Au[3,:]
+    # Au[1,:]=-(3//8)Au[3,:]+Au[1,:]
+    # Au[2,:]=-(3//16)Au[3,:]+Au[2,:]
+    # B=Au[:,4:end]
+    # B*A
 end
 
 # ╔═╡ 25e77707-5852-48f8-9849-46e3f6841bb6
@@ -499,30 +499,30 @@ md"## Determinants"
 md"### Cramer's Rule"
 
 # ╔═╡ aff3151b-4b66-4d55-8e27-744a53f5a91e
- md"## Row and Column Properties"
+md"## Row and Column Properties"
 
 # ╔═╡ babc3fb7-0eaa-4af6-b7d1-cd0b0fd4c78b
 let
-	A1 =[1 2 3
-		 0 4 4
-		0 6 7
-	]
-	A2 =[1 2 3
-		 4 0 0
-		0 6 7
-	]
-	B = [1 2 3;4 4 4;0 6 7]
-	det(B),det(A1),det(A2)
+    A1 = [1 2 3
+        0 4 4
+        0 6 7
+    ]
+    A2 = [1 2 3
+        4 0 0
+        0 6 7
+    ]
+    B = [1 2 3; 4 4 4; 0 6 7]
+    det(B), det(A1), det(A2)
 end
 
 # ╔═╡ ea5ca7e4-2f30-45f2-8715-7e502a274a53
 let
-	A =[
-		1  2  3  4 
-		0  5  6  7 
-		0  0  8  9 
-		2  4  6  9
-	]
+    A = [
+        1 2 3 4
+        0 5 6 7
+        0 0 8 9
+        2 4 6 9
+    ]
 end
 
 # ╔═╡ e1199b37-1692-4d97-ba86-0b5239c316d1
@@ -530,12 +530,12 @@ md"## Inverses and the Adjoint Matrix"
 
 # ╔═╡ ece946d9-b094-4e01-8dda-47740ec418b3
 let
-	A = [
-		1  4  5 
-		4  2  5
-		-3  3  -1
-	]
-	# inv(Rational.(A))
+    A = [
+        1 4 5
+        4 2 5
+        -3 3 -1
+    ]
+    # inv(Rational.(A))
 end
 
 # ╔═╡ 30795897-1e43-41ed-ba85-c3b89ecdef1f
@@ -585,21 +585,21 @@ md"##  Linear Independence"
 
 # ╔═╡ 4fc61c32-377d-475f-9587-fb884aaafcb6
 let
-	A=[1 2 3;2 3 8;2 4 8;1 1 5]
-	b= zeros(3)
-	# A\b
-	# solve()
+    A = [1 2 3; 2 3 8; 2 4 8; 1 1 5]
+    b = zeros(3)
+    # A\b
+    # solve()
 end
 
 # ╔═╡ 73ea96b9-be3c-4e26-8f54-914bd53d409b
 let
-	v1=[2;0;-3]
-	v2=[4,-5,-6]
-	v3=[-2,1,3]
-	A=[v1 v2 v3]
-	A[3,:]=(3//2)A[1,:]+A[3,:]
-	A
-	# det(A)
+    v1 = [2; 0; -3]
+    v2 = [4, -5, -6]
+    v3 = [-2, 1, 3]
+    A = [v1 v2 v3]
+    A[3, :] = (3 // 2)A[1, :] + A[3, :]
+    A
+    # det(A)
 end
 
 # ╔═╡ faf0e3cf-3973-4272-bda3-a3410c8e17d2
@@ -607,13 +607,13 @@ md"# 4.4 Bases and Dimension for Vector Spaces"
 
 # ╔═╡ f911e13b-7830-449d-b8d2-ae6ecb388e5c
 let
-	A = [
-		1 1 1 0
-		-1 -1 -1 3
-		-2 2 -3 -1
-		-3 3 -2 2
-	]
-	det(A)
+    A = [
+        1 1 1 0
+        -1 -1 -1 3
+        -2 2 -3 -1
+        -3 3 -2 2
+    ]
+    det(A)
 end
 
 # ╔═╡ dca3f82b-7cac-4849-88a2-d47805957566
@@ -621,18 +621,16 @@ md"##  Bases for Solution Spaces"
 
 # ╔═╡ 03e906c2-29b0-487b-9223-6c7313c1d740
 let
-	A = [
-		3 6 -1 -5 5 
-		2 4 -1 -3 2 
-		3//1 6 -2 -4 1
+    A = [
+        3 6 -1 -5 5
+        2 4 -1 -3 2
+        3//1 6 -2 -4 1]
+    A[1, :] = A[1, :] - A[2, :]
+    A[2, :] = -(A[2, 1] / A[1, 1]) * A[1, :] + A[2, :]
+    A[3, :] = -(A[3, 1] / A[1, 1]) * A[1, :] + A[3, :]
+    A[3, :] = -(A[3, 3] / A[2, 3]) * A[2, :] + A[3, :]
 
-	]
-	A[1,:]=A[1,:]-A[2,:]
-	A[2,:]=-(A[2,1]/A[1,1])*A[1,:]+A[2,:]
-	A[3,:]=-(A[3,1]/A[1,1])*A[1,:]+A[3,:]
-	A[3,:]=-(A[3,3]/A[2,3])*A[2,:]+A[3,:]
-	
-	A
+    A
 end
 
 # ╔═╡ ee16937c-617a-4f4a-a15e-c3853f0e8ca8
@@ -640,18 +638,16 @@ md"# 4.5 Row and Column Spaces"
 
 # ╔═╡ d999ba91-2a73-4d8e-a99a-fd5187f24e6b
 let
-	A = [
-		3 6 -1 -5 5 
-		2 4 -1 -3 2 
-		3 6 -2 -4 1
+    A = [
+        3 6 -1 -5 5
+        2 4 -1 -3 2
+        3 6 -2 -4 1]
+    # A[1,:]=A[1,:]-A[2,:]
+    # A[2,:]=-(A[2,1]/A[1,1])*A[1,:]+A[2,:]
+    # A[3,:]=-(A[3,1]/A[1,1])*A[1,:]+A[3,:]
+    # A[3,:]=-(A[3,3]/A[2,3])*A[2,:]+A[3,:]
 
-	]
-	# A[1,:]=A[1,:]-A[2,:]
-	# A[2,:]=-(A[2,1]/A[1,1])*A[1,:]+A[2,:]
-	# A[3,:]=-(A[3,1]/A[1,1])*A[1,:]+A[3,:]
-	# A[3,:]=-(A[3,3]/A[2,3])*A[2,:]+A[3,:]
-	
-	rank(A)
+    rank(A)
 end
 
 # ╔═╡ 28fb5089-e83b-47f5-93be-60f1f0ea1e30
@@ -933,9 +929,9 @@ md"## Variation of Parameters"
 
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
-	function add_space(n=1)
-		repeat("&nbsp;",n)
-	end
+    function add_space(n=1)
+        repeat("&nbsp;", n)
+    end
     function post_img(img::String, w=500)
         res = Resource(img, :width => w)
         cm"""
@@ -956,10 +952,10 @@ begin
     function define(t="")
         beginBlock("Definition", t)
     end
-	function remark(t="")
+    function remark(t="")
         beginBlock("Remark", t)
     end
-	function remarks(t="")
+    function remarks(t="")
         beginBlock("Remarks", t)
     end
     function bbl(t)
@@ -969,9 +965,9 @@ begin
         beginBlock(t, s)
     end
     ebl() = endBlock()
-	function theorem(s)
-		bth(s)
-	end
+    function theorem(s)
+        bth(s)
+    end
     function bth(s)
         beginTheorem(s)
     end
@@ -1014,7 +1010,7 @@ begin
     function endTheorem()
         endBlock()
     end
-	ex() = example("Example","")
+    ex() = example("Example", "")
     function example(lable, desc)
         """<div style="display:flex;">
        <div style="
