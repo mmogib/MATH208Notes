@@ -924,8 +924,23 @@ cm"""
 # ╔═╡ b8db6d0c-7200-4c76-9fed-3a774ce8dae9
 md"## Variation of Parameters"
 
-# ╔═╡ 0fec7bee-9c5a-4288-b8e0-568cbe0b0466
+# ╔═╡ 274e341c-66c4-434a-b002-079130d6ee81
+md"# 6.1 Introduction to Eigenvalues"
 
+# ╔═╡ 41799b6d-d000-40c9-8144-211645bf6a3e
+md"##  The Characteristic Equation"
+
+# ╔═╡ 2e116819-87fb-4fef-892e-3fbd19f3862e
+cm"""
+## Eigenspaces
+
+Let ``\lambda`` be a fixed eigenvalue of the ``n \times n`` matrix ``\mathbf{A}``. Then the set of all eigenvectors associated with ``\mathbf{A}`` is the set of all nonzero solution vectors of the system
+```math
+(\mathbf{A}-\lambda \mathbf{I}) \mathbf{v}=\mathbf{0} .
+```
+
+The __solution space__ of this system is called the __eigenspace of ``\mathbf{A}`` associated with the eigenvalue ``\lambda``__. This subspace of ``\mathbf{R}^n`` consists of all eigenvectors associated with ``\lambda`` together with the zero vector. 
+"""
 
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
@@ -2774,6 +2789,120 @@ Determine the appropriate form for a particular solution of the fifth-order equa
 ```
 """
 
+# ╔═╡ 0fec7bee-9c5a-4288-b8e0-568cbe0b0466
+cm"""
+$(bth("1 Variation of Parameters"))
+If the nonhomogeneous equation ``y^{\prime \prime}+P(x) y^{\prime}+Q(x) y=f(x)`` has complementary function ``y_c(x)=c_1 y_1(x)+c_2 y_2(x)``, then a particular solution is given by
+```math
+y_p(x)=-y_1(x) \int \frac{y_2(x) f(x)}{W(x)} d x+y_2(x) \int \frac{y_1(x) f(x)}{W(x)} d x,
+```
+where ``W=W\left(y_1, y_2\right)`` is the Wronskian of the two independent solutions ``y_1`` and ``y_2`` of the associated homogeneous equation.
+"""
+
+# ╔═╡ 35574f43-874e-4c68-9830-85bbf452296d
+cm"""
+$(ex(11))
+Find a particular solution of the equation ``y^{\prime \prime}+y=\tan x``.
+"""
+
+# ╔═╡ bc149a7f-b9ff-4724-814f-e7e18e3dea86
+cm"""
+$(define("Eigenvalues and Eigenvectors"))
+The number ``\lambda`` is said to be an __eigenvalue__ of the ``n \times n`` matrix ``\mathbf{A}`` provided there exists a __nonzero vector__ ``\mathbf{v}`` such that
+```math
+\mathbf{A v}=\lambda \mathbf{v},
+```
+in which case the vector ``\mathbf{v}`` is called an __eigenvector__ of the matrix ``\mathbf{A}``. We also say that the eigenvector ``\mathbf{v}`` is associated with the eigenvalue ``\lambda``, or that the eigenvalue ``\lambda`` corresponds to the eigenvector ``\mathbf{v}``.
+"""
+
+# ╔═╡ 82353e45-9faf-4818-8c04-c2c41cc69866
+cm"""
+$(bbl("Remarks",""))
+The system 
+```math
+\mathbf{A v}=\lambda \mathbf{v},
+```
+has a nontrivial solution ``\mathbf{v} \neq \mathbf{0}`` if and only if the determinant
+```math
+\operatorname{det}(\mathbf{A}-\lambda \mathbf{I})=|\mathbf{A}-\lambda \mathbf{I}|
+```
+of its coefficient matrix is zero. The equation 
+```math 
+|\mathbf{A}-\lambda \mathbf{I}|=0
+``` 
+is called the __characteristic equation__ of the square matrix ``\mathbf{A}``, and we have proved that there exists an eigenvector ``\mathbf{v}`` associated with ``\lambda`` if and only if ``\lambda`` satisfies this equation.
+"""
+
+# ╔═╡ 8ce55646-dfa7-47df-8164-d90fc824d477
+cm"""
+$(bth("1 The Characteristic Equation"))
+The number ``\lambda`` is an eigenvalue of the ``n \times n`` matrix ``\mathbf{A}`` if and only if ``\lambda`` satisfies the characteristic equation
+```math
+|\mathbf{A}-\lambda \mathbf{I}|=0 .
+```
+"""
+
+# ╔═╡ b87b52a1-dfce-4891-abb4-8583cdd23744
+cm"""
+$(ex())
+Find the eigenvalues and associated eigenvectors of the matrix
+```math
+\mathbf{A}=\left[\begin{array}{rr}
+5 & 7 \\
+-2 & -4
+\end{array}\right] .
+```
+"""
+
+# ╔═╡ 2718bf8e-7b0c-42b3-913e-a18f16d22d0b
+cm"""
+$(ex())
+Find the eigenvalues and associated eigenvectors of the matrix
+```math
+\mathbf{A}=\left[\begin{array}{rr}0 & 8 \\ -2 & 0\end{array}\right]
+```
+"""
+
+# ╔═╡ 9a981f7a-9c28-4af0-ad2a-ff6f0c3ec2ea
+cm"""
+$(ex()) 
+Find the eigenvalues and associated eigenvectors of the ``I_2``.
+"""
+
+# ╔═╡ 16d4239c-a7c0-42ce-8640-8afeffecd47d
+cm"""
+$(ex())
+Find the eigenvalues and associated eigenvectors of the matrix
+```math
+\mathbf{A}=\left[\begin{array}{ll}2 & 3 \\ 0 & 2\end{array}\right]
+```
+"""
+
+# ╔═╡ a4ac83bb-c85a-4a6f-86b7-7594043e9294
+cm"""
+$(bbl("Remark",""))
+These examples illustrate the four possibilities for a ``2 \times 2`` matrix ``\mathbf{A}``. It can have either
+- two distinct real eigenvalues, each corresponding to a single eigenvector;
+- a single real eigenvalue corresponding to a single eigenvector;
+- a single real eigenvalue corresponding to two linearly independent eigenvectors; or
+- two complex conjugate eigenvalues corresponding to complex conjugate eigenvectors.
+
+$(bbl("Remark",""))
+Substitution of ``\lambda=0`` in the characteristic equation ``|\mathbf{A}-\lambda \mathbf{I}|=0`` yields ``|\mathbf{A}|=0``. Therefore, ``\lambda=0`` is an eigenvalue of the matrix ``\mathbf{A}`` if and only if ``\mathbf{A}`` is singular: ``|\mathbf{A}|=0``.
+"""
+
+# ╔═╡ 31061f53-97f2-456c-b5b5-8e4f3229e0f4
+cm"""
+$(ex())Find bases for the eigenspaces of the matrix
+```math
+\mathbf{A}=\left[\begin{array}{rrr}
+4 & -2 & 1 \\
+2 & 0 & 1 \\
+2 & -2 & 3
+\end{array}\right]
+```
+"""
+
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
 initialize_eqref()
 
@@ -2816,7 +2945,6 @@ Printf = "de0858da-6303-5e67-8744-51eddeeeb8d7"
 QRCoders = "f42e9828-16f3-11ed-2883-9126170b272d"
 Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
-SymPy = "24249f21-da20-56a4-8eb1-6a02cf4ae2e6"
 
 [compat]
 Colors = "~0.12.11"
@@ -2830,16 +2958,15 @@ PlutoExtras = "~0.7.13"
 PlutoUI = "~0.7.60"
 PrettyTables = "~2.4.0"
 QRCoders = "~1.4.5"
-SymPy = "~2.2.0"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.11.0"
+julia_version = "1.11.1"
 manifest_format = "2.0"
-project_hash = "7da05748dac78c02b49902a8bf42c86d7c455cde"
+project_hash = "9d4264e62aea4a6dbff5896fd89dd0d573ffedaa"
 
 [[deps.AbstractFFTs]]
 deps = ["LinearAlgebra"]
@@ -2931,21 +3058,11 @@ git-tree-sha1 = "362a287c3aa50601b0bc359053d5c2468f0e7ce0"
 uuid = "5ae59095-9a9b-59fe-a467-6f913c188581"
 version = "0.12.11"
 
-[[deps.CommonEq]]
-git-tree-sha1 = "6b0f0354b8eb954cdba708fb262ef00ee7274468"
-uuid = "3709ef60-1bee-4518-9f2f-acd86f176c50"
-version = "0.2.1"
-
 [[deps.CommonMark]]
 deps = ["Crayons", "PrecompileTools"]
 git-tree-sha1 = "3faae67b8899797592335832fccf4b3c80bb04fa"
 uuid = "a80b9123-70ca-4bc0-993e-6e3bcb318db6"
 version = "0.8.15"
-
-[[deps.CommonSolve]]
-git-tree-sha1 = "0eee5eb66b1cf62cd6ad1b460238e60e4b09400c"
-uuid = "38540f10-b2f7-11e9-35d8-d573e4eb0ff2"
-version = "0.2.4"
 
 [[deps.Compat]]
 deps = ["TOML", "UUIDs"]
@@ -2967,12 +3084,6 @@ deps = ["Serialization", "Sockets"]
 git-tree-sha1 = "ea32b83ca4fefa1768dc84e504cc0a94fb1ab8d1"
 uuid = "f0e56b4a-5159-44fe-b623-3e5288b988bb"
 version = "2.4.2"
-
-[[deps.Conda]]
-deps = ["Downloads", "JSON", "VersionParsing"]
-git-tree-sha1 = "b19db3927f0db4151cb86d073689f2428e524576"
-uuid = "8f4d0f93-b110-5947-807f-2305c1781a2d"
-version = "1.10.2"
 
 [[deps.ConstructionBase]]
 git-tree-sha1 = "76219f1ed5771adbb096743bff43fb5fdd4c1157"
@@ -3801,12 +3912,6 @@ git-tree-sha1 = "8f6bc219586aef8baf0ff9a5fe16ee9c70cb65e4"
 uuid = "92933f4c-e287-5a05-a399-4b506db050ca"
 version = "1.10.2"
 
-[[deps.PyCall]]
-deps = ["Conda", "Dates", "Libdl", "LinearAlgebra", "MacroTools", "Serialization", "VersionParsing"]
-git-tree-sha1 = "9816a3826b0ebf49ab4926e2b18842ad8b5c8f04"
-uuid = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
-version = "1.96.4"
-
 [[deps.QOI]]
 deps = ["ColorTypes", "FileIO", "FixedPointNumbers"]
 git-tree-sha1 = "18e8f4d1426e965c7b532ddd260599e1510d26ce"
@@ -4037,24 +4142,6 @@ deps = ["Artifacts", "Libdl", "libblastrampoline_jll"]
 uuid = "bea87d4a-7f5b-5778-9afe-8cc45184846c"
 version = "7.7.0+0"
 
-[[deps.SymPy]]
-deps = ["CommonEq", "CommonSolve", "LinearAlgebra", "PyCall", "SpecialFunctions", "SymPyCore"]
-git-tree-sha1 = "d35b297be048dfac05bcff29e55d6106808e3c5a"
-uuid = "24249f21-da20-56a4-8eb1-6a02cf4ae2e6"
-version = "2.2.0"
-
-[[deps.SymPyCore]]
-deps = ["CommonEq", "CommonSolve", "Latexify", "LinearAlgebra", "Markdown", "RecipesBase", "SpecialFunctions"]
-git-tree-sha1 = "bef92ec4c31804bdc9c44cb00eaf0348eac383fb"
-uuid = "458b697b-88f0-4a86-b56b-78b75cfb3531"
-version = "0.2.5"
-
-    [deps.SymPyCore.extensions]
-    SymPyCoreTermInterfaceExt = "TermInterface"
-
-    [deps.SymPyCore.weakdeps]
-    TermInterface = "8ea1fca8-c5ef-4a55-8b96-4e9afe9c9a3c"
-
 [[deps.TOML]]
 deps = ["Dates"]
 uuid = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
@@ -4154,11 +4241,6 @@ version = "1.6.4"
 git-tree-sha1 = "ca0969166a028236229f63514992fc073799bb78"
 uuid = "41fe7b60-77ed-43a1-b4f0-825fd5a5650d"
 version = "0.2.0"
-
-[[deps.VersionParsing]]
-git-tree-sha1 = "58d6e80b4ee071f5efd07fda82cb9fbe17200868"
-uuid = "81def892-9a0e-5fdd-b105-ffc91e053289"
-version = "1.3.0"
 
 [[deps.Vulkan_Loader_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Wayland_jll", "Xorg_libX11_jll", "Xorg_libXrandr_jll", "xkbcommon_jll"]
@@ -4737,7 +4819,20 @@ version = "1.4.1+1"
 # ╟─5405ebd1-dbd9-42d1-a542-1d8c9f4b9aaa
 # ╟─fa4b457e-6833-49b2-a4ee-db18905061d7
 # ╟─b8db6d0c-7200-4c76-9fed-3a774ce8dae9
-# ╠═0fec7bee-9c5a-4288-b8e0-568cbe0b0466
+# ╟─0fec7bee-9c5a-4288-b8e0-568cbe0b0466
+# ╟─35574f43-874e-4c68-9830-85bbf452296d
+# ╟─274e341c-66c4-434a-b002-079130d6ee81
+# ╟─bc149a7f-b9ff-4724-814f-e7e18e3dea86
+# ╟─41799b6d-d000-40c9-8144-211645bf6a3e
+# ╟─82353e45-9faf-4818-8c04-c2c41cc69866
+# ╟─8ce55646-dfa7-47df-8164-d90fc824d477
+# ╟─b87b52a1-dfce-4891-abb4-8583cdd23744
+# ╟─2718bf8e-7b0c-42b3-913e-a18f16d22d0b
+# ╟─9a981f7a-9c28-4af0-ad2a-ff6f0c3ec2ea
+# ╟─16d4239c-a7c0-42ce-8640-8afeffecd47d
+# ╟─a4ac83bb-c85a-4a6f-86b7-7594043e9294
+# ╟─2e116819-87fb-4fef-892e-3fbd19f3862e
+# ╟─31061f53-97f2-456c-b5b5-8e4f3229e0f4
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
