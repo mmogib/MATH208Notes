@@ -17,6 +17,7 @@ begin
     # using SymPy
     using QRCoders
     using PrettyTables
+	# using Primes
     # using LinearSolve
     # using NonlinearSolve
     # using ForwardDiff
@@ -930,9 +931,12 @@ md"# 6.1 Introduction to Eigenvalues"
 # ╔═╡ 41799b6d-d000-40c9-8144-211645bf6a3e
 md"##  The Characteristic Equation"
 
+# ╔═╡ 50c06b0f-3a4e-4f91-ad85-5b814dffa8bb
+md"## Eigenspaces"
+
 # ╔═╡ 2e116819-87fb-4fef-892e-3fbd19f3862e
 cm"""
-## Eigenspaces
+
 
 Let ``\lambda`` be a fixed eigenvalue of the ``n \times n`` matrix ``\mathbf{A}``. Then the set of all eigenvectors associated with ``\mathbf{A}`` is the set of all nonzero solution vectors of the system
 ```math
@@ -941,6 +945,30 @@ Let ``\lambda`` be a fixed eigenvalue of the ``n \times n`` matrix ``\mathbf{A}`
 
 The __solution space__ of this system is called the __eigenspace of ``\mathbf{A}`` associated with the eigenvalue ``\lambda``__. This subspace of ``\mathbf{R}^n`` consists of all eigenvectors associated with ``\lambda`` together with the zero vector. 
 """
+
+# ╔═╡ 92297d90-f326-4f1e-80fc-5465621e8a6b
+md"# 6.2 Diagonalization of Matrices"
+
+# ╔═╡ 050d88a5-3b65-4940-b6b2-6750eaff6d66
+let
+	λ1 = -2
+	v1 = [-1;1]
+	λ2 = 3
+	v2 = [-7;2]
+	P = [v1 v2]
+	Pinv= inv(P)
+	D = Diagonal([-2;3])
+	P*D*Pinv
+end
+
+# ╔═╡ b7e7238a-b2ec-4632-85b3-c069217b7ecc
+md"## Similarity and Diagonalization"
+
+# ╔═╡ 343d8a6b-c6bd-41ef-ab28-3872753864c6
+let
+	f(x)=x^3-7x^2+16x-12
+	# map(x->(x,f(x)),factor(Vector,-12))
+end
 
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
@@ -2903,6 +2931,100 @@ $(ex())Find bases for the eigenspaces of the matrix
 ```
 """
 
+# ╔═╡ a78f4ee9-0ddc-47b8-8252-4c6a1fe0073d
+cm"""
+Recall:
+
+$(ex())
+Find the eigenvalues and associated eigenvectors of the matrix
+```math
+\mathbf{A}=\left[\begin{array}{rr}
+5 & 7 \\
+-2 & -4
+\end{array}\right] .
+```
+"""
+
+# ╔═╡ 8d5ea72f-66be-4a22-811f-1405a6b724c8
+cm"""
+$(define("Similar Matrices"))
+The ``n \times n`` matrices ``\mathbf{A}`` and ``\mathbf{B}`` are called similar provided that there exists an invertible matrix ``\mathbf{P}`` such that
+```math
+\mathbf{B}=\mathbf{P}^{-1} \mathbf{A P}
+```
+"""
+
+# ╔═╡ 122b69e6-2e6d-4338-81bb-c7c050d0cc8a
+cm"""
+$(bbl("Remarks",""))
+
+An ``n \times n`` matrix ``\mathbf{A}`` is called __diagonalizable__ if it is similar to a diagonal matrix ``\mathbf{D}``; that is, there exist a diagonal matrix ``\mathbf{D}`` and an invertible matrix ``\mathbf{P}`` such that ``\mathbf{A}=\mathbf{P D P}^{-1}``, and so
+```math
+\mathbf{P}^{-1} \mathbf{A P}=\mathbf{D} .
+```
+
+The process of finding the __diagonalizing__ matrix ``\mathbf{P}`` and the diagonal matrix ``\mathbf{D}`` is called __diagonalization__ of the matrix A. 
+
+In Example 1 we showed that the matrix ``A`` is __diagonalizable__.
+"""
+
+# ╔═╡ 9ededb67-b1a0-4ee9-ac2f-f2bfbdb9e772
+cm"""
+$(bth("1 Criterion for Diagonalizability"))
+The ``n \times n`` matrix ``\mathbf{A}`` is diagonalizable if and only if it has ``n`` linearly independent eigenvectors.
+"""
+
+# ╔═╡ 6ec677b8-aae1-4a49-861f-ee85e94f872d
+cm"""
+$(ex())
+The matrix 
+```math
+\mathbf{A}=\left[\begin{array}{ll}2 & 3 \\ 0 & 2\end{array}\right]
+```
+is NOT diagonalizable. 
+"""
+
+# ╔═╡ d7f27e6b-b367-4375-a4ee-1ffaee828fba
+cm"""
+$(ex())Find bases for the eigenspaces of the matrix
+```math
+\mathbf{A}=\left[\begin{array}{rrr}
+4 & -2 & 1 \\
+2 & 0 & 1 \\
+2 & -2 & 3
+\end{array}\right]
+```
+Is ``A`` __diagonalizable__?
+"""
+
+# ╔═╡ 4569a153-4e04-4a6b-b379-adf9f3ded21a
+cm"""
+$(bth("2 Eigenvectors Associated with Distinct Eigenvalues"))
+Suppose that the eigenvectors ``\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k`` are associated with the distinct eigenvalues ``\lambda_1, \lambda_2, \ldots, \lambda_k`` of the matrix ``\mathbf{A}``. Then these ``k`` eigenvectors are linearly independent.
+"""
+
+# ╔═╡ 1cbf11da-3e9f-4bfb-b298-8212bdedd95b
+cm"""
+$(bth("3"))
+If the ``n \times n`` matrix ``\mathbf{A}`` has ``n`` distinct eigenvalues, then it is diagonalizable.
+"""
+
+# ╔═╡ 6c44073c-b617-4d7f-83f6-458d8830328d
+cm"""
+$(bth("4 Complete Independence of Eigenvectors"))
+Let ``\lambda_1, \lambda_2, \ldots, \lambda_k`` be the distinct eigenvalues of the ``n \times n`` matrix ``\mathbf{A}``. For each ``i=1,2, \ldots, k``, let ``S_i`` be a basis for the eigenspace associated with ``\lambda_i``. Then the union ``S`` of the bases ``S_1, S_2, \ldots, S_k`` is a linearly independent set of eigenvectors of ``\mathbf{A}``.
+"""
+
+# ╔═╡ c447fe70-1e3d-4c90-aebd-7b6ed096bf70
+cm"""
+$(ex())
+Is the matrix
+```math
+\mathbf{A}=\left[\begin{array}{rrr}3 & 0 & 0 \\ -4 & 6 & 2 \\ 16 & -15 & -5\end{array}\right]
+```
+diagonalizable?
+"""
+
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
 initialize_eqref()
 
@@ -4831,8 +4953,23 @@ version = "1.4.1+1"
 # ╟─9a981f7a-9c28-4af0-ad2a-ff6f0c3ec2ea
 # ╟─16d4239c-a7c0-42ce-8640-8afeffecd47d
 # ╟─a4ac83bb-c85a-4a6f-86b7-7594043e9294
+# ╟─50c06b0f-3a4e-4f91-ad85-5b814dffa8bb
 # ╟─2e116819-87fb-4fef-892e-3fbd19f3862e
 # ╟─31061f53-97f2-456c-b5b5-8e4f3229e0f4
+# ╟─92297d90-f326-4f1e-80fc-5465621e8a6b
+# ╟─a78f4ee9-0ddc-47b8-8252-4c6a1fe0073d
+# ╠═050d88a5-3b65-4940-b6b2-6750eaff6d66
+# ╟─b7e7238a-b2ec-4632-85b3-c069217b7ecc
+# ╟─8d5ea72f-66be-4a22-811f-1405a6b724c8
+# ╟─122b69e6-2e6d-4338-81bb-c7c050d0cc8a
+# ╟─9ededb67-b1a0-4ee9-ac2f-f2bfbdb9e772
+# ╟─6ec677b8-aae1-4a49-861f-ee85e94f872d
+# ╟─d7f27e6b-b367-4375-a4ee-1ffaee828fba
+# ╠═343d8a6b-c6bd-41ef-ab28-3872753864c6
+# ╟─4569a153-4e04-4a6b-b379-adf9f3ded21a
+# ╟─1cbf11da-3e9f-4bfb-b298-8212bdedd95b
+# ╟─6c44073c-b617-4d7f-83f6-458d8830328d
+# ╟─c447fe70-1e3d-4c90-aebd-7b6ed096bf70
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
