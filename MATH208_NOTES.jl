@@ -455,10 +455,10 @@ let
     # Au=hcat(A,B)
     # Au[1,:],Au[2,:]=Au[2,:],Au[1,:]
     # Au[2,:]=-2Au[1,:]+Au[2,:]
-    # Au[3,:]=-7Au[1,:]+Au[3,:]
-    # Au[3,:]=-2Au[2,:]+Au[3,:]
+    # # Au[3,:]=-7Au[1,:]+Au[3,:]
+    # # Au[3,:]=-2Au[2,:]+Au[3,:]
 
-    Au
+    # Au
 end
 
 # ╔═╡ 387953af-89c5-47ee-a1b1-af9b05baf949
@@ -969,6 +969,51 @@ let
 	f(x)=x^3-7x^2+16x-12
 	# map(x->(x,f(x)),factor(Vector,-12))
 end
+
+# ╔═╡ d897e53f-396a-49c6-a5fd-18bfa4263a5b
+md"# 7.2 Matrices and Linear Systems"
+
+# ╔═╡ 49f00900-bac4-4f1c-878e-d80a7cb013e9
+md"##  First-Order Linear Systems"
+
+# ╔═╡ c048be67-8396-4769-aa8e-198113361281
+cm"""
+We discuss here the __general system of ``n`` first-order linear equations__
+```math
+\begin{gathered}
+x_1^{\prime}=p_{11}(t) x_1+p_{12}(t) x_2+\cdots+p_{1 n}(t) x_n+f_1(t), \\
+x_2^{\prime}=p_{21}(t) x_1+p_{22}(t) x_2+\cdots+p_{2 n}(t) x_n+f_2(t), \\
+x_3^{\prime}=p_{31}(t) x_1+p_{32}(t) x_2+\cdots+p_{3 n}(t) x_n+f_3(t), \\
+\vdots \\
+x_n^{\prime}=p_{n 1}(t) x_1+p_{n 2}(t) x_2+\cdots+p_{n n}(t) x_n+f_n(t) .
+\end{gathered}
+```
+
+If we introduce the coefficient matrix
+```math
+\mathbf{P}(t)=\left[p_{i j}(t)\right]
+```
+and the column vectors
+```math
+\mathbf{x}=\left[x_i\right] \quad \text { and } \quad \mathbf{f}(t)=\left[f_i(t)\right]
+```
+then this system in takes the form of single matrix equation
+```math
+\frac{d \mathbf{x}}{d t}=\mathbf{P}(t) \mathbf{x}+\mathbf{f}(t)
+```
+"""
+
+# ╔═╡ 35305de0-ae3f-4600-a632-120f4038a7c7
+md"## Independence and General Solutions"
+
+# ╔═╡ 57fbd696-71d2-4410-91d2-fc90b9bf74bf
+md"##  Initial Value Problems and Elementary Row Operations"
+
+# ╔═╡ e89c49d1-a3f2-4773-930f-4ecc22727a8d
+md"##  Nonhomogeneous Solutions"
+
+# ╔═╡ c12fe73c-add0-427a-9a1a-9c83e83f0048
+md"# 7.3 The Eigenvalue Method for Linear Systems"
 
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
@@ -3025,6 +3070,222 @@ Is the matrix
 diagonalizable?
 """
 
+# ╔═╡ a683151e-a8ac-4336-87c3-4f95bf85db4d
+cm"""
+$(ex(1))
+If
+```math
+\mathbf{x}(t)=\left[\begin{array}{c}
+t \\
+t^2 \\
+e^{-t}
+\end{array}\right] \quad \text { and } \quad \mathbf{A}(t)=\left[\begin{array}{cc}
+\sin t & 1 \\
+t & \cos t
+\end{array}\right]
+```
+then
+```math
+\frac{d \mathbf{x}}{d t}=\left[\begin{array}{c}
+1 \\
+2 t \\
+-e^{-t}
+\end{array}\right] \quad \text { and } \quad \mathbf{A}^{\prime}(t)=\left[\begin{array}{cc}
+\cos t & 0 \\
+1 & -\sin t
+\end{array}\right]
+```
+$(ebl())
+
+$(bbl("Remark",""))
+``x(t)`` and ``A(t)`` are __function-valued__.
+"""
+
+# ╔═╡ 6b121775-cf2c-4c08-835c-64b51b8494c2
+cm"""
+$(bbl("The differentiation rules",""))
+
+```math
+\frac{d}{d t}(\mathbf{A}+\mathbf{B})=\frac{d \mathbf{A}}{d t}+\frac{d \mathbf{B}}{d t}
+```
+and
+```math
+\frac{d}{d t}(\mathbf{A B})=\mathbf{A} \frac{d \mathbf{B}}{d t}+\frac{d \mathbf{A}}{d t} \mathbf{B}
+```
+```math
+\frac{d}{d t}(c \mathbf{A})=c \frac{d \mathbf{A}}{d t}, \quad \frac{d}{d t}(\mathbf{C A})=\mathbf{C} \frac{d A}{d t}, \quad$ and $\quad \frac{d}{d t}(\mathbf{A C})=\frac{d \mathbf{A}}{d t} \mathbf{C}.
+```
+where ``c`` is a (constant) real number and ``\mathbf{C}`` is a constant matrix.
+"""
+
+# ╔═╡ b30b3130-04ae-4e2d-a8ca-571f8af2d50f
+cm"""
+$(ex(2)) Write the first-order system in matrix form
+```math
+\begin{aligned}
+& x_1^{\prime}=4 x_1-3 x_2, \\
+& x_2^{\prime}=6 x_1-7 x_2
+\end{aligned}
+```
+"""
+
+# ╔═╡ a517f8b3-5230-462c-8144-2ef6e0926d41
+cm"""
+$(bth("1 Principle of Superposition"))
+Let ``\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n`` be ``n`` solutions of the __homogeneous linear equation__ in 
+```math
+\frac{d \mathbf{x}}{d t}=\mathbf{P}(t) \mathbf{x} \tag{*}
+```
+on the open interval ``I``. If ``c_1, c_2, \ldots, c_n`` are constants, then the linear combination
+```math
+\mathbf{x}(t)=c_1 \mathbf{x}_1(t)+c_2 \mathbf{x}_2(t)+\cdots+c_n \mathbf{x}_n(t)
+```
+is also a solution of Eq. (*) on ``I``.
+"""
+
+# ╔═╡ 360aa72f-42af-4b33-a55a-9f63de8bf9de
+cm"""
+$(ex(2,"Continued"))
+Verify that the vector functions
+```math
+\mathbf{x}_1(t)=\left[\begin{array}{l}
+3 e^{2 t} \\
+2 e^{2 t}
+\end{array}\right] \quad \text { and } \quad \mathbf{x}_2(t)=\left[\begin{array}{c}
+e^{-5 t} \\
+3 e^{-5 t}
+\end{array}\right]
+```
+satisfy the first-order system
+```math
+\begin{aligned}
+& x_1^{\prime}=4 x_1-3 x_2, \\
+& x_2^{\prime}=6 x_1-7 x_2
+\end{aligned}
+```
+"""
+
+# ╔═╡ 0a548690-cc94-441e-87df-f1bf33e2061e
+cm"""
+$(bbl("Remarks",""))
+The vector-valued functions ``\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n`` are __linearly dependent__ on the interval ``I`` provided that there exist constants ``c_1, c_2, \ldots``, ``c_n``, not all zero, such that
+```math
+c_1 \mathbf{x}_1(t)+c_2 \mathbf{x}_2(t)+\cdots+c_n \mathbf{x}_n(t)=\mathbf{0}
+```
+for all ``t`` in ``I``. Otherwise, they are __linearly independent__.
+
+If ``\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n`` are such solutions, then their __Wronskian__ is the ``n \times n`` determinant
+```math
+W(t)=\left|\begin{array}{cccc}
+x_{11}(t) & x_{12}(t) & \cdots & x_{1 n}(t) \\
+x_{21}(t) & x_{22}(t) & \cdots & x_{2 n}(t) \\
+\vdots & \vdots & & \vdots \\
+x_{n 1}(t) & x_{n 2}(t) & \cdots & x_{n n}(t)
+\end{array}\right|
+```
+
+"""
+
+# ╔═╡ 86ee83b8-7fd6-4314-bd13-c7e991188d8e
+cm"""
+$(bth("2 Wronskians of Solutions"))
+Suppose that ``\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n`` are ``n`` solutions of the homogeneous linear equation ``\mathbf{x}^{\prime}=\mathbf{P}(t) \mathbf{x}`` on an open interval ``I``. Suppose also that ``\mathbf{P}(t)`` is continuous on ``I``. Let
+```math
+W=W\left(\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n\right)
+```
+
+Then
+- If ``\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n`` are linearly dependent on ``I``, then ``W=0`` at every point of I.
+- If ``\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n`` are linearly independent on ``I``, then ``W \neq 0`` at each point of I.
+
+Thus there are only two possibilities for solutions of homogeneous systems: Either ``W=0`` at every point of ``I``, or ``W=0`` at no point of ``I``.
+"""
+
+# ╔═╡ 1f516e68-f01f-4e50-bcd3-19f89c95b004
+cm"""
+$(bth("3 General Solutions of Homogeneous Systems"))
+Let ``\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n`` be ``n`` linearly independent solutions of the homogeneous linear equation ``\mathbf{x}^{\prime}=\mathbf{P}(t) \mathbf{x}`` on an open interval ``I`` where ``\mathbf{P}(t)`` is continuous. If ``\mathbf{x}(t)`` is any solution whatsoever of the equation ``\mathbf{x}^{\prime}=\mathbf{P}(t) \mathbf{x}`` on ``I``, then there exist numbers ``c_1``, ``c_2, \ldots, c_n`` such that
+```math
+\mathbf{x}(t)=c_1 \mathbf{x}_1(t)+c_2 \mathbf{x}_2(t)+\cdots+c_n \mathbf{x}_n(t)
+```
+for all ``t`` in ``I``.
+"""
+
+# ╔═╡ 9443f969-f812-49fe-a90b-4feeb68ef5cb
+cm"""
+$(ex(3))
+Verify that 
+```math
+\mathbf{x}_1(t)=\left[\begin{array}{c}
+2 e^t \\
+2 e^t \\
+e^t
+\end{array}\right], \quad \mathbf{x}_2(t)=\left[\begin{array}{c}
+2 e^{3 t} \\
+0 \\
+-e^{3 t}
+\end{array}\right], \quad \text { and } \quad \mathbf{x}_3(t)=\left[\begin{array}{c}
+2 e^{5 t} \\
+-2 e^{5 t} \\
+e^{5 t}
+\end{array}\right]
+```
+are solutions of the equation
+```math
+\frac{d \mathbf{x}}{d t}=\left[\begin{array}{rrr}
+3 & -2 & 0 \\
+-1 & 3 & -2 \\
+0 & -1 & 3
+\end{array}\right] \mathbf{x} .
+```
+Write the __general solution__.
+$(ex(4))
+Solve the initial-value problem
+```math
+\frac{d \mathbf{x}}{d t}=\left[\begin{array}{rrr}3 & -2 & 0 \\ -1 & 3 & -2 \\ 0 & -1 & 3\end{array}\right] \mathbf{x}, \quad \mathbf{x}(0)=\left[\begin{array}{l}0 \\ 2 \\ 6\end{array}\right].
+```
+"""
+
+# ╔═╡ 539d655f-3f23-4d4d-a695-62a6f37632dd
+cm"""
+$(bth("4 Solutions of Nonhomogeneous Systems"))
+Let ``\mathbf{x}_p`` be a particular solution of the nonhomogeneous linear equation in 
+```math
+\frac{d \mathbf{x}}{d t}=\mathbf{P}(t) \mathbf{x}+\mathbf{f}(t) \tag{IVP}
+```
+on an open interval ``I`` on which the functions ``\mathbf{P}(t)`` and ``\mathbf{f}(t)`` are continuous. Let ``\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n`` be linearly independent solutions of the associated homogeneous equation on ``I``. If ``\mathbf{x}(t)`` is any solution whatsoever of Eq. (IVP) on ``I``, then there exist numbers ``c_1, c_2, \ldots, c_n`` such that
+```math
+\mathbf{x}(t)=c_1 \mathbf{x}_1(t)+c_2 \mathbf{x}_2(t)+\cdots+c_n \mathbf{x}_n(t)+\mathbf{x}_p(t)
+```
+for all ``t`` in ``I``.
+"""
+
+# ╔═╡ ca9d9245-a9b7-4ce3-98a4-e3549eb7d118
+cm"""
+$(ex(2)) Solve
+```math
+\begin{aligned}
+& x_1^{\prime}=4 x_1-3 x_2, \\
+& x_2^{\prime}=6 x_1-7 x_2
+\end{aligned}
+```
+"""
+
+# ╔═╡ 4d2c0551-0ff5-44ae-81c5-9e0f703f6241
+cm"""
+$(bth("1 Eigenvalue Solutions"))
+Let ``\lambda`` be an eigenvalue of the [constant] coefficient matrix ``\mathbf{A}`` of the first-order linear system
+```math
+\frac{d \mathbf{x}}{d t}=\mathbf{A x} .
+```
+
+If ``\mathbf{v}`` is an eigenvector associated with ``\lambda``, then
+```math
+\mathbf{x}(t)=\mathbf{v} e^{\lambda t}
+```
+is a nontrivial solution of the system.
+"""
+
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
 initialize_eqref()
 
@@ -4970,6 +5231,25 @@ version = "1.4.1+1"
 # ╟─1cbf11da-3e9f-4bfb-b298-8212bdedd95b
 # ╟─6c44073c-b617-4d7f-83f6-458d8830328d
 # ╟─c447fe70-1e3d-4c90-aebd-7b6ed096bf70
+# ╟─d897e53f-396a-49c6-a5fd-18bfa4263a5b
+# ╟─a683151e-a8ac-4336-87c3-4f95bf85db4d
+# ╟─6b121775-cf2c-4c08-835c-64b51b8494c2
+# ╟─49f00900-bac4-4f1c-878e-d80a7cb013e9
+# ╟─c048be67-8396-4769-aa8e-198113361281
+# ╟─b30b3130-04ae-4e2d-a8ca-571f8af2d50f
+# ╟─a517f8b3-5230-462c-8144-2ef6e0926d41
+# ╟─360aa72f-42af-4b33-a55a-9f63de8bf9de
+# ╟─35305de0-ae3f-4600-a632-120f4038a7c7
+# ╟─0a548690-cc94-441e-87df-f1bf33e2061e
+# ╟─86ee83b8-7fd6-4314-bd13-c7e991188d8e
+# ╟─1f516e68-f01f-4e50-bcd3-19f89c95b004
+# ╟─57fbd696-71d2-4410-91d2-fc90b9bf74bf
+# ╟─9443f969-f812-49fe-a90b-4feeb68ef5cb
+# ╟─e89c49d1-a3f2-4773-930f-4ecc22727a8d
+# ╟─539d655f-3f23-4d4d-a695-62a6f37632dd
+# ╟─c12fe73c-add0-427a-9a1a-9c83e83f0048
+# ╟─ca9d9245-a9b7-4ce3-98a4-e3549eb7d118
+# ╟─4d2c0551-0ff5-44ae-81c5-9e0f703f6241
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
