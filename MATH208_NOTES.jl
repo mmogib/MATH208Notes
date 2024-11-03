@@ -1015,6 +1015,12 @@ md"##  Nonhomogeneous Solutions"
 # ╔═╡ c12fe73c-add0-427a-9a1a-9c83e83f0048
 md"# 7.3 The Eigenvalue Method for Linear Systems"
 
+# ╔═╡ 38da86ee-ad79-4145-989e-2c7f5700917e
+md"## Distinct Real Eigenvalues"
+
+# ╔═╡ 8a4fc02e-a8cf-4fbb-9485-7b2beaa1580f
+md"##  Complex Eigenvalues"
+
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
     function add_space(n=1)
@@ -3286,6 +3292,42 @@ If ``\mathbf{v}`` is an eigenvector associated with ``\lambda``, then
 is a nontrivial solution of the system.
 """
 
+# ╔═╡ 4a97c0a0-1906-4704-879b-775929535d7a
+cm"""
+$(ex(1))
+Find a general solution of the system
+```math
+\begin{aligned}
+& x_1^{\prime}=4 x_1+2 x_2, \\
+& x_2^{\prime}=3 x_1-x_2 .
+\end{aligned}
+```
+"""
+
+# ╔═╡ 1ed1648e-eccb-40b9-83bb-f0df29848ef2
+cm"""
+$(ex(2,"Three brine tanks")) If ``V_1=20, V_2=40, V_3=50, r=10(\mathrm{gal} / \mathrm{min})``, and the initial amounts of salt in the three brine tanks, in pounds, are
+```math
+x_1(0)=15, \quad x_2(0)=x_3(0)=0,
+```
+find the amount of salt in each tank at time ``t \geq 0``.
+
+$(post_img("https://www.dropbox.com/scl/fi/hrywp90h468bgm0mu93tk/fig_7_3_2.png?rlkey=be5x52271k3lfm9eg27y8mbw3&dl=1",200))
+
+"""
+
+# ╔═╡ fefea759-c49c-4243-a813-e5308c4687fa
+cm"""
+$(ex(3))
+Find a general solution of the system
+```math
+\begin{aligned}
+& \frac{d x_1}{d t}=4 x_1-3 x_2 \\
+& \frac{d x_2}{d t}=3 x_1+4 x_2
+\end{aligned}
+```
+"""
+
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
 initialize_eqref()
 
@@ -5250,6 +5292,11 @@ version = "1.4.1+1"
 # ╟─c12fe73c-add0-427a-9a1a-9c83e83f0048
 # ╟─ca9d9245-a9b7-4ce3-98a4-e3549eb7d118
 # ╟─4d2c0551-0ff5-44ae-81c5-9e0f703f6241
+# ╟─38da86ee-ad79-4145-989e-2c7f5700917e
+# ╟─4a97c0a0-1906-4704-879b-775929535d7a
+# ╟─1ed1648e-eccb-40b9-83bb-f0df29848ef2
+# ╟─8a4fc02e-a8cf-4fbb-9485-7b2beaa1580f
+# ╟─fefea759-c49c-4243-a813-e5308c4687fa
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
