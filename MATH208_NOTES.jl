@@ -1012,8 +1012,17 @@ md"##  Initial Value Problems and Elementary Row Operations"
 # ╔═╡ e89c49d1-a3f2-4773-930f-4ecc22727a8d
 md"##  Nonhomogeneous Solutions"
 
+# ╔═╡ e64b4a98-ddd3-43b1-985d-f3a705448654
+cm"""
+<iframe class="airtable-embed" src="https://airtable.com/embed/appA1XBC7Hyx4wms2/shrZ0RiS3fGTYrQ5d?viewControls=on" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
+
+"""
+
 # ╔═╡ c12fe73c-add0-427a-9a1a-9c83e83f0048
 md"# 7.3 The Eigenvalue Method for Linear Systems"
+
+# ╔═╡ dac48d06-c31f-4574-ae89-955a533db6b3
+
 
 # ╔═╡ 38da86ee-ad79-4145-989e-2c7f5700917e
 md"## Distinct Real Eigenvalues"
@@ -5289,8 +5298,10 @@ version = "1.4.1+1"
 # ╟─9443f969-f812-49fe-a90b-4feeb68ef5cb
 # ╟─e89c49d1-a3f2-4773-930f-4ecc22727a8d
 # ╟─539d655f-3f23-4d4d-a695-62a6f37632dd
+# ╟─e64b4a98-ddd3-43b1-985d-f3a705448654
 # ╟─c12fe73c-add0-427a-9a1a-9c83e83f0048
-# ╟─ca9d9245-a9b7-4ce3-98a4-e3549eb7d118
+# ╠═ca9d9245-a9b7-4ce3-98a4-e3549eb7d118
+# ╠═dac48d06-c31f-4574-ae89-955a533db6b3
 # ╟─4d2c0551-0ff5-44ae-81c5-9e0f703f6241
 # ╟─38da86ee-ad79-4145-989e-2c7f5700917e
 # ╟─4a97c0a0-1906-4704-879b-775929535d7a
