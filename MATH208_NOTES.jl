@@ -1012,12 +1012,6 @@ md"##  Initial Value Problems and Elementary Row Operations"
 # ╔═╡ e89c49d1-a3f2-4773-930f-4ecc22727a8d
 md"##  Nonhomogeneous Solutions"
 
-# ╔═╡ e64b4a98-ddd3-43b1-985d-f3a705448654
-cm"""
-<iframe class="airtable-embed" src="https://airtable.com/embed/appA1XBC7Hyx4wms2/shrZ0RiS3fGTYrQ5d?viewControls=on" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
-
-"""
-
 # ╔═╡ c12fe73c-add0-427a-9a1a-9c83e83f0048
 md"# 7.3 The Eigenvalue Method for Linear Systems"
 
@@ -1029,6 +1023,100 @@ md"## Distinct Real Eigenvalues"
 
 # ╔═╡ 8a4fc02e-a8cf-4fbb-9485-7b2beaa1580f
 md"##  Complex Eigenvalues"
+
+# ╔═╡ acc4e350-570f-49af-9718-b05ab4c1662e
+md"# 7.6 Multiple Eigenvalue Solutions"
+
+# ╔═╡ ffc3de2d-fcdc-453c-b4a7-6414fe3e323e
+md"## Defective Eigenvalues"
+
+# ╔═╡ 1a3a89b0-1549-4aef-abca-1b5e67d4f5be
+let
+	A = [0 1 2;-5 -3 -7;1 0 0]
+	# B = A+I
+	# B^2
+	# B^3
+	# u3=[1.0;0.0;0]
+	# u2 = B*u3
+	# u1 = B*u2
+end
+
+# ╔═╡ effc2715-a3e9-4cdb-af4b-733382701644
+md"# 8.1 Matrix Exponentials and Linear Systems"
+
+# ╔═╡ 5625e8d7-4c6d-409d-bbeb-0f577b483b0b
+let
+	A = [4 2;3 -1]
+	x0=[1.0;-1]
+	λ,V = eigen(A)
+	# B1 = A-λ[1]*I
+	# V1 = [1;-3.0]
+	# B2 = A-λ[2]*I
+	# V2 = [2.0;1]
+	# x1(t)=V1*exp(λ[1]*t)
+	# x2(t)=V2*exp(λ[2]*t)
+	# Φ(t)=[x1(t) x2(t)]
+	# X(t) = Φ(t)*inv(Φ(0))*x0
+	# X(1)
+end
+
+# ╔═╡ 5ffebe02-0c9b-4b92-bd2a-8288a95f7526
+md"## ExponentialMatrices"
+
+# ╔═╡ a12f16f5-9bdb-48ba-a2ff-895286390a31
+cm"""
+__Recall__
+```math
+e^z=\sum_{k=0}^{\infty} \frac{z^k}{k!} = 1+z+\frac{z^2}{2!}+\frac{z^3}{3!}+\cdots+\frac{z^n}{n!}+\cdots
+```
+__Matrix Exponential__
+
+Let ``\mathbf{A}`` be an ``n \times n`` matrix, then the exponential matrix ``e^{\mathbf{A}}`` is the ``n \times n`` matrix defined by the series
+```math
+e^{\mathbf{A}}=\mathbf{I}+\mathbf{A}+\frac{\mathbf{A}^2}{2!}+\cdots+\frac{\mathbf{A}^n}{n!}+\cdots,\tag{🧿}
+```
+where ``\mathbf{I}`` is the identity matrix. The meaning of the infinite series on the right in (🧿) is given by
+```math
+\sum_{n=0}^{\infty} \frac{\mathbf{A}^n}{n!}=\lim _{k \rightarrow \infty}\left(\sum_{n=0}^k \frac{\mathbf{A}^n}{n!}\right),\tag{👽}
+```
+where ``\mathbf{A}^0=\mathbf{I}, \mathbf{A}^2=\mathbf{A A}, \mathbf{A}^3=\mathbf{A} \mathbf{A}^2``, and so on; inductively, ``\mathbf{A}^{n+1}=\mathbf{A} \mathbf{A}^n`` if ``n \geqq 0``. It can be shown that the limit in (👽) exists for every ``n \times n`` square matrix ``\mathbf{A}``. That is, the exponential matrix ``e^{\mathbf{A}}`` is defined (by Eq. (🧿)) for every square matrix ``\mathbf{A}``.
+"""
+
+# ╔═╡ 28e223d4-2009-47d3-958f-d4505c3f9ab1
+cm"""
+__Rxponential Relations__
+
+- ``e^{\mathbf{0}}=\mathbf{I}``.
+- If ``\mathbf{A B}=\mathbf{B A}``, then ``e^{\mathbf{A}+\mathbf{B}}=e^{\mathbf{A}} e^{\mathbf{B}}``.
+- ``\left(e^{\mathbf{A}}\right)^{-1}=e^{-\mathbf{A}}``
+- the matrix ``e^{\mathbf{A}}`` is nonsingular for every ``n \times n`` matrix ``\mathbf{A}``
+- If ``t`` is a scalar variable, then substitution of ``\mathbf{A} t`` for ``\mathbf{A}`` in Eq. (🧿) gives
+```math
+e^{\mathbf{A} t}=\mathbf{I}+\mathbf{A} t+\mathbf{A}^2 \frac{t^2}{2!}+\cdots+\mathbf{A}^n \frac{t^n}{n!}+\cdots
+```
+
+Of course, ``\mathbf{A} t`` is obtained simply by multiplying each element of ``\mathbf{A}`` by ``t``.)
+"""
+
+# ╔═╡ 0952900f-1a29-4e87-8d04-90a78a3a8189
+let
+	A = diagm(0=>[2.0;3.0])
+	A^5
+end
+
+# ╔═╡ 16cd2f66-4a91-4c5f-bad8-135b7bc8f555
+md"##  Matrix Exponential Solutions"
+
+# ╔═╡ 4cd37de0-bfff-49e9-a661-752e565998ff
+cm"""
+```math
+\frac{d}{d t}\left(e^{\mathbf{A} t}\right)=\mathbf{A}+\mathbf{A}^2 t+\mathbf{A}^3 \frac{t^2}{2!}+\cdots=\mathbf{A}\left(\mathbf{I}+\mathbf{A} t+\mathbf{A}^2 \frac{t^2}{2!}+\cdots\right)
+```
+that is,
+```math
+\frac{d}{d t}\left(e^{\mathbf{A} t}\right)=\mathbf{A} e^{\mathbf{A} t},
+```
+"""
 
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
@@ -3337,6 +3425,202 @@ Find a general solution of the system
 ```
 """
 
+# ╔═╡ 1e738733-4b09-40c2-8513-ba0a388b07bf
+cm"""
+$(ex(1)) Find a general solution of the system
+```math
+\mathbf{x}^{\prime}=\left[\begin{array}{rrr}
+9 & 4 & 0 \\
+-6 & -1 & 0 \\
+6 & 4 & 3
+\end{array}\right] \mathbf{x} .
+```
+__Solution__
+
+```math
+\begin{aligned}|\mathbf{A}-\lambda \mathbf{I}| & =\left|\begin{array}{ccc}9-\lambda & 4 & 0 \\ -6 & -1-\lambda & 0 \\ 6 & 4 & 3-\lambda\end{array}\right| \\ & =(3-\lambda)[(9-\lambda)(-1-\lambda)+24 \\ & =(3-\lambda)\left(15-8 \lambda+\lambda^2\right) \\ & =(5-\lambda)(3-\lambda)^2=0 .\end{aligned}
+```
+- CASE 1: ``\lambda_1=5``
+```math
+\mathbf{v}_1=\left[\begin{array}{lll}1 & -1 & 1\end{array}\right]^T
+```
+
+- CASE 2: ``\lambda_2=3``
+```math
+\mathbf{v}_2=\left[\begin{array}{lll}0 & 0 & 1\end{array}\right]^T
+```
+```math
+\mathbf{v}_3=\left[\begin{array}{lll}2 & -3 & 0\end{array}\right]^T
+```
+
+__The corresponding general solution__
+```math
+\begin{aligned}
+\mathbf{x}(t) & =c_1 \mathbf{v}_1 e^{5 t}+c_2 \mathbf{v}_2 e^{3 t}+c_3 \mathbf{v}_3 e^{3 t} \\
+& =c_1\left[\begin{array}{r}
+1 \\
+-1 \\
+1
+\end{array}\right] e^{5 t}+c_2\left[\begin{array}{l}
+0 \\
+0 \\
+1
+\end{array}\right] e^{3 t}+c_3\left[\begin{array}{r}
+2 \\
+-3 \\
+0
+\end{array}\right] e^{3 t},
+\end{aligned}
+```
+with scalar component functions given by
+```math
+\begin{aligned}
+& x_1(t)=c_1 e^{5 t}+2 c_3 e^{3 t}, \\
+& x_2(t)=-c_1 e^{5 t}-3 c_3 e^{3 t}, \\
+& x_3(t)=c_1 e^{5 t}+c_2 e^{3 t} .
+\end{aligned}
+```
+"""
+
+# ╔═╡ 844341e0-46d5-4920-85b5-74d2b64aa3f3
+cm"""
+$(bbl("ALGORITHM Defective Multiplicity 2 Eigenvalues",""))
+1. First find a nonzero solution ``\mathbf{v}_2`` of the equation
+```math
+(\mathbf{A}-\lambda \mathbf{I})^2 \mathbf{v}_2=\mathbf{0}
+```
+such that
+```math
+(\mathbf{A}-\lambda \mathbf{I}) \mathbf{v}_2=\mathbf{v}_1
+```
+is nonzero, and therefore is an eigenvector ``\mathbf{v}_1`` associated with ``\lambda``.
+
+
+2. Then form the two independent solutions
+```math
+\mathbf{x}_1(t)=\mathbf{v}_1 e^{\lambda t}
+```
+and
+```math
+\mathbf{x}_2(t)=\left(\mathbf{v}_1 t+\mathbf{v}_2\right) e^{\lambda t}
+```
+of ``\mathbf{x}^{\prime}=\mathbf{A x}`` corresponding to ``\lambda``.
+"""
+
+# ╔═╡ a9ad28a9-deab-4c8a-9a85-90434b55f77a
+cm"""
+$(ex(2)) Find a general solution of the system
+```math
+\mathbf{x}^{\prime}=\left[\begin{array}{rr}
+1 & -3 \\
+3 & 7
+\end{array}\right] \mathbf{x}
+```
+"""
+
+# ╔═╡ 33f99fda-5000-4b72-a1ea-4bc8a4e5e4d1
+cm"""
+$(bbl("ALGORITHM Chains of Generalized Eigenvectors",""))
+Begin with a nonzero solution ``\mathbf{u}_1`` of 
+```math
+(\mathbf{A}-\lambda \mathbf{I})^{d+1} \mathbf{u}=\mathbf{0}
+```
+(``d`` is the defect of ``\lambda``)
+
+and successively multiply by the matrix ``\mathbf{A}-\lambda \mathbf{I}`` until the zero vector is obtained. If
+```math
+\begin{aligned}
+(\mathbf{A}-\lambda \mathbf{I}) \mathbf{u}_1 & =\mathbf{u}_2 \neq \mathbf{0}, \\
+& \\
+(\mathbf{A}-\lambda \mathbf{I}) \mathbf{u}_{k-1} & =\mathbf{u}_k \neq \mathbf{0}
+\end{aligned}
+```
+but ``(\mathbf{A}-\lambda \mathbf{I}) \mathbf{u}_k=\mathbf{0}``, then the vectors
+```math
+\left\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k\right\}=\left\{\mathbf{u}_k, \mathbf{u}_{k-1}, \ldots, \mathbf{u}_2, \mathbf{u}_1\right\}
+```
+(listed in reverse order of their appearance) form a length ``k`` chain of generalized eigenvectors based on the (ordinary) eigenvector ``\mathbf{v}_1``.
+"""
+
+# ╔═╡ e8346ea6-7c27-40ae-a564-798ccda40587
+cm"""
+$(ex(4)) 
+Find three linearly independent solutions of the system
+```math
+\mathbf{x}^{\prime}=\left[\begin{array}{rrr}
+0 & 1 & 2 \\
+-5 & -3 & -7 \\
+1 & 0 & 0
+\end{array}\right] \mathbf{x} .
+```
+"""
+
+# ╔═╡ 47aa63f6-8807-4333-b2a5-d429edb2bc51
+cm"""
+$(bth("Fundamental Matrix Solutions"))
+Let ``\boldsymbol{\Phi}(t)`` be a fundamental matrix for the homogeneous linear system ``\mathbf{x}^{\prime}=\mathbf{A x}``. Then the [unique] solution of the initial value problem
+```math
+\mathbf{x}^{\prime}=\mathbf{A x}, \quad \mathbf{x}(0)=\mathbf{x}_0
+```
+is given by
+```math
+\mathbf{x}(t)=\boldsymbol{\Phi}(t) \boldsymbol{\Phi}(0)^{-1} \mathbf{x}_0 .
+```
+"""
+
+# ╔═╡ f840c8e2-2734-4a60-a203-be7a2eac3e8a
+cm"""
+$(ex(1))
+Find a fundamental matrix for the system
+```math
+\begin{aligned}
+& x^{\prime}=4 x+2 y, \\
+& y^{\prime}=3 x-y,
+\end{aligned}
+```
+and then use it to find the solution that satisfies the initial conditions ``x(0)=1, y(0)=-1``.
+"""
+
+# ╔═╡ fab7ac78-0f1c-4b11-b282-6fd43e217244
+cm"""
+$(ex(2))
+Let 
+```math 
+\mathbf{A}=\left[\begin{array}{lll}0 & 3 & 4 \\ 0 & 0 & 6 \\ 0 & 0 & 0\end{array}\right]
+```
+Find ``e^{At}``.
+"""
+
+# ╔═╡ b7702670-c6e8-43dd-8925-158d646db431
+cm"""
+$(ex(3))
+```math 
+\mathbf{A}=\left[\begin{array}{lll}2 & 3 & 4 \\ 0 & 2 & 6 \\ 0 & 0 & 2\end{array}\right]
+```
+"""
+
+# ╔═╡ 537a839a-ebd0-4029-9e6a-a519e3080f94
+cm"""
+$(bth("Matrix Exponential Solutions"))
+If ``\mathbf{A}`` is an ``n \times n`` matrix, then the solution of the initial value problem
+```math
+\mathbf{x}^{\prime}=\mathbf{A} \mathbf{x}, \quad \mathbf{x}(0)=\mathbf{x}_0
+```
+is given by
+```math
+\mathbf{x}(t)=e^{\mathbf{A} t} \mathbf{x}_0,
+```
+and this solution is unique.
+"""
+
+# ╔═╡ e03d01e2-5468-4ab6-92c1-dcc0fece230d
+cm"""
+$(bbl("Remarks",""))
+```math
+e^{\mathbf{A} t}=\boldsymbol{\Phi}(t) \boldsymbol{\Phi}(0)^{-1}
+```
+"""
+
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
 initialize_eqref()
 
@@ -5298,9 +5582,8 @@ version = "1.4.1+1"
 # ╟─9443f969-f812-49fe-a90b-4feeb68ef5cb
 # ╟─e89c49d1-a3f2-4773-930f-4ecc22727a8d
 # ╟─539d655f-3f23-4d4d-a695-62a6f37632dd
-# ╟─e64b4a98-ddd3-43b1-985d-f3a705448654
 # ╟─c12fe73c-add0-427a-9a1a-9c83e83f0048
-# ╠═ca9d9245-a9b7-4ce3-98a4-e3549eb7d118
+# ╟─ca9d9245-a9b7-4ce3-98a4-e3549eb7d118
 # ╠═dac48d06-c31f-4574-ae89-955a533db6b3
 # ╟─4d2c0551-0ff5-44ae-81c5-9e0f703f6241
 # ╟─38da86ee-ad79-4145-989e-2c7f5700917e
@@ -5308,6 +5591,28 @@ version = "1.4.1+1"
 # ╟─1ed1648e-eccb-40b9-83bb-f0df29848ef2
 # ╟─8a4fc02e-a8cf-4fbb-9485-7b2beaa1580f
 # ╟─fefea759-c49c-4243-a813-e5308c4687fa
+# ╟─acc4e350-570f-49af-9718-b05ab4c1662e
+# ╟─1e738733-4b09-40c2-8513-ba0a388b07bf
+# ╟─ffc3de2d-fcdc-453c-b4a7-6414fe3e323e
+# ╟─844341e0-46d5-4920-85b5-74d2b64aa3f3
+# ╟─a9ad28a9-deab-4c8a-9a85-90434b55f77a
+# ╟─33f99fda-5000-4b72-a1ea-4bc8a4e5e4d1
+# ╟─e8346ea6-7c27-40ae-a564-798ccda40587
+# ╠═1a3a89b0-1549-4aef-abca-1b5e67d4f5be
+# ╟─effc2715-a3e9-4cdb-af4b-733382701644
+# ╟─47aa63f6-8807-4333-b2a5-d429edb2bc51
+# ╟─f840c8e2-2734-4a60-a203-be7a2eac3e8a
+# ╠═5625e8d7-4c6d-409d-bbeb-0f577b483b0b
+# ╟─5ffebe02-0c9b-4b92-bd2a-8288a95f7526
+# ╟─a12f16f5-9bdb-48ba-a2ff-895286390a31
+# ╟─28e223d4-2009-47d3-958f-d4505c3f9ab1
+# ╠═0952900f-1a29-4e87-8d04-90a78a3a8189
+# ╟─fab7ac78-0f1c-4b11-b282-6fd43e217244
+# ╟─b7702670-c6e8-43dd-8925-158d646db431
+# ╟─16cd2f66-4a91-4c5f-bad8-135b7bc8f555
+# ╟─4cd37de0-bfff-49e9-a661-752e565998ff
+# ╟─537a839a-ebd0-4029-9e6a-a519e3080f94
+# ╟─e03d01e2-5468-4ab6-92c1-dcc0fece230d
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
