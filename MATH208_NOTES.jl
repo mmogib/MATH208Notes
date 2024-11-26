@@ -1166,20 +1166,17 @@ let
 	# # X(0)
 end
 
-# ╔═╡ e334a299-5eb6-4161-8fd2-82049739df10
-
-
 # ╔═╡ 0eabb137-4e36-4ff6-b8ec-66a3684d23ab
 let
 	A = [2 3 4;0 2 6;0 0 2]
 	x0 =[19;29;39]
 	@syms t::Real
-	D = Diagonal(diag(A))
-	B = triu(A,1)
-	expD = [exp(2t) 0 0;0 exp(2t) 0;0 0 exp(2t)]
-	expB=I+B*t+(1/2)*B^2*t^2
-	expA = expD*expB
-	x = expand.(expA*x0)
+	# D = Diagonal(diag(A))
+	# B = triu(A,1)
+	# expD = [exp(2t) 0 0;0 exp(2t) 0;0 0 exp(2t)]
+	# expB=I+B*t+(1/2)*B^2*t^2
+	# expA = expD*expB
+	# x = expand.(expA*x0)
 end
 
 # ╔═╡ 5f59d949-801c-4d0b-b47c-11105af1dc1f
@@ -1207,6 +1204,26 @@ where
 
 # ╔═╡ 902c04b9-6e24-416a-9414-1c63115d92d9
 md"## Variation of Parameters"
+
+# ╔═╡ 5efb8691-e012-403c-ae3f-8fe9cc60fdce
+cm"""
+We already have
+```math
+\boldsymbol{\Phi}(t)=\left[\begin{array}{rr}e^{-2 t} & 2 e^{5 t} \\ -3 e^{-2 t} & e^{5 t}\end{array}\right] \quad \text{with}\quad \quad \boldsymbol{\Phi}(0)^{-1}=\frac{1}{7}\left[\begin{array}{rr}1 & -2 \\ 3 & 1\end{array}\right].
+```
+So,
+```math
+\begin{aligned} e^{\mathbf{A} t}=\boldsymbol{\Phi}(t) \boldsymbol{\Phi}(0)^{-1} & =\left[\begin{array}{rr}e^{-2 t} & 2 e^{5 t} \\ -3 e^{-2 t} & e^{5 t}\end{array}\right] \cdot \frac{1}{7}\left[\begin{array}{rr}1 & -2 \\ 3 & 1\end{array}\right] \\ & =\frac{1}{7}\left[\begin{array}{rr}e^{-2 t}+6 e^{5 t} & -2 e^{-2 t}+2 e^{5 t} \\ -3 e^{-2 t}+3 e^{5 t} & 6 e^{-2 t}+e^{5 t}\end{array}\right] .\end{aligned}
+```
+and 
+```math
+\begin{aligned} e^{-\mathbf{A} t} \mathbf{x}(t) & =\mathbf{x}_0+\int_0^t e^{-\mathbf{A} s} \mathbf{f}(s) d s \\ & =\left[\begin{array}{l}7 \\ 3\end{array}\right]+\int_0^t \frac{1}{7}\left[\begin{array}{rr}e^{2 s}+6 e^{-5 s} & -2 e^{2 s}+2 e^{-5 s} \\ -3 e^{2 s}+3 e^{-5 s} & 6 e^{2 s}+e^{-5 s}\end{array}\right]\left[\begin{array}{c}-15 s e^{-2 s} \\ -4 s e^{-2 s}\end{array}\right] d s \\ & =\left[\begin{array}{l}7 \\ 3\end{array}\right]+\int_0^t\left[\begin{array}{c}-s-14 s e^{-7 s} \\ 3 s-7 s e^{-7 s}\end{array}\right] d s \\ & =\left[\begin{array}{l}7 \\ 3\end{array}\right]+\frac{1}{14}\left[\begin{array}{c}-4-7 t^2+4 e^{-7 t}+28 t e^{-7 t} \\ -2+21 t^2+2 e^{-7 t}+14 t e^{-7 t}\end{array}\right] .\end{aligned}
+```
+Hence
+```math
+\begin{aligned} \mathbf{x}(t) & =\frac{1}{7}\left[\begin{array}{rr}e^{-2 t}+6 e^{5 t} & -2 e^{-2 t}+2 e^{5 t} \\ -3 e^{-2 t}+3 e^{5 t} & 6 e^{-2 t}+e^{5 t}\end{array}\right] \cdot \frac{1}{14}\left[\begin{array}{c}94-7 t^2+4 e^{-7 t}+28 t e^{-7 t} \\ 40+21 t^2+2 e^{-7 t}+14 t e^{-7 t}\end{array}\right] \\ & =\frac{1}{14}\left[\begin{array}{c}\left(6+28 t-7 t^2\right) e^{-2 t}+92 e^{5 t} \\ \left(-4+14 t+21 t^2\right) e^{-2 t}+46 e^{5 t}\end{array}\right] .\end{aligned}
+```
+"""
 
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
@@ -3763,6 +3780,32 @@ $(bbl("Variation of Parameters Formula"))
 ```
 """
 
+# ╔═╡ 1d2b5fc6-3c14-435e-ba94-fdec058d7ffe
+cm"""
+$(bbl("Remark",""))
+```math
+\mathbf{x}_p(t)=\int e^{-\mathbf{A}(s-t)} \mathbf{f}(s) d s \quad \quad \text{and}\quad \mathbf{x}(t)=e^{\mathbf{A} t} \mathbf{x}_0+\int_0^t e^{-\mathbf{A}(s-t)} \mathbf{f}(s) d s.
+```
+"""
+
+# ╔═╡ 616a3a9f-ef18-4987-b311-b38ea234da18
+cm"""
+$(ex())
+Solve the initial value problem
+```math
+\mathbf{x}^{\prime}=\left[\begin{array}{rr}
+4 & 2 \\
+3 & -1
+\end{array}\right] \mathbf{x}-\left[\begin{array}{r}
+15 \\
+4
+\end{array}\right] t e^{-2 t}, \quad \mathbf{x}(0)=\left[\begin{array}{l}
+7 \\
+3
+\end{array}\right]
+```
+"""
+
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
 initialize_eqref()
 
@@ -6211,7 +6254,6 @@ version = "1.4.1+1"
 # ╟─e03d01e2-5468-4ab6-92c1-dcc0fece230d
 # ╟─90d6b80d-e7ee-4a70-ae16-f74d8a0e3089
 # ╠═ca84b97a-31a1-4175-be83-17c6c0cb0531
-# ╠═e334a299-5eb6-4161-8fd2-82049739df10
 # ╟─54bd9d7e-87c5-4a58-a420-89daf72cc210
 # ╠═0eabb137-4e36-4ff6-b8ec-66a3684d23ab
 # ╟─5f59d949-801c-4d0b-b47c-11105af1dc1f
@@ -6219,6 +6261,9 @@ version = "1.4.1+1"
 # ╟─902c04b9-6e24-416a-9414-1c63115d92d9
 # ╟─6cb9907a-b772-43be-aa1b-504d9b61f603
 # ╟─59097d79-0da7-498f-9523-e4592715415a
+# ╟─1d2b5fc6-3c14-435e-ba94-fdec058d7ffe
+# ╟─616a3a9f-ef18-4987-b311-b38ea234da18
+# ╟─5efb8691-e012-403c-ae3f-8fe9cc60fdce
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
