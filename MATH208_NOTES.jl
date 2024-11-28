@@ -1083,7 +1083,7 @@ let
 end
 
 # ╔═╡ 5ffebe02-0c9b-4b92-bd2a-8288a95f7526
-md"## ExponentialMatrices"
+md"## Exponential Matrices"
 
 # ╔═╡ a12f16f5-9bdb-48ba-a2ff-895286390a31
 cm"""
@@ -1224,6 +1224,60 @@ Hence
 \begin{aligned} \mathbf{x}(t) & =\frac{1}{7}\left[\begin{array}{rr}e^{-2 t}+6 e^{5 t} & -2 e^{-2 t}+2 e^{5 t} \\ -3 e^{-2 t}+3 e^{5 t} & 6 e^{-2 t}+e^{5 t}\end{array}\right] \cdot \frac{1}{14}\left[\begin{array}{c}94-7 t^2+4 e^{-7 t}+28 t e^{-7 t} \\ 40+21 t^2+2 e^{-7 t}+14 t e^{-7 t}\end{array}\right] \\ & =\frac{1}{14}\left[\begin{array}{c}\left(6+28 t-7 t^2\right) e^{-2 t}+92 e^{5 t} \\ \left(-4+14 t+21 t^2\right) e^{-2 t}+46 e^{5 t}\end{array}\right] .\end{aligned}
 ```
 """
+
+# ╔═╡ 5b3db4fb-a1f2-4b0b-8854-1f2d422e9920
+md"# 11.1 Introduction and Review of Power Series"
+
+# ╔═╡ a311dcb7-e219-45ee-b740-798ebf11b858
+cm"""
+__Recall__ first that a power series in (powers of) ``x-a`` is an infinite series of the form
+```math
+\sum_{n=0}^{\infty} c_n(x-a)^n=c_0+c_1(x-a)+c_2(x-a)^2+\cdots+c_n(x-a)^n+\cdots \tag{🙃}
+```
+
+If ``a=0``, this is a power series in ``x`` :
+```math
+\sum_{n=0}^{\infty} c_n x^n=c_0+c_1 x+c_2 x^2+\cdots+c_n x^n+\cdots
+```
+
+
+The power series in (🙃) converges on the interval ``I`` provided that the limit
+```math
+\sum_{n=0}^{\infty} c_n x^n=\lim _{N \rightarrow \infty} \sum_{n=0}^N c_n x^n
+```
+exists for all ``x`` in ``I``. In this case the sum
+```math
+f(x)=\sum_{n=0}^{\infty} c_n x^n
+```
+is defined on ``I``, and we call the series ``\sum c_n x^n`` __a power series representation of the function ``f`` on ``I``__. 
+
+
+"""
+
+# ╔═╡ f2ee9bda-24ee-43b1-b833-fa40e7aa61af
+cm"""
+```math 
+\begin{aligned} e^x & =\sum_{n=0}^{\infty} \frac{x^n}{n!}=1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\cdots ; \\ \cos x & =\sum_{n=0}^{\infty} \frac{(-1)^n x^{2 n}}{(2 n)!}=1-\frac{x^2}{2!}+\frac{x^4}{4!}-\cdots ; \\ \sin x & =\sum_{n=0}^{\infty} \frac{(-1)^n x^{2 n+1}}{(2 n+1)!}=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\cdots ; \\ \cosh x & =\sum_{n=0}^{\infty} \frac{x^{2 n}}{(2 n)!}=1+\frac{x^2}{2!}+\frac{x^4}{4!}+\cdots ; \\ \sinh x & =\sum_{n=0}^{\infty} \frac{x^{2 n+1}}{(2 n+1)!}=x+\frac{x^3}{3!}+\frac{x^5}{5!}+\cdots ; \\ \ln (1+x) & =\sum_{n=1}^{\infty} \frac{(-1)^{n+1} x^n}{n}=x-\frac{x^2}{2}+\frac{x^3}{3}-\cdots ; \\ \frac{1}{1-x} & =\sum_{n=0}^{\infty} x^n=1+x+x^2+x^3+\cdots ; \\ (1+x)^\alpha & =1+\alpha x+\frac{\alpha(\alpha-1) x^2}{2!}+\frac{\alpha(\alpha-1)(\alpha-2) x^3}{3!}+\cdots\end{aligned}
+```
+"""
+
+# ╔═╡ 1c75d203-a102-42f5-9776-bf5efee811d4
+md"## Power Series Operations"
+
+# ╔═╡ d792e37c-e7b2-4662-a1ec-ff04532e6801
+cm"""
+
+If the Taylor series of the function ``f`` converges to ``f(x)`` for all ``x`` in some open interval containing ``a``, then we say that the function ``f`` is analytic at ``x=a``. For example,
+- every polynomial function is analytic everywhere;
+- every rational function is analytic wherever its denominator is nonzero;
+- more generally, if the two functions ``f`` and ``g`` are both analytic at ``x=a``, then so are their sum ``f+g`` and their product ``f \cdot g``, as is their quotient ``f / g`` if ``g(a) \neq 0``.
+"""
+
+# ╔═╡ c524c00f-a9d8-4f54-ad36-9e9a587743eb
+md"##  The Power Series Method"
+
+# ╔═╡ d049d7db-b62e-45f7-8751-0dd84f6e9b38
+md"## Shift of Index of Summation"
 
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
@@ -3806,6 +3860,49 @@ Solve the initial value problem
 ```
 """
 
+# ╔═╡ 0f76e5a2-8e89-4614-b360-9d6f4b89edf7
+cm"""
+$(ex())
+Use the method of variation of parameters to solve
+```math
+\mathbf{x}^{\prime}=\left[\begin{array}{lll}1 & 3 & 4 \\ 0 & 1 & 3 \\ 0 & 0 & 2\end{array}\right]\mathbf{x}+\left[\begin{array}{c}0 \\ 0 \\ 2 e^{2 t}\end{array}\right], \quad \mathbf{x}(0)=\left[\begin{array}{l}0 \\ 0 \\ 0\end{array}\right].
+```
+Given that 
+```math
+e^{\mathbf{A} t}=\left[\begin{array}{ccc}e^t & 3 t e^t & (-13-9 t) e^t+13 e^{2 t} \\ 0 & e^t & -3 e^t+3 e^{2 t} \\ 0 & 0 & e^{2 t}\end{array}\right]
+```
+"""
+
+# ╔═╡ f23bec3c-c36a-44db-8253-494eb20397c2
+cm"""
+$(bth("Termwise Differentiation of Power Series"))
+If the power series representation
+```math
+f(x)=\sum_{n=0}^{\infty} c_n x^n=c_0+c_1 x+c_2 x^2+c_3 x^3+\cdots
+```
+of the function ``f`` converges on the open interval ``I``, then ``f`` is differentiable on ``I``, and
+```math
+f^{\prime}(x)=\sum_{n=1}^{\infty} n c_n x^{n-1}=c_1+2 c_2 x+3 c_3 x^2+\cdots
+```
+at each point of ``I``.
+"""
+
+# ╔═╡ a18f24b1-1313-4d81-a19e-11168d68ff02
+cm"""
+$(bth("Identity Principle"))
+If
+```math
+\sum_{n=0}^{\infty} a_n x^n=\sum_{n=0}^{\infty} b_n x^n
+```
+for every point ``x`` in some open interval ``I``, then ``a_n=b_n`` for all ``n \geqq 0``.
+"""
+
+# ╔═╡ 7e75309d-856e-4f36-b353-58cfbf8d0284
+cm"""
+$(ex(1))
+Solve the equation ``y^{\prime}+2 y=0``
+"""
+
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
 initialize_eqref()
 
@@ -6264,6 +6361,17 @@ version = "1.4.1+1"
 # ╟─1d2b5fc6-3c14-435e-ba94-fdec058d7ffe
 # ╟─616a3a9f-ef18-4987-b311-b38ea234da18
 # ╟─5efb8691-e012-403c-ae3f-8fe9cc60fdce
+# ╟─0f76e5a2-8e89-4614-b360-9d6f4b89edf7
+# ╟─5b3db4fb-a1f2-4b0b-8854-1f2d422e9920
+# ╟─a311dcb7-e219-45ee-b740-798ebf11b858
+# ╟─f2ee9bda-24ee-43b1-b833-fa40e7aa61af
+# ╟─1c75d203-a102-42f5-9776-bf5efee811d4
+# ╟─d792e37c-e7b2-4662-a1ec-ff04532e6801
+# ╟─c524c00f-a9d8-4f54-ad36-9e9a587743eb
+# ╟─f23bec3c-c36a-44db-8253-494eb20397c2
+# ╟─a18f24b1-1313-4d81-a19e-11168d68ff02
+# ╟─7e75309d-856e-4f36-b353-58cfbf8d0284
+# ╟─d049d7db-b62e-45f7-8751-0dd84f6e9b38
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
