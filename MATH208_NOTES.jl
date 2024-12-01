@@ -3903,6 +3903,38 @@ $(ex(1))
 Solve the equation ``y^{\prime}+2 y=0``
 """
 
+# ╔═╡ 396da38b-0336-48ff-8b7e-88791ead72cb
+cm"""
+$(bth("Radius of Convergence"))
+Given the power series ``\sum c_n x^n``, suppose that the limit
+```math
+\rho=\lim _{n \rightarrow \infty}\left|\frac{c_n}{c_{n+1}}\right|
+```
+exists ( ``\rho`` is finite) or is infinite (in this case we will write ``\rho=\infty`` ). Then
+
+- (a) If ``\rho=0``, then the series diverges for all ``x \neq 0``.
+- (b) If ``0<\rho<\infty``, then ``\sum c_n x^n`` converges if ``|x|<\rho`` and diverges if ``|x|>\rho``.
+- (c) If ``\rho=\infty``, then the series converges for all ``x``.
+"""
+
+# ╔═╡ 5cd66668-2d46-41c1-834e-ee6516a61b3e
+cm"""
+$(ex(2))
+Solve the equation ``(x-3) y^{\prime}+2 y=0``.
+"""
+
+# ╔═╡ 55863f83-c560-4986-9ac4-1aba99aaeb36
+cm"""
+$(ex(3))
+Solve the equation ``x^2 y^{\prime}=y-x-1``
+"""
+
+# ╔═╡ e01d3509-24ba-4ef4-a11c-1ddb18f51040
+cm"""
+$(ex(4)) 
+Solve the equation ``y^{\prime \prime}+y=0``.
+"""
+
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
 initialize_eqref()
 
@@ -6372,6 +6404,10 @@ version = "1.4.1+1"
 # ╟─a18f24b1-1313-4d81-a19e-11168d68ff02
 # ╟─7e75309d-856e-4f36-b353-58cfbf8d0284
 # ╟─d049d7db-b62e-45f7-8751-0dd84f6e9b38
+# ╟─396da38b-0336-48ff-8b7e-88791ead72cb
+# ╟─5cd66668-2d46-41c1-834e-ee6516a61b3e
+# ╟─55863f83-c560-4986-9ac4-1aba99aaeb36
+# ╟─e01d3509-24ba-4ef4-a11c-1ddb18f51040
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
