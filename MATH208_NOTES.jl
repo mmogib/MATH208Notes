@@ -1279,6 +1279,9 @@ md"##  The Power Series Method"
 # ╔═╡ d049d7db-b62e-45f7-8751-0dd84f6e9b38
 md"## Shift of Index of Summation"
 
+# ╔═╡ 9137bc38-4fc3-439e-8379-ae807eeb8ca2
+md"# 11.2 Power Series Solutions"
+
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
     function add_space(n=1)
@@ -3935,6 +3938,79 @@ $(ex(4))
 Solve the equation ``y^{\prime \prime}+y=0``.
 """
 
+# ╔═╡ 1b20672c-47e6-44f7-b0de-e3e378f368e0
+cm"""
+We consider
+```math
+A(x) y^{\prime \prime}+B(x) y^{\prime}+C(x) y=0 \tag{🐱}
+```
+where the coefficients ``A, B``, and ``C`` are analytic functions of ``x``. 
+
+We saw in Example 3 of Section 11.1 that the series method does not always yield a series solution. To discover when it does succeed, we rewrite Eq. (🐱) in the form
+```math
+y^{\prime \prime}+P(x) y^{\prime}+Q(x) y=0 \tag{🐔}
+```
+with leading coefficient 1 , and with ``P=B / A`` and ``Q=C / A``. Note that ``P(x)`` and ``Q(x)`` will generally fail to be analytic at points where ``A(x)`` vanishes. 
+
+For example, consider the equation
+```math
+x y^{\prime \prime}+y^{\prime}+x y=0 \tag{🐶}
+```
+
+The coefficient functions in (🐶) are continuous everywhere. But in the form of (🐔) it is the equation
+```math
+y^{\prime \prime}+\frac{1}{x} y^{\prime}+y=0
+```
+with ``P(x)=1 / x`` not analytic at ``x=0``.
+
+$(define("Ordinary and Singular Points"))
+The point ``x=a`` is called an __ordinary point__ of Eq. (🐔)—and of the equivalent Eq. (🐱)—provided that the functions ``P(x)`` and ``Q(x)`` are both analytic at ``x=a``. Otherwise, ``x=a`` is a singular point. 
+"""
+
+# ╔═╡ f90022bc-06fe-45c8-981e-565cc35d3efe
+cm"""
+$(ex())
+Is ``x=0`` a regular point to the following?
+1. ``x y^{\prime \prime}+(\sin x) y^{\prime}+x^2 y=0``,
+2. ``y^{\prime \prime}+x^2 y^{\prime}+x^{1 / 2} y=0``,
+3. ``\left(1-x^3\right) y^{\prime \prime}+\left(7 x^2+3 x^5\right) y^{\prime}+\left(5 x-13 x^4\right) y=0``
+"""
+
+# ╔═╡ 58b9bed0-225c-4910-875c-affd69e667c5
+cm"""
+$(bth("Solutions Near an Ordinary Point"))
+Suppose that ``a`` is an ordinary point of the equation
+```math
+A(x) y^{\prime \prime}+B(x) y^{\prime}+C(x) y=0 \tag{🐱}
+```
+that is, the functions ``P=B / A`` and ``Q=C / A`` are analytic at ``x=a``. Then Eq. (🐱) has two linearly independent solutions, each of the form
+```math
+y(x)=\sum_{n=0}^{\infty} c_n(x-a)^n \tag{🐸}
+```
+
+The radius of convergence of any such series solution is at least as large as the distance from ``a`` to the nearest (real or complex) singular point of Eq. (🐱). The coefficients in the series in (🐸) can be determined by its substitution in Eq. (🐱).
+"""
+
+# ╔═╡ febafc25-81a9-45bf-aa26-f54deb7692e7
+cm"""
+$(ex(4))
+Determine the radius of convergence guaranteed by previous Theorem of a series solution of
+```math
+\left(x^2+9\right) y^{\prime \prime}+x y^{\prime}+x^2 y=0
+```
+in powers of ``x``. Repeat for a series in powers of ``x-4``.
+"""
+
+# ╔═╡ 4bbbcc7f-a115-4a18-9ecb-5a26b44125b3
+cm"""
+$(ex(5)) Find the general solution in powers of ``x`` of
+```math
+\left(x^2-4\right) y^{\prime \prime}+3 x y^{\prime}+y=0 .
+```
+
+Then find the particular solution with ``y(0)=4, y^{\prime}(0)=1``.
+"""
+
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
 initialize_eqref()
 
@@ -6408,6 +6484,12 @@ version = "1.4.1+1"
 # ╟─5cd66668-2d46-41c1-834e-ee6516a61b3e
 # ╟─55863f83-c560-4986-9ac4-1aba99aaeb36
 # ╟─e01d3509-24ba-4ef4-a11c-1ddb18f51040
+# ╟─9137bc38-4fc3-439e-8379-ae807eeb8ca2
+# ╟─1b20672c-47e6-44f7-b0de-e3e378f368e0
+# ╟─f90022bc-06fe-45c8-981e-565cc35d3efe
+# ╟─58b9bed0-225c-4910-875c-affd69e667c5
+# ╟─febafc25-81a9-45bf-aa26-f54deb7692e7
+# ╟─4bbbcc7f-a115-4a18-9ecb-5a26b44125b3
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
