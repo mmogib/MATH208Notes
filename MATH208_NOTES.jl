@@ -1282,6 +1282,135 @@ md"## Shift of Index of Summation"
 # ╔═╡ 9137bc38-4fc3-439e-8379-ae807eeb8ca2
 md"# 11.2 Power Series Solutions"
 
+# ╔═╡ aca3dd9d-ce26-4e23-acea-fee11415d308
+md"## The Legendre Equation"
+
+# ╔═╡ 6369e3e1-0d00-43ae-8155-e8a9d0e6b953
+cm"""
+The Legendre equation of order ``\alpha`` is the second-order linear differential equation
+```math
+\left(1-x^2\right) y^{\prime \prime}-2 x y^{\prime}+\alpha(\alpha+1) y=0, \tag{🐭}
+```
+where the real number ``\alpha`` satisfies the inequality ``\alpha>-1``. Let 
+```math
+y=\sum_{m=0}^{\infty}c_mx^m
+```
+Then 
+
+```math
+c_{m+2}=-\frac{(\alpha-m)(\alpha+m+1)}{(m+1)(m+2)} c_m\tag{🐧}
+```
+
+"""
+
+# ╔═╡ 16e4f015-bb68-4e01-8c32-4ad472b05dfa
+cm"""
+In terms of the arbitrary constants ``c_0`` and ``c_1``, Eq. (🐧) yields
+```math
+\begin{aligned}
+& c_2=-\frac{\alpha(\alpha+1)}{2!} c_0, \\
+& c_3=-\frac{(\alpha-1)(\alpha+2)}{3!} c_1, \\
+& c_4=\frac{\alpha(\alpha-2)(\alpha+1)(\alpha+3)}{4!} c_0, \\
+& c_5=\frac{(\alpha-1)(\alpha-3)(\alpha+2)(\alpha+4)}{5!} c_1 .
+\end{aligned}
+```
+
+We can show without much trouble that for ``m>0``,
+```math
+c_{2 m}=(-1)^m \frac{\alpha(\alpha-2)(\alpha-4) \cdots(\alpha-2 m+2)(\alpha+1)(\alpha+3) \cdots(\alpha+2 m-1)}{(2 m)!} c_0\tag{🐼1}
+```
+and
+```math
+c_{2 m+1}=(-1)^m \frac{(\alpha-1)(\alpha-3) \cdots(\alpha-2 m+1)(\alpha+2)(\alpha+4) \cdots(\alpha+2 m)}{(2 m+1)!} c_1 .\tag{🐼2}
+```
+
+Alternatively,
+```math
+c_{2 m}=(-1)^m a_{2 m} c_0 \quad \text { and } \quad c_{2 m+1}=(-1)^m a_{2 m+1} c_1
+```
+where ``a_{2 m}`` and ``a_{2 m+1}`` denote the fractions in Eqs. (🐼1) and (🐼2), respectively. With this notation, we get two linearly independent power series solutions
+```math
+y_1(x)=c_0 \sum_{m=0}^{\infty}(-1)^m a_{2 m} x^{2 m} \quad \text { and } \quad y_2(x)=c_1 \sum_{m=0}^{\infty}(-1)^m a_{2 m+1} x^{2 m+1} \tag{🐼3}
+```
+of Legendre's equation of order ``\alpha``.
+"""
+
+# ╔═╡ 3380efe9-9cf5-45e5-af6f-81ad4f028252
+cm"""
+- Now suppose that ``\alpha=n``, a nonnegative integer. 
+
+- If __``\alpha=n`` is even__, we see from Eq. (🐼1) that ``a_{2 m}=0`` when ``2 m>n``.
+ 	- ``y_1(x)`` is a __polynomial of degree ``n``__ and 
+	- ``y_2`` is a __(nonterminating) infinite series__. 
+
+- If ``\alpha=n`` is an odd positive integer, we see from Eq. (🐼2) that ``a_{2 m+1}=0`` when ``2 m+1>n``. In this case, 
+	- ``y_2(x)`` is a __polynomial of degree ``n``__ and 
+	- ``y_1`` is a __(nonterminating) infinite series__. 
+
+Thus in either case, one of the two solutions in (🐼3) is a polynomial and the other is a nonterminating series.
+
+With an appropriate choice (made separately for each ``n`` ) of the arbitrary constants ``c_0`` ( ``n`` even) or ``c_1`` ( ``n`` odd), the ``n`` th-degree polynomial solution of Legendre's equation of order ``n``,
+```math
+\left(1-x^2\right) y^{\prime \prime}-2 x y^{\prime}+n(n+1) y=0,
+```
+is denoted by ``P_n(x)`` and is called the Legendre polynomial of degree ``n``. It is customary (for a reason indicated in Problem 32) to choose the arbitrary constant so that the coefficient of ``x^n`` in ``P_n(x)`` is ``(2 n)!/\left[2^n(n!)^2\right]``. It then turns out that
+```math
+P_n(x)=\sum_{k=0}^N \frac{(-1)^k(2 n-2 k)!}{2^n k!(n-k)!(n-2 k)!} x^{n-2 k},
+```
+where ``N=[[n / 2 ]]``, the integral part of ``n / 2``. The first six Legendre polynomials are
+```math
+\begin{array}{ll}
+P_0(x) \equiv 1, & P_1(x)=x, \\
+P_2(x)=\frac{1}{2}\left(3 x^2-1\right), & P_3(x)=\frac{1}{2}\left(5 x^3-3 x\right), \\
+P_4(x)=\frac{1}{8}\left(35 x^4-30 x^2+3\right), & P_5(x)=\frac{1}{8}\left(63 x^5-70 x^3+15 x\right)
+\end{array}
+```
+"""
+
+# ╔═╡ f68ab65f-d795-432c-a3cc-c697f183b03c
+md"# 11.3 Frobenius Series Solutions"
+
+# ╔═╡ 7cac8364-545f-4184-ab42-8fddde5ddbea
+cm"""
+We consider
+```math
+A(x) y^{\prime \prime}+B(x) y^{\prime}+C(x) y=0 \tag{🐱}
+```
+near a singular point.
+"""
+
+# ╔═╡ 0ebbac9d-cc8e-412d-b563-8abc47351d0a
+md"## Types of Singular Points"
+
+# ╔═╡ d01299db-58cd-46d9-ac37-7e1506b766bd
+cm"""
+- At a singular point ``x=a`` the method of previous section fails.
+- We rewrite (🐱) as
+```math
+y^{\prime \prime}+P(x) y^{\prime}+Q(x) y=0 \tag{🐔}
+```
+```math
+\text{where}\quad P=B/A, \quad Q = C/A
+```
+- We can prove that ``P(x)`` and ``Q(x)`` are either
+	- analytic or
+	- ``\lim_{x\to 0}P(x) = \pm \infty``, ``\lim_{x\to 0}Q(x) = \pm \infty``
+
+
+- The power series method can be generalized to apply near the singular point ``x=0`` of Eq. (🐔), provided that 
+	- ``P(x)`` approaches infinity no more rapidly than ``1 / x``, and 
+	- ``Q(x)`` no more rapidly than ``1 / x^2``, as ``x \rightarrow 0``. 
+- We rewrite Eq. (🐔) in the form
+```math
+y^{\prime \prime}+\frac{p(x)}{x} y^{\prime}+\frac{q(x)}{x^2} y=0,\tag{🐰}
+```
+where
+```math
+p(x)=x P(x) \quad \text { and } \quad q(x)=x^2 Q(x) .\tag{🐇}
+```
+"""
+
+
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
     function add_space(n=1)
@@ -3970,7 +4099,7 @@ The point ``x=a`` is called an __ordinary point__ of Eq. (🐔)—and of the equ
 # ╔═╡ f90022bc-06fe-45c8-981e-565cc35d3efe
 cm"""
 $(ex())
-Is ``x=0`` a regular point to the following?
+Is ``x=0`` a ordinary point to the following?
 1. ``x y^{\prime \prime}+(\sin x) y^{\prime}+x^2 y=0``,
 2. ``y^{\prime \prime}+x^2 y^{\prime}+x^{1 / 2} y=0``,
 3. ``\left(1-x^3\right) y^{\prime \prime}+\left(7 x^2+3 x^5\right) y^{\prime}+\left(5 x-13 x^4\right) y=0``
@@ -4009,6 +4138,47 @@ $(ex(5)) Find the general solution in powers of ``x`` of
 ```
 
 Then find the particular solution with ``y(0)=4, y^{\prime}(0)=1``.
+"""
+
+# ╔═╡ 25070349-df43-4002-bbe2-c073fb2d107c
+cm"""
+$(define("Regular Singular Point"))
+The singular point ``x=0`` of Eq. (🐰) is a __regular singular point__ if the functions ``p(x)`` and ``q(x)`` are both analytic at ``x=0``. Otherwise it is an irregular singular point.
+"""
+
+# ╔═╡ 941767c0-826a-49ac-81d3-fed7904133ba
+cm"""
+$(ex(1))
+Consider the differential equation
+```math
+x^2(1+x) y^{\prime \prime}+x\left(4-x^2\right) y^{\prime}+(2+3 x) y=0
+```
+"""
+
+# ╔═╡ eaa0fa9e-cc8c-4f78-8041-8a62a35f366d
+cm"""
+$(bbl("Remark",""))
+It may happen that when we begin with a differential equation in the general form in Eq. (🐱) and rewrite it in the form in (🐰), the functions ``p(x)`` and ``q(x)`` as given in (4) are indeterminate forms at ``x=0``. In this case the situation is determined by the limits
+```math
+p_0=p(0)=\lim _{x \rightarrow 0} p(x)=\lim _{x \rightarrow 0} x P(x)
+```
+and
+```math
+q_0=q(0)=\lim _{x \rightarrow 0} q(x)=\lim _{x \rightarrow 0} x^2 Q(x)
+```
+
+If ``p_0=0=q_0``, then ``x=0`` may be an ordinary point of the differential equation ``x^2 y^{\prime \prime}+x p(x) y^{\prime}+q(x) y=0`` in (🐇). Otherwise:
+- If both the limits in above exist and are finite, then ``x=0`` is a __regular singular point__.
+- If either limit fails to exist or is infinite, then ``x=0`` is an __irregular singular point__.
+"""
+
+# ╔═╡ 6552b72c-2062-4002-a9c7-a5725fae7a2f
+cm"""
+$(ex(2))
+Investigate the nature of the point ``x=0`` for the differential equation
+```math
+x^4 y^{\prime \prime}+\left(x^2 \sin x\right) y^{\prime}+(1-\cos x) y=0,
+```
 """
 
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
@@ -6490,6 +6660,18 @@ version = "1.4.1+1"
 # ╟─58b9bed0-225c-4910-875c-affd69e667c5
 # ╟─febafc25-81a9-45bf-aa26-f54deb7692e7
 # ╟─4bbbcc7f-a115-4a18-9ecb-5a26b44125b3
+# ╟─aca3dd9d-ce26-4e23-acea-fee11415d308
+# ╟─6369e3e1-0d00-43ae-8155-e8a9d0e6b953
+# ╟─16e4f015-bb68-4e01-8c32-4ad472b05dfa
+# ╟─3380efe9-9cf5-45e5-af6f-81ad4f028252
+# ╟─f68ab65f-d795-432c-a3cc-c697f183b03c
+# ╟─7cac8364-545f-4184-ab42-8fddde5ddbea
+# ╟─0ebbac9d-cc8e-412d-b563-8abc47351d0a
+# ╟─d01299db-58cd-46d9-ac37-7e1506b766bd
+# ╟─25070349-df43-4002-bbe2-c073fb2d107c
+# ╟─941767c0-826a-49ac-81d3-fed7904133ba
+# ╟─eaa0fa9e-cc8c-4f78-8041-8a62a35f366d
+# ╟─6552b72c-2062-4002-a9c7-a5725fae7a2f
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
