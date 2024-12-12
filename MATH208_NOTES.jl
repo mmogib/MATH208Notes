@@ -1411,6 +1411,83 @@ p(x)=x P(x) \quad \text { and } \quad q(x)=x^2 Q(x) .\tag{🐇}
 """
 
 
+# ╔═╡ 611fe34d-dd51-455c-a7ab-425c1f981c20
+md"## The Method of Frobenius"
+
+# ╔═╡ 337f7d7e-13d4-405a-b27a-afeb06740776
+cm"""
+The series
+```math
+y(x)=x^r \sum_{n=0}^{\infty} c_n x^n=\sum_{n=0}^{\infty} c_n x^{n+r}=c_0 x^r+c_1 x^{r+1}+c_2 x^{r+2}+\cdots
+```
+is called a __Frobenius series__.
+"""
+
+# ╔═╡ f437d77e-a024-4b13-aea5-b45cd92588bf
+md"### The Indicial Equation"
+
+# ╔═╡ cb632ce7-cd43-47f8-a9e4-5a7f3b8d5e5d
+cm"""
+Consider 
+```math
+x^2 y^{\prime \prime}+p_0 x y^{\prime}+q_0 y=0
+```
+where ``p(x) \equiv p_0`` and ``q(x) \equiv q_0`` are constants. The function
+```math
+y(x)=x^r
+```
+is a solution if and only if 
+```math
+r(r-1)+p_0 r+q_0=0.
+```
+This equation is call the __indicial equation__.
+"""
+
+# ╔═╡ f949163f-23b0-45f4-a0c6-e0388d0cead0
+let
+	@syms a₀::Real x::Real b₀::Real
+	a(n)= if n==0 
+			a₀
+	elseif n==1
+		0
+	else
+		a(n-2)/(2n^2+3n)
+	end
+
+	b(n)= if n==0 
+			b₀
+	elseif n==1
+		0
+	else
+		b(n-2)/(2n^2-3n)
+	end
+	# b(6)
+	# y1(x)= sqrt(x)*sum(a(n)*x^n for n in 1:10)
+	# y1(x)
+	# y2(x)= x^(-1)*sum(b(n)*x^n for n in 1:10)
+	# y2(x)
+end
+
+# ╔═╡ 819069ad-b0a6-4751-8e69-4de8cc6abd5e
+md"###  When ``r_1 - r_2`` Is an Integer"
+
+# ╔═╡ 33fea4a0-6285-4030-a674-2f247c75f73c
+let
+	@syms a₀::Real x::Real c₀::Real c₁::Real
+
+	c(n)= if n==0 
+			c₀
+	elseif n==1
+		c₁
+	else
+		c(n-2)/(n*(n-1))
+	end
+	# y1(x)= sum((-1)^n*c(2n)*x^(2n) for n in 0:5)
+	# simplify(y1(x))
+	y2(x)= sum((-1)^n*c(2n+1)*x^(2n+1) for n in 0:5)
+	simplify(y2(x))
+end
+
 # ╔═╡ ef081dfa-b610-4c7a-a039-7258f4f6e80e
 begin
     function add_space(n=1)
@@ -4181,6 +4258,98 @@ x^4 y^{\prime \prime}+\left(x^2 \sin x\right) y^{\prime}+(1-\cos x) y=0,
 ```
 """
 
+# ╔═╡ 6b36d484-2e70-4c16-9e2e-3d1abed85867
+cm"""
+$(bth("Frobenius Series Solutions"))
+Suppose that ``x=0`` is a regular singular point of the equation
+```math
+x^2 y^{\prime \prime}+x p(x) y^{\prime}+q(x) y=0 .
+```
+
+Let ``\rho>0`` denote the minimum of the radii of convergence of the power series
+```math
+p(x)=\sum_{n=0}^{\infty} p_n x^n \quad \text { and } \quad q(x)=\sum_{n=0}^{\infty} q_n x^n .
+```
+
+Let ``r_1`` and ``r_2`` be the (real) roots, with ``r_1 \geqq r_2``, of the indicial equation ``r(r-1)+`` ``p_0 r+q_0=0``. Then
+- (a) For ``x>0``, there exists a solution of Eq. (10) of the form
+```math
+y_1(x)=x^{r_1} \sum_{n=0}^{\infty} a_n x^n \quad\left(a_0 \neq 0\right)
+```
+corresponding to the larger root ``r_1``.
+- (b) If ``r_1-r_2`` is neither zero nor a positive integer, then there exists a second linearly independent solution for ``x>0`` of the form
+```math
+y_2(x)=x^{r_2} \sum_{n=0}^{\infty} b_n x^n \quad\left(b_0 \neq 0\right)
+```
+corresponding to the smaller root ``r_2``.
+The radii of convergence of the power series in Eqs. (18) and (19) are each at least ``\rho``. The coefficients in these series can be determined by substituting the series in the differential equation
+```math
+x^2 y^{\prime \prime}+x p(x) y^{\prime}+q(x) y=0 .
+```
+"""
+
+# ╔═╡ b132e474-02b9-4820-b9cb-00be1c723501
+cm"""
+$(ex(3))
+Find the exponents in the possible Frobenius series solutions of the equation
+```math
+2 x^2(1+x) y^{\prime \prime}+3 x(1+x)^3 y^{\prime}-\left(1-x^2\right) y=0 .
+```
+"""
+
+# ╔═╡ cc0636ca-8e8e-4418-923f-7288086ae5da
+cm"""
+$(ex(4))
+Find the Frobenius series solutions of
+```math
+2 x^2 y^{\prime \prime}+3 x y^{\prime}-\left(x^2+1\right) y=0 .
+```
+"""
+
+# ╔═╡ 9cc6f63a-6229-4407-ba17-a259aa633087
+cm"""
+$(ex(5)) Find a Frobenius solution of Bessel's equation of order zero,
+```math
+x^2 y^{\prime \prime}+x y^{\prime}+x^2 y=0
+```
+"""
+
+# ╔═╡ 83dac868-fb48-43a7-83a4-ae80125afaff
+cm"""
+$(ex(6))
+Find the Frobenius series solutions of
+```math
+x y^{\prime \prime}+2 y^{\prime}+x y=0 .
+```
+"""
+
+# ╔═╡ 049fa252-941b-480d-b87e-97392096373a
+cm"""
+$(bbl("Summary",""))
+
+When confronted with a linear second-order differential equation
+```math
+A(x) y^{\prime \prime}+B(x) y^{\prime}+C(x) y=0
+```
+with analytic coefficient functions, in order to investigate the possible existence of series solutions we first write the equation in the standard form
+```math
+y^{\prime \prime}+P(x) y^{\prime}+Q(x) y=0 .
+```
+
+If ``P(x)`` and ``Q(x)`` are both analytic at ``x=0``, then ``x=0`` is an ordinary point, and the equation has two linearly independent power series solutions.
+
+Otherwise, ``x=0`` is a singular point, and we next write the differential equation in the form
+```math
+y^{\prime \prime}+\frac{p(x)}{x} y^{\prime}+\frac{q(x)}{x^2} y=0 .
+```
+
+If ``p(x)`` and ``q(x)`` are both analytic at ``x=0``, then ``x=0`` is a regular singular point. In this case we find the two exponents ``r_1`` and ``r_2`` (assumed real, and with ``r_1 \geqq r_2`` ) by solving the indicial equation
+```math
+r(r-1)+p_0 r+q_0=0,
+```
+where ``p_0=p(0)`` and ``q_0=q(0)``. There always exists a Frobenius series solution ``y=x^{r_1} \sum a_n x^n`` associated with the larger exponent ``r_1``, and if ``r_1-r_2`` is not an integer, the existence of a second Frobenius series solution ``y_2=x^{r_2} \sum b_n x^n`` is also guaranteed.
+"""
+
 # ╔═╡ da9230a6-088d-4735-b206-9514c12dd223
 initialize_eqref()
 
@@ -6672,6 +6841,19 @@ version = "1.4.1+1"
 # ╟─941767c0-826a-49ac-81d3-fed7904133ba
 # ╟─eaa0fa9e-cc8c-4f78-8041-8a62a35f366d
 # ╟─6552b72c-2062-4002-a9c7-a5725fae7a2f
+# ╟─611fe34d-dd51-455c-a7ab-425c1f981c20
+# ╟─337f7d7e-13d4-405a-b27a-afeb06740776
+# ╟─f437d77e-a024-4b13-aea5-b45cd92588bf
+# ╟─cb632ce7-cd43-47f8-a9e4-5a7f3b8d5e5d
+# ╟─6b36d484-2e70-4c16-9e2e-3d1abed85867
+# ╟─b132e474-02b9-4820-b9cb-00be1c723501
+# ╟─cc0636ca-8e8e-4418-923f-7288086ae5da
+# ╠═f949163f-23b0-45f4-a0c6-e0388d0cead0
+# ╟─9cc6f63a-6229-4407-ba17-a259aa633087
+# ╟─819069ad-b0a6-4751-8e69-4de8cc6abd5e
+# ╟─83dac868-fb48-43a7-83a4-ae80125afaff
+# ╠═33fea4a0-6285-4030-a674-2f247c75f73c
+# ╟─049fa252-941b-480d-b87e-97392096373a
 # ╠═f2d4c2a5-f486-407b-b31b-d2efcc7476b3
 # ╟─ef081dfa-b610-4c7a-a039-7258f4f6e80e
 # ╟─da9230a6-088d-4735-b206-9514c12dd223
